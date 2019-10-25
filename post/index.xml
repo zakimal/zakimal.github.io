@@ -5,12 +5,232 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 17:21:38 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 19:04:31 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>🚩flagパッケージでコマンドライン引数を扱う</title>
+      <link>/post/20191025_handle-commandline-args-with-flag-package/</link>
+      <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
+      <guid>/post/20191025_handle-commandline-args-with-flag-package/</guid>
+      <description>
+
+&lt;h2 id=&#34;flag-パッケージ&#34;&gt;&lt;code&gt;flag&lt;/code&gt;パッケージ&lt;/h2&gt;
+
+&lt;p&gt;Golangでは，標準パッケージとしてコマンドライン引数を扱う&lt;a href=&#34;https://golang.org/pkg/flag/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;flag&lt;/code&gt;&lt;/a&gt;パッケージが付属しています．「痒い所に手が届く」とはこのことですね．&lt;/p&gt;
+
+&lt;h2 id=&#34;フラグの立っていないコマンドライン引数の取得&#34;&gt;フラグの立っていないコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Parse()&lt;/code&gt;の後に&lt;code&gt;Args()&lt;/code&gt;で&lt;code&gt;[]string&lt;/code&gt;として取得できます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;pakcage main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	args := flag.Args()
+	fmt.Println(args)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag0.go a b c
+[a b c]
+$ go run with-no-flag0.go 1 2 3
+[1 2 3]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;$n$番目の要素のみを取り出したい場合は&lt;code&gt;Arg(n)&lt;/code&gt;で&lt;code&gt;string&lt;/code&gt;として取得できます．$n$番目の要素が存在しない場合は&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;が返ってくるようです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	fmt.Println(flag.Arg(0), flag.Arg(1))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag1.go hoge fuga
+hoge fuga
+$ go run with-no-flag1.go 1
+1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの立っているコマンドライン引数の取得&#34;&gt;フラグの立っているコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;もしくは&lt;code&gt;型名Var()&lt;/code&gt;で，フラグを定義したのち，&lt;code&gt;Parse()&lt;/code&gt;でそれぞれの変数を取得できます．&lt;/p&gt;
+
+&lt;p&gt;フラグの定義は「フラグ名」「デフォルト値」「ヘルプメッセージ」で行います．&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;の場合は，指定した型へのポインタが返ってきます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -int 2 -str hello -bool true
+2 hello true
+$ go run with-flag0.go
+0 default false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;型名Var()&lt;/code&gt;の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;time&amp;quot;
+)
+
+func main() {
+	var (
+		d time.Duration
+		f float64
+	)
+	flag.DurationVar(&amp;amp;d, &amp;quot;dur&amp;quot;, 1 * time.Second, &amp;quot;duration flag&amp;quot;)
+	flag.Float64Var(&amp;amp;f, &amp;quot;float&amp;quot;, 0.1, &amp;quot;float flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(d, f)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag1.go -dur 1h -float 2.3
+1h0m0s 2.3
+$ go run with-flag1.go -float str
+invalid value &amp;quot;str&amp;quot; for flag -float: strconv.ParseFloat: parsing &amp;quot;str&amp;quot;: invalid syntax
+Usage of /var/folders/.../with-flag1:
+  -dur duration
+    	duration flag (default 1s)
+  -float float
+    	float flag (default 0.1)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの書き方&#34;&gt;フラグの書き方&lt;/h2&gt;
+
+&lt;p&gt;フラグの書き方は次の2通りが可能です．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-flag value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-flag=value&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ただし，Bool値を取得する場合は&lt;code&gt;flag=value&lt;/code&gt;を使った方が混乱がないかもしれません．というのも， &lt;strong&gt;フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで&lt;code&gt;true&lt;/code&gt;となる&lt;/strong&gt;からです．&lt;/p&gt;
+
+&lt;p&gt;つまり，フラグを立ててBool値を取得したい場合は&lt;code&gt;-bool=true&lt;/code&gt;/&lt;code&gt;-bool=false&lt;/code&gt;としなければならないということです．&lt;code&gt;-bool false&lt;/code&gt;では&lt;code&gt;true&lt;/code&gt;となってしまいます．また&lt;code&gt;-bool false&lt;/code&gt;以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -bool false -int 123 -str abc # falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる
+0 default true 
+$ go run with-flag0.go -bool=true -int 123 -str abc
+123 abc true
+$ go run with-flag0.go -bool=false -int 123 -str abc
+123 abc false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに&lt;code&gt;-h&lt;/code&gt;でヘルプを表示してくれます．賢いですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -h
+Usage of /var/folders/.../with-flag0:
+  -bool
+    	bool flag
+  -int int
+    	int flag
+  -str string
+    	string flag (default &amp;quot;default&amp;quot;)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;コマンドライン引数の個数を数える&#34;&gt;コマンドライン引数の個数を数える&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;NArg()&lt;/code&gt;で非フラグなものを，&lt;code&gt;NFlag()&lt;/code&gt;でフラグなものをカウントできます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+	flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+	flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(&amp;quot;non flag:&amp;quot;, flag.NArg())
+	fmt.Println(&amp;quot;flag:&amp;quot;, flag.NFlag())
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run flag-test.go -int 1 -str foo -bool=true a b
+non flag: 2
+flag: 3
+$ go run flag-test.go -int 1 -str foo -bool true a b
+non flag: 3
+flag: 3
+$ go run flag-test.go -bool true -int 1 -str foo a b
+non flag: 7
+flag: 1
+$ go run flag-test.go a b c -bool=true -str foo
+non flag: 6
+flag: 0
+$ go run flag-test.go -bool=true -str foo a b c
+non flag: 3
+flag: 2
+$ go run flag-test.go a b c
+non flag: 3
+flag: 0
+$ go run flag-test.go -bool=true -str foo
+non flag: 0
+flag: 2
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>HugoとGitHub Pagesでブログを作ってみた！</title>
@@ -19,14 +239,14 @@
       <guid>/post/20191025_about-this-site/</guid>
       <description>
 
-&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;最近はもっぱら卒論の実装ばかりやっています，zakです．&lt;/p&gt;
 
 &lt;p&gt;プログラム書くのって難しいですよね．僕にとってはとても難しいので，わからないことがあったらデキる人のブログを参考にさせていただいたりしています．
 そんな中で，自分もコードを書くことが増えてきて，そこで得た知識をなんらかの形で発信できないかなと思って，このブログを思いつきで始めました．&lt;/p&gt;
 
-&lt;h1 id=&#34;採用技術&#34;&gt;採用技術&lt;/h1&gt;
+&lt;h2 id=&#34;採用技術&#34;&gt;採用技術&lt;/h2&gt;
 
 &lt;p&gt;このブログはサイトジェネレータとしてHugo，ホスティングサービスとしてGitHub Pagesを採用しています．&lt;/p&gt;
 

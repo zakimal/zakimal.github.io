@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Golang | zak</title>
-    <link>/tags/golang/</link>
-      <atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
-    <description>Golang</description>
+    <title>Tips | zak</title>
+    <link>/tags/tips/</link>
+      <atom:link href="/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tips</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 19:04:31 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
-      <title>Golang</title>
-      <link>/tags/golang/</link>
+      <title>Tips</title>
+      <link>/tags/tips/</link>
     </image>
     
     <item>
@@ -229,40 +229,6 @@ $ go run flag-test.go -bool=true -str foo
 non flag: 0
 flag: 2
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>HugoとGitHub Pagesでブログを作ってみた！</title>
-      <link>/post/20191025_about-this-site/</link>
-      <pubDate>Fri, 25 Oct 2019 17:21:38 +0900</pubDate>
-      <guid>/post/20191025_about-this-site/</guid>
-      <description>
-
-&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
-
-&lt;p&gt;最近はもっぱら卒論の実装ばかりやっています，zakです．&lt;/p&gt;
-
-&lt;p&gt;プログラム書くのって難しいですよね．僕にとってはとても難しいので，わからないことがあったらデキる人のブログを参考にさせていただいたりしています．
-そんな中で，自分もコードを書くことが増えてきて，そこで得た知識をなんらかの形で発信できないかなと思って，このブログを思いつきで始めました．&lt;/p&gt;
-
-&lt;h2 id=&#34;採用技術&#34;&gt;採用技術&lt;/h2&gt;
-
-&lt;p&gt;このブログはサイトジェネレータとしてHugo，ホスティングサービスとしてGitHub Pagesを採用しています．&lt;/p&gt;
-
-&lt;p&gt;HugoはGolangで記述されたオープンソースの静的サイトジェネレーターです．設定をtomlで書いて，記事をMarkdownで書いて，それをHugoがHTMLその他ファイルに爆速でしたためてくれます．真面目にウェブサイトを作ろうとすると，「書きにくいHTMLで文章を書いて，CSSで見栄えを整えて」という感じで作っていくことになります．HTMLってあんまり洗練されていなくて人間にとっては読みずらいですよね．一方でMarkdownは文法が簡単なので，箇条書きでメモってるぐらいの感覚で構造を持った文章が書けてしまいます．Hugoを使うことで，サイト作成者はMarkdownというわかりやすい文法で記事を書くことができ，本来の仕事に専念できるわけです．&lt;/p&gt;
-
-&lt;p&gt;Hugoのいいところはそれだけではありません．Hugoはその便利さから，多くのユーザーから愛されていて，そのユーザーらがそれぞれ美しいデザインテーマを公開してくれています．どれもセンスが良く，機能面でも充実しています．このテーマはオープンソースで公開されているので，カスタマイズも簡単です．そこらへんのブログサービスを利用すると，テーマがどれも陳腐で不満ですよね．&lt;/p&gt;
-
-&lt;p&gt;今回はMarkdownで記事が執筆できるところとHugoで用いることができるAcademicというテーマが気に入ったので，Hugoを使うことにしました．&lt;/p&gt;
-
-&lt;p&gt;GitHub Pagesは，GitHubが提供している静的サイトのホスティングサービスです．GitHubのアカウントさえあれば，誰でも静的なサイトを公開することができます．何より無料なので，これを使わない手はありません．サイトのソースコードをGitHubで管理しつつ公開もできちゃうなんて，GitHubは太っ腹ですね．&lt;/p&gt;
-
-&lt;p&gt;GitHub Pagesの他にもホスティングサービスはありますが，ソースコード管理と一緒にホスティングできるところが便利だと思ったので採用しました．&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;気が向いたら，もうちょっと追記します 🙇&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     
