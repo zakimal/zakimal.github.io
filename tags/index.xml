@@ -5,12 +5,28 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 19:04:31 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 22:45:15 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
       <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>Framework</title>
+      <link>/tags/framework/</link>
+      <pubDate>Fri, 25 Oct 2019 22:45:15 +0900</pubDate>
+      <guid>/tags/framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Library</title>
+      <link>/tags/library/</link>
+      <pubDate>Fri, 25 Oct 2019 22:45:15 +0900</pubDate>
+      <guid>/tags/library/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Golang</title>
