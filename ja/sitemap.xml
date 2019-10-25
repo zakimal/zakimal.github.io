@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/ja/authors/admin/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/admin/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/authors/admin/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/authors/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/authors/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/post/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/publication_types/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/publication_types/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/publication_types/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/publication/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/publication/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/publication/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/talk/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/talk/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/talk/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/"
+                />
+  </url>
+  
+</urlset>
