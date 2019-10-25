@@ -3,6 +3,76 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tags/github/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/golang/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/hugo/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/20191025_about-this-site/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-10-25T17:21:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/20191025_first-post/</loc>
+    <lastmod>2019-10-25T17:07:09+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/admin/</loc>
     <xhtml:link
                 rel="alternate"
@@ -45,20 +115,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
     <loc>/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
@@ -97,34 +153,6 @@
                 rel="alternate"
                 hreflang="ja"
                 href="/talk/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/"
                 />
   </url>
   

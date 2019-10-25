@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts | zak</title>
-    <link>/post/</link>
-      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    <description>Posts</description>
+    <title>GitHub | zak</title>
+    <link>/tags/github/</link>
+      <atom:link href="/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <description>GitHub</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 17:21:38 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
-      <title>Posts</title>
-      <link>/post/</link>
+      <title>GitHub</title>
+      <link>/tags/github/</link>
     </image>
     
     <item>
@@ -43,19 +43,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;気が向いたら，もうちょっと追記します 🙇&lt;/p&gt;
 &lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>🚀最初の投稿</title>
-      <link>/post/20191025_first-post/</link>
-      <pubDate>Fri, 25 Oct 2019 17:07:09 +0900</pubDate>
-      <guid>/post/20191025_first-post/</guid>
-      <description>
-
-&lt;h1 id=&#34;ご挨拶&#34;&gt;ご挨拶&lt;/h1&gt;
-
-&lt;p&gt;はじめまして．技術ブログ始めてみました．ぼちぼち投稿します 👍&lt;/p&gt;
 </description>
     </item>
     
