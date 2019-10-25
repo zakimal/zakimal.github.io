@@ -3,128 +3,128 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/ja/authors/admin/</loc>
+    <loc>/authors/admin/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/authors/admin/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/authors/admin/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/authors/admin/"
-                />
   </url>
   
   <url>
-    <loc>/ja/authors/</loc>
+    <loc>/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/authors/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/authors/"
-                />
   </url>
   
   <url>
-    <loc>/ja/categories/</loc>
+    <loc>/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/categories/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/categories/"
-                />
   </url>
   
   <url>
-    <loc>/ja/post/</loc>
+    <loc>/post/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/post/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/post/"
-                />
   </url>
   
   <url>
-    <loc>/ja/publication_types/</loc>
+    <loc>/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/publication_types/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/publication_types/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/publication_types/"
-                />
   </url>
   
   <url>
-    <loc>/ja/publication/</loc>
+    <loc>/publication/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/publication/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/publication/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/publication/"
-                />
   </url>
   
   <url>
-    <loc>/ja/talk/</loc>
+    <loc>/talk/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/talk/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/talk/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/talk/"
-                />
   </url>
   
   <url>
-    <loc>/ja/tags/</loc>
+    <loc>/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
                 href="/tags/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/tags/"
-                />
   </url>
   
   <url>
-    <loc>/ja/</loc>
+    <loc>/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/"
+                href="/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/ja/"
+                href="/"
                 />
   </url>
   
