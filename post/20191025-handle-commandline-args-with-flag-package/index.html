@@ -586,7 +586,7 @@ exit status 2
 <li><code>-flag=value</code></li>
 </ul>
 
-<p>ただし，Bool値を取得する場合は<code>flag=value</code>を使った方が混乱がないかもしれません．というのも， <strong>フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで<code>true</code>となる</strong>からです．</p>
+<p>ただし，Bool値を取得する場合は<code>flag=value</code>を使った方がいいかもしれません．というのも， <strong>フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで<code>true</code>となる</strong>からです．</p>
 
 <p>つまり，フラグを立ててBool値を取得したい場合は<code>-bool=true</code>/<code>-bool=false</code>としなければならないということです．<code>-bool false</code>では<code>true</code>となってしまいます．また<code>-bool false</code>以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．</p>
 

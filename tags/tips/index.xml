@@ -143,7 +143,7 @@ exit status 2
 &lt;li&gt;&lt;code&gt;-flag=value&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;ただし，Bool値を取得する場合は&lt;code&gt;flag=value&lt;/code&gt;を使った方が混乱がないかもしれません．というのも， &lt;strong&gt;フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで&lt;code&gt;true&lt;/code&gt;となる&lt;/strong&gt;からです．&lt;/p&gt;
+&lt;p&gt;ただし，Bool値を取得する場合は&lt;code&gt;flag=value&lt;/code&gt;を使った方がいいかもしれません．というのも， &lt;strong&gt;フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで&lt;code&gt;true&lt;/code&gt;となる&lt;/strong&gt;からです．&lt;/p&gt;
 
 &lt;p&gt;つまり，フラグを立ててBool値を取得したい場合は&lt;code&gt;-bool=true&lt;/code&gt;/&lt;code&gt;-bool=false&lt;/code&gt;としなければならないということです．&lt;code&gt;-bool false&lt;/code&gt;では&lt;code&gt;true&lt;/code&gt;となってしまいます．また&lt;code&gt;-bool false&lt;/code&gt;以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．&lt;/p&gt;
 
