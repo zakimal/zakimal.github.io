@@ -14,9 +14,9 @@
     
     <item>
       <title>🚩flagパッケージでコマンドライン引数を扱う</title>
-      <link>/post/20191025_handle-commandline-args-with-flag-package/</link>
+      <link>/post/20191025-handle-commandline-args-with-flag-package/</link>
       <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
-      <guid>/post/20191025_handle-commandline-args-with-flag-package/</guid>
+      <guid>/post/20191025-handle-commandline-args-with-flag-package/</guid>
       <description>
 
 &lt;h2 id=&#34;flag-パッケージ&#34;&gt;&lt;code&gt;flag&lt;/code&gt;パッケージ&lt;/h2&gt;

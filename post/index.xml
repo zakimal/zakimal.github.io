@@ -14,9 +14,9 @@
     
     <item>
       <title>FramworkとLibraryの違い</title>
-      <link>/post/20191025_what-is-the-difference-between-library-and-framework/</link>
+      <link>/post/20191025-what-is-the-difference-between-library-and-framework/</link>
       <pubDate>Fri, 25 Oct 2019 22:45:15 +0900</pubDate>
-      <guid>/post/20191025_what-is-the-difference-between-library-and-framework/</guid>
+      <guid>/post/20191025-what-is-the-difference-between-library-and-framework/</guid>
       <description>
 
 &lt;h2 id=&#34;ありがちな会話&#34;&gt;ありがちな会話&lt;/h2&gt;
@@ -94,9 +94,9 @@
     
     <item>
       <title>🚩flagパッケージでコマンドライン引数を扱う</title>
-      <link>/post/20191025_handle-commandline-args-with-flag-package/</link>
+      <link>/post/20191025-handle-commandline-args-with-flag-package/</link>
       <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
-      <guid>/post/20191025_handle-commandline-args-with-flag-package/</guid>
+      <guid>/post/20191025-handle-commandline-args-with-flag-package/</guid>
       <description>
 
 &lt;h2 id=&#34;flag-パッケージ&#34;&gt;&lt;code&gt;flag&lt;/code&gt;パッケージ&lt;/h2&gt;
@@ -314,9 +314,9 @@ flag: 2
     
     <item>
       <title>HugoとGitHub Pagesでブログを作ってみた！</title>
-      <link>/post/20191025_about-this-site/</link>
+      <link>/post/20191025-about-this-site/</link>
       <pubDate>Fri, 25 Oct 2019 17:21:38 +0900</pubDate>
-      <guid>/post/20191025_about-this-site/</guid>
+      <guid>/post/20191025-about-this-site/</guid>
       <description>
 
 &lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
@@ -348,9 +348,9 @@ flag: 2
     
     <item>
       <title>🚀最初の投稿</title>
-      <link>/post/20191025_first-post/</link>
+      <link>/post/20191025-first-post/</link>
       <pubDate>Fri, 25 Oct 2019 17:07:09 +0900</pubDate>
-      <guid>/post/20191025_first-post/</guid>
+      <guid>/post/20191025-first-post/</guid>
       <description>
 
 &lt;h1 id=&#34;ご挨拶&#34;&gt;ご挨拶&lt;/h1&gt;

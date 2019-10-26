@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="flagパッケージでコマンドライン引数を賢く扱おう！">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/tags/hugo/">
+  <link rel="alternate" hreflang="ja-JP" href="/post/20191025-handle-commandline-args-with-flag-package/">
 
   
 
@@ -91,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/tags/hugo/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/hugo/">
+  <link rel="canonical" href="/post/20191025-handle-commandline-args-with-flag-package/">
 
   
   
@@ -113,18 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/tags/hugo/">
-  <meta property="og:title" content="Hugo | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/post/20191025-handle-commandline-args-with-flag-package/">
+  <meta property="og:title" content="🚩flagパッケージでコマンドライン引数を扱う | zak">
+  <meta property="og:description" content="flagパッケージでコマンドライン引数を賢く扱おう！"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2019-10-25T17:21:38&#43;09:00">
+    
+      <meta property="article:published_time" content="2019-10-25T19:04:31&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-10-25T19:04:31&#43;09:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/20191025-handle-commandline-args-with-flag-package/"
+  },
+  "headline": "🚩flagパッケージでコマンドライン引数を扱う",
+  
+  "datePublished": "2019-10-25T19:04:31+09:00",
+  "dateModified": "2019-10-25T19:04:31+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.png"
+    }
+  },
+  "description": "flagパッケージでコマンドライン引数を賢く扱おう！"
+}
+</script>
+
+  
 
   
 
@@ -132,10 +177,13 @@
   
 
 
+  
 
 
 
-  <title>Hugo | zak</title>
+
+
+  <title>🚩flagパッケージでコマンドライン引数を扱う | zak</title>
 
 </head>
 
@@ -327,54 +375,537 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>🚩flagパッケージでコマンドライン引数を扱う</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Fri, Oct 25, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<h2 id="flag-パッケージ"><code>flag</code>パッケージ</h2>
+
+<p>Golangでは，標準パッケージとしてコマンドライン引数を扱う<a href="https://golang.org/pkg/flag/" target="_blank"><code>flag</code></a>パッケージが付属しています．「痒い所に手が届く」とはこのことですね．</p>
+
+<h2 id="フラグの立っていないコマンドライン引数の取得">フラグの立っていないコマンドライン引数の取得</h2>
+
+<p><code>Parse()</code>の後に<code>Args()</code>で<code>[]string</code>として取得できます．</p>
+
+<pre><code class="language-golang">pakcage main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	flag.Parse()
+	args := flag.Args()
+	fmt.Println(args)
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run with-no-flag0.go a b c
+[a b c]
+$ go run with-no-flag0.go 1 2 3
+[1 2 3]
+</code></pre>
+
+<p>$n$番目の要素のみを取り出したい場合は<code>Arg(n)</code>で<code>string</code>として取得できます．$n$番目の要素が存在しない場合は<code>&quot;&quot;</code>が返ってくるようです．</p>
+
+<pre><code class="language-golang">package main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	flag.Parse()
+	fmt.Println(flag.Arg(0), flag.Arg(1))
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run with-no-flag1.go hoge fuga
+hoge fuga
+$ go run with-no-flag1.go 1
+1
+</code></pre>
+
+<h2 id="フラグの立っているコマンドライン引数の取得">フラグの立っているコマンドライン引数の取得</h2>
+
+<p><code>型名()</code>もしくは<code>型名Var()</code>で，フラグを定義したのち，<code>Parse()</code>でそれぞれの変数を取得できます．</p>
+
+<p>フラグの定義は「フラグ名」「デフォルト値」「ヘルプメッセージ」で行います．</p>
+
+<p><code>型名()</code>の場合は，指定した型へのポインタが返ってきます．</p>
+
+<pre><code class="language-golang">package main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
+		s = flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
+		b = flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run with-flag0.go -int 2 -str hello -bool true
+2 hello true
+$ go run with-flag0.go
+0 default false
+</code></pre>
+
+<p><code>型名Var()</code>の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．</p>
+
+<pre><code class="language-golang">package main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+	&quot;time&quot;
+)
+
+func main() {
+	var (
+		d time.Duration
+		f float64
+	)
+	flag.DurationVar(&amp;d, &quot;dur&quot;, 1 * time.Second, &quot;duration flag&quot;)
+	flag.Float64Var(&amp;f, &quot;float&quot;, 0.1, &quot;float flag&quot;)
+	flag.Parse()
+	fmt.Println(d, f)
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run with-flag1.go -dur 1h -float 2.3
+1h0m0s 2.3
+$ go run with-flag1.go -float str
+invalid value &quot;str&quot; for flag -float: strconv.ParseFloat: parsing &quot;str&quot;: invalid syntax
+Usage of /var/folders/.../with-flag1:
+  -dur duration
+    	duration flag (default 1s)
+  -float float
+    	float flag (default 0.1)
+exit status 2
+</code></pre>
+
+<h2 id="フラグの書き方">フラグの書き方</h2>
+
+<p>フラグの書き方は次の2通りが可能です．</p>
+
+<ul>
+<li><code>-flag value</code></li>
+<li><code>-flag=value</code></li>
+</ul>
+
+<p>ただし，Bool値を取得する場合は<code>flag=value</code>を使った方が混乱がないかもしれません．というのも， <strong>フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで<code>true</code>となる</strong>からです．</p>
+
+<p>つまり，フラグを立ててBool値を取得したい場合は<code>-bool=true</code>/<code>-bool=false</code>としなければならないということです．<code>-bool false</code>では<code>true</code>となってしまいます．また<code>-bool false</code>以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．</p>
+
+<pre><code class="language-golang">package main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
+		s = flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
+		b = flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run with-flag0.go -bool false -int 123 -str abc # falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる
+0 default true 
+$ go run with-flag0.go -bool=true -int 123 -str abc
+123 abc true
+$ go run with-flag0.go -bool=false -int 123 -str abc
+123 abc false
+</code></pre>
+
+<p>ちなみに<code>-h</code>でヘルプを表示してくれます．賢いですね．</p>
+
+<pre><code class="language-shell">$ go run with-flag0.go -h
+Usage of /var/folders/.../with-flag0:
+  -bool
+    	bool flag
+  -int int
+    	int flag
+  -str string
+    	string flag (default &quot;default&quot;)
+exit status 2
+</code></pre>
+
+<h2 id="コマンドライン引数の個数を数える">コマンドライン引数の個数を数える</h2>
+
+<p><code>NArg()</code>で非フラグなものを，<code>NFlag()</code>でフラグなものをカウントできます．</p>
+
+<pre><code class="language-golang">package main
+
+import (
+	&quot;flag&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+	flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
+	flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
+	flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
+	flag.Parse()
+	fmt.Println(&quot;non flag:&quot;, flag.NArg())
+	fmt.Println(&quot;flag:&quot;, flag.NFlag())
+}
+</code></pre>
+
+<pre><code class="language-shell">$ go run flag-test.go -int 1 -str foo -bool=true a b
+non flag: 2
+flag: 3
+$ go run flag-test.go -int 1 -str foo -bool true a b
+non flag: 3
+flag: 3
+$ go run flag-test.go -bool true -int 1 -str foo a b
+non flag: 7
+flag: 1
+$ go run flag-test.go a b c -bool=true -str foo
+non flag: 6
+flag: 0
+$ go run flag-test.go -bool=true -str foo a b c
+non flag: 3
+flag: 2
+$ go run flag-test.go a b c
+non flag: 3
+flag: 0
+$ go run flag-test.go -bool=true -str foo
+non flag: 0
+flag: 2
+</code></pre>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/golang/">Golang</a>
+  
+  <a class="badge badge-light" href="/tags/tips/">Tips</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/20191025-handle-commandline-args-with-flag-package/&amp;text=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/20191025-handle-commandline-args-with-flag-package/&amp;t=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86&amp;body=/post/20191025-handle-commandline-args-with-flag-package/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/20191025-handle-commandline-args-with-flag-package/&amp;title=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86%20/post/20191025-handle-commandline-args-with-flag-package/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/20191025-handle-commandline-args-with-flag-package/&amp;title=%f0%9f%9a%a9flag%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a7%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%83%a9%e3%82%a4%e3%83%b3%e5%bc%95%e6%95%b0%e3%82%92%e6%89%b1%e3%81%86" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-  
 
   
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Hugo</h1>
-
   
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-  
-
-  
-  
-  <div>
-    <h2><a href="/post/20191025-about-this-site/">HugoとGitHub Pagesでブログを作ってみた！</a></h2>
-    <div class="article-style">
+  <div class="media author-card content-widget-hr">
+    
       
-      このブログの技術的なところをまとめてみました！まだ途中です 🙇
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
       
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
     </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>関連項目</h3>
+    <ul>
+      
+      <li><a href="/post/20191025-about-this-site/">HugoとGitHub Pagesでブログを作ってみた！</a></li>
+      
+    </ul>
   </div>
   
 
-  
 
-</div>
+
+  </div>
+</article>
 
       
 
