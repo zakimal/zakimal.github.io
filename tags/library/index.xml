@@ -43,7 +43,7 @@
 
 &lt;h3 id=&#34;framework&#34;&gt;Framework&lt;/h3&gt;
 
-&lt;p&gt;Frameworkは， (初期化から実際の処理，終了といった) アプリケーションの制御は*全てFramework側にあります*．アプリケーションを開発者は，Frameworkが要求するロジックを部品としてFrameworkに提供することになるわけです．Frameworkはアプリケーションの骨格を定義しているともいるかもしれません．外枠だけ定義しているのです．このFrameworkの持つ性質は，ソフトウェア工学的には「制御の反転 IoC (Inversion of Control)」と呼ばれています．&lt;/p&gt;
+&lt;p&gt;Frameworkは， (初期化から実際の処理，終了といった) アプリケーションの制御は &lt;em&gt;全てFramework側にあります&lt;/em&gt; ．アプリケーションを開発者は，Frameworkが要求するロジックを部品としてFrameworkに提供することになるわけです．Frameworkはアプリケーションの骨格を定義しているともいるかもしれません．外枠だけ定義しているのです．このFrameworkの持つ性質は，ソフトウェア工学的には「制御の反転 IoC (Inversion of Control)」と呼ばれています．&lt;/p&gt;
 
 &lt;p&gt;Frameworkを用いることで，アプリケーション開発者は設計についてあれやこれや悩む必要がなくなります．Frameworkの要求に従っていれば，それなりの品質のシステムが勝手に出来上がることになるからです．また，Frameworkに則ってアプリケーションを開発していくと，コードに一貫性が生まれます．これはコードに可読性を与え，メンテナンスがしやすくなります．&lt;/p&gt;
 
