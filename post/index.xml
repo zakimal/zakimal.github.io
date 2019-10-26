@@ -89,6 +89,14 @@
 &lt;li&gt;&lt;a href=&#34;https://www.freecodecamp.org/news/the-difference-between-a-framework-and-a-library-bd133054023f/&#34; target=&#34;_blank&#34;&gt;The Difference Between a Framework and a Library (freeCodeCamp)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/148747/what-is-the-difference-between-a-framework-and-a-library&#34; target=&#34;_blank&#34;&gt;What is the difference between a framework and a library? (stackoverflow)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;script src=&#34;https://utteranc.es/client.js&#34;
+        repo=&#34;zakimal/zakimal.github.io&#34;
+        issue-term=&#34;pathname&#34;
+        theme=&#34;github-light&#34;
+        crossorigin=&#34;anonymous&#34;
+        async&gt;
+&lt;/script&gt;
 </description>
     </item>
     
