@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="ちゃんと説明できますか？">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/tags/golang/">
+  <link rel="alternate" hreflang="ja-JP" href="/post/what-is-the-difference-between-library-and-framework/">
 
   
 
@@ -91,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/tags/golang/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/golang/">
+  <link rel="canonical" href="/post/what-is-the-difference-between-library-and-framework/">
 
   
   
@@ -113,29 +111,83 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/tags/golang/">
-  <meta property="og:title" content="Golang | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
-  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  <meta property="og:url" content="/post/what-is-the-difference-between-library-and-framework/">
+  <meta property="og:title" content="FramworkとLibraryの違い | zak">
+  <meta property="og:description" content="ちゃんと説明できますか？"><meta property="og:image" content="/post/what-is-the-difference-between-library-and-framework/featured.png">
+  <meta property="twitter:image" content="/post/what-is-the-difference-between-library-and-framework/featured.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2019-10-25T19:04:31&#43;09:00">
+    
+      <meta property="article:published_time" content="2019-10-25T22:45:15&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-10-25T22:45:15&#43;09:00">
   
-
-  
-
-
-
 
   
 
 
+    
+
+
+
+
+
+
   
 
 
 
 
 
-  <title>Golang | zak</title>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/what-is-the-difference-between-library-and-framework/"
+  },
+  "headline": "FramworkとLibraryの違い",
+  
+  "image": [
+    "/post/what-is-the-difference-between-library-and-framework/featured.png"
+  ],
+  
+  "datePublished": "2019-10-25T22:45:15+09:00",
+  "dateModified": "2019-10-25T22:45:15+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.png"
+    }
+  },
+  "description": "ちゃんと説明できますか？"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>FramworkとLibraryの違い | zak</title>
 
 </head>
 
@@ -327,6 +379,78 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>FramworkとLibraryの違い</h1>
+
+  
+  <p class="page-subtitle">似てるようで結構違う話</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Fri, Oct 25, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
   
 
 
@@ -340,50 +464,332 @@
 
 
 
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/post/what-is-the-difference-between-library-and-framework/featured_hu4d8e6617fcc2787a93b94905ea9c008a_74760_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<h2 id="ありがちな会話">ありがちな会話</h2>
+
+<p>「Web Application Frameworkと言ったら，やっぱりRuby on Railsだよね！」</p>
+
+<p>「Webのフロント開発ではjQueryってライブラリがあってだな&hellip;」</p>
+
+<p>「最近だと，FacebookがJavascriptのフレームワークとしてReactを発表してるよね」</p>
+
+<p>「ReactよりAngular JSの方がいいよ」</p>
+
+<p>Web系の技術の話では，たくさんのFrameworkだのLibraryだのが提案されて使用されていると思います．僕なんかも初めて聞くものがあれば，すぐにググってその正体を知ろうとするのですが，どれもこれも「これは便利なWeb Frameworkです」ぐらいしか教えてくれません．Frameworkの正体って一体何なのでしょうか．気になったので調べてみました．</p>
+
+<h2 id="library-v-s-framework">Library v.s. Framework</h2>
+
+<h3 id="library">Library</h3>
+
+<p>Libraryは，コードの再利用を目的とした「便利な関数やクラスの（ただの）コレクション」のようなものです．Libraryに含まれる関数やクラスは，ある特定の処理を達成するロジックを含んでいて，開発者がそれらを利用することで開発を進めていくことになります．例えばグラフアルゴリズムのライブラリなら，Dijkstra法とかBellman-Ford法を実装した関数が含まれていて，開発者がその関数を利用することでアプリケーションを開発します．アプリケーションの開発者が書いているロジックにライブラリの関数が利用されるので，アプリケーションの制御は開発者側にあります．</p>
+
+<p>Libraryを用いることで，他の人の仕事の恩恵に与りながら開発を進めることができます．これはとても嬉しいことです．開発の速度が上がります．</p>
+
+<p>要するに「<strong>Libraryのコードを開発者が利用する</strong>」のがLibraryです．</p>
+
+<h3 id="framework">Framework</h3>
+
+<p>Frameworkは， (初期化から実際の処理，終了といった) アプリケーションの制御は <em>全てFramework側にあります</em> ．アプリケーションを開発者は，Frameworkが要求するロジックを部品としてFrameworkに提供することになるわけです．Frameworkはアプリケーションの骨格を定義しているともいるかもしれません．外枠だけ定義しているのです．このFrameworkの持つ性質は，ソフトウェア工学的には「制御の反転 IoC (Inversion of Control)」と呼ばれています．</p>
+
+<p>Frameworkを用いることで，アプリケーション開発者は設計についてあれやこれや悩む必要がなくなります．Frameworkの要求に従っていれば，それなりの品質のシステムが勝手に出来上がることになるからです．また，Frameworkに則ってアプリケーションを開発していくと，コードに一貫性が生まれます．これはコードに可読性を与え，メンテナンスがしやすくなります．</p>
+
+<p>一方で，Frameworkは「制約の集合」でもあります．アプリケーションの全体としての制御が開発者の自由にできないわけですから，Frameworkを導入するならばFrameworkの課すルールを理解する必要があります．ルールを理解するのには時間がかかるものですし，Frameworkのルールに窮屈さを感じることもあるかもしれません．小規模なその場限りの開発現場などでは，この制約がFrameworkのメリットを上回ることがあるので，Frameworkを導入しないこともあるでしょう．</p>
+
+<p>要するに「<strong>Frameworkが開発者のコードを利用する</strong>」のがFrameworkです．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="library-framework-relationship.jpeg" data-caption="LibraryとFrameworkとあなた">
+<img src="library-framework-relationship.jpeg" alt="" ></a>
+
+
   
+  
+  <figcaption>
+    LibraryとFrameworkとあなた
+  </figcaption>
+
+
+</figure>
+
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://tech.nikkeibp.co.jp/it/article/lecture/20070205/260697/" target="_blank">ソフトウエアのフレームワークとはなにか (日経XTECH)</a></li>
+<li><a href="https://qiita.com/azuki8/items/ad7710fdefaedc63e3f7" target="_blank">フレームワークとライブラリの違い (Qiita)</a></li>
+<li><a href="https://www.freecodecamp.org/news/the-difference-between-a-framework-and-a-library-bd133054023f/" target="_blank">The Difference Between a Framework and a Library (freeCodeCamp)</a></li>
+<li><a href="https://stackoverflow.com/questions/148747/what-is-the-difference-between-a-framework-and-a-library" target="_blank">What is the difference between a framework and a library? (stackoverflow)</a></li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/framework/">Framework</a>
+  
+  <a class="badge badge-light" href="/tags/library/">Library</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/what-is-the-difference-between-library-and-framework/&amp;text=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/what-is-the-difference-between-library-and-framework/&amp;t=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84&amp;body=/post/what-is-the-difference-between-library-and-framework/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/what-is-the-difference-between-library-and-framework/&amp;title=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84%20/post/what-is-the-difference-between-library-and-framework/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/what-is-the-difference-between-library-and-framework/&amp;title=Framwork%e3%81%a8Library%e3%81%ae%e9%81%95%e3%81%84" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
 
   
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Golang</h1>
-
   
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-  
-
-  
-  
-  <div>
-    <h2><a href="/post/handle-commandline-args-with-flag-package/">🚩flagパッケージでコマンドライン引数を扱う</a></h2>
-    <div class="article-style">
+  <div class="media author-card content-widget-hr">
+    
       
-      flagパッケージでコマンドライン引数を賢く扱おう！
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
       
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
     </div>
   </div>
+
+
+
+
+<section id="comments">
   
-  <div>
-    <h2><a href="/post/about-this-site/">HugoとGitHub Pagesでブログを作ってみた！</a></h2>
-    <div class="article-style">
-      
-      このブログの技術的なところをまとめてみました！まだ途中です 🙇
-      
-    </div>
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
   </div>
-  
-
-  
-
-</div>
+</article>
 
       
 

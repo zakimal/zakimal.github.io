@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="このブログの技術的なところをまとめてみました！まだ途中です :bow:">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/tags/golang/">
+  <link rel="alternate" hreflang="ja-JP" href="/post/about-this-site/">
 
   
 
@@ -91,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/tags/golang/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/golang/">
+  <link rel="canonical" href="/post/about-this-site/">
 
   
   
@@ -113,29 +111,83 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/tags/golang/">
-  <meta property="og:title" content="Golang | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
-  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  <meta property="og:url" content="/post/about-this-site/">
+  <meta property="og:title" content="HugoとGitHub Pagesでブログを作ってみた！ | zak">
+  <meta property="og:description" content="このブログの技術的なところをまとめてみました！まだ途中です :bow:"><meta property="og:image" content="/post/about-this-site/featured.png">
+  <meta property="twitter:image" content="/post/about-this-site/featured.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2019-10-25T19:04:31&#43;09:00">
+    
+      <meta property="article:published_time" content="2019-10-25T17:21:38&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-10-25T17:21:38&#43;09:00">
   
-
-  
-
-
-
 
   
 
 
+    
+
+
+
+
+
+
   
 
 
 
 
 
-  <title>Golang | zak</title>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/about-this-site/"
+  },
+  "headline": "HugoとGitHub Pagesでブログを作ってみた！",
+  
+  "image": [
+    "/post/about-this-site/featured.png"
+  ],
+  
+  "datePublished": "2019-10-25T17:21:38+09:00",
+  "dateModified": "2019-10-25T17:21:38+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.png"
+    }
+  },
+  "description": "このブログの技術的なところをまとめてみました！まだ途中です :bow:"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>HugoとGitHub Pagesでブログを作ってみた！ | zak</title>
 
 </head>
 
@@ -327,6 +379,76 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>HugoとGitHub Pagesでブログを作ってみた！</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Fri, Oct 25, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
   
 
 
@@ -340,50 +462,288 @@
 
 
 
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/post/about-this-site/featured_huf72f5c2f7f3ad36232cff80ba5a6d048_110351_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <span class="article-header-caption">GitHub Pages meets Hugo</span>
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<h2 id="はじめに">はじめに</h2>
+
+<p>最近はもっぱら卒論の実装ばかりやっています，zakです．</p>
+
+<p>プログラム書くのって難しいですよね．僕にとってはとても難しいので，わからないことがあったらデキる人のブログを参考にさせていただいたりしています．
+そんな中で，自分もコードを書くことが増えてきて，そこで得た知識をなんらかの形で発信できないかなと思って，このブログを思いつきで始めました．</p>
+
+<h2 id="採用技術">採用技術</h2>
+
+<p>このブログはサイトジェネレータとしてHugo，ホスティングサービスとしてGitHub Pagesを採用しています．</p>
+
+<p>HugoはGolangで記述されたオープンソースの静的サイトジェネレーターです．設定をtomlで書いて，記事をMarkdownで書いて，それをHugoがHTMLその他ファイルに爆速でしたためてくれます．真面目にウェブサイトを作ろうとすると，「書きにくいHTMLで文章を書いて，CSSで見栄えを整えて」という感じで作っていくことになります．HTMLってあんまり洗練されていなくて人間にとっては読みずらいですよね．一方でMarkdownは文法が簡単なので，箇条書きでメモってるぐらいの感覚で構造を持った文章が書けてしまいます．Hugoを使うことで，サイト作成者はMarkdownというわかりやすい文法で記事を書くことができ，本来の仕事に専念できるわけです．</p>
+
+<p>Hugoのいいところはそれだけではありません．Hugoはその便利さから，多くのユーザーから愛されていて，そのユーザーらがそれぞれ美しいデザインテーマを公開してくれています．どれもセンスが良く，機能面でも充実しています．このテーマはオープンソースで公開されているので，カスタマイズも簡単です．そこらへんのブログサービスを利用すると，テーマがどれも陳腐で不満ですよね．</p>
+
+<p>今回はMarkdownで記事が執筆できるところとHugoで用いることができるAcademicというテーマが気に入ったので，Hugoを使うことにしました．</p>
+
+<p>GitHub Pagesは，GitHubが提供している静的サイトのホスティングサービスです．GitHubのアカウントさえあれば，誰でも静的なサイトを公開することができます．何より無料なので，これを使わない手はありません．サイトのソースコードをGitHubで管理しつつ公開もできちゃうなんて，GitHubは太っ腹ですね．</p>
+
+<p>GitHub Pagesの他にもホスティングサービスはありますが，ソースコード管理と一緒にホスティングできるところが便利だと思ったので採用しました．</p>
+
+<blockquote>
+<p>気が向いたら，もうちょっと追記します 🙇</p>
+</blockquote>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
   
+  <a class="badge badge-light" href="/tags/hugo/">Hugo</a>
+  
+  <a class="badge badge-light" href="/tags/github/">GitHub</a>
+  
+  <a class="badge badge-light" href="/tags/golang/">Golang</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/about-this-site/&amp;text=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/about-this-site/&amp;t=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81&amp;body=/post/about-this-site/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/about-this-site/&amp;title=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81%20/post/about-this-site/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/about-this-site/&amp;title=Hugo%e3%81%a8GitHub%20Pages%e3%81%a7%e3%83%96%e3%83%ad%e3%82%b0%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%81" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
 
   
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Golang</h1>
-
   
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-  
-
-  
-  
-  <div>
-    <h2><a href="/post/handle-commandline-args-with-flag-package/">🚩flagパッケージでコマンドライン引数を扱う</a></h2>
-    <div class="article-style">
+  <div class="media author-card content-widget-hr">
+    
       
-      flagパッケージでコマンドライン引数を賢く扱おう！
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
       
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
     </div>
   </div>
+
+
+
+
+<section id="comments">
   
-  <div>
-    <h2><a href="/post/about-this-site/">HugoとGitHub Pagesでブログを作ってみた！</a></h2>
-    <div class="article-style">
-      
-      このブログの技術的なところをまとめてみました！まだ途中です 🙇
-      
-    </div>
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
   </div>
-  
-
-  
-
-</div>
+</article>
 
       
 
