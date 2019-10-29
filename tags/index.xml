@@ -5,12 +5,36 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 19:50:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 23:24:38 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
       <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>Emulator</title>
+      <link>/tags/emulator/</link>
+      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
+      <guid>/tags/emulator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulator</title>
+      <link>/tags/simulator/</link>
+      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
+      <guid>/tags/simulator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terminology</title>
+      <link>/tags/terminology/</link>
+      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
+      <guid>/tags/terminology/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Git</title>

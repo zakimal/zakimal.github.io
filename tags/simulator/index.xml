@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simulator | zak</title>
+    <link>/tags/simulator/</link>
+      <atom:link href="/tags/simulator/index.xml" rel="self" type="application/rss+xml" />
+    <description>Simulator</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 23:24:38 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Simulator</title>
+      <link>/tags/simulator/</link>
+    </image>
+    
+    <item>
+      <title>Emulator v.s. Simulator</title>
+      <link>/post/simulator-vs-emulator/</link>
+      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
+      <guid>/post/simulator-vs-emulator/</guid>
+      <description>
+
+&lt;h2 id=&#34;ある人によれば&#34;&gt;ある人によれば&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Simulation = For analysis and study&lt;/p&gt;
+
+&lt;p&gt;Emulation = For usage as a substitute&lt;/p&gt;
+
+&lt;p&gt;A simulator is an environment which models but an emulator is one that replicates the usage as on the original device or system.&lt;/p&gt;
+
+&lt;p&gt;Simulator mimics the activity of something that it is simulating. It &lt;strong&gt;&amp;ldquo;appears&amp;rdquo;&lt;/strong&gt; (a lot can go with this &amp;ldquo;appears&amp;rdquo;, depending on the context) to be the same as the thing being simulated. For example the flight simulator &amp;ldquo;appears&amp;rdquo; to be a real flight to the user, although it does not transport you from one place to another.&lt;/p&gt;
+
+&lt;p&gt;Emulator, on the other hand, &lt;strong&gt;actually &amp;ldquo;does&amp;rdquo;&lt;/strong&gt; what the thing being emulated does, and in doing so it too &amp;ldquo;appears to be doing the same thing&amp;rdquo;. An emulator may use different set of protocols for mimicking the thing being emulated, but the result/outcome is always the same as the original object. For example, EMU8086 emulates the 8086 microprocessor on your computer, which obviously is not running on 8086 (= different protocols), but the output it gives is what a real 8086 would give.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;また別の人によれば&#34;&gt;また別の人によれば&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Simulator is broader than Emulator&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Simulator tends to imitate/model more global processes/things in general with ability to narrow the imitation down (e.g. capacitor simulator with presets representing some known models)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Emulator tends to imitate certain hardware devices with certain specification, known characteristics and properties (e.g. SNES emulator, Intel 8087 or Roland TB-303)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;語源を辿ると&#34;&gt;語源を辿ると&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;emulate is &amp;ldquo;to be equal&amp;rdquo; (looks like more aggressive and straightforward - rivalry)&lt;/li&gt;
+&lt;li&gt;simulate is &amp;ldquo;to be similar&amp;rdquo; (looks like more sly and tricky - imitation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;日本語だと&#34;&gt;日本語だと&amp;hellip;&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Emulation: （代替可能なレベルでの）模倣&lt;/li&gt;
+&lt;li&gt;Simulation: 模擬&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;かな？🤔&lt;/p&gt;
+
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/1584617/simulator-or-emulator-what-is-the-difference&#34; target=&#34;_blank&#34;&gt;Simulator or Emulator? What is the difference?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

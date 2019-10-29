@@ -3,6 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tags/emulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/simulator-vs-emulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/simulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/terminology/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/"
+                />
+  </url>
+  
+  <url>
     <loc>/tags/git/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
   </url>
@@ -18,53 +83,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-10-29T19:50:58+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-10-29T19:50:58+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
     <loc>/tags/tips/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-10-29T19:50:58+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/"
-                />
   </url>
   
   <url>
