@@ -5,12 +5,52 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 23:24:38 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 23:54:29 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
       <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>Distributed Graph Processing</title>
+      <link>/tags/distributed-graph-processing/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/tags/distributed-graph-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GRAPE</title>
+      <link>/tags/grape/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/tags/grape/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graph</title>
+      <link>/tags/graph/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/tags/graph/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parallel Computation</title>
+      <link>/tags/parallel-computation/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/tags/parallel-computation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parallel Graph Computation</title>
+      <link>/tags/parallel-graph-computation/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/tags/parallel-graph-computation/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Emulator</title>

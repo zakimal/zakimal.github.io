@@ -218,7 +218,7 @@
 
 &lt;p&gt;&lt;code&gt;Parse()&lt;/code&gt;の後に&lt;code&gt;Args()&lt;/code&gt;で&lt;code&gt;[]string&lt;/code&gt;として取得できます．&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;pakcage main
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
 
 import (
 	&amp;quot;flag&amp;quot;

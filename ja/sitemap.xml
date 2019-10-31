@@ -3,18 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tags/emulator/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <loc>/tags/distributed-graph-processing/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/simulator-vs-emulator/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <loc>/tags/grape/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/graph/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/parallel-computation/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/parallel-graph-computation/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/parallelizing-sequential-graph-computations/</loc>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,13 +48,8 @@
   </url>
   
   <url>
-    <loc>/tags/simulator/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -48,13 +63,8 @@
   </url>
   
   <url>
-    <loc>/tags/terminology/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -65,6 +75,26 @@
                 hreflang="ja"
                 href="/"
                 />
+  </url>
+  
+  <url>
+    <loc>/tags/emulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/simulator-vs-emulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/simulator/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/terminology/</loc>
+    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
   
   <url>
