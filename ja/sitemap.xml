@@ -3,6 +3,91 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/tags/channel/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/goalg/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/golang-channels-tutorial/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/tutorial/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-10-31T22:32:28+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/concurrent/</loc>
+    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/concurrent-vs-parallel/</loc>
+    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/parallel/</loc>
+    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/terminology/</loc>
+    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/distributed-graph-processing/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
@@ -33,51 +118,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-10-29T23:54:29+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/"
-                />
-  </url>
-  
-  <url>
     <loc>/tags/emulator/</loc>
     <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
@@ -89,11 +129,6 @@
   
   <url>
     <loc>/tags/simulator/</loc>
-    <lastmod>2019-10-29T23:24:38+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/terminology/</loc>
     <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
   

@@ -5,12 +5,60 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Tue, 29 Oct 2019 23:54:29 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Thu, 31 Oct 2019 22:32:28 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
       <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>Channel</title>
+      <link>/tags/channel/</link>
+      <pubDate>Thu, 31 Oct 2019 22:32:28 +0900</pubDate>
+      <guid>/tags/channel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Goalg</title>
+      <link>/tags/goalg/</link>
+      <pubDate>Thu, 31 Oct 2019 22:32:28 +0900</pubDate>
+      <guid>/tags/goalg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>/tags/tutorial/</link>
+      <pubDate>Thu, 31 Oct 2019 22:32:28 +0900</pubDate>
+      <guid>/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Concurrent</title>
+      <link>/tags/concurrent/</link>
+      <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
+      <guid>/tags/concurrent/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parallel</title>
+      <link>/tags/parallel/</link>
+      <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
+      <guid>/tags/parallel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terminology</title>
+      <link>/tags/terminology/</link>
+      <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
+      <guid>/tags/terminology/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Distributed Graph Processing</title>
@@ -65,14 +113,6 @@
       <link>/tags/simulator/</link>
       <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
       <guid>/tags/simulator/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Terminology</title>
-      <link>/tags/terminology/</link>
-      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
-      <guid>/tags/terminology/</guid>
       <description></description>
     </item>
     
