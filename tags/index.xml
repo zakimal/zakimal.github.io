@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Thu, 31 Oct 2019 22:32:28 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 01 Nov 2019 14:07:56 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
@@ -15,8 +15,40 @@
     <item>
       <title>Channel</title>
       <link>/tags/channel/</link>
-      <pubDate>Thu, 31 Oct 2019 22:32:28 +0900</pubDate>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
       <guid>/tags/channel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Concurrency</title>
+      <link>/tags/concurrency/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/tags/concurrency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>/tags/golang/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Goroutine</title>
+      <link>/tags/goroutine/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/tags/goroutine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parallelism</title>
+      <link>/tags/parallelism/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/tags/parallelism/</guid>
       <description></description>
     </item>
     
@@ -177,14 +209,6 @@
       <link>/tags/library/</link>
       <pubDate>Fri, 25 Oct 2019 22:45:15 +0900</pubDate>
       <guid>/tags/library/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
-      <guid>/tags/golang/</guid>
       <description></description>
     </item>
     

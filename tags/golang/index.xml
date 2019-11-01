@@ -5,12 +5,500 @@
     <link>/tags/golang/</link>
       <atom:link href="/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <description>Golang</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 25 Oct 2019 19:04:31 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 01 Nov 2019 14:07:56 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Golang</title>
       <link>/tags/golang/</link>
     </image>
+    
+    <item>
+      <title>Internal of Golang Concurrency Primitives</title>
+      <link>/post/internal-of-golang-concurrency-primitives/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/post/internal-of-golang-concurrency-primitives/</guid>
+      <description>
+
+&lt;h2 id=&#34;並行処理-並列処理&#34;&gt;並行処理？並列処理？&lt;/h2&gt;
+
+&lt;p&gt;並行処理とか並列処理って一体なんなのでしょう．&lt;/p&gt;
+
+&lt;p&gt;黎明期の計算機では，並行処理だの並列処理だのなんてことは，一切考えていませんでした．入力された命令を1つずつ，真面目に実行していくことで計算を実行していたのです．黎明期の計算機は，人間が紙と鉛筆でちんたら計算をするよりも，何倍も高速にかつ正確に計算をすることができたので，とても人気になりました．ただ，その当時の計算機は物理的にサイズもデカくて高価なものでした．なので，計算機を導入・設置できるのは大学などのお金と部屋が余っている組織ぐらいしかなかったわけです．&lt;/p&gt;
+
+&lt;p&gt;大学に計算機が設置されると，大学の研究者たちは喜びました．これで面倒な手計算から解放されるわけですからそりゃそうでしょう．みんなでこぞって計算機を使いたくなります．でも「計算機を利用したい研究者の人数」が「設置してある計算機の台数」と比較して圧倒的に多いので，計算機の使用を巡って争奪戦が起こります．だって，当時の計算機は「入力された命令を1つずつ，真面目に実行していく」タイプの計算機なので，他の誰かが計算機に計算をさせている間は，他の研究者はその計算機を使うことができないからです．そんなの不便すぎます．せっかく便利でしかもめちゃんこ高価な計算機が設置してあるのに，しかも使いたい人はたくさんいるのに使わせてあげられないなんて，もう不満タラタラです．そこで研究者たちは考えました．&lt;/p&gt;
+
+&lt;p&gt;「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」&lt;/p&gt;
+
+&lt;p&gt;「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」&lt;/p&gt;
+
+&lt;p&gt;ここからoperating systemとかprocessとかいろんな概念が確立されていくわけです．&lt;/p&gt;
+
+&lt;p&gt;「並行」というのは，英語ではconcurrentに相当し，「1台のマシンで複数のタスクを同時に実行している（ように見える）様」を意味します．concurrentな処理は「限られたリソースを有効活用すること」を目的としていて，現在の計算機では「同時に処理しているように見せるために，複数のタスクを時間的に細切れにして全部のタスクをちょっとずつ進める」ことでconcurrentな処理を実現しています．&lt;/p&gt;
+
+&lt;p&gt;一方で，似たような概念として「並列」というものもあります．英語ではparallelに相当し，「複数台のマシンで1つのタスクを実行している様」を意味します．parallelな処理は「（複数のマシンという）豊富なリソースを利用して1つのタスクを高速に実行すること」を目的としていて，concurrentとは目的が違います．&lt;/p&gt;
+
+&lt;h2 id=&#34;concurrentなプログラム&#34;&gt;concurrentなプログラム&lt;/h2&gt;
+
+&lt;p&gt;ここまで計算機の進化の歴史を本当にざっくり見てみましたが，じゃあconcurrentという概念がプログラムとどう絡んでいくのでしょうか．&lt;/p&gt;
+
+&lt;p&gt;プログラムというのは大体「CPUでの演算」「データのI/O」「ネットワーキング」を部品として構成されています．それぞれの部品には特徴があって，「CPUでの演算」はとても高速に実行できるけれども，「データのI/O」と「ネットーワーキング」は（「CPUでの演算」と比較して）桁違いに，本当に桁違いに時間がかかります．もし計算機が「入力された命令を1つずつ，真面目に実行していく」方式で動いていたとすると，「データのI/O」と「ネットーワーキング」に取り組んでいる間，計算機はうんともすんとも言わずに黙り込んでしまうことになります．これは明らかに無駄です．CPUは何も計算を進めないでただ存在しているだけになるわけです．&lt;/p&gt;
+
+&lt;p&gt;concurrentという概念の背景には「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」という問題があったわけです．この問題意識が一歩進むと，「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」となり，さらに一歩進んで「（複数のタスクで構成される）1つのプログラムを1台のCPUで効率的に処理するためにはどういう仕組みが必要なんだろう？&amp;hellip;そうだ！CPUが暇な時間帯には別の仕事をさせよう！」となるわけです．&lt;/p&gt;
+
+&lt;p&gt;「時間がかかってしまう処理をやっている間に，他にできる計算をCPUにやらせよう」というのがconcurrentなプログラムを書きたい理由です．だってそうした方がやりたいこと早く終わるでしょう．しかもPersonalな計算機が世の中に普及して「計算機はより高速にユーザーの動作に応答しなきゃいけない（うんともすんとも言わない計算機は嫌われてる）」し「ユーザーは大抵の場合音楽聴きながらメールチェックしつつYoutubeで動画も見たいワガママな存在」なので，CPUに暇な時間なんてものはないわけですよ．&lt;/p&gt;
+
+&lt;p&gt;「プログラムはconcurrentに実行されるべき」となるとconcurrentなプログラムを記述して，それを実際にconcurrentに実行する機構が必要になります．&lt;/p&gt;
+
+&lt;p&gt;「実際にconcurrentに実行する機構」についてはOperating Systemが頑張って，プログラムがconcurrentに実行されるように実行環境を提供します．Operating Systemは結構頑張るのですが，やっぱり頑固なハードウェアさんとやりとりしないといけないので，相当大変そうです．提供してくれる実行環境の効率にも限度がありそうです．&lt;/p&gt;
+
+&lt;p&gt;「concurrentなプログラムを記述」するところについては，プログラミング言語の守備範囲なわけですが，いろんな言語がいろんなアプローチを取って，concurrentなプログラムをより簡単に書けるように，プログラム開発者に部品primitiveを提供してくれます．&lt;/p&gt;
+
+&lt;p&gt;でも古参のプログラミング言語たちは，そのデザインの根幹に「プログラムがconcurrentに実行される」とか想定していないわけで，いざやろうとすると不自然なところとかがやっぱりでてきてしまいます．なのでgolangは，言語のデザインの段階でconcurrencyを考慮した言語として誕生しました．そうすれば，concurrentなプログラムがより直感的にわかりやすく書けるようになるわけです．&lt;/p&gt;
+
+&lt;h2 id=&#34;goroutineとchannel&#34;&gt;goroutineとchannel&lt;/h2&gt;
+
+&lt;p&gt;golangはconcurrentなプログラムを書くためのprimitiveとしてgoroutineとchannelを提供しています．というのもgolangでは，concurrentなプログラムを「goroutineたちがメッセージをやりとりしながら進行する計算」としてモデル化しているのです．ここで注意しておきたいのが，concurrentなプログラムを表現する別のモデルも考えられるという点です．モデル化にはバリエーションがあるので「goroutineたちがmessage passing」だけが唯一のモデルというわけではないです．&lt;/p&gt;
+
+&lt;p&gt;goroutineというのは，概念的にはOSの提供するプロセスとかスレッドみたいなもので，実行中の処理を抽象化したものです．直感的にはOSのスレッドと思っていてもいいかもしれません．実態はちょっと違うんですけどね．この「抽象化された処理」同士がmessage passingによって情報を共有することでconcurrentな処理が実現できることになります．&lt;/p&gt;
+
+&lt;p&gt;channelというのは，goroutine間でのコミュニケーションをサポートするためにメッセージキューです．&lt;/p&gt;
+
+&lt;p&gt;golangは言語設計の根底にある思想として&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;を，掲げています．要するに「goroutineたちは共有メモリを設けるのではなくてmessage passingでコミュニケーションをとる」ように設計しようということです．&lt;/p&gt;
+
+&lt;h2 id=&#34;goroutineとchannelの設計と実装を眺める&#34;&gt;goroutineとchannelの設計と実装を眺める&lt;/h2&gt;
+
+&lt;h3 id=&#34;goroutine&#34;&gt;goroutine&lt;/h3&gt;
+
+&lt;p&gt;goroutineは「実行中の処理を抽象化したもの」と書きましたが，これは具体的には「計算に用いるstackと実行状態を保持している構造体」として実装されています．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type g struct {
+	// Stack parameters.
+	// stack describes the actual stack memory: [stack.lo, stack.hi).
+	// stackguard0 is the stack pointer compared in the Go stack growth prologue.
+	// It is stack.lo+StackGuard normally, but can be StackPreempt to trigger a preemption.
+	// stackguard1 is the stack pointer compared in the C stack growth prologue.
+	// It is stack.lo+StackGuard on g0 and gsignal stacks.
+	// It is ~0 on other goroutine stacks, to trigger a call to morestackc (and crash).
+	stack       stack   // offset known to runtime/cgo
+	stackguard0 uintptr // offset known to liblink
+	stackguard1 uintptr // offset known to liblink
+
+	// ,,,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;「それってOSの提供するプロセスとかスレッドと同じじゃないの？」&lt;/p&gt;
+
+&lt;p&gt;それは確かにそうなんですが，goroutineはOSの提供するプロセスとかスレッドと同レベルの存在ではなくて，goroutineは，OSの提供するスレッドに対してM:Nでマッピングされる「golangのruntimeが提供する，ユーザー空間で定義されたスレッド」として存在しています．golangのruntimeはgoroutineを管理していて「いつ，どのgoroutineを実行するか」を決定するschedulerとしての役割も担っています．つまりgolangのruntimeはユーザー空間で動く「ミニOS」のようなものな訳です．とは言いつつも，実際に実行されるためにはOSの提供するスレッドとして実行されなければいけないわけですから，goroutineはスレッドにマッピングされることになります．golangのschedulerはgoroutineとOSのスレッドを，M:Nでマッピングします．つまり複数のgoroutineが複数のOSスレッドとして実行されるわけです．1つのgoroutineが複数のOSスレッドとして実行されるし，1つのOSスレッドでは複数のgoroutineを実行することになります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;goroutine.jpeg&#34; data-caption=&#34;OS Process v.s. OS Thread v.s. Goroutine&#34;&gt;
+&lt;img src=&#34;goroutine.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    OS Process v.s. OS Thread v.s. Goroutine
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;となると，重要なのは「golangのruntimeがどのようなルールでgoroutineの実行計画を立てるのか」です．&lt;/p&gt;
+
+&lt;h4 id=&#34;golangのruntimeによるgoroutineのスケジューリング&#34;&gt;golangのruntimeによるgoroutineのスケジューリング&lt;/h4&gt;
+
+&lt;p&gt;登場するのは&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;G&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;の三人．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;machineの&lt;code&gt;M&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;OSスレッドに相当する&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;goroutineの&lt;code&gt;G&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;processorの&lt;code&gt;P&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;スケジューリングのコンテキスト（次どの&lt;code&gt;G&lt;/code&gt;を実行するのか）を管理している&lt;/li&gt;
+&lt;li&gt;具体的に言えば，runnableなgoroutineのキューを管理しているのが&lt;code&gt;P&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;gmp.jpeg&#34; data-caption=&#34;G，M，P&#34;&gt;
+&lt;img src=&#34;gmp.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    &lt;code&gt;G&lt;/code&gt;，&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;まず，環境変数&lt;code&gt;GOMAXPROCS&lt;/code&gt;の数だけ&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;がセットされます．以下では，&lt;code&gt;GOMAXPROCS = 2&lt;/code&gt;とします．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;gmp2.jpeg&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;runnableな&lt;code&gt;G&lt;/code&gt;が&lt;code&gt;P&lt;/code&gt;にenqueueされ，&lt;code&gt;M&lt;/code&gt;は&lt;code&gt;P&lt;/code&gt;からrunnableな&lt;code&gt;G&lt;/code&gt;を1個取り出して実行します．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;assignment.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;もし，queueにrunnableな&lt;code&gt;G&lt;/code&gt;が0個になってしまったら，他のqueueから半分盗みます．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;work-stealing.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;「自分のqueueが空になったら他の&lt;code&gt;M&lt;/code&gt;の持つ&lt;code&gt;P&lt;/code&gt;から半分奪う」というスケジューリングアルゴリズムはwork stealingアルゴリズムと呼ばれています．golangのruntimeのスケジューラーはこのwork stealingアルゴリズムに従ってgoroutineのスケジューリングを行います．このアルゴリズムはCPUをたくさん使うような処理にスケジューリングには効率的である一方でI/O待ちを伴う処理（&lt;code&gt;syscall&lt;/code&gt;の実行やネットワーク処理）とは相性が悪いです．そのため，いくつかの工夫がされています．&lt;/p&gt;
+
+&lt;p&gt;まず，golangのruntimeに存在しているものを整理します．上で登場した&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;G&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;の他にruntimeには&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;グローバルキュー
+
+&lt;ul&gt;
+&lt;li&gt;各&lt;code&gt;M&lt;/code&gt;-&lt;code&gt;P&lt;/code&gt;に対応するqueueとは別に存在するキュー&lt;/li&gt;
+&lt;li&gt;通常&lt;code&gt;G&lt;/code&gt;がrunnableになると&lt;code&gt;P&lt;/code&gt;の持つキューに入るが，いくつかの状況ではこちらに入ります&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/golang/go/blob/15ea61c50ca25295497e78354f7f8397e73e3590/src/runtime/proc.go#L4427:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;sysmon&lt;/code&gt;&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GOMAXPROCS&lt;/code&gt;の数だけの&lt;code&gt;M&lt;/code&gt;と&lt;code&gt;P&lt;/code&gt;の他に，&lt;code&gt;sysmon&lt;/code&gt;という関数を実行し続ける特別な&lt;code&gt;M&lt;/code&gt;が存在しています&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysmon&lt;/code&gt;の実態は無限ループで，そのループの中で&lt;code&gt;netpoll&lt;/code&gt;のチェックなどを行っています&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; Idle List
+
+&lt;ul&gt;
+&lt;li&gt;暇な&lt;code&gt;P&lt;/code&gt;のリスト&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt; Idle List
+
+&lt;ul&gt;
+&lt;li&gt;暇な&lt;code&gt;M&lt;/code&gt;のリスト&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;syscall-を実行した場合&#34;&gt;&lt;code&gt;syscall&lt;/code&gt;を実行した場合&lt;/h5&gt;
+
+&lt;p&gt;時間のかかる&lt;code&gt;syscall&lt;/code&gt;を実行した場合，&lt;code&gt;sysmon&lt;/code&gt;がそれを検知し，&lt;code&gt;syscall&lt;/code&gt;を発行した&lt;code&gt;G&lt;/code&gt;を実行している&lt;code&gt;M&lt;/code&gt;から&lt;code&gt;P&lt;/code&gt;を切り離し，別の&lt;code&gt;M&lt;/code&gt;にその&lt;code&gt;P&lt;/code&gt;をアタッチして処理を継続させます．
+&lt;code&gt;syscall&lt;/code&gt;終了後は，まず&lt;code&gt;P&lt;/code&gt; Idle Listを確認して暇そうにしている&lt;code&gt;P&lt;/code&gt;を自身（&lt;code&gt;M&lt;/code&gt;）にアタッチして処理を進めます．&lt;code&gt;P&lt;/code&gt; Idle Listがからの場合は&lt;code&gt;syscall&lt;/code&gt;を発行した&lt;code&gt;G&lt;/code&gt;をグローバルキューに突っ込み（この&lt;code&gt;G&lt;/code&gt;はいずれGCされる），自身（&lt;code&gt;M&lt;/code&gt;）は&lt;code&gt;M&lt;/code&gt; Idle Listに入ります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;syscall.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;h5 id=&#34;ネットワーク処理をした場合&#34;&gt;ネットワーク処理をした場合&lt;/h5&gt;
+
+&lt;p&gt;ネットワーク処理の発生時には&lt;code&gt;netpoller&lt;/code&gt;という仕組みに，ネットワーク処理を実行しているgoroutineが登録され，&lt;code&gt;sysmon&lt;/code&gt;が&lt;code&gt;netpoller&lt;/code&gt;にポーリングします．ネットワーク処理が終了したら&lt;code&gt;netpoller&lt;/code&gt;からグローバルキューに追加されて，&lt;code&gt;M&lt;/code&gt;で続きを実行されるのを待つことになります．&lt;/p&gt;
+
+&lt;p&gt;golangの標準ライブラリが提供するネットワーキングのAPIはブロッキングな処理となっていますが，goroutineはOSスレッドに対してM:Nでマッピングされるため，&lt;code&gt;netpoller&lt;/code&gt;をによってノンブロッキングな処理として実行されることになります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;network-read.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;channel&#34;&gt;channel&lt;/h3&gt;
+
+&lt;p&gt;channelはgoroutine間でのメッセージングをサポートするキューです．channelにはいくつかの面白い特徴があります．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;channelはgoroutine-safe
+
+&lt;ul&gt;
+&lt;li&gt;複数のgoroutineがあるchannelに同時にアクセスしても問題が発生しないようにロック機構が組み込まれています&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;channelはgoroutine間でFIFOなデータの受け渡しが可能です&lt;/li&gt;
+&lt;li&gt;channelはその状況次第ではgoroutineをブロックしたりアンブロックしたりできます
+
+&lt;ul&gt;
+&lt;li&gt;バッファ0のchannelはgoroutineを同期させることができます．つまりあるgorotuineがchannelに書き込むと，相手のgoroutineがそれを読み込むまで書き込んだgoroutineの実行はブロックされるし，channelから読み込みたいgoroutineの実行は，相手のgoroutineが何かを書き込むまでブロックされます．&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;channelは&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L32:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;hchan&lt;/code&gt;&lt;/a&gt;という名前の構造体で実装されています．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type hchan struct {
+	qcount   uint           // total data in the queue
+	dataqsiz uint           // size of the circular queue
+	buf      unsafe.Pointer // points to an array of dataqsiz elements
+	elemsize uint16
+	closed   uint32
+	elemtype *_type // element type
+	sendx    uint   // send index
+	recvx    uint   // receive index
+	recvq    waitq  // list of recv waiters
+	sendq    waitq  // list of send waiters
+
+	// lock protects all fields in hchan, as well as several
+	// fields in sudogs blocked on this channel.
+	//
+	// Do not change another G&#39;s status while holding this lock
+	// (in particular, do not ready a G), as this can deadlock
+	// with stack shrinking.
+	lock mutex
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;まず，構造体&lt;code&gt;hchan&lt;/code&gt;のメンバーとして&lt;code&gt;lock mutex&lt;/code&gt;が見えるので，channelはgoroutine-safeです．複数のgoroutineが同時にアクセスしても問題が発生しないようになっています．goroutineがchannelに対して読み書きをしたくなったらロックを取ってから行うようになっているということです．&lt;/p&gt;
+
+&lt;p&gt;上に示した通り，channelの実体は「circular queue（へのポインタ）」です．組み込みの&lt;code&gt;make()&lt;/code&gt;でchannelを作ると，実体はheap領域に確保され，それへのポインタが返されます．&lt;code&gt;buf&lt;/code&gt;がバッファ先頭へのポインタで，&lt;code&gt;sendx&lt;/code&gt;・&lt;code&gt;recvx&lt;/code&gt;がそれぞれキューの先頭とお尻の番号になっています．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;hchan.jpeg&#34; data-caption=&#34;構造体hchan&#34;&gt;
+&lt;img src=&#34;hchan.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    構造体&lt;code&gt;hchan&lt;/code&gt;
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;なので，channelにメッセージが送り込まれたら，&lt;code&gt;buf[0]&lt;/code&gt;にメッセージが入り，&lt;code&gt;sendx&lt;/code&gt;がインクリメントされて1になります．続けてメッセージが2個送り込まれると&lt;code&gt;buf[1]&lt;/code&gt;，&lt;code&gt;buf[2]&lt;/code&gt;にメッセージが書き込まれ，&lt;code&gt;sendx&lt;/code&gt;が0に戻ります．ここでメッセージが1個読まれると&lt;code&gt;buf[0]&lt;/code&gt;の内容がdequeueて&lt;code&gt;recvx&lt;/code&gt;が1になります．特に難しいことはなく，一般のcircular queueの動作ですね．&lt;/p&gt;
+
+&lt;p&gt;channel間のメッセージングはとても直感的に実現することができます．channelにメッセージを書き込む時は，まず&lt;code&gt;hchan&lt;/code&gt;のロックを取って，次に&lt;code&gt;buf&lt;/code&gt;のお尻に送りたいデータをメモリコピーして，アンロック．channelからメッセージを読み込む時は，同様にまず&lt;code&gt;hchan&lt;/code&gt;のロックを取って，&lt;code&gt;buf&lt;/code&gt;の先頭をメモリコピーして，アンロック．とてもシンプルな動作です．&lt;/p&gt;
+
+&lt;p&gt;実はこの挙動こそが，golangの&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;を実装している箇所と言えます．&lt;/p&gt;
+
+&lt;p&gt;goroutine間で共有しているのは構造体&lt;code&gt;hchan&lt;/code&gt;だけです．しかも&lt;code&gt;hchan&lt;/code&gt;はロックによって排他処理が施されるため，goroutine-safeです．&lt;code&gt;hchan&lt;/code&gt;の&lt;code&gt;buf&lt;/code&gt;に値を書き込む（つまりchannelに値を送る）・値を読み込む（つまりchannelから値を取り出す）動作は全て&lt;strong&gt;メモリコピー&lt;/strong&gt;で行われます．goroutine間でやり取りする情報は（メモリを共有するのではなくて）メモリコピーして渡しましょうというのが，上の標語の実装と言えます．&lt;/p&gt;
+
+&lt;p&gt;channelはgoroutineの挙動をブロックしたりアンブロックしたりすることができます．バッファに空きが無いchannel（バッファ0のchannelや容量一杯データが書き込まれているchannel）に対してデータを送り込もうとすると，&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L162&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;gopark()&lt;/code&gt;&lt;/a&gt;が実行されます．この関数は，golangのruntimeのスケジューラを呼び出して，バッファに空きが無いchannelにデータを送り込もうとしたgoroutineの状態を&lt;code&gt;wait&lt;/code&gt;にして別のgoroutineの実行を始めます．channelに対してデータを送り込むロジックの中に，goroutineをブロックするロジックが組み込まれているということになります．では，どうやってブロックされたgoroutineの実行を再開するのでしょうか．&lt;/p&gt;
+
+&lt;p&gt;ここで興味深いのが，&lt;code&gt;gopark()&lt;/code&gt;の実行の直前に「どのgoroutineがどんな値を送り込もうとしていたのかをchannelの中に記録しておく」というところです．構造体&lt;code&gt;hchan&lt;/code&gt;には&lt;code&gt;sendq&lt;/code&gt;，&lt;code&gt;recvq&lt;/code&gt;というメンバがあり，そこに「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」という情報を保持しています．「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」を保持する構造体は&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/runtime2.go#L342:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;sudog&lt;/code&gt;&lt;/a&gt;という名前になっています．なぜこの名前なのかは&lt;a href=&#34;https://groups.google.com/forum/#!topic/golang-codereviews/rC9BLPFvkW8&#34; target=&#34;_blank&#34;&gt;ここのメーリスの一連の流れ&lt;/a&gt;を読むとわかるかもしれませんよ．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;// sudog represents a g in a wait list, such as for sending/receiving
+// on a channel.
+//
+// sudog is necessary because the g ↔ synchronization object relation
+// is many-to-many. A g can be on many wait lists, so there may be
+// many sudogs for one g; and many gs may be waiting on the same
+// synchronization object, so there may be many sudogs for one object.
+//
+// sudogs are allocated from a special pool. Use acquireSudog and
+// releaseSudog to allocate and free them.
+type sudog struct {
+	// The following fields are protected by the hchan.lock of the
+	// channel this sudog is blocking on. shrinkstack depends on
+	// this for sudogs involved in channel ops.
+
+	g *g
+
+	// isSelect indicates g is participating in a select, so
+	// g.selectDone must be CAS&#39;d to win the wake-up race.
+	isSelect bool
+	next     *sudog
+	prev     *sudog
+	elem     unsafe.Pointer // data element (may point to stack)
+
+	// The following fields are never accessed concurrently.
+	// For channels, waitlink is only accessed by g.
+	// For semaphores, all fields (including the ones above)
+	// are only accessed when holding a semaRoot lock.
+
+	acquiretime int64
+	releasetime int64
+	ticket      uint32
+	parent      *sudog // semaRoot binary tree
+	waitlink    *sudog // g.waiting list or semaRoot
+	waittail    *sudog // semaRoot
+	c           *hchan // channel
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;gopark()&lt;/code&gt;によって受け取り手のgoroutineの実行が開始されると，&lt;strong&gt;受け取り手のgoroutineが，channelの&lt;code&gt;sendq&lt;/code&gt;の中身を確認して，実行をブロックされてしまった送り手のgoroutineが最後にchannelに送り込もうとした値を（送り手側に代わって）受け取り手側がchannelの&lt;code&gt;buf&lt;/code&gt;にコピーします&lt;/strong&gt;．これはある種の最適化です．真面目に，送り手側の実行が再開されてからchannelにデータを送り込むことにするとchannelに対するロックを取る必要があり，排他処理をする回数が1回増えてしまいます．「誰がどんな値を送ろうとしていたのか」が自明であるならば，先にやってしまえという考えのようです．&lt;/p&gt;
+
+&lt;p&gt;channelから値を1個受け取ると，&lt;code&gt;goready()&lt;/code&gt;が実行されて，スケジューラーが起動し，バッファに空きが無いchannelにメッセージを送ろうとしたgoroutineの状態をrunnableにセットして実行待ちのキューに入ります．&lt;/p&gt;
+
+&lt;p&gt;goroutineが空のchannelに対して読み込みを行おうとすると，そのgoroutineの動作はブロックされます．この挙動はchannelからデータを受け取るロジックである&lt;code&gt;recv()&lt;/code&gt;関数内に記述されています．さらに面白いのが，「どのgoroutineが，どこに値を受け取ろうとしていたのか」を&lt;code&gt;recvq&lt;/code&gt;に保存していることです．これによって，channelにデータを送り込むgoroutineが，受け取り先のgoroutineのスタック領域を直接いじってデータを送り切ってしまうことが可能となります．goroutineの実体は（雑に言えば）stackを持つ構造体で，OSプロセスのスタック領域に置かれています．つまり別のgoroutineの持つstackを直接いじることが，channelでのデータのやり取りの限られた状況においてのみ許されているというのが興味深いです．&lt;/p&gt;
+
+&lt;p&gt;golangのchannel周りの実装を見て，&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「排他処理を含む簡潔な実装の方が，排他処理なしの複雑な実装よりマシ．いくらパフォーマンスが良くても，それが複雑なコードでも良いことの理由にはならない」&lt;/li&gt;
+&lt;li&gt;「パフォーマンスの観点から，goroutineというユーザーレベルのスレッドを実装し（OSスレッドをブロックさせない），異なるgoroutineを跨いだメモリコピーを許す（その分実装がやや複雑になるがそれは許容する）」&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という相反する考えが感じられます．つまり&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;simplicityとperformaceには明確なtrade-offが存在する&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ということですね．&lt;/p&gt;
+
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+
+&lt;p&gt;今回初めてruntimeをじっくり読みました．今まで概念として理解していたものの実体をコードとして掴めたので，とても楽しかったです．今回はgoroutineとchannel周りが中心だったので，次はスケジューラー周辺をもっとつぶさに見ていきたいと思います．&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>🚩flagパッケージでコマンドライン引数を扱う</title>
