@@ -1300,13 +1300,13 @@ type sudog struct {
     </item>
     
     <item>
-      <title>対象鍵暗号</title>
+      <title>共通鍵暗号</title>
       <link>/post/symmetric-key-encription-scheme/</link>
       <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
       <guid>/post/symmetric-key-encription-scheme/</guid>
       <description>
 
-&lt;h2 id=&#34;対象鍵暗号&#34;&gt;対象鍵暗号&lt;/h2&gt;
+&lt;h2 id=&#34;共通鍵暗号&#34;&gt;共通鍵暗号&lt;/h2&gt;
 
 &lt;p&gt;暗号化・復号で同一の鍵を用いる暗号化方式&lt;/p&gt;
 
@@ -1318,7 +1318,7 @@ type sudog struct {
 &lt;li&gt;Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;対象鍵暗号の満たすべき性質&#34;&gt;対象鍵暗号の満たすべき性質&lt;/h2&gt;
+&lt;h2 id=&#34;共通鍵暗号の満たすべき性質&#34;&gt;共通鍵暗号の満たすべき性質&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;正当性
@@ -1333,7 +1333,7 @@ type sudog struct {
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;対象鍵暗号に対する攻撃モデル&#34;&gt;対象鍵暗号に対する攻撃モデル&lt;/h2&gt;
+&lt;h2 id=&#34;共通鍵暗号に対する攻撃モデル&#34;&gt;共通鍵暗号に対する攻撃モデル&lt;/h2&gt;
 
 &lt;h3 id=&#34;暗号文単独攻撃-ciphertext-only-attack&#34;&gt;暗号文単独攻撃：Ciphertext Only Attack&lt;/h3&gt;
 
@@ -1355,9 +1355,11 @@ type sudog struct {
 
 &lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
 
-&lt;h2 id=&#34;鍵全数探索攻撃に対する対象鍵暗号の安全性&#34;&gt;鍵全数探索攻撃に対する対象鍵暗号の安全性&lt;/h2&gt;
+&lt;h2 id=&#34;鍵全数探索攻撃に対する共通鍵暗号の安全性&#34;&gt;鍵全数探索攻撃に対する共通鍵暗号の安全性&lt;/h2&gt;
 
-&lt;p&gt;秘密鍵が$k$bitであるような対象鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．対象鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．&lt;/p&gt;
+&lt;p&gt;秘密鍵が$k$bitであるような共通鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．共通鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．&lt;/p&gt;
+
+&lt;h2 id=&#34;共通鍵暗号-1&#34;&gt;共通鍵暗号&lt;/h2&gt;
 </description>
     </item>
     

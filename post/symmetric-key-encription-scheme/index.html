@@ -112,7 +112,7 @@
   
   <meta property="og:site_name" content="zak">
   <meta property="og:url" content="/post/symmetric-key-encription-scheme/">
-  <meta property="og:title" content="対象鍵暗号 | zak">
+  <meta property="og:title" content="共通鍵暗号 | zak">
   <meta property="og:description" content="暗号技術学習メモ #2"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
@@ -147,7 +147,7 @@
     "@type": "WebPage",
     "@id": "/post/symmetric-key-encription-scheme/"
   },
-  "headline": "対象鍵暗号",
+  "headline": "共通鍵暗号",
   
   "datePublished": "2019-10-28T17:19:36+09:00",
   "dateModified": "2019-10-28T17:19:36+09:00",
@@ -183,7 +183,7 @@
 
 
 
-  <title>対象鍵暗号 | zak</title>
+  <title>共通鍵暗号 | zak</title>
 
 </head>
 
@@ -396,7 +396,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>対象鍵暗号</h1>
+  <h1>共通鍵暗号</h1>
 
   
   <p class="page-subtitle">暗号技術学習メモ #2</p>
@@ -464,7 +464,7 @@
     <div class="article-style">
       
 
-<h2 id="対象鍵暗号">対象鍵暗号</h2>
+<h2 id="共通鍵暗号">共通鍵暗号</h2>
 
 <p>暗号化・復号で同一の鍵を用いる暗号化方式</p>
 
@@ -476,7 +476,7 @@
 <li>Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る</li>
 </ul>
 
-<h2 id="対象鍵暗号の満たすべき性質">対象鍵暗号の満たすべき性質</h2>
+<h2 id="共通鍵暗号の満たすべき性質">共通鍵暗号の満たすべき性質</h2>
 
 <ul>
 <li>正当性
@@ -491,7 +491,7 @@
 </ul></li>
 </ul>
 
-<h2 id="対象鍵暗号に対する攻撃モデル">対象鍵暗号に対する攻撃モデル</h2>
+<h2 id="共通鍵暗号に対する攻撃モデル">共通鍵暗号に対する攻撃モデル</h2>
 
 <h3 id="暗号文単独攻撃-ciphertext-only-attack">暗号文単独攻撃：Ciphertext Only Attack</h3>
 
@@ -513,9 +513,11 @@
 
 <p>攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．</p>
 
-<h2 id="鍵全数探索攻撃に対する対象鍵暗号の安全性">鍵全数探索攻撃に対する対象鍵暗号の安全性</h2>
+<h2 id="鍵全数探索攻撃に対する共通鍵暗号の安全性">鍵全数探索攻撃に対する共通鍵暗号の安全性</h2>
 
-<p>秘密鍵が$k$bitであるような対象鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．対象鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．</p>
+<p>秘密鍵が$k$bitであるような共通鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．共通鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．</p>
+
+<h2 id="共通鍵暗号-1">共通鍵暗号</h2>
 
     </div>
 
@@ -548,7 +550,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/symmetric-key-encription-scheme/&amp;text=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/post/symmetric-key-encription-scheme/&amp;text=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -561,7 +563,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/symmetric-key-encription-scheme/&amp;t=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/post/symmetric-key-encription-scheme/&amp;t=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
@@ -574,7 +576,7 @@
       
       
       <li>
-        <a href="mailto:?subject=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7&amp;body=/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7&amp;body=/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -587,7 +589,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -600,7 +602,7 @@
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7%20/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7%20/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -613,7 +615,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%85%b1%e9%80%9a%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
