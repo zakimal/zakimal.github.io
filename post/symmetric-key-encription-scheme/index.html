@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="暗号技術学習メモ #2">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/tags/cryptography/">
+  <link rel="alternate" hreflang="ja-JP" href="/post/symmetric-key-encription-scheme/">
 
   
 
@@ -91,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/tags/cryptography/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/cryptography/">
+  <link rel="canonical" href="/post/symmetric-key-encription-scheme/">
 
   
   
@@ -113,18 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/tags/cryptography/">
-  <meta property="og:title" content="Cryptography | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/post/symmetric-key-encription-scheme/">
+  <meta property="og:title" content="対象鍵暗号 | zak">
+  <meta property="og:description" content="暗号技術学習メモ #2"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2019-10-28T17:19:36&#43;09:00">
+    
+      <meta property="article:published_time" content="2019-10-28T17:19:36&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-10-28T17:19:36&#43;09:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/symmetric-key-encription-scheme/"
+  },
+  "headline": "対象鍵暗号",
+  
+  "datePublished": "2019-10-28T17:19:36+09:00",
+  "dateModified": "2019-10-28T17:19:36+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.png"
+    }
+  },
+  "description": "暗号技術学習メモ #2"
+}
+</script>
+
+  
 
   
 
@@ -132,10 +177,13 @@
   
 
 
+  
 
 
 
-  <title>Cryptography | zak</title>
+
+
+  <title>対象鍵暗号 | zak</title>
 
 </head>
 
@@ -327,63 +375,397 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>対象鍵暗号</h1>
+
+  
+  <p class="page-subtitle">暗号技術学習メモ #2</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mon, Oct 28, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<h2 id="対象鍵暗号">対象鍵暗号</h2>
+
+<p>暗号化・復号で同一の鍵を用いる暗号化方式</p>
+
+<h2 id="シナリオ">シナリオ</h2>
+
+<ul>
+<li>Aliceが秘密鍵$key$を作成し，Bobに安全に共有</li>
+<li>Aliceがメッセージ$m$を$key$で暗号化$c = Enc(m, key)$し，Bobに送信</li>
+<li>Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る</li>
+</ul>
+
+<h2 id="対象鍵暗号の満たすべき性質">対象鍵暗号の満たすべき性質</h2>
+
+<ul>
+<li>正当性
+
+<ul>
+<li>$m = Dec(Enc(m, key), key)$が成立すること</li>
+</ul></li>
+<li>秘匿性
+
+<ul>
+<li>暗号文$c$から平文$m$に関連する情報が得られないこと</li>
+</ul></li>
+</ul>
+
+<h2 id="対象鍵暗号に対する攻撃モデル">対象鍵暗号に対する攻撃モデル</h2>
+
+<h3 id="暗号文単独攻撃-ciphertext-only-attack">暗号文単独攻撃：Ciphertext Only Attack</h3>
+
+<p>攻撃者が「解読対象の暗号文$c^*$」と「盗聴した暗号文$c_1$，$c_2$，$c_3$&hellip;$c_k$」を手元に持っている状況での攻撃．通信路の盗聴という攻撃に相当．</p>
+
+<h3 id="既知平文攻撃-known-plaintext-attack">既知平文攻撃：Known Plaintext Attack</h3>
+
+<p>攻撃者が「解読対象の暗号文$c^*$」と「（同一の鍵で暗号化された）ランダムな平文と暗号文の対$(m_1, c_1)$，$(m_2, c_2)$，$(m_3, c_3)$&hellip;$(m_k, c_k)$」を手元に持っている状況での攻撃．過去の平文が特定済みであるような状況での攻撃に相当．</p>
+
+<h3 id="選択平文攻撃-chosen-plaintext-attack">選択平文攻撃：Chosen Plaintext Attack</h3>
+
+<p>攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の平文に対応する暗号文を自由に入手できる」ような状況での攻撃．</p>
+
+<h3 id="選択暗号文攻撃-chosen-ciphertext-attack">選択暗号文攻撃：Chosen Ciphertext Attack</h3>
+
+<p>攻撃者が「解読対象の暗号文$c^<em>$」を持ち，「攻撃対象の暗号文$c^</em>$を入手する前の時点で，攻撃者が自分の選んだ暗号文に対応する平文を入手することができる」ような状況での攻撃．</p>
+
+<h3 id="適応的選択暗号文攻撃-adaptive-chosen-ciphertext-attack">適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack</h3>
+
+<p>攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．</p>
+
+<h2 id="鍵全数探索攻撃に対する対象鍵暗号の安全性">鍵全数探索攻撃に対する対象鍵暗号の安全性</h2>
+
+<p>秘密鍵が$k$bitであるような対象鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．対象鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/cryptography/">Cryptography</a>
+  
+  <a class="badge badge-light" href="/tags/memo/">Memo</a>
+  
+  <a class="badge badge-light" href="/tags/symmetric-key-encryption/">Symmetric Key Encryption</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/symmetric-key-encription-scheme/&amp;text=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/symmetric-key-encription-scheme/&amp;t=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7&amp;body=/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7%20/post/symmetric-key-encription-scheme/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/symmetric-key-encription-scheme/&amp;title=%e5%af%be%e8%b1%a1%e9%8d%b5%e6%9a%97%e5%8f%b7" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
 
 
 
-
-
-
-
-
-
-
-  
 
   
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Cryptography</h1>
-
   
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-  
-
-  
-  
-  <div>
-    <h2><a href="/post/symmetric-key-encription-scheme/">対象鍵暗号</a></h2>
-    <div class="article-style">
+  <div class="media author-card content-widget-hr">
+    
       
-      暗号技術学習メモ #2
+      <img class="portrait mr-3" src="/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
       
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
     </div>
   </div>
+
+
+
+
+<section id="comments">
   
-  <div>
-    <h2><a href="/post/basic-cryptographic-technologies/">暗号の基礎技術</a></h2>
-    <div class="article-style">
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>関連項目</h3>
+    <ul>
       
-      暗号技術学習メモ #1
+      <li><a href="/post/basic-cryptographic-technologies/">暗号の基礎技術</a></li>
       
-    </div>
+      <li><a href="/post/six-elements-of-infomation-security/">情報セキュリティの構成要素</a></li>
+      
+    </ul>
   </div>
   
 
-  
 
-</div>
+
+  </div>
+</article>
 
       
 

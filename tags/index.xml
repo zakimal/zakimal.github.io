@@ -175,7 +175,7 @@
     <item>
       <title>Cryptography</title>
       <link>/tags/cryptography/</link>
-      <pubDate>Mon, 28 Oct 2019 12:40:48 +0900</pubDate>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
       <guid>/tags/cryptography/</guid>
       <description></description>
     </item>
@@ -183,8 +183,16 @@
     <item>
       <title>Memo</title>
       <link>/tags/memo/</link>
-      <pubDate>Mon, 28 Oct 2019 12:40:48 +0900</pubDate>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
       <guid>/tags/memo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Symmetric Key Encryption</title>
+      <link>/tags/symmetric-key-encryption/</link>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
+      <guid>/tags/symmetric-key-encryption/</guid>
       <description></description>
     </item>
     

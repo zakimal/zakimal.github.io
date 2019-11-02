@@ -179,12 +179,22 @@
   
   <url>
     <loc>/tags/cryptography/</loc>
-    <lastmod>2019-10-28T12:40:48+09:00</lastmod>
+    <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/memo/</loc>
-    <lastmod>2019-10-28T12:40:48+09:00</lastmod>
+    <lastmod>2019-10-28T17:19:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/symmetric-key-encryption/</loc>
+    <lastmod>2019-10-28T17:19:36+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/symmetric-key-encription-scheme/</loc>
+    <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>

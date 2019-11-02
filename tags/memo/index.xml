@@ -5,12 +5,74 @@
     <link>/tags/memo/</link>
       <atom:link href="/tags/memo/index.xml" rel="self" type="application/rss+xml" />
     <description>Memo</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 28 Oct 2019 12:40:48 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 28 Oct 2019 17:19:36 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Memo</title>
       <link>/tags/memo/</link>
     </image>
+    
+    <item>
+      <title>対象鍵暗号</title>
+      <link>/post/symmetric-key-encription-scheme/</link>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
+      <guid>/post/symmetric-key-encription-scheme/</guid>
+      <description>
+
+&lt;h2 id=&#34;対象鍵暗号&#34;&gt;対象鍵暗号&lt;/h2&gt;
+
+&lt;p&gt;暗号化・復号で同一の鍵を用いる暗号化方式&lt;/p&gt;
+
+&lt;h2 id=&#34;シナリオ&#34;&gt;シナリオ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Aliceが秘密鍵$key$を作成し，Bobに安全に共有&lt;/li&gt;
+&lt;li&gt;Aliceがメッセージ$m$を$key$で暗号化$c = Enc(m, key)$し，Bobに送信&lt;/li&gt;
+&lt;li&gt;Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;対象鍵暗号の満たすべき性質&#34;&gt;対象鍵暗号の満たすべき性質&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;正当性
+
+&lt;ul&gt;
+&lt;li&gt;$m = Dec(Enc(m, key), key)$が成立すること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;秘匿性
+
+&lt;ul&gt;
+&lt;li&gt;暗号文$c$から平文$m$に関連する情報が得られないこと&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;対象鍵暗号に対する攻撃モデル&#34;&gt;対象鍵暗号に対する攻撃モデル&lt;/h2&gt;
+
+&lt;h3 id=&#34;暗号文単独攻撃-ciphertext-only-attack&#34;&gt;暗号文単独攻撃：Ciphertext Only Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「盗聴した暗号文$c_1$，$c_2$，$c_3$&amp;hellip;$c_k$」を手元に持っている状況での攻撃．通信路の盗聴という攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;既知平文攻撃-known-plaintext-attack&#34;&gt;既知平文攻撃：Known Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「（同一の鍵で暗号化された）ランダムな平文と暗号文の対$(m_1, c_1)$，$(m_2, c_2)$，$(m_3, c_3)$&amp;hellip;$(m_k, c_k)$」を手元に持っている状況での攻撃．過去の平文が特定済みであるような状況での攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択平文攻撃-chosen-plaintext-attack&#34;&gt;選択平文攻撃：Chosen Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の平文に対応する暗号文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択暗号文攻撃-chosen-ciphertext-attack&#34;&gt;選択暗号文攻撃：Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^&lt;em&gt;$」を持ち，「攻撃対象の暗号文$c^&lt;/em&gt;$を入手する前の時点で，攻撃者が自分の選んだ暗号文に対応する平文を入手することができる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;適応的選択暗号文攻撃-adaptive-chosen-ciphertext-attack&#34;&gt;適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h2 id=&#34;鍵全数探索攻撃に対する対象鍵暗号の安全性&#34;&gt;鍵全数探索攻撃に対する対象鍵暗号の安全性&lt;/h2&gt;
+
+&lt;p&gt;秘密鍵が$k$bitであるような対象鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．対象鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>暗号の基礎技術</title>
