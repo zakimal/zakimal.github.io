@@ -99,6 +99,10 @@
 &lt;p&gt;不特定多数の管理者がそれぞれのルールでSNSを提供するときに，それらSNS同士がやり取りをするための統一的なデータ形式・APIを規定しているのがActivityPubということになるが，各SNSが独自機能を実装して独自データフォーマットを追加したときはどのように対応するのだろう．&lt;/p&gt;
 
 &lt;p&gt;ActivityPubは最低限実装されるべきAPIとして整備されるにしても，独自データフォーマットについては共有する方法とかは規定していない．ActivityPubには「JSON-LDを用いてActivityStreamsは拡張可能である」としている．やり取りされるJSONメッセージに未知のフィールドが存在していたら，無視するか適当に解釈するかしかないので，どうするのだろう．ただ，SNSというある程度要求されるAPIがサービスから予測がつくしそれ以上の独自性がなさそうという感覚からすればActivityStreamsで十分なのかもしれない．この点はActivityStreamsを読んでみないとわからないと思うので気が向いたらやろうかな．&lt;/p&gt;
+
+&lt;h2 id=&#34;mastodon&#34;&gt;Mastodon&lt;/h2&gt;
+
+&lt;p&gt;MastodonはActivityPubを実装しているウェブアプリケーションの1つ．ちょっと前にちょっと流行った．Mastodonの面白いところは，Social Webにおけるグローバルなuser identityをメールアドレスみたいな形式で表現できるようにしたこと．Web上でのIdentityはサービスと強固に結びついていて，現在でもGoogle，Facebook，GitHub認証のサービスがたくさんある．「私はAliceです」と，ただそれだけで主張することができるURLがWeb上には存在していなくて，「FacebookのAliceさん」とか「GoogleのAliceさん」という風にしか自分のことを表現できていない状態にある．Federated Social Webの実装例であるMastodonでは，&lt;code&gt;&amp;lt;user_id&amp;gt;@&amp;lt;federation_id&amp;gt;&lt;/code&gt;みたいな形でユーザーのグローバルなIdentityを与えることにしていて，これは賢いなと思う．&lt;/p&gt;
 </description>
     </item>
     
