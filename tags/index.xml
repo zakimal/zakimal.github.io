@@ -173,6 +173,46 @@
     </item>
     
     <item>
+      <title>ActivityPub</title>
+      <link>/tags/activitypub/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/tags/activitypub/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Decentralization</title>
+      <link>/tags/decentralization/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/tags/decentralization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Distributed Social Network</title>
+      <link>/tags/distributed-social-network/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/tags/distributed-social-network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Federated Social Web</title>
+      <link>/tags/federated-social-web/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/tags/federated-social-web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mastodon</title>
+      <link>/tags/mastodon/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/tags/mastodon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cryptography</title>
       <link>/tags/cryptography/</link>
       <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>

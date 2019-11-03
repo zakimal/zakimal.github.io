@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mastodon | zak</title>
+    <link>/tags/mastodon/</link>
+      <atom:link href="/tags/mastodon/index.xml" rel="self" type="application/rss+xml" />
+    <description>Mastodon</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 28 Oct 2019 17:49:25 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Mastodon</title>
+      <link>/tags/mastodon/</link>
+    </image>
+    
+    <item>
+      <title>Federated Social WebとActivityPub</title>
+      <link>/post/what-is-activitypub/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/post/what-is-activitypub/</guid>
+      <description>
+
+&lt;h2 id=&#34;federated-social-webとは&#34;&gt;Federated Social Webとは？&lt;/h2&gt;
+
+&lt;p&gt;Federated Social Webとは，誤解を恐れず端的に言えば「分散Twitter」である．&lt;/p&gt;
+
+&lt;p&gt;「分散Twitter」とは何かを説明するには，Twitterと対比するのがわかりやすい．TwitterはTwitter社が提供しているマイクロブログサービスで，ユーザーはTwitter社が管理するサーバー上に展開されているTwitterというシステム内にアカウントを作成し，テキストメッセージや動画像を投稿（ツイート）したり拡散（リツイート）したりすることができる．アカウントごとにタイムラインというインタフェースが提供され，ユーザーはタイムラインを通じてコンテンツを閲覧することができる．Twitterはアカウントを「Followする」という機能も実装している．これは「他のアカウントの投稿を自分のタイムラインに表示する機能」でユーザーは好みのコンテンツを投稿してくれるアカウントをフォローすることで，より簡単に好みのコンテンツを発見・消費することができるようになる．&lt;/p&gt;
+
+&lt;p&gt;Twitterの抱える問題点は「Twitterというサービスが中央集権的である」という点である．「Twitterというサービスが中央集権的である」とは&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「TwitterというシステムはTwitter社の管理するマシン上でのみ展開されているため，そのマシンが落ちるとTwitterというシステム全体が落ちてしまう（単一障害点）」&lt;/li&gt;
+&lt;li&gt;「ユーザーがTwitterに投稿した任意のコンテンツやデータは基本的にTwitter社の管理するマシンにしか残らない」&lt;/li&gt;
+&lt;li&gt;「ユーザーは投稿内容についてTwitter社の決めるルールに従わなければならない（コンテンツの価値判断についての自由がユーザーから剥奪される．少なくともTwitter社がコンテンツに対して検閲を行えばそれを回避する手段は存在しない）」&lt;/li&gt;
+&lt;li&gt;「Twitterというサービスを提供するTwitter社の決めるルールに，ユーザーの全員が従わなければならない」&lt;/li&gt;
+&lt;li&gt;「TwitterというサービスのしようがTwitter社の一存で決まるため，Twitterというシステムに乗っかろうとする外部の開発者は地位的にTwitter社の下につくことになる」&lt;/li&gt;
+&lt;li&gt;「Twitterの実装は公開されない（ので，ユーザーがなんらかの不具合に直面しても，ユーザー自身で修正することが根本的に不可能）」&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ということ．&lt;/p&gt;
+
+&lt;p&gt;「Twitterというシステムの管理者がTwitter社しかいない」と「ユーザーはTwitter社の決めたルールの中でした活動できない」ということになる．これは殊「コンテンツ共有」という文脈において大きな問題になる可能性がある．というのも，「コンテンツに対する価値判断やそれを発表することは，基本的に人間に与えられた自由である」からだ．いわゆる「表現の自由」ってやつだ．細かなことを言えば，法律が保証する「表現の自由」の範囲は「公共の福祉を侵害したり他者の自由を侵害しない」ような表現の自由であるようだが．ここで大事なのは，表現の自由を制約するのは「公共の福祉や他社の自由を侵害するかしないか」という社会的な合意であって，Twitterといった一私企業の決めたルールではないということだ．現状のSNSはその点で問題を抱えている（と自由を求めるユーザーは主張している）．無論，Twitter社の決めたルールの範囲内で楽しむので十分というユーザーもいるだろうし，なんならそっちの方が多数派な気もするが．&lt;/p&gt;
+
+&lt;p&gt;そんな問題意識からFederated Social Webという概念が登場している．Federated Social Webが実現したいのは「中央集権ではない形で社会的な人間の在りようをインターネットの世界に実装すること」である．Federated Social Webでは，先に挙げた目的を「Cleint-ServerモデルとServer-Serverモデルの組み合わせ」で実現しようとしている．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;federated-social-web.jpeg&#34; data-caption=&#34;Fededated Social Web&#34;&gt;
+&lt;img src=&#34;federated-social-web.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Fededated Social Web
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;Federated Social Webでは「既存のTwitterのような仕組みを提供するserverが不特定多数の管理者（これは組織でも個人でもいい）によって提供され，彼らが提供するシステムにユーザーが乗っかる」というモデルである．&lt;/p&gt;
+
+&lt;p&gt;「Federated」を英英辞典で引くと&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;(of a country or organization) set up as a single centralized unit within which each state or division keeps some internal autonomy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とある．つまり，Social Networkingに必要な機能を提供するserverが，（単一の管理者によって定められたルールによって動くのではなくて）複数の管理者が自由に定めたルールに基づいて統治・管理されるということだ．ユーザーは自分の納得するルールで運用されているserverにぶら下がれば，そのユーザーにとって十分な自由を享受できるし，いやになれば異なるルールで動いている他のserverに移ることだって可能だ．さらに言えば「オレオレルール」で運用されるオレオレSNSを構築することだって許されている．&lt;/p&gt;
+
+&lt;h2 id=&#34;activitypubとは&#34;&gt;ActivityPubとは&lt;/h2&gt;
+
+&lt;p&gt;ActivityPubはFederated Social Webを実現する際の通信プロトコルだ．ActivityPubは「あるserverとそれにぶら下がっているclient間の通信プロトコル」と「連合を組むserver間の通信プロトコル」の2つのプロトコルを内包している．&lt;/p&gt;
+
+&lt;p&gt;「あるserverとそれにぶら下がっているclient間の通信プロトコル」は，通常のSNSにおいて必要な投稿だとか他の人の行動のお知らせとかを受け取るために必要な通信を規定しているもの．&lt;/p&gt;
+
+&lt;p&gt;「連合を組むserver間の通信プロトコル」は，不特定多数の管理者が運営するserver間で情報を共有するための通信を規定するもの．これがあることで，「Federated」なSocial Webが初めて実現できる．&lt;/p&gt;
+
+&lt;p&gt;ActivityPubでは，ユーザーは「他のユーザーからのお知らせを受け取る&lt;code&gt;inbox&lt;/code&gt;と自分のシステム上での行動を他の人に通知する&lt;code&gt;outbox&lt;/code&gt;を持つActor」としてモデル化される．&lt;code&gt;inbox&lt;/code&gt;/&lt;code&gt;outbox&lt;/code&gt;の実体はwebの世界で言うところのURLに過ぎず，さらに言えばclientがserverに&lt;code&gt;GET&lt;/code&gt;/&lt;code&gt;POST&lt;/code&gt;する際のapi endpointでしかない．あctivityPubではどんな形式のデータをやりとりするかも規定している．より具体的に言えば「SNSをWeb上で実現する際のJSONメッセージフォーマット」を規定するActivityStreamsの上にActivityPubは規定されている．&lt;/p&gt;
+
+&lt;p&gt;要するに，client-server間の通信とclient-client間の通信のそれぞれについて，ActivityStreamsが定義するデータを用いたSNS上におけるActorの行動に対するCRUDを定義しているのがActivityPubである．&lt;/p&gt;
+
+&lt;h2 id=&#34;疑問&#34;&gt;疑問&lt;/h2&gt;
+
+&lt;p&gt;不特定多数の管理者がそれぞれのルールでSNSを提供するときに，それらSNS同士がやり取りをするための統一的なデータ形式・APIを規定しているのがActivityPubということになるが，各SNSが独自機能を実装して独自データフォーマットを追加したときはどのように対応するのだろう．&lt;/p&gt;
+
+&lt;p&gt;ActivityPubは最低限実装されるべきAPIとして整備されるにしても，独自データフォーマットについては共有する方法とかは規定していない．ActivityPubには「JSON-LDを用いてActivityStreamsは拡張可能である」としている．やり取りされるJSONメッセージに未知のフィールドが存在していたら，無視するか適当に解釈するかしかないので，どうするのだろう．ただ，SNSというある程度要求されるAPIがサービスから予測がつくしそれ以上の独自性がなさそうという感覚からすればActivityStreamsで十分なのかもしれない．この点はActivityStreamsを読んでみないとわからないと思うので気が向いたらやろうかな．&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
