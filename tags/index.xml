@@ -5,12 +5,52 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Fri, 01 Nov 2019 14:07:56 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 04 Nov 2019 01:03:05 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Tags</title>
       <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>Data Serializing</title>
+      <link>/tags/data-serializing/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/tags/data-serializing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FlatBuf</title>
+      <link>/tags/flatbuf/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/tags/flatbuf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JSON</title>
+      <link>/tags/json/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/tags/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ProtoBuf</title>
+      <link>/tags/protobuf/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/tags/protobuf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>XML</title>
+      <link>/tags/xml/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/tags/xml/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Channel</title>

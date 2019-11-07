@@ -3,6 +3,81 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/json-vs-protobuf-vs-flatbuf/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-serializing/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/flatbuf/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/json/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/protobuf/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/xml/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-11-04T01:03:05+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/"
+                />
+  </url>
+  
+  <url>
     <loc>/tags/channel/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
@@ -30,51 +105,6 @@
   <url>
     <loc>/tags/parallelism/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-11-01T14:07:56+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-11-01T14:07:56+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2019-11-01T14:07:56+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/"
-                />
   </url>
   
   <url>

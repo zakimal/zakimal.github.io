@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>XML | zak</title>
+    <link>/tags/xml/</link>
+      <atom:link href="/tags/xml/index.xml" rel="self" type="application/rss+xml" />
+    <description>XML</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 04 Nov 2019 01:03:05 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>XML</title>
+      <link>/tags/xml/</link>
+    </image>
+    
+    <item>
+      <title>Data Serializationのさまざま</title>
+      <link>/post/json-vs-protobuf-vs-flatbuf/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/post/json-vs-protobuf-vs-flatbuf/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;communication.gif&#34; alt=&#34;通信し合うサーバーたち&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;データのserialization-deserialization&#34;&gt;データのserialization/deserialization&lt;/h2&gt;
+
+&lt;p&gt;イマドキのソフトウェアは，機能ごとにプログラムを整理整頓して，それらが情報をやりとりしながらサービスを提供します．システムを構成するコンポーネント間でメッセージングをしなければならず，その際にやりとりするデータについて「どういう表現であるのか」について共有しておかないといけません．人間の会話で言うならば「何語を喋るか」に近いのかな．&lt;/p&gt;
+
+&lt;p&gt;「どんな形式でデータを表現するか」についてはいくつかの形式が提案されていて，それぞれについて一長一短がある．代表的なのはXML，JSON，BSON，Protocol Buffers，FlatBuffers．他にもいろいろあります．&lt;/p&gt;
+
+&lt;h2 id=&#34;xml&#34;&gt;XML&lt;/h2&gt;
+
+&lt;p&gt;XMLとは「e&lt;strong&gt;X&lt;/strong&gt;tended &lt;strong&gt;M&lt;/strong&gt;arkdown &lt;strong&gt;L&lt;/strong&gt;anguage」の略で，文章の電子化に源流があるデータ形式．前提に「文章のデジタル化」があるので，XMLの仕様にはデータの「型」が定義されていません．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;breakfast_menu&amp;gt;
+&amp;lt;food&amp;gt;
+	&amp;lt;name&amp;gt;Belgian Waffles&amp;lt;/name&amp;gt;
+	&amp;lt;price&amp;gt;$5.95&amp;lt;/price&amp;gt;
+	&amp;lt;description&amp;gt;
+		Two of our famous Belgian Waffles with plenty of real maple syrup
+	&amp;lt;/description&amp;gt;
+	&amp;lt;calories&amp;gt;650&amp;lt;/calories&amp;gt;
+&amp;lt;/food&amp;gt;
+&amp;lt;food&amp;gt;
+	&amp;lt;name&amp;gt;Strawberry Belgian Waffles&amp;lt;/name&amp;gt;
+	&amp;lt;price&amp;gt;$7.95&amp;lt;/price&amp;gt;
+	&amp;lt;description&amp;gt;
+		Light Belgian waffles covered with strawberries and whipped cream
+	&amp;lt;/description&amp;gt;
+	&amp;lt;calories&amp;gt;900&amp;lt;/calories&amp;gt;
+&amp;lt;/food&amp;gt;
+&amp;lt;/breakfast_menu&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;XMLは文章のデジタル化が前提にあるので，HTMLみたいな見た目になっています．&lt;/p&gt;
+
+&lt;p&gt;XMLの特徴として「XMLはself-describingである」と評されることが多くあります．これは「&lt;strong&gt;データ自体の構造がデータそのものに表現されている&lt;/strong&gt;」ということです．つまり事前に通信の両端でやり取りするデータの方についての合意をとっていなくても（やり取りするデータを眺めれば）データの齟齬のない解釈が可能であるということです．JSONだとこれはできません．XMLはタグだけをみることで，そのデータの構造を即座に読み取ることができます．JSONでは，タグに相当するものをハッシュのキーとして表現すればできないわけではないが，それはデータの型を表現したわけではなくて，ハッシュを用いて似たようなデータ型を表現しただけです．&lt;/p&gt;
+
+&lt;p&gt;XMLで記述されたデータはそれ自身のメタな構造をも表現しているという点が分散システムにおけるデータのやり取りで非常に有用なので，古くからよく使われています．&lt;/p&gt;
+
+&lt;h2 id=&#34;json&#34;&gt;JSON&lt;/h2&gt;
+
+&lt;p&gt;JSONとは「&lt;strong&gt;J&lt;/strong&gt;ava&lt;strong&gt;S&lt;/strong&gt;cript &lt;strong&gt;O&lt;/strong&gt;bject &lt;strong&gt;N&lt;/strong&gt;otation」の略．JSONをシステム間のデータの表現形式として用いると「JavaScriptでのデータのリテラルな表現をそのままシステム間のデータ表現形式」として用いることになって，webな世界だとJavaScriptのインタプリタでそのまま処理できるので扱いやすくてよく用いられがち．しかも，JSONは人間にとってもパッと見でデータの構造が把握しやすくて人気が出ました．それなりに古参なデータ形式ですが，現在もバリバリの現役です．視認性が良いのがやっぱり人気の理由なんですかね．デバッグしやすいし．&lt;/p&gt;
+
+&lt;p&gt;JSONは「プログラミング言語におけるデータのリテラル表現」が出所なので，仕様として「型」が含まれていて，扱いやすいです．「型」が仕様として存在しているので「空の値」を型ごとに区別することができます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;null&amp;quot;: null,
+	&amp;quot;string&amp;quot;: &amp;quot;&amp;quot;,
+	&amp;quot;array&amp;quot;: [],
+	&amp;quot;dict&amp;quot;: {}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JSONは，こんなにシステム間で情報をやりとりする際のデータ形式として用いられるようになることを全然想定していなかったので，扱いづらさがあったりするらしい．僕は具体的に表現することができないが「古臭い」なんて言われることもあります．&lt;/p&gt;
+
+&lt;p&gt;「どういうフィールドを持ったJSONデータを扱うのか」について通信の両端点で合意しておく必要があるのはもちろんですが，JSONのデータ形式はスキーマを直接的に表現しているわけではない（つまりインタフェースをJSONが規定しているわけではない）という認識も大事だと思います．そのままのJSONはただのデータ形式に過ぎなくて，スキーマ言語としての「データ型を定義する」というメタな機能はないということです．&lt;/p&gt;
+
+&lt;p&gt;JSONなどでも「JSONでJSONのスキーマを書いてしまおう」という&lt;a href=&#34;https://json-schema.org/&#34; target=&#34;_blank&#34;&gt;JSON Schema&lt;/a&gt;なるものが存在しているそうですが，やっぱりだいぶ書きにくそうです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;productId&amp;quot;: 1,
+	&amp;quot;productName&amp;quot;: &amp;quot;An ice sculpture&amp;quot;,
+	&amp;quot;price&amp;quot;: 12.50,
+	&amp;quot;tags&amp;quot;: [ &amp;quot;cold&amp;quot;, &amp;quot;ice&amp;quot; ],
+	&amp;quot;dimensions&amp;quot;: {
+		&amp;quot;length&amp;quot;: 7.0,
+		&amp;quot;width&amp;quot;: 12.0,
+		&amp;quot;height&amp;quot;: 9.5
+	},
+ 	&amp;quot;warehouseLocation&amp;quot;: {
+		&amp;quot;latitude&amp;quot;: -78.75,
+		&amp;quot;longitude&amp;quot;: 20.4
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;というスキーマをJSONで書くと&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;$schema&amp;quot;: &amp;quot;http://json-schema.org/draft-07/schema#&amp;quot;,
+	&amp;quot;$id&amp;quot;: &amp;quot;http://example.com/product.schema.json&amp;quot;,
+	&amp;quot;title&amp;quot;: &amp;quot;Product&amp;quot;,
+	&amp;quot;description&amp;quot;: &amp;quot;A product from Acme&#39;s catalog&amp;quot;,
+	&amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,
+	&amp;quot;properties&amp;quot;: {
+		&amp;quot;productId&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;The unique identifier for a product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;integer&amp;quot;
+		},
+		&amp;quot;productName&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Name of the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;
+		},
+		&amp;quot;price&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;The price of the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;,
+			&amp;quot;exclusiveMinimum&amp;quot;: 0
+		},
+		&amp;quot;tags&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Tags for the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;array&amp;quot;,
+			&amp;quot;items&amp;quot;: {
+				&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;
+			},
+			&amp;quot;minItems&amp;quot;: 1,
+			&amp;quot;uniqueItems&amp;quot;: true
+		},
+		&amp;quot;dimensions&amp;quot;: {
+			&amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,
+			&amp;quot;properties&amp;quot;: {
+				&amp;quot;length&amp;quot;: {
+					&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				},
+				&amp;quot;width&amp;quot;: {
+		    		&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				},
+				&amp;quot;height&amp;quot;: {
+					&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				}
+			},
+			&amp;quot;required&amp;quot;: [ &amp;quot;length&amp;quot;, &amp;quot;width&amp;quot;, &amp;quot;height&amp;quot; ]
+		},
+		&amp;quot;warehouseLocation&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Coordinates of the warehouse where the product is located.&amp;quot;,
+			&amp;quot;$ref&amp;quot;: &amp;quot;https://example.com/geographical-location.schema.json&amp;quot;
+		}
+	},
+	&amp;quot;required&amp;quot;: [ &amp;quot;productId&amp;quot;, &amp;quot;productName&amp;quot;, &amp;quot;price&amp;quot; ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;🤔 ﾁｮｯﾄﾐﾆｸｲ&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;bson&#34;&gt;BSON&lt;/h2&gt;
+
+&lt;p&gt;JSONはテキストベース（つまりシリアライズ・デシリアライズの際に扱われるデータの単位がbitじゃなくてbyte）でしたが，それを改めたBSON = &lt;strong&gt;B&lt;/strong&gt;inary J&lt;strong&gt;SON&lt;/strong&gt;というのも存在します．つまりBSONではデータがバイナリベース（つまりシリアライズ・デシリアライズの際に扱われるデータの大きさの単位がbit）になっています．BSONは後述するProtocol Buffersとよく似ていて，度々比較されています．公式によると，&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Lightweight&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep­ing spa­tial over­head to a min­im­um is im­port­ant for any data rep­res­ent­a­tion format, es­pe­cially when used over the net­work.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Traversable&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;BSON is de­signed to be tra­versed eas­ily. This is a vi­tal prop­erty in its role as the primary data rep­res­ent­a­tion for Mon­goDB.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Efficient&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;En­cod­ing data to BSON and de­cod­ing from BSON can be per­formed very quickly in most lan­guages due to the use of C data types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;という特徴があります．&lt;/p&gt;
+
+&lt;p&gt;BSONは，Protocol Buffersと比較して&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;more &amp;ldquo;schema-less&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;であるとされています．つまり，サービス間のインタフェースの仕様そのものとやりとりするデータ形式の関係性が（Protocol Buffersと比較して）疎で，より柔軟性があるということです．一方で，BSONはProtocol Buffersと比べてメッセージのフィールド名のエンコードに関してやや冗長であるとされています．&lt;/p&gt;
+
+&lt;p&gt;MongoDBがBSONをデータの表現方式として採用しているのが興味深いですね．多くの主要言語でBSONのエンコード・デコードをサポートするライブラリが実装されていて手軽に使えそうな印象です．ただ，バイナリベースということもあって，BSONをそのまま眺めても人間には意味がわからないので，デバッグはちょっと大変なのかもしれませんね．&lt;/p&gt;
+
+&lt;p&gt;例えば&lt;code&gt;{&amp;quot;hello&amp;quot;: &amp;quot;world&amp;quot;}&lt;/code&gt;をBSONでエンコードすると以下のようになります．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  \x16\x00\x00\x00                   // total document size
+  \x02                               // 0x02 = type String
+  hello\x00                          // field name
+  \x06\x00\x00\x00world\x00          // field value
+  \x00                               // 0x00 = type EOO (&#39;end of object&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;protocol-buffers&#34;&gt;Protocol Buffers&lt;/h2&gt;
+
+&lt;p&gt;Protocol BuffersはGoogleが社内のシステム間で情報をやりとりする際に用いていたデータ形式で2008年にオープンソース化されました．Googleが出している公式のドキュメントによれば&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ということらしいです．Protocol Buffersはシステム間で情報をやりとりする際に用いるデータ形式の一種なんですが，それは嘘じゃないんですけど，Protocol Buffersの指す意味範囲はそれだけにとどまらず，サービス間のインタフェースを定義するスキーマ言語としての顔もあるのが特徴です．もっというと，このスキーマ言語が優秀であるというのがProtocol Buffersの人気を大きく支えている理由なのだと思います．「Protocol Buffersがスキーマ言語である」というのはどういうことかというと，Protocol Buffersでは「システムのインタフェース（つまり，どんな型のデータをやりとりするのか）を定義する独自言語」であるということです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-protobuf&#34;&gt;syntax = &amp;quot;proto3&amp;quot;;
+package example.protobuf;
+
+message SimpleMessage {
+	message HeaderItem {
+		string name = 1;
+		string value = 2;
+	}
+	enum Type {
+		START = 0;
+		BLOB = 1;
+		END = 2;
+	}
+
+	uint64 id = 1;
+	Type message_type = 2;
+	repeated HeaderItem headers = 3;
+	bytes blob = 4; 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Protocol Buffersは，サービス間でやりとりするデータの型を表現する独自言語とともに，その独自言語で記述されたインタフェースを特定の言語にコンパイルするツールまでもが同梱されています．&lt;/p&gt;
+
+&lt;p&gt;スキーマ言語が存在すると，非常に便利です．モダンなソフトウェアシステムでは，いろんなところにデータが保存されているかもしれないし，バックエンドで動いているサーバーもいくつかあるかもしれないし，もはやそれが普通になってきています．となると，システムの中のありとあらゆる場所でデータのシリアライズ・デシリアライズをしなければならないし，通信している両者でデータの解釈に矛盾が発生しないように整える必要があります．スキーマ言語があると，この「整える作業」がとてもやりやすくなります．自然言語と違って，スキーマ言語では解釈に差異が発生しないからです．「管理者が一人」みたいなシステムでは，スキーマ言語なんてたいそうなものを持ち出してくる必要はないと思うんですけど，webみたいな自律分散的な系だと，ますますスキーマ言語としてのProtocol Buffersの良さが際立ってくるわけです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersのスキーマ言語としての良さは，その簡潔さではないでしょうか．プログラムを書く人間にとっては，特に難しいことを考えずに意図が汲み取れる程度の決まりごとしかないし，スキーマ言語としてプログラミング言語から独立している点も，ツールの作りやすさとかに影響していて，Protocol Buffersが人気な理由なんだと思います．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersでは，&lt;code&gt;.proto&lt;/code&gt;ファイルとしてサービスインタフェースを記述します．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-protobuf&#34;&gt;message Person {
+	required string name = 1;
+	required int32 id = 2;
+	optional string email = 3;
+
+	enum PhoneType {
+		MOBILE = 0;
+		HOME = 1;
+		WORK = 2;
+	}
+
+	message PhoneNumber {
+		required string number = 1;
+		optional PhoneType type = 2 [default = HOME];
+	}
+
+	repeated PhoneNumber phone = 4;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;明確なサービスインタフェースをコンパイラによって適切に所望の言語のプログラムに変換してくれるので，開発を進めやすくなります．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersではサービスのインタフェースの変更に対して後方互換性を維持した形でメッセージのやり取りをできるように「未知なフィールドに遭遇したら無視する」ということになっています．こうすれば，サービスのインタフェースが更新されたとしても，既存のプログラムは動くことには動くことになります．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersの公式のドキュメントでは，XMLと比較して&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Protocol buffers&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;are simpler&lt;/li&gt;
+&lt;li&gt;are 3 to 10 times smaller&lt;/li&gt;
+&lt;li&gt;are 20 to 100 times faster&lt;/li&gt;
+&lt;li&gt;are less ambiguous&lt;/li&gt;
+&lt;li&gt;generate data access classes that are easier to use programmatically&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;と主張しています．確かにXMLはいちいちタグで括らなきゃいけないしProtocol Buffersは効率が良さそうです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersのデフォルトのシリアライズはバイナリベースです．人間が眺めて構造が取れるような見た目にはなっていません．しかしProtocol Buffersはシリアライズのフォーマットとして様々な形式（例えばJSONなど）も扱えるように周辺ツールが充実しているので，「スキーマ言語としてのProtocol Buffersでサービスのインフェースを記述して，実際にやり取りするデータはJSON」ということも可能になっています．&lt;/p&gt;
+
+&lt;h2 id=&#34;flat-buffers&#34;&gt;Flat Buffers&lt;/h2&gt;
+
+&lt;p&gt;これもGoogleによってオープンソース化されたデータのシリアライズ・デシリアライズ方式．公式によれば，&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Access to serialized data without parsing/unpacking&lt;/li&gt;
+&lt;li&gt;Memory efficiency and speed&lt;/li&gt;
+&lt;li&gt;Flexible&lt;/li&gt;
+&lt;li&gt;Tiny code footprint&lt;/li&gt;
+&lt;li&gt;Strongly typed&lt;/li&gt;
+&lt;li&gt;Convenient to use&lt;/li&gt;
+&lt;li&gt;Cross platform code with no dependencies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;という特徴があります．面白いのが「Access to serialized data without parsing/unpacking」ってところですね．FlatBuffersでは階層構造を持つデータを，パースすることなく直接扱うことができるらしいです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersの進化系として自らを位置づけていて，Flat Buffersではデータをパースする必要がないのでProtocol Buffersと比較してコード量が桁違いで削減できて，さらにFlat BuffersではProtocol Buffersより強力に型をサポートしているところが進化ポイントですね．white paperのmotivationの章には&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とあり，シリアライズの効率について高水準なものが求められる状況で用いられることが想定されているそうです．&lt;/p&gt;
+
+&lt;p&gt;Facebookで用いられているらしいですが，Protocol Buffersの人気に押されて，あまり流行っている感じはしないんですがどうなんでしょうか．&lt;/p&gt;
+
+&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+
+&lt;h3 id=&#34;xml-1&#34;&gt;XML&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hoge&lt;/li&gt;
+&lt;li&gt;hoge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;json-1&#34;&gt;JSON&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3schools.com/whatis/whatis_json.asp&#34; target=&#34;_blank&#34;&gt;What is JSON - W3Schools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3schools.com/js/js_json_intro.asp&#34; target=&#34;_blank&#34;&gt;JSON Introduction - W3Schools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://json-schema.org/&#34; target=&#34;_blank&#34;&gt;JSON Schema&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;bson-1&#34;&gt;BSON&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://bsonspec.org/&#34; target=&#34;_blank&#34;&gt;BSON&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;protocol-buffers-1&#34;&gt;Protocol Buffers&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/protocol-buffers&#34; target=&#34;_blank&#34;&gt;Protocol Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;flat-buffers-1&#34;&gt;Flat Buffers&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/flatbuffers/&#34; target=&#34;_blank&#34;&gt;Flat Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
