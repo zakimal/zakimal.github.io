@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Identity | zak</title>
+    <link>/tags/identity/</link>
+      <atom:link href="/tags/identity/index.xml" rel="self" type="application/rss+xml" />
+    <description>Identity</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Sun, 03 Nov 2019 23:48:08 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Identity</title>
+      <link>/tags/identity/</link>
+    </image>
+    
+    <item>
+      <title>Self-Sovereign Identity - 自己主権型アイデンティティー</title>
+      <link>/post/what-is-self-sovereign-identity/</link>
+      <pubDate>Sun, 03 Nov 2019 23:48:08 +0900</pubDate>
+      <guid>/post/what-is-self-sovereign-identity/</guid>
+      <description>
+
+&lt;h2 id=&#34;identity-is&#34;&gt;Identity is&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The fact of being who or what a person or thing is.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;self-sovereign-identity-自己主権型アイデンティティとは&#34;&gt;Self-Sovereign Identity - 自己主権型アイデンティティとは&lt;/h2&gt;
+
+&lt;p&gt;Self-Sovereign Identityとは，一言で言えば「物理世界における身分証明書と同じレベルの正当性と携帯性と情報の制御可能性を備えたデジタルな身分証明書」です．Self-Sovereign Identityが実現すれば，公的に有効な身分証明書として機能するだけでなく，物理世界における「運転免許証」のように手軽に携帯できて，第二者に対して証明したい事柄に関連する必要十分な情報のみを開示する（例えば，年齢確認する際には誕生年だけ提示して住所は見せない）といった個人情報の制御も可能となります．&lt;/p&gt;
+
+&lt;h2 id=&#34;現状のdigital-identityの問題点-self-sovereign-identityが必要とされる背景&#34;&gt;現状のDigital Identityの問題点・Self-Sovereign Identityが必要とされる背景&lt;/h2&gt;
+
+&lt;p&gt;そもそもなぜSelf-Sovereign Identityなるものが必要なのでしょうか．それはインターネットという計算機のネットワークが「接続において，通信の両端点のアイデンティティーを全く考慮しない」という系だからです．&lt;/p&gt;
+
+&lt;p&gt;インターネットでは「誰が繋がっているのか」について全く関知しません．だからこそ自律分散な系として成立することができます．中央で接続を管理する者が存在する必要がないわけですね．&lt;/p&gt;
+
+&lt;p&gt;しかし，SNSの登場によってインターネット上でのアイデンティティーのようなものが確立されてきました．SNSのアカウント情報です．SNSは「物理世界における人間のネットワーク」を計算機上に実現したものであるから，SNSという系に登場するアカウントは物理世界の人間と非常に密に関連している情報だし，その側面を持ってアイデンティティー的なものと見ることもできなくもないです．しかしSNSアカウントは物理世界におけるアイデンティティー（パスポートや運転免許証）と等価なものとしては扱えません．&lt;/p&gt;
+
+&lt;p&gt;物理世界のアイデンティティーは「国家のような信頼できる第三者によって発行される証明書」として存在しています．パスポート，運転免許証はまさしくそれです．国家が「この人はこういう人で&amp;hellip;」という保証をしてくれているのです．だから（少なくともその証明書を発行している第三者を信頼できる者という共通認識のある範囲内では）証明書を見せつけることで第二者に対して自分の身分を証明することが可能なのです．&lt;/p&gt;
+
+&lt;p&gt;パスポートや運転免許証はポケットに入れて持ち運ぶことができます．さらに第二者に対して開示する個人情報を，自分の手で制御することができます．相手に年齢確認を求められたなら，生年月日だけで十分（住所まで教える必要はない）ですから，運転免許証の該当部分だけ見せてあとは黒塗りとかでも主張の正当性は証明できるわけですね．この携帯性と情報開示に対する制御性が物理世界におけるアイデンティティーの持つ重要な性質です．&lt;/p&gt;
+
+&lt;p&gt;SNSアカウントは実はこの「携帯性」と「情報開示に対する制御性」を兼ね備えていません．FacebookアカウントでTwitterにはログインできないし，Facebookは僕の持っているFacebookアカウントの情報の完全なコピーを持っていますし，Facebookがそれを外部に公開してしまえば，僕にはそれを止める手段がありません．&lt;/p&gt;
+
+&lt;p&gt;Self-Sovereign Identityはデジタルなアイデンティティーにサービスを跨いだ携帯性とアイデンティティー情報に対する制御性をユーザーに取り戻すことを目指して考案された概念です．&lt;/p&gt;
+
+&lt;h3 id=&#34;self-sovereign-identityに至るまでのデジタルアイデンティティーの変遷&#34;&gt;Self-Sovereign Identityに至るまでのデジタルアイデンティティーの変遷&lt;/h3&gt;
+
+&lt;p&gt;デジタルアイデンティティーの類型はだいたい以下の4個です．どれも現役で用いられているアイデンティティーで，後半のものほど新し目な考え方で，グラデーションがついていると思うとわかりやすいです．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Centralized Identity - 中央集権型アイデンティティー&lt;/li&gt;
+&lt;li&gt;Federated Identity - 連合型アイデンティティー&lt;/li&gt;
+&lt;li&gt;User-Centric Identity - ユーザー中心型アイデンティティー&lt;/li&gt;
+&lt;li&gt;Self-Sovereign Identity - 自己主権型アイデンティティ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;centralized-identity-中央集権型アイデンティティー&#34;&gt;Centralized Identity - 中央集権型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;ここのサービスごとに，サービス運営者がIDを発行・管理するタイプのIDです．メールアドレスとパスワードでアカウントを作成するタイプのIDはこれです．IDの管理権限が発行主体にあるというのが特徴で，現在世の中で運営されているほとんどのインターネットサービスがこの方式を採用していますね．&lt;/p&gt;
+
+&lt;p&gt;サービスのビジネスモデルがユーザーの囲い込みによって成立しているという側面を考慮すると，発行とともに管理できる方が，サービス運営者としてはやりやすいし，実装も容易であるからだと思います．&lt;/p&gt;
+
+&lt;p&gt;このタイプのIDは，発行されたIDをそのサービスの外に持ち出すことが難しいことから，ユーザーのサービスに対するロックインや，サービスごとのアイデンティティーの分断，ユーザーによるIDの管理が不可能（サービス運営者が悪意を働いてもそれを止める手段をユーザーは持ち合わせていない）という問題点があります．&lt;/p&gt;
+
+&lt;h4 id=&#34;federated-identity-連合型アイデンティティー&#34;&gt;Federated Identity - 連合型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;複数のサービス間でIDについて合意を取ることで，連合内ではIDの持ち運びが可能となるようなIDのことです．Single Sign-Onと呼ばれることもあります．1つのIDで複数サービスにログインできるサービス間での相互運用性Interoperabilityを実現します．&lt;/p&gt;
+
+&lt;p&gt;連合型アイデンティティーは中央集権型のそれよりもユーザーの利便性は向上する一方で，連合型アイデンティティーであっても，IDそのものの管理は連合を組んでいるサービス提供者側にあります．&lt;/p&gt;
+
+&lt;p&gt;実は連合型アイデンティティーに対する取り組みは，これまで一部で実際に行われてきた歴史があります．1999年にはMicrosoftが&lt;a href=&#34;https://news.microsoft.com/2000/05/17/passport-to-convenience-microsofts-single-sign-in-and-wallet-services-for-online-shopping/&#34; target=&#34;_blank&#34;&gt;Passport&lt;/a&gt;という連合型アイデンティティーサービスに取り組もうとしていました．&lt;/p&gt;
+
+&lt;p&gt;これは，その当時に増加してきていたEコマース事業に対してその利便性を高めることを狙ってMicrosoftが取り組んでいたもので，Windows XPへのPassportでのサインインが可能だったりと結構新し目なことに取り組もうとしたのだと思います．Eコマースサイトに手元のパソコンのアカウントでログインできるということですから，覚えなきゃいけない情報が減るので助かりますね．&lt;/p&gt;
+
+&lt;p&gt;一方で，Microsoftが一社でIDを管理するという色合いが強かったのも事実で，それを嫌ってか，広く利用されるには至らなかったようです．&lt;/p&gt;
+
+&lt;p&gt;実はMicrosoftのPassportに対抗してSun Microsystemsを中心とした企業連合によってLiberty Allianceという同じく連合型アイデンティティーの実現を目指した団体があったようなんですが，これも道半ばで頓挫してしまいました．&lt;/p&gt;
+
+&lt;h4 id=&#34;user-centric-identity-ユーザー中心型アイデンティティー&#34;&gt;User-Centric Identity - ユーザー中心型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;「ユーザーは自身のIDを自らの手で制御すべきだ」という考えに基づいて考案されたのがユーザー中心型アイデンティティーです．ユーザー中心型アイデンティティーでは「ユーザーの同意Consent」と「相互運用性Interoperability」に特に重きがおかれました．ユーザー中心型アイデンティティーはThe Identity Commonsという団体がリードしていたプロジェクトで，The Identity CommonsはInternet Identity Workshopを設立し，ユーザー中心型アイデンティティーの仕様策定を推進してきました．Internet Identity WorkshopはOpenID，OpenID Connect，OAuthといった現在多くSingle Sign-Onで利用されている仕様を誕生させています．&lt;/p&gt;
+
+&lt;p&gt;一方でユーザー中心型アイデンティティーでも，IDの管理はIDの発行元によって行われ，もし発行元がIDの削除をしてしまえばそのIDは存在しなくなってしまうわけで，完全なユーザー中心（管理までユーザーの手で行う）というわけではないようです．&lt;/p&gt;
+
+&lt;h4 id=&#34;self-sovereign-identity-自己主権型アイデンティティ&#34;&gt;Self-Sovereign Identity - 自己主権型アイデンティティ&lt;/h4&gt;
+
+&lt;p&gt;「物理世界におけるアイデンティティーの持つ携帯性と情報に対する制御性をデジタルなアイデンティティーに持ち込もう」というのが自己主権型アイデンティティーです．アイデンティティーに管理を自分の手で行おうとするのが自己主権に指す意味です．&lt;/p&gt;
+
+&lt;h2 id=&#34;self-sovereign-identityの仕組み&#34;&gt;Self-Sovereign Identityの仕組み&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;信頼できる第三者がユーザーの身分を証明する証明書を発行し，その証明書に電子署名を施す．この際に信頼できる第三者に対する識別子と署名情報を情報を耐改竄性のある公共アクセスが可能なストレージに保存する&lt;/li&gt;
+&lt;li&gt;ユーザーは信頼できる第三者によって電子署名の施された証明書に対して自分の電子署名を施して，手元に保管する．この際，ユーザーに対する識別子と署名情報を耐改竄性のある公共アクセスが可能なストレージに保存する&lt;/li&gt;
+&lt;li&gt;身分証明を要求する検証者はユーザーから提示された証明書（もしくはその一部）に対して，その証明書が正当であることを公共アクセス可能なストレージに保存されている情報をもとに判断する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;この「耐改竄性のある公共アクセスが可能なストレージ」がブロックチェーンを用いることで実現できるかもしれないということで，Self-Sovereign Identityの実現可能性が見えてきているのです．&lt;/p&gt;
+
+&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@AlexPreukschat/self-sovereign-identity-a-guide-to-privacy-for-your-digital-identity-5b9e95677778&#34; target=&#34;_blank&#34;&gt;https://medium.com/@AlexPreukschat/self-sovereign-identity-a-guide-to-privacy-for-your-digital-identity-5b9e95677778&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.windley.com/archives/2018/09/multi-source_and_self-sovereign_identity.shtml&#34; target=&#34;_blank&#34;&gt;https://www.windley.com/archives/2018/09/multi-source_and_self-sovereign_identity.shtml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/TR/2019/WD-did-core-20191107/&#34; target=&#34;_blank&#34;&gt;https://www.w3.org/TR/2019/WD-did-core-20191107/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jnsa.org/seminar/2018/0126/data/2-3.pdf&#34; target=&#34;_blank&#34;&gt;https://www.jnsa.org/seminar/2018/0126/data/2-3.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.icr.co.jp/newsletter/wtr346-20180126-ogawa.html&#34; target=&#34;_blank&#34;&gt;https://www.icr.co.jp/newsletter/wtr346-20180126-ogawa.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.dappsway.com/entry/what-is-ssi&#34; target=&#34;_blank&#34;&gt;https://www.dappsway.com/entry/what-is-ssi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.windley.com/archives/2017/10/fixing_the_five_problems_of_internet_identity.shtml&#34; target=&#34;_blank&#34;&gt;https://www.windley.com/archives/2017/10/fixing_the_five_problems_of_internet_identity.shtml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ibm.com/blogs/blockchain/category/trusted-identity/self-sovereign-identity/&#34; target=&#34;_blank&#34;&gt;https://www.ibm.com/blogs/blockchain/category/trusted-identity/self-sovereign-identity/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html&#34; target=&#34;_blank&#34;&gt;http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
