@@ -5,12 +5,88 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Mon, 04 Nov 2019 01:03:05 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright><lastBuildDate>Thu, 14 Nov 2019 14:57:55 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/</link>
     </image>
+    
+    <item>
+      <title>Golangでよく見かける構造体実装パターン</title>
+      <link>/post/golang-structure-implementation-patterns/</link>
+      <pubDate>Thu, 14 Nov 2019 14:57:55 +0900</pubDate>
+      <guid>/post/golang-structure-implementation-patterns/</guid>
+      <description>
+
+&lt;h2 id=&#34;golangでよく見かける構造体実装パターン&#34;&gt;Golangでよく見かける構造体実装パターン&lt;/h2&gt;
+
+&lt;p&gt;よく見かけるパターンをまとめてみた．&lt;/p&gt;
+
+&lt;h3 id=&#34;コンストラクタとしての-newxxxx&#34;&gt;コンストラクタとしての&lt;code&gt;NewXXXX()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;構造体の初期化と生成に使うパターン&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/7PCxyYTCwek&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍 構造体の生成と初期化の内部実装を利用者に見せない&lt;/li&gt;
+&lt;li&gt;👍 構造体そのものの構造を利用者に見せない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;エクスポートして外部パッケージからのアクセス許可を利用したシングルトン&#34;&gt;エクスポートして外部パッケージからのアクセス許可を利用したシングルトン&lt;/h3&gt;
+
+&lt;p&gt;「構造体名の先頭を大文字にすることで外部パッケージからのアクセスを許可する」というGolangの特徴を生かしてシングルトンを生成できる．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package singleton
+
+// 構造体自体を外部に公開しない
+type singleton struct {
+}
+
+// 構造体のインスタンスを保持する変数も外部に公開しない
+var instance *singleton
+
+// シングルトンなインスタンスを取得する関数のみを外部に公開
+func GetInstance() *singleton {
+	if instance == nil {
+	     instance = &amp;amp;singleton{}
+	}
+	return instance
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;interface-でポリモーフィズム&#34;&gt;&lt;code&gt;interface&lt;/code&gt;でポリモーフィズム&lt;/h3&gt;
+
+&lt;p&gt;Golangには「型の継承」がない．一方で，&lt;code&gt;interface&lt;/code&gt;を用いることでポリモーフィズムを実現できる．&lt;code&gt;interface&lt;/code&gt;によって振る舞いを定義することで，「同じような振る舞いをするもの」をまとめて扱えるようになる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/p-yY5gEOdaG&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;構造体の埋め込みによるポリモーフィズム&#34;&gt;構造体の埋め込みによるポリモーフィズム&lt;/h3&gt;
+
+&lt;p&gt;ある構造体に対して，特定の振る舞いを実装している構造体を埋め込むことで，その構造体も「埋め込まれた構造体と同様な振る舞いをするもの」として扱うことができる．ただ，これをやると構造体の初期化時に構造体の内部を意識する必要があるため，初期化のための&lt;code&gt;NewXXXX()&lt;/code&gt;を用意してあげると良い．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/MsxaudYhObv&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;埋め込まれた構造体が上位の構造体の関数を使う&#34;&gt;埋め込まれた構造体が上位の構造体の関数を使う&lt;/h3&gt;
+
+&lt;p&gt;オブジェクト指向では「子クラスが親クラスのメソッドを用いること」ができるが，Golangでもできないことはない．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/cQ4uSQ7_TLl&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;構造体による処理の移譲&#34;&gt;構造体による処理の移譲&lt;/h3&gt;
+
+&lt;p&gt;構造体のメンバーとして，特定の処理に対して責任を持つ構造体を持つことで，処理の移譲を実現できる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/KPX9i1sY1CK&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;関数による処理の移譲&#34;&gt;関数による処理の移譲&lt;/h3&gt;
+
+&lt;p&gt;Golangでは関数は第1級市民なので値として扱うことができる．処理を定義した関数をやりとりすることで処理を移譲させることができる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/MN93S3LVX9l&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+</description>
+    </item>
     
     <item>
       <title>Data Serializationのさまざま</title>
