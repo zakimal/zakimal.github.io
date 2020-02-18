@@ -3,23 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tags/golang/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+    <loc>/post/book-shelf/</loc>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/golang-structure-implementation-patterns/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/implementation-pattern/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+    <loc>/tags/book-shelf/</loc>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -34,7 +29,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -49,7 +44,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -60,6 +55,21 @@
                 hreflang="ja"
                 href="/"
                 />
+  </url>
+  
+  <url>
+    <loc>/tags/golang/</loc>
+    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/golang-structure-implementation-patterns/</loc>
+    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/implementation-pattern/</loc>
+    <lastmod>2019-11-14T14:57:55+09:00</lastmod>
   </url>
   
   <url>
