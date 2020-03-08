@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips | zak</title>
+    <link>/ja/tags/tips/</link>
+      <atom:link href="/ja/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tips</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Tue, 29 Oct 2019 19:50:58 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Tips</title>
+      <link>/ja/tags/tips/</link>
+    </image>
+    
+    <item>
+      <title>GitHub上でのmerge</title>
+      <link>/ja/post/three-kinds-of-merge-on-github/</link>
+      <pubDate>Tue, 29 Oct 2019 19:50:58 +0900</pubDate>
+      <guid>/ja/post/three-kinds-of-merge-on-github/</guid>
+      <description>
+
+&lt;h2 id=&#34;github上でのmerge&#34;&gt;GitHub上でのmerge&lt;/h2&gt;
+
+&lt;p&gt;GitHub上で行えるmergeには3種類あります．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a merge commit&lt;/li&gt;
+&lt;li&gt;Squash and merge&lt;/li&gt;
+&lt;li&gt;Rebase and merge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これらは，「merge commitの有無」「merge commitのauthorが誰になるのか」などの点で微妙に異なります．&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;merge commitの有無&lt;/th&gt;
+&lt;th&gt;merge commitのauthor&lt;/th&gt;
+&lt;th&gt;merge元のbranchのcommit log&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Create a merge commit&lt;/td&gt;
+&lt;td&gt;有&lt;/td&gt;
+&lt;td&gt;merge先&lt;/td&gt;
+&lt;td&gt;残る&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Squash and merge&lt;/td&gt;
+&lt;td&gt;有&lt;/td&gt;
+&lt;td&gt;merge元&lt;/td&gt;
+&lt;td&gt;残らない&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Rebase and merge&lt;/td&gt;
+&lt;td&gt;無&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;残る&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;create-a-merge-commit&#34;&gt;Create a merge commit&lt;/h3&gt;
+
+&lt;p&gt;「Create a merge commit」では，&lt;code&gt;git merge --no-ff&lt;/code&gt;でmergeすることになります．つまり，merge先に新たなcommitが作成され，そのcommitがmerge元のcommitを取り込みます．このとき作成されるmerge commitのauthorはmerge先のauthorとして記録されます．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
+&lt;li&gt;merge元のbranchがそのまま残るので変更箇所を追いやすい&lt;/li&gt;
+&lt;li&gt;merge後に，merge元のbranchを削除したとしても，このbranchのcommit logがmerge先に残る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．わかりやすい一方で，「merge commitのauthorがmerge元ではない」のが（個人的に）「その人の頑張りを讃えたいのになぁ」とか思っちゃったりしてちょっと申し訳ない気がするとかしないとか．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;create-merge-commit.gif&#34; data-caption=&#34;Create a merge commit&#34;&gt;
+&lt;img src=&#34;create-merge-commit.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Create a merge commit
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;squash-and-merge&#34;&gt;Squash and merge&lt;/h3&gt;
+
+&lt;p&gt;「Squash and merge」では，&lt;code&gt;git merge --squash&lt;/code&gt;でmergeすることになります．つまり，merge元のcommitを一つのcommitにまとめた上で，merge先にmerge commitとして先頭に追加されます．このときのmerge commitのauthorはmerge元のauthorとなります．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
+&lt;li&gt;複数のcommitをまとめて一つにできるのでmerge先のcommit logがわかりやすい&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．一方で，一度commitをまとめてしまうと，「どの変更が誰によってどのcommitで行われたのか」という情報が失われてしまうことになります．他の人の複数のcommitを一つのcommitに押し込むことになるので，個人的には若干怖さがあります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;squash-and-merge.gif&#34; data-caption=&#34;Squash and merge&#34;&gt;
+&lt;img src=&#34;squash-and-merge.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Squash and merge
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;rebase-and-merge&#34;&gt;Rebase and merge&lt;/h3&gt;
+
+&lt;p&gt;「Rebase and merge」では，まずmerge元のブランチにあるcommit列に対して&lt;code&gt;git rebase&lt;/code&gt;して，commit列が一列になったところでfast-forwardの形でmergeが実行されます．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;mergeした結果，merge先のcommit logが一直線で見やすい&lt;/li&gt;
+&lt;li&gt;merge commitが作成されない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;rebase-and-merge.gif&#34; data-caption=&#34;Rebase and merge&#34;&gt;
+&lt;img src=&#34;rebase-and-merge.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Rebase and merge
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github&#34; target=&#34;_blank&#34;&gt;About merge methods on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>🚩flagパッケージでコマンドライン引数を扱う</title>
+      <link>/ja/post/handle-commandline-args-with-flag-package/</link>
+      <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
+      <guid>/ja/post/handle-commandline-args-with-flag-package/</guid>
+      <description>
+
+&lt;h2 id=&#34;flag-パッケージ&#34;&gt;&lt;code&gt;flag&lt;/code&gt;パッケージ&lt;/h2&gt;
+
+&lt;p&gt;Golangでは，標準パッケージとしてコマンドライン引数を扱う&lt;a href=&#34;https://golang.org/pkg/flag/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;flag&lt;/code&gt;&lt;/a&gt;パッケージが付属しています．「痒い所に手が届く」とはこのことですね．&lt;/p&gt;
+
+&lt;h2 id=&#34;フラグの立っていないコマンドライン引数の取得&#34;&gt;フラグの立っていないコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Parse()&lt;/code&gt;の後に&lt;code&gt;Args()&lt;/code&gt;で&lt;code&gt;[]string&lt;/code&gt;として取得できます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	args := flag.Args()
+	fmt.Println(args)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag0.go a b c
+[a b c]
+$ go run with-no-flag0.go 1 2 3
+[1 2 3]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;$n$番目の要素のみを取り出したい場合は&lt;code&gt;Arg(n)&lt;/code&gt;で&lt;code&gt;string&lt;/code&gt;として取得できます．$n$番目の要素が存在しない場合は&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;が返ってくるようです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	fmt.Println(flag.Arg(0), flag.Arg(1))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag1.go hoge fuga
+hoge fuga
+$ go run with-no-flag1.go 1
+1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの立っているコマンドライン引数の取得&#34;&gt;フラグの立っているコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;もしくは&lt;code&gt;型名Var()&lt;/code&gt;で，フラグを定義したのち，&lt;code&gt;Parse()&lt;/code&gt;でそれぞれの変数を取得できます．&lt;/p&gt;
+
+&lt;p&gt;フラグの定義は「フラグ名」「デフォルト値」「ヘルプメッセージ」で行います．&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;の場合は，指定した型へのポインタが返ってきます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -int 2 -str hello -bool true
+2 hello true
+$ go run with-flag0.go
+0 default false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;型名Var()&lt;/code&gt;の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;time&amp;quot;
+)
+
+func main() {
+	var (
+		d time.Duration
+		f float64
+	)
+	flag.DurationVar(&amp;amp;d, &amp;quot;dur&amp;quot;, 1 * time.Second, &amp;quot;duration flag&amp;quot;)
+	flag.Float64Var(&amp;amp;f, &amp;quot;float&amp;quot;, 0.1, &amp;quot;float flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(d, f)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag1.go -dur 1h -float 2.3
+1h0m0s 2.3
+$ go run with-flag1.go -float str
+invalid value &amp;quot;str&amp;quot; for flag -float: strconv.ParseFloat: parsing &amp;quot;str&amp;quot;: invalid syntax
+Usage of /var/folders/.../with-flag1:
+  -dur duration
+    	duration flag (default 1s)
+  -float float
+    	float flag (default 0.1)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの書き方&#34;&gt;フラグの書き方&lt;/h2&gt;
+
+&lt;p&gt;フラグの書き方は次の2通りが可能です．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-flag value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-flag=value&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ただし，Bool値を取得する場合は&lt;code&gt;flag=value&lt;/code&gt;を使った方がいいかもしれません．というのも， &lt;strong&gt;フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで&lt;code&gt;true&lt;/code&gt;となる&lt;/strong&gt;からです．&lt;/p&gt;
+
+&lt;p&gt;つまり，フラグを立ててBool値を取得したい場合は&lt;code&gt;-bool=true&lt;/code&gt;/&lt;code&gt;-bool=false&lt;/code&gt;としなければならないということです．&lt;code&gt;-bool false&lt;/code&gt;では&lt;code&gt;true&lt;/code&gt;となってしまいます．また&lt;code&gt;-bool false&lt;/code&gt;以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -bool false -int 123 -str abc # falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる
+0 default true 
+$ go run with-flag0.go -bool=true -int 123 -str abc
+123 abc true
+$ go run with-flag0.go -bool=false -int 123 -str abc
+123 abc false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに&lt;code&gt;-h&lt;/code&gt;でヘルプを表示してくれます．賢いですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -h
+Usage of /var/folders/.../with-flag0:
+  -bool
+    	bool flag
+  -int int
+    	int flag
+  -str string
+    	string flag (default &amp;quot;default&amp;quot;)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;コマンドライン引数の個数を数える&#34;&gt;コマンドライン引数の個数を数える&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;NArg()&lt;/code&gt;で非フラグなものを，&lt;code&gt;NFlag()&lt;/code&gt;でフラグなものをカウントできます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+	flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+	flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(&amp;quot;non flag:&amp;quot;, flag.NArg())
+	fmt.Println(&amp;quot;flag:&amp;quot;, flag.NFlag())
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run flag-test.go -int 1 -str foo -bool=true a b
+non flag: 2
+flag: 3
+$ go run flag-test.go -int 1 -str foo -bool true a b
+non flag: 3
+flag: 3
+$ go run flag-test.go -bool true -int 1 -str foo a b
+non flag: 7
+flag: 1
+$ go run flag-test.go a b c -bool=true -str foo
+non flag: 6
+flag: 0
+$ go run flag-test.go -bool=true -str foo a b c
+non flag: 3
+flag: 2
+$ go run flag-test.go a b c
+non flag: 3
+flag: 0
+$ go run flag-test.go -bool=true -str foo
+non flag: 0
+flag: 2
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

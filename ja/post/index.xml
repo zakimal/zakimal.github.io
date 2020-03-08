@@ -5,12 +5,2780 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2019</copyright>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Sun, 08 Mar 2020 13:47:19 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>「オブジェクト指向」について考える</title>
+      <link>/ja/post/what-is-object-oriented/</link>
+      <pubDate>Sun, 08 Mar 2020 13:47:19 +0900</pubDate>
+      <guid>/ja/post/what-is-object-oriented/</guid>
+      <description>
+
+&lt;h2 id=&#34;oriented-ってどういう意味なんだろう&#34;&gt;&amp;rdquo;-oriented&amp;rdquo;ってどういう意味なんだろう？&lt;/h2&gt;
+
+&lt;p&gt;プログラミングをお勉強しているので，いろんなカタカナ用語に遭遇する．カタカナ用語ってその言葉の指す意味が字面に現れてこなくて，「それってどういう意味？」となりがちだ．&lt;/p&gt;
+
+&lt;p&gt;最近気になったのは「XXX-oriented」という言葉だ．Object-orientedとかservice-orientedとかで目にする．日本語に訳されるときは「XXX指向」って訳されている．が，日本語に訳されたところで意味は判然としない．「オブジェクト指向 とは」でググるとめちゃめちゃたくさんのブログ記事が出てくる．だいたい「オブジェクト指向ってよくわかんねぇよな！俺が解説してやる！」っていう趣旨の記事で，世界一わかりやすいと謳っている．&lt;/p&gt;
+
+&lt;p&gt;僕もそれらの類の記事はいくつか呼んだことがあるし，オブジェクト指向なプログラミングを文法からサポートするいろんな言語でプログラミングをしたことがあるので，オブジェクト指向とはなんなのか，みたいなところの「手触り感」はなんとなく分かっているけど，もうちょっとメタな視点から「XXX-oriented」の意味を考えてみたくなった．&lt;/p&gt;
+
+&lt;p&gt;「XXX-oriented」の中でも一番有名なのかも知れないのが「Object-oriented」だと思うので，そこから考えてみる．オブジェクト指向でプログラムすると，記述したい事柄を「データとデータに対する操作を一括にまとめたオブジェクト」なるものをたくさん定義して，それらの相互作用でプログラムを記述していくことになる．オブジェクト指向ではプログラムにおける主役は「オブジェクト」であり，プログラマはそれらオブジェクト同士の動きを，あたかも演劇における脚本を書いているかのように操って1つのプログラムに仕立て上げる．僕が思うに，オブジェクト指向で大事なのは「プログラムにおける主役がオブジェクトである」という点がオブジェクト指向の本当のところなのだと思う．「Object-oriented」が「オブジェクトが主役」の意味なら「XXX-oriented」は「XXXが主役」ってことなのだろうか？&lt;/p&gt;
+
+&lt;p&gt;「oriented」を適当に英語辞典で引いてみると，「特定の方向に向く，位置を定める」という意味の「orient」の過去分詞が転じた形容詞と書いてあった．ということは，字面で言えば「オブジェクトの方を向いた」って意味なのか？「オブジェクト指向」という漢字はそういう雰囲気が確かに感じられる．&lt;/p&gt;
+
+&lt;p&gt;Object-orientedって言うときはおそらく「オブジェクトを主役とする（という方向を向いた）思想に基づく技術」って意味なんだろうなぁ．となるとObject-oriented programmingっていうのは「オブジェクトを主役とする（という方向を向いた）思想に基づいて確立されたプログラミング手法」的な意味合いになりそうだし，僕の肌感ともあってくる．&lt;/p&gt;
+
+&lt;p&gt;なるほど，Service-Oriented Architectureもそう考えると，「サービス」が主役として振る舞うアーキテクチャってことなんだろうな&amp;hellip;じゃあ最近話題のマイクロサービスアーキテクチャと何が違うんだろう&amp;hellip;同じような名前だけど&amp;hellip;暇なときにでも調べてみるか．&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;「XXX-oriented」とは「XXXという方向性に基づく（技術）」ぐらいの意味&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Book Shelf</title>
+      <link>/ja/post/book-shelf/</link>
+      <pubDate>Mon, 25 Nov 2019 23:57:01 +0900</pubDate>
+      <guid>/ja/post/book-shelf/</guid>
+      <description>
+
+&lt;h1 id=&#34;読みたい&#34;&gt;読みたい&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;［改訂新版］プログラマのための文字コード技術入門&lt;/li&gt;
+&lt;li&gt;みんなのデータ構造&lt;/li&gt;
+&lt;li&gt;プログラマの数学 第2版&lt;/li&gt;
+&lt;li&gt;純粋関数型データ構造&lt;/li&gt;
+&lt;li&gt;Understanding Compression&lt;/li&gt;
+&lt;li&gt;型システム入門 ― プログラミング言語と型の理論&lt;/li&gt;
+&lt;li&gt;その数式、プログラムできますか？&lt;/li&gt;
+&lt;li&gt;計算機プログラムの構造と解釈&lt;/li&gt;
+&lt;li&gt;正規表現技術入門 ― 最新エンジン実装と理論的背景&lt;/li&gt;
+&lt;li&gt;アンダースタンディング コンピュテーション ― 単純な機械から不可能なプログラムまで&lt;/li&gt;
+&lt;li&gt;ガベージコレクション ― 自動的メモリ管理を構成する理論と実装&lt;/li&gt;
+&lt;li&gt;アルゴリズムを学ぼう&lt;/li&gt;
+&lt;li&gt;ガベージコレクションのアルゴリズムと実装&lt;/li&gt;
+&lt;li&gt;アルゴリズムイントロダクション第三巻 ― 精選トピックス&lt;/li&gt;
+&lt;li&gt;アルゴリズムイントロダクション第二巻（改訂 2 版） ― 高度な設計と解析手法・高度なデータ構造・グラフアルゴリズム&lt;/li&gt;
+&lt;li&gt;アルゴリズムイントロダクション第一巻（改訂 2 版） ― 基礎・ソート・データ構造・数学&lt;/li&gt;
+&lt;li&gt;オートマトン言語理論　計算論 I（第二版）&lt;/li&gt;
+&lt;li&gt;アルゴリズムとデータ構造（岩波講座 ソフトウェア科学 3）&lt;/li&gt;
+&lt;li&gt;基礎情報理論&lt;/li&gt;
+&lt;li&gt;江添亮の C++ 入門&lt;/li&gt;
+&lt;li&gt;Modern C++ チャレンジ ― C++17 プログラミング力を鍛える 100 問&lt;/li&gt;
+&lt;li&gt;More Effective C# 6.0/7.0&lt;/li&gt;
+&lt;li&gt;低レベルプログラミング&lt;/li&gt;
+&lt;li&gt;Optimized C++&lt;/li&gt;
+&lt;li&gt;C++ のための API デザイン&lt;/li&gt;
+&lt;li&gt;C++ テンプレートテクニック（第二版）&lt;/li&gt;
+&lt;li&gt;The Architecture of Open Source Applications - Volume II: Structure, Scale, and a Few More Fearless Hacks&lt;/li&gt;
+&lt;li&gt;The Architecture of Open Source Applications - Elegance, Evolution, and a Few Fearless Hacks&lt;/li&gt;
+&lt;li&gt;コンパイラの構成と最適化&lt;/li&gt;
+&lt;li&gt;最新コンパイラ構成技法（タイガーブック）&lt;/li&gt;
+&lt;li&gt;Linkers and Loaders&lt;/li&gt;
+&lt;li&gt;コンパイラ 作りながら学ぶ&lt;/li&gt;
+&lt;li&gt;7 つの言語 7 つの世界&lt;/li&gt;
+&lt;li&gt;江添亮の詳説 C++17&lt;/li&gt;
+&lt;li&gt;Effective Modern C++ ― C++&lt;sup&gt;11&lt;/sup&gt;&amp;frasl;&lt;sub&gt;14&lt;/sub&gt; プログラムを進化させる 42 項目&lt;/li&gt;
+&lt;li&gt;コーディングを支える技術&lt;/li&gt;
+&lt;li&gt;ls を読まずにプログラマを名乗るな！&lt;/li&gt;
+&lt;li&gt;Effective STL ― STL を効果的に使いこなす 50 の鉄則&lt;/li&gt;
+&lt;li&gt;More Effective C++ ― プログラムとデザインを改良するための新 35 項目&lt;/li&gt;
+&lt;li&gt;Effective C++ ― プログラムとデザインを改良するための 55 項目&lt;/li&gt;
+&lt;li&gt;ゲームプログラマのための C++&lt;/li&gt;
+&lt;li&gt;言語実装パターン ― コンパイラ技術によるテキスト処理から言語実装まで&lt;/li&gt;
+&lt;li&gt;パーフェクト JavaScript&lt;/li&gt;
+&lt;li&gt;Effective Java（第二版）&lt;/li&gt;
+&lt;li&gt;Binary Hacks ― ハッカー秘伝のテクニック 100 選&lt;/li&gt;
+&lt;li&gt;リンカ・ローダ実践開発テクニック ― 実行ファイルを作成するために必須の技術&lt;/li&gt;
+&lt;li&gt;省メモリプログラミング ― メモリ制限のあるシステムのためのソフトウェアパターン集&lt;/li&gt;
+&lt;li&gt;エキスパート Objective-C プログラミング&lt;/li&gt;
+&lt;li&gt;iPhone プログラミング UIKit 詳解リファレンス&lt;/li&gt;
+&lt;li&gt;スクリプトエンジン プログラミング&lt;/li&gt;
+&lt;li&gt;プログラミングテクニックアドバンス ― 実践的 UNIX プログラミングソースコードにみる珠玉の手法&lt;/li&gt;
+&lt;li&gt;プログラミングテクニック ― UNIX コマンドのソースコードにみる実践プログラミング手法&lt;/li&gt;
+&lt;li&gt;エキスパート Python プログラミング&lt;/li&gt;
+&lt;li&gt;GNU Make（第三版）&lt;/li&gt;
+&lt;li&gt;ふつうのコンパイラをつくろう ― 言語処理系をつくりながら学ぶコンパイルと実行環境の仕組み&lt;/li&gt;
+&lt;li&gt;明快入門　コンパイラ・インタプリタ処理系を作りながら学ぶ&lt;/li&gt;
+&lt;li&gt;エキスパート C プログラミング 知られざる C の深層&lt;/li&gt;
+&lt;li&gt;メタプログラミング Ruby&lt;/li&gt;
+&lt;li&gt;Ruby ソースコード完全解説&lt;/li&gt;
+&lt;li&gt;プログラミング言語 Ruby&lt;/li&gt;
+&lt;li&gt;Boost C++ Libraries プログラミング（第二版）&lt;/li&gt;
+&lt;li&gt;Java の地図帳　図解・実例・リンクで学ぶ Java プログラミング&lt;/li&gt;
+&lt;li&gt;コア Java 2 基礎編&lt;/li&gt;
+&lt;li&gt;基礎からの PHP&lt;/li&gt;
+&lt;li&gt;コンパイラ ― 原理・技法・ツール（ドラゴンブック）&lt;/li&gt;
+&lt;li&gt;Raspberry Pi で学ぶコンピュータアーキテクチャ&lt;/li&gt;
+&lt;li&gt;動かしてわかる CPU の作り方 10 講&lt;/li&gt;
+&lt;li&gt;FPGA の原理と構成&lt;/li&gt;
+&lt;li&gt;ディジタル回路設計とコンピュータアーキテクチャ [ARM版]&lt;/li&gt;
+&lt;li&gt;熱血！アセンブラ入門&lt;/li&gt;
+&lt;li&gt;自作エミュレータで学ぶ x86 アーキテクチャ&lt;/li&gt;
+&lt;li&gt;コンピュータアーキテクチャ　定量的アプローチ（ヘネパタ）&lt;/li&gt;
+&lt;li&gt;量子コンピュータが人工知能を加速する&lt;/li&gt;
+&lt;li&gt;GPU を支える技術 ― 超並列ハードウェアの快進撃［技術基礎］&lt;/li&gt;
+&lt;li&gt;ディジタル回路設計とコンピュータアーキテクチャ&lt;/li&gt;
+&lt;li&gt;はじめて読む486 - 32ビットコンピュータをやさしく語る&lt;/li&gt;
+&lt;li&gt;構造化コンピュータ構成（第四版）&lt;/li&gt;
+&lt;li&gt;プロセッサを支える技術&lt;/li&gt;
+&lt;li&gt;コンピュータの構成と設計（パタヘネ）&lt;/li&gt;
+&lt;li&gt;作りながら学ぶコンピュータアーキテクチャ&lt;/li&gt;
+&lt;li&gt;作って理解する OS ― x86 系コンピュータを動かす理論と実装&lt;/li&gt;
+&lt;li&gt;Android を支える技術 II ― 新のマルチタスクに挑んだモバイル OS の心臓部&lt;/li&gt;
+&lt;li&gt;詳解 システム・パフォーマンス&lt;/li&gt;
+&lt;li&gt;インサイド Windows&lt;/li&gt;
+&lt;li&gt;新装改訂版 Linux のブートプロセスをみる&lt;/li&gt;
+&lt;li&gt;Linux デバイスドライバ&lt;/li&gt;
+&lt;li&gt;Unix 考古学 Truth of the Legend&lt;/li&gt;
+&lt;li&gt;インサイド Windows&lt;/li&gt;
+&lt;li&gt;[試して理解] Linux のしくみ ― 実験と図解で学ぶ OS とハードウェアの基礎知識&lt;/li&gt;
+&lt;li&gt;Android を支える技術 I - 60 fps を達成するモダンな GUI システム&lt;/li&gt;
+&lt;li&gt;Linux プログラミングインタフェース&lt;/li&gt;
+&lt;li&gt;はじめての OS コードリーディング ― UNIX V6 で学ぶカーネルのしくみ&lt;/li&gt;
+&lt;li&gt;作りながら学ぶ OS カーネル ― 保護モードプログラミングの基本と実践&lt;/li&gt;
+&lt;li&gt;30 日でできる！OS 自作入門&lt;/li&gt;
+&lt;li&gt;Write Portable Code ― 複数プラットフォームに移植可能なソフトウェアの開発技法&lt;/li&gt;
+&lt;li&gt;Linux システムプログラミング&lt;/li&gt;
+&lt;li&gt;例解 UNIX プログラミング教室 ― システムコールを使いこなすための 12 講&lt;/li&gt;
+&lt;li&gt;オペレーティングシステムの仕組み&lt;/li&gt;
+&lt;li&gt;詳解 Linux カーネル&lt;/li&gt;
+&lt;li&gt;構造化並列プログラミング ― 効率良い計算を行うためのパターン&lt;/li&gt;
+&lt;li&gt;SRE サイトリライアビリティエンジニアリング ― Google の信頼性を支えるエンジニアリングチーム&lt;/li&gt;
+&lt;li&gt;ビッグデータを支える技術 ― 刻々とデータが脈打つ自動化の世界&lt;/li&gt;
+&lt;li&gt;Shared Memory Application Programming&lt;/li&gt;
+&lt;li&gt;並行コンピューティング技法 ― 実践マルチコア/マルチスレッドプログラミング (The Art of Concurrency)&lt;/li&gt;
+&lt;li&gt;The Art of Multiprocessor Programming ― 並行プログラミングの原理から実践まで&lt;/li&gt;
+&lt;li&gt;Pthreads プログラミング&lt;/li&gt;
+&lt;li&gt;Google を支える技術&lt;/li&gt;
+&lt;li&gt;TCP 技術入門 ― 進化を続ける基本プロトコル&lt;/li&gt;
+&lt;li&gt;ソースコードで体感するネットワークの仕組み ― 手を動かしながら基礎から TCP/IP の実装までがわかる&lt;/li&gt;
+&lt;li&gt;アカマイ ― 知られざるインターネットの巨人&lt;/li&gt;
+&lt;li&gt;UNIX ネットワークプログラミング (Vol.2) IPC: プロセス間通信&lt;/li&gt;
+&lt;li&gt;UNIX ネットワークプログラミング (Vol.1) ネットワーク API: ソケットと XTI&lt;/li&gt;
+&lt;li&gt;体系的に学ぶ 安全な Web アプリケーションの作り方 (第 2 版) ― 脆弱性が生まれる原理と対策の実践&lt;/li&gt;
+&lt;li&gt;ブラウザハック&lt;/li&gt;
+&lt;li&gt;超速! Web ページ速度改善ガイド ― 使いやすさは「速さ」から始まる&lt;/li&gt;
+&lt;li&gt;Web フロントエンドハイパフォーマンスチューニング&lt;/li&gt;
+&lt;li&gt;ハイパフォーマンスブラウザネットワーキング ― ネットワークアプリケーションのためのパフォーマンス最適化&lt;/li&gt;
+&lt;li&gt;めんどうくさい Web セキュリティ&lt;/li&gt;
+&lt;li&gt;Ruby on Rails 3 アプリケーションプログラミング&lt;/li&gt;
+&lt;li&gt;Web 開発者のための大規模サービス技術入門 ― データ構造、メモリ、OS、DB、サーバ/インフラ&lt;/li&gt;
+&lt;li&gt;24 時間 365 日 サーバ/インフラを支える技術 ― スケーラビリティ、ハイパフォーマンス、省力運用&lt;/li&gt;
+&lt;li&gt;仕事ではじめる機械学習&lt;/li&gt;
+&lt;li&gt;これならわかる深層学習入門&lt;/li&gt;
+&lt;li&gt;ゼロから作る Deep Learning &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;作って動かす ALife&lt;/li&gt;
+&lt;li&gt;TensorFlow ではじめる DeepLearning 実装入門&lt;/li&gt;
+&lt;li&gt;はじめてのパターン認識&lt;/li&gt;
+&lt;li&gt;進化的アーキテクチャ ― 絶え間ない変化を支える&lt;/li&gt;
+&lt;li&gt;Clean Architecture 達人に学ぶソフトウェアの構造と設計&lt;/li&gt;
+&lt;li&gt;エリック・エヴァンスのドメイン駆動設計&lt;/li&gt;
+&lt;li&gt;マイクロサービスアーキテクチャ&lt;/li&gt;
+&lt;li&gt;API デザインケーススタディ Rubyの実例から学ぶ。問題に即したデザインと普遍の考え方&lt;/li&gt;
+&lt;li&gt;エンジニアのためのマネジメントキャリアパス ― テックリードから CTO までマネジメントスキル向上ガイド&lt;/li&gt;
+&lt;li&gt;サイバー攻撃 ― ネット世界の裏側で起きていること&lt;/li&gt;
+&lt;li&gt;エンジニアリング組織論への招待 ― 不確実性に向き合う思考と組織のリファクタリング&lt;/li&gt;
+&lt;li&gt;プリンシプル オブ プログラミング ― 3 年目までに身につけたい 一生役立つ 101 の原理原則&lt;/li&gt;
+&lt;li&gt;Joel on Software&lt;/li&gt;
+&lt;li&gt;OSS ライセンスの教科書&lt;/li&gt;
+&lt;li&gt;エンジニアの知的生産術 ― 効率的に学び、整理し、アウトプットする&lt;/li&gt;
+&lt;li&gt;セキュリティコンテストのための CTF 問題集&lt;/li&gt;
+&lt;li&gt;セキュリティコンテストチャレンジブック ― CTF で学ぼう! 情報を守るための戦い方&lt;/li&gt;
+&lt;li&gt;プログラミングコンテストチャレンジブック&lt;/li&gt;
+&lt;li&gt;目指せ！プログラミング世界一 ― 大学対抗プログラミングコンテスト ICPC への挑戦&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;読んだ&#34;&gt;読んだ&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;クラウドを支えるこれからの暗号技術&lt;/li&gt;
+&lt;li&gt;リーダブルコード　より良いコードを書くためのシンプルで実践的なテクニック&lt;/li&gt;
+&lt;li&gt;GitHub 実践入門 ― Pull Request による開発の変革&lt;/li&gt;
+&lt;li&gt;人工知能は人間を超えるか&lt;/li&gt;
+&lt;li&gt;ゼロから作る Deep Learning&lt;/li&gt;
+&lt;li&gt;Real World HTTP ― 歴史とコードに学ぶインターネットとウェブ技術&lt;/li&gt;
+&lt;li&gt;Writing An Interpreter In Go&lt;/li&gt;
+&lt;li&gt;Writing A Compiler In Go&lt;/li&gt;
+&lt;li&gt;実践 Rust 入門 ― 言語仕様から開発手法まで&lt;/li&gt;
+&lt;li&gt;Programming Rust&lt;/li&gt;
+&lt;li&gt;すごい Haskell たのしく学ぼう！&lt;/li&gt;
+&lt;li&gt;プログラミング言語 Go&lt;/li&gt;
+&lt;li&gt;Go ならわかるシステムプログラミング&lt;/li&gt;
+&lt;li&gt;コンピュータシステムの理論と実装&lt;/li&gt;
+&lt;li&gt;Go 言語による並行処理&lt;/li&gt;
+&lt;li&gt;Distributed Systems: Principles and Paradigms (2nd Edition)&lt;/li&gt;
+&lt;li&gt;Computer Networking: A Top-Down Approach (4th Edition)&lt;/li&gt;
+&lt;li&gt;ふつうの Linux プログラミング (第 2 版) ― Linux の仕組みから学べる gcc プログラミングの王道&lt;/li&gt;
+&lt;li&gt;Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems&lt;/li&gt;
+&lt;li&gt;Cracking the Coding Interview: 189 Programming Questions and Solutions&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Golangでよく見かける構造体実装パターン</title>
+      <link>/ja/post/golang-structure-implementation-patterns/</link>
+      <pubDate>Thu, 14 Nov 2019 14:57:55 +0900</pubDate>
+      <guid>/ja/post/golang-structure-implementation-patterns/</guid>
+      <description>
+
+&lt;h2 id=&#34;golangでよく見かける構造体実装パターン&#34;&gt;Golangでよく見かける構造体実装パターン&lt;/h2&gt;
+
+&lt;p&gt;よく見かけるパターンをまとめてみた．&lt;/p&gt;
+
+&lt;h3 id=&#34;コンストラクタとしての-newxxxx&#34;&gt;コンストラクタとしての&lt;code&gt;NewXXXX()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;構造体の初期化と生成に使うパターン&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/7PCxyYTCwek&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍 構造体の生成と初期化の内部実装を利用者に見せない&lt;/li&gt;
+&lt;li&gt;👍 構造体そのものの構造を利用者に見せない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;エクスポートして外部パッケージからのアクセス許可を利用したシングルトン&#34;&gt;エクスポートして外部パッケージからのアクセス許可を利用したシングルトン&lt;/h3&gt;
+
+&lt;p&gt;「構造体名の先頭を大文字にすることで外部パッケージからのアクセスを許可する」というGolangの特徴を生かしてシングルトンを生成できる．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package singleton
+
+// 構造体自体を外部に公開しない
+type singleton struct {
+}
+
+// 構造体のインスタンスを保持する変数も外部に公開しない
+var instance *singleton
+
+// シングルトンなインスタンスを取得する関数のみを外部に公開
+func GetInstance() *singleton {
+	if instance == nil {
+	     instance = &amp;amp;singleton{}
+	}
+	return instance
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;interface-でポリモーフィズム&#34;&gt;&lt;code&gt;interface&lt;/code&gt;でポリモーフィズム&lt;/h3&gt;
+
+&lt;p&gt;Golangには「型の継承」がない．一方で，&lt;code&gt;interface&lt;/code&gt;を用いることでポリモーフィズムを実現できる．&lt;code&gt;interface&lt;/code&gt;によって振る舞いを定義することで，「同じような振る舞いをするもの」をまとめて扱えるようになる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/p-yY5gEOdaG&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;構造体の埋め込みによるポリモーフィズム&#34;&gt;構造体の埋め込みによるポリモーフィズム&lt;/h3&gt;
+
+&lt;p&gt;ある構造体に対して，特定の振る舞いを実装している構造体を埋め込むことで，その構造体も「埋め込まれた構造体と同様な振る舞いをするもの」として扱うことができる．ただ，これをやると構造体の初期化時に構造体の内部を意識する必要があるため，初期化のための&lt;code&gt;NewXXXX()&lt;/code&gt;を用意してあげると良い．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/MsxaudYhObv&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;埋め込まれた構造体が上位の構造体の関数を使う&#34;&gt;埋め込まれた構造体が上位の構造体の関数を使う&lt;/h3&gt;
+
+&lt;p&gt;オブジェクト指向では「子クラスが親クラスのメソッドを用いること」ができるが，Golangでもできないことはない．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/cQ4uSQ7_TLl&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;構造体による処理の移譲&#34;&gt;構造体による処理の移譲&lt;/h3&gt;
+
+&lt;p&gt;構造体のメンバーとして，特定の処理に対して責任を持つ構造体を持つことで，処理の移譲を実現できる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/KPX9i1sY1CK&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&#34;関数による処理の移譲&#34;&gt;関数による処理の移譲&lt;/h3&gt;
+
+&lt;p&gt;Golangでは関数は第1級市民なので値として扱うことができる．処理を定義した関数をやりとりすることで処理を移譲させることができる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/MN93S3LVX9l&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Serializationのさまざま</title>
+      <link>/ja/post/json-vs-protobuf-vs-flatbuf/</link>
+      <pubDate>Mon, 04 Nov 2019 01:03:05 +0900</pubDate>
+      <guid>/ja/post/json-vs-protobuf-vs-flatbuf/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;communication.gif&#34; alt=&#34;通信し合うサーバーたち&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;データのserialization-deserialization&#34;&gt;データのserialization/deserialization&lt;/h2&gt;
+
+&lt;p&gt;イマドキのソフトウェアは，機能ごとにプログラムを整理整頓して，それらが情報をやりとりしながらサービスを提供します．システムを構成するコンポーネント間でメッセージングをしなければならず，その際にやりとりするデータについて「どういう表現であるのか」について共有しておかないといけません．人間の会話で言うならば「何語を喋るか」に近いのかな．&lt;/p&gt;
+
+&lt;p&gt;「どんな形式でデータを表現するか」についてはいくつかの形式が提案されていて，それぞれについて一長一短がある．代表的なのはXML，JSON，BSON，Protocol Buffers，FlatBuffers．他にもいろいろあります．&lt;/p&gt;
+
+&lt;h2 id=&#34;xml&#34;&gt;XML&lt;/h2&gt;
+
+&lt;p&gt;XMLとは「e&lt;strong&gt;X&lt;/strong&gt;tended &lt;strong&gt;M&lt;/strong&gt;arkdown &lt;strong&gt;L&lt;/strong&gt;anguage」の略で，文章の電子化に源流があるデータ形式．前提に「文章のデジタル化」があるので，XMLの仕様にはデータの「型」が定義されていません．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;breakfast_menu&amp;gt;
+&amp;lt;food&amp;gt;
+	&amp;lt;name&amp;gt;Belgian Waffles&amp;lt;/name&amp;gt;
+	&amp;lt;price&amp;gt;$5.95&amp;lt;/price&amp;gt;
+	&amp;lt;description&amp;gt;
+		Two of our famous Belgian Waffles with plenty of real maple syrup
+	&amp;lt;/description&amp;gt;
+	&amp;lt;calories&amp;gt;650&amp;lt;/calories&amp;gt;
+&amp;lt;/food&amp;gt;
+&amp;lt;food&amp;gt;
+	&amp;lt;name&amp;gt;Strawberry Belgian Waffles&amp;lt;/name&amp;gt;
+	&amp;lt;price&amp;gt;$7.95&amp;lt;/price&amp;gt;
+	&amp;lt;description&amp;gt;
+		Light Belgian waffles covered with strawberries and whipped cream
+	&amp;lt;/description&amp;gt;
+	&amp;lt;calories&amp;gt;900&amp;lt;/calories&amp;gt;
+&amp;lt;/food&amp;gt;
+&amp;lt;/breakfast_menu&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;XMLは文章のデジタル化が前提にあるので，HTMLみたいな見た目になっています．&lt;/p&gt;
+
+&lt;p&gt;XMLの特徴として「XMLはself-describingである」と評されることが多くあります．これは「&lt;strong&gt;データ自体の構造がデータそのものに表現されている&lt;/strong&gt;」ということです．つまり事前に通信の両端でやり取りするデータの方についての合意をとっていなくても（やり取りするデータを眺めれば）データの齟齬のない解釈が可能であるということです．JSONだとこれはできません．XMLはタグだけをみることで，そのデータの構造を即座に読み取ることができます．JSONでは，タグに相当するものをハッシュのキーとして表現すればできないわけではないが，それはデータの型を表現したわけではなくて，ハッシュを用いて似たようなデータ型を表現しただけです．&lt;/p&gt;
+
+&lt;p&gt;XMLで記述されたデータはそれ自身のメタな構造をも表現しているという点が分散システムにおけるデータのやり取りで非常に有用なので，古くからよく使われています．&lt;/p&gt;
+
+&lt;h2 id=&#34;json&#34;&gt;JSON&lt;/h2&gt;
+
+&lt;p&gt;JSONとは「&lt;strong&gt;J&lt;/strong&gt;ava&lt;strong&gt;S&lt;/strong&gt;cript &lt;strong&gt;O&lt;/strong&gt;bject &lt;strong&gt;N&lt;/strong&gt;otation」の略．JSONをシステム間のデータの表現形式として用いると「JavaScriptでのデータのリテラルな表現をそのままシステム間のデータ表現形式」として用いることになって，webな世界だとJavaScriptのインタプリタでそのまま処理できるので扱いやすくてよく用いられがち．しかも，JSONは人間にとってもパッと見でデータの構造が把握しやすくて人気が出ました．それなりに古参なデータ形式ですが，現在もバリバリの現役です．視認性が良いのがやっぱり人気の理由なんですかね．デバッグしやすいし．&lt;/p&gt;
+
+&lt;p&gt;JSONは「プログラミング言語におけるデータのリテラル表現」が出所なので，仕様として「型」が含まれていて，扱いやすいです．「型」が仕様として存在しているので「空の値」を型ごとに区別することができます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;null&amp;quot;: null,
+	&amp;quot;string&amp;quot;: &amp;quot;&amp;quot;,
+	&amp;quot;array&amp;quot;: [],
+	&amp;quot;dict&amp;quot;: {}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JSONは，こんなにシステム間で情報をやりとりする際のデータ形式として用いられるようになることを全然想定していなかったので，扱いづらさがあったりするらしい．僕は具体的に表現することができないが「古臭い」なんて言われることもあります．&lt;/p&gt;
+
+&lt;p&gt;「どういうフィールドを持ったJSONデータを扱うのか」について通信の両端点で合意しておく必要があるのはもちろんですが，JSONのデータ形式はスキーマを直接的に表現しているわけではない（つまりインタフェースをJSONが規定しているわけではない）という認識も大事だと思います．そのままのJSONはただのデータ形式に過ぎなくて，スキーマ言語としての「データ型を定義する」というメタな機能はないということです．&lt;/p&gt;
+
+&lt;p&gt;JSONなどでも「JSONでJSONのスキーマを書いてしまおう」という&lt;a href=&#34;https://json-schema.org/&#34; target=&#34;_blank&#34;&gt;JSON Schema&lt;/a&gt;なるものが存在しているそうですが，やっぱりだいぶ書きにくそうです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;productId&amp;quot;: 1,
+	&amp;quot;productName&amp;quot;: &amp;quot;An ice sculpture&amp;quot;,
+	&amp;quot;price&amp;quot;: 12.50,
+	&amp;quot;tags&amp;quot;: [ &amp;quot;cold&amp;quot;, &amp;quot;ice&amp;quot; ],
+	&amp;quot;dimensions&amp;quot;: {
+		&amp;quot;length&amp;quot;: 7.0,
+		&amp;quot;width&amp;quot;: 12.0,
+		&amp;quot;height&amp;quot;: 9.5
+	},
+ 	&amp;quot;warehouseLocation&amp;quot;: {
+		&amp;quot;latitude&amp;quot;: -78.75,
+		&amp;quot;longitude&amp;quot;: 20.4
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;というスキーマをJSONで書くと&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+	&amp;quot;$schema&amp;quot;: &amp;quot;http://json-schema.org/draft-07/schema#&amp;quot;,
+	&amp;quot;$id&amp;quot;: &amp;quot;http://example.com/product.schema.json&amp;quot;,
+	&amp;quot;title&amp;quot;: &amp;quot;Product&amp;quot;,
+	&amp;quot;description&amp;quot;: &amp;quot;A product from Acme&#39;s catalog&amp;quot;,
+	&amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,
+	&amp;quot;properties&amp;quot;: {
+		&amp;quot;productId&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;The unique identifier for a product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;integer&amp;quot;
+		},
+		&amp;quot;productName&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Name of the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;
+		},
+		&amp;quot;price&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;The price of the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;,
+			&amp;quot;exclusiveMinimum&amp;quot;: 0
+		},
+		&amp;quot;tags&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Tags for the product&amp;quot;,
+			&amp;quot;type&amp;quot;: &amp;quot;array&amp;quot;,
+			&amp;quot;items&amp;quot;: {
+				&amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;
+			},
+			&amp;quot;minItems&amp;quot;: 1,
+			&amp;quot;uniqueItems&amp;quot;: true
+		},
+		&amp;quot;dimensions&amp;quot;: {
+			&amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,
+			&amp;quot;properties&amp;quot;: {
+				&amp;quot;length&amp;quot;: {
+					&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				},
+				&amp;quot;width&amp;quot;: {
+		    		&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				},
+				&amp;quot;height&amp;quot;: {
+					&amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;
+				}
+			},
+			&amp;quot;required&amp;quot;: [ &amp;quot;length&amp;quot;, &amp;quot;width&amp;quot;, &amp;quot;height&amp;quot; ]
+		},
+		&amp;quot;warehouseLocation&amp;quot;: {
+			&amp;quot;description&amp;quot;: &amp;quot;Coordinates of the warehouse where the product is located.&amp;quot;,
+			&amp;quot;$ref&amp;quot;: &amp;quot;https://example.com/geographical-location.schema.json&amp;quot;
+		}
+	},
+	&amp;quot;required&amp;quot;: [ &amp;quot;productId&amp;quot;, &amp;quot;productName&amp;quot;, &amp;quot;price&amp;quot; ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;🤔 ﾁｮｯﾄﾐﾆｸｲ&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;bson&#34;&gt;BSON&lt;/h2&gt;
+
+&lt;p&gt;JSONはテキストベース（つまりシリアライズ・デシリアライズの際に扱われるデータの単位がbitじゃなくてbyte）でしたが，それを改めたBSON = &lt;strong&gt;B&lt;/strong&gt;inary J&lt;strong&gt;SON&lt;/strong&gt;というのも存在します．つまりBSONではデータがバイナリベース（つまりシリアライズ・デシリアライズの際に扱われるデータの大きさの単位がbit）になっています．BSONは後述するProtocol Buffersとよく似ていて，度々比較されています．公式によると，&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Lightweight&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep­ing spa­tial over­head to a min­im­um is im­port­ant for any data rep­res­ent­a­tion format, es­pe­cially when used over the net­work.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Traversable&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;BSON is de­signed to be tra­versed eas­ily. This is a vi­tal prop­erty in its role as the primary data rep­res­ent­a­tion for Mon­goDB.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Efficient&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;En­cod­ing data to BSON and de­cod­ing from BSON can be per­formed very quickly in most lan­guages due to the use of C data types.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;という特徴があります．&lt;/p&gt;
+
+&lt;p&gt;BSONは，Protocol Buffersと比較して&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;more &amp;ldquo;schema-less&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;であるとされています．つまり，サービス間のインタフェースの仕様そのものとやりとりするデータ形式の関係性が（Protocol Buffersと比較して）疎で，より柔軟性があるということです．一方で，BSONはProtocol Buffersと比べてメッセージのフィールド名のエンコードに関してやや冗長であるとされています．&lt;/p&gt;
+
+&lt;p&gt;MongoDBがBSONをデータの表現方式として採用しているのが興味深いですね．多くの主要言語でBSONのエンコード・デコードをサポートするライブラリが実装されていて手軽に使えそうな印象です．ただ，バイナリベースということもあって，BSONをそのまま眺めても人間には意味がわからないので，デバッグはちょっと大変なのかもしれませんね．&lt;/p&gt;
+
+&lt;p&gt;例えば&lt;code&gt;{&amp;quot;hello&amp;quot;: &amp;quot;world&amp;quot;}&lt;/code&gt;をBSONでエンコードすると以下のようになります．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  \x16\x00\x00\x00                   // total document size
+  \x02                               // 0x02 = type String
+  hello\x00                          // field name
+  \x06\x00\x00\x00world\x00          // field value
+  \x00                               // 0x00 = type EOO (&#39;end of object&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;protocol-buffers&#34;&gt;Protocol Buffers&lt;/h2&gt;
+
+&lt;p&gt;Protocol BuffersはGoogleが社内のシステム間で情報をやりとりする際に用いていたデータ形式で2008年にオープンソース化されました．Googleが出している公式のドキュメントによれば&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ということらしいです．Protocol Buffersはシステム間で情報をやりとりする際に用いるデータ形式の一種なんですが，それは嘘じゃないんですけど，Protocol Buffersの指す意味範囲はそれだけにとどまらず，サービス間のインタフェースを定義するスキーマ言語としての顔もあるのが特徴です．もっというと，このスキーマ言語が優秀であるというのがProtocol Buffersの人気を大きく支えている理由なのだと思います．「Protocol Buffersがスキーマ言語である」というのはどういうことかというと，Protocol Buffersでは「システムのインタフェース（つまり，どんな型のデータをやりとりするのか）を定義する独自言語」であるということです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-protobuf&#34;&gt;syntax = &amp;quot;proto3&amp;quot;;
+package example.protobuf;
+
+message SimpleMessage {
+	message HeaderItem {
+		string name = 1;
+		string value = 2;
+	}
+	enum Type {
+		START = 0;
+		BLOB = 1;
+		END = 2;
+	}
+
+	uint64 id = 1;
+	Type message_type = 2;
+	repeated HeaderItem headers = 3;
+	bytes blob = 4; 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Protocol Buffersは，サービス間でやりとりするデータの型を表現する独自言語とともに，その独自言語で記述されたインタフェースを特定の言語にコンパイルするツールまでもが同梱されています．&lt;/p&gt;
+
+&lt;p&gt;スキーマ言語が存在すると，非常に便利です．モダンなソフトウェアシステムでは，いろんなところにデータが保存されているかもしれないし，バックエンドで動いているサーバーもいくつかあるかもしれないし，もはやそれが普通になってきています．となると，システムの中のありとあらゆる場所でデータのシリアライズ・デシリアライズをしなければならないし，通信している両者でデータの解釈に矛盾が発生しないように整える必要があります．スキーマ言語があると，この「整える作業」がとてもやりやすくなります．自然言語と違って，スキーマ言語では解釈に差異が発生しないからです．「管理者が一人」みたいなシステムでは，スキーマ言語なんてたいそうなものを持ち出してくる必要はないと思うんですけど，webみたいな自律分散的な系だと，ますますスキーマ言語としてのProtocol Buffersの良さが際立ってくるわけです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersのスキーマ言語としての良さは，その簡潔さではないでしょうか．プログラムを書く人間にとっては，特に難しいことを考えずに意図が汲み取れる程度の決まりごとしかないし，スキーマ言語としてプログラミング言語から独立している点も，ツールの作りやすさとかに影響していて，Protocol Buffersが人気な理由なんだと思います．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersでは，&lt;code&gt;.proto&lt;/code&gt;ファイルとしてサービスインタフェースを記述します．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-protobuf&#34;&gt;message Person {
+	required string name = 1;
+	required int32 id = 2;
+	optional string email = 3;
+
+	enum PhoneType {
+		MOBILE = 0;
+		HOME = 1;
+		WORK = 2;
+	}
+
+	message PhoneNumber {
+		required string number = 1;
+		optional PhoneType type = 2 [default = HOME];
+	}
+
+	repeated PhoneNumber phone = 4;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;明確なサービスインタフェースをコンパイラによって適切に所望の言語のプログラムに変換してくれるので，開発を進めやすくなります．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersではサービスのインタフェースの変更に対して後方互換性を維持した形でメッセージのやり取りをできるように「未知なフィールドに遭遇したら無視する」ということになっています．こうすれば，サービスのインタフェースが更新されたとしても，既存のプログラムは動くことには動くことになります．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersの公式のドキュメントでは，XMLと比較して&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Protocol buffers&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;are simpler&lt;/li&gt;
+&lt;li&gt;are 3 to 10 times smaller&lt;/li&gt;
+&lt;li&gt;are 20 to 100 times faster&lt;/li&gt;
+&lt;li&gt;are less ambiguous&lt;/li&gt;
+&lt;li&gt;generate data access classes that are easier to use programmatically&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;と主張しています．確かにXMLはいちいちタグで括らなきゃいけないしProtocol Buffersは効率が良さそうです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersのデフォルトのシリアライズはバイナリベースです．人間が眺めて構造が取れるような見た目にはなっていません．しかしProtocol Buffersはシリアライズのフォーマットとして様々な形式（例えばJSONなど）も扱えるように周辺ツールが充実しているので，「スキーマ言語としてのProtocol Buffersでサービスのインフェースを記述して，実際にやり取りするデータはJSON」ということも可能になっています．&lt;/p&gt;
+
+&lt;h2 id=&#34;flat-buffers&#34;&gt;Flat Buffers&lt;/h2&gt;
+
+&lt;p&gt;これもGoogleによってオープンソース化されたデータのシリアライズ・デシリアライズ方式．公式によれば，&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Access to serialized data without parsing/unpacking&lt;/li&gt;
+&lt;li&gt;Memory efficiency and speed&lt;/li&gt;
+&lt;li&gt;Flexible&lt;/li&gt;
+&lt;li&gt;Tiny code footprint&lt;/li&gt;
+&lt;li&gt;Strongly typed&lt;/li&gt;
+&lt;li&gt;Convenient to use&lt;/li&gt;
+&lt;li&gt;Cross platform code with no dependencies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;という特徴があります．面白いのが「Access to serialized data without parsing/unpacking」ってところですね．FlatBuffersでは階層構造を持つデータを，パースすることなく直接扱うことができるらしいです．&lt;/p&gt;
+
+&lt;p&gt;Protocol Buffersの進化系として自らを位置づけていて，Flat Buffersではデータをパースする必要がないのでProtocol Buffersと比較してコード量が桁違いで削減できて，さらにFlat BuffersではProtocol Buffersより強力に型をサポートしているところが進化ポイントですね．white paperのmotivationの章には&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とあり，シリアライズの効率について高水準なものが求められる状況で用いられることが想定されているそうです．&lt;/p&gt;
+
+&lt;p&gt;Facebookで用いられているらしいですが，Protocol Buffersの人気に押されて，あまり流行っている感じはしないんですがどうなんでしょうか．&lt;/p&gt;
+
+&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+
+&lt;h3 id=&#34;xml-1&#34;&gt;XML&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hoge&lt;/li&gt;
+&lt;li&gt;hoge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;json-1&#34;&gt;JSON&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3schools.com/whatis/whatis_json.asp&#34; target=&#34;_blank&#34;&gt;What is JSON - W3Schools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3schools.com/js/js_json_intro.asp&#34; target=&#34;_blank&#34;&gt;JSON Introduction - W3Schools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://json-schema.org/&#34; target=&#34;_blank&#34;&gt;JSON Schema&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;bson-1&#34;&gt;BSON&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://bsonspec.org/&#34; target=&#34;_blank&#34;&gt;BSON&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;protocol-buffers-1&#34;&gt;Protocol Buffers&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developers.google.com/protocol-buffers&#34; target=&#34;_blank&#34;&gt;Protocol Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;flat-buffers-1&#34;&gt;Flat Buffers&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://google.github.io/flatbuffers/&#34; target=&#34;_blank&#34;&gt;Flat Buffers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Self-Sovereign Identity - 自己主権型アイデンティティー</title>
+      <link>/ja/post/what-is-self-sovereign-identity/</link>
+      <pubDate>Sun, 03 Nov 2019 23:48:08 +0900</pubDate>
+      <guid>/ja/post/what-is-self-sovereign-identity/</guid>
+      <description>
+
+&lt;h2 id=&#34;identity-is&#34;&gt;Identity is&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The fact of being who or what a person or thing is.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;self-sovereign-identity-自己主権型アイデンティティとは&#34;&gt;Self-Sovereign Identity - 自己主権型アイデンティティとは&lt;/h2&gt;
+
+&lt;p&gt;Self-Sovereign Identityとは，一言で言えば「物理世界における身分証明書と同じレベルの正当性と携帯性と情報の制御可能性を備えたデジタルな身分証明書」です．Self-Sovereign Identityが実現すれば，公的に有効な身分証明書として機能するだけでなく，物理世界における「運転免許証」のように手軽に携帯できて，第二者に対して証明したい事柄に関連する必要十分な情報のみを開示する（例えば，年齢確認する際には誕生年だけ提示して住所は見せない）といった個人情報の制御も可能となります．&lt;/p&gt;
+
+&lt;h2 id=&#34;現状のdigital-identityの問題点-self-sovereign-identityが必要とされる背景&#34;&gt;現状のDigital Identityの問題点・Self-Sovereign Identityが必要とされる背景&lt;/h2&gt;
+
+&lt;p&gt;そもそもなぜSelf-Sovereign Identityなるものが必要なのでしょうか．それはインターネットという計算機のネットワークが「接続において，通信の両端点のアイデンティティーを全く考慮しない」という系だからです．&lt;/p&gt;
+
+&lt;p&gt;インターネットでは「誰が繋がっているのか」について全く関知しません．だからこそ自律分散な系として成立することができます．中央で接続を管理する者が存在する必要がないわけですね．&lt;/p&gt;
+
+&lt;p&gt;しかし，SNSの登場によってインターネット上でのアイデンティティーのようなものが確立されてきました．SNSのアカウント情報です．SNSは「物理世界における人間のネットワーク」を計算機上に実現したものであるから，SNSという系に登場するアカウントは物理世界の人間と非常に密に関連している情報だし，その側面を持ってアイデンティティー的なものと見ることもできなくもないです．しかしSNSアカウントは物理世界におけるアイデンティティー（パスポートや運転免許証）と等価なものとしては扱えません．&lt;/p&gt;
+
+&lt;p&gt;物理世界のアイデンティティーは「国家のような信頼できる第三者によって発行される証明書」として存在しています．パスポート，運転免許証はまさしくそれです．国家が「この人はこういう人で&amp;hellip;」という保証をしてくれているのです．だから（少なくともその証明書を発行している第三者を信頼できる者という共通認識のある範囲内では）証明書を見せつけることで第二者に対して自分の身分を証明することが可能なのです．&lt;/p&gt;
+
+&lt;p&gt;パスポートや運転免許証はポケットに入れて持ち運ぶことができます．さらに第二者に対して開示する個人情報を，自分の手で制御することができます．相手に年齢確認を求められたなら，生年月日だけで十分（住所まで教える必要はない）ですから，運転免許証の該当部分だけ見せてあとは黒塗りとかでも主張の正当性は証明できるわけですね．この携帯性と情報開示に対する制御性が物理世界におけるアイデンティティーの持つ重要な性質です．&lt;/p&gt;
+
+&lt;p&gt;SNSアカウントは実はこの「携帯性」と「情報開示に対する制御性」を兼ね備えていません．FacebookアカウントでTwitterにはログインできないし，Facebookは僕の持っているFacebookアカウントの情報の完全なコピーを持っていますし，Facebookがそれを外部に公開してしまえば，僕にはそれを止める手段がありません．&lt;/p&gt;
+
+&lt;p&gt;Self-Sovereign Identityはデジタルなアイデンティティーにサービスを跨いだ携帯性とアイデンティティー情報に対する制御性をユーザーに取り戻すことを目指して考案された概念です．&lt;/p&gt;
+
+&lt;h3 id=&#34;self-sovereign-identityに至るまでのデジタルアイデンティティーの変遷&#34;&gt;Self-Sovereign Identityに至るまでのデジタルアイデンティティーの変遷&lt;/h3&gt;
+
+&lt;p&gt;デジタルアイデンティティーの類型はだいたい以下の4個です．どれも現役で用いられているアイデンティティーで，後半のものほど新し目な考え方で，グラデーションがついていると思うとわかりやすいです．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Centralized Identity - 中央集権型アイデンティティー&lt;/li&gt;
+&lt;li&gt;Federated Identity - 連合型アイデンティティー&lt;/li&gt;
+&lt;li&gt;User-Centric Identity - ユーザー中心型アイデンティティー&lt;/li&gt;
+&lt;li&gt;Self-Sovereign Identity - 自己主権型アイデンティティ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;centralized-identity-中央集権型アイデンティティー&#34;&gt;Centralized Identity - 中央集権型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;ここのサービスごとに，サービス運営者がIDを発行・管理するタイプのIDです．メールアドレスとパスワードでアカウントを作成するタイプのIDはこれです．IDの管理権限が発行主体にあるというのが特徴で，現在世の中で運営されているほとんどのインターネットサービスがこの方式を採用していますね．&lt;/p&gt;
+
+&lt;p&gt;サービスのビジネスモデルがユーザーの囲い込みによって成立しているという側面を考慮すると，発行とともに管理できる方が，サービス運営者としてはやりやすいし，実装も容易であるからだと思います．&lt;/p&gt;
+
+&lt;p&gt;このタイプのIDは，発行されたIDをそのサービスの外に持ち出すことが難しいことから，ユーザーのサービスに対するロックインや，サービスごとのアイデンティティーの分断，ユーザーによるIDの管理が不可能（サービス運営者が悪意を働いてもそれを止める手段をユーザーは持ち合わせていない）という問題点があります．&lt;/p&gt;
+
+&lt;h4 id=&#34;federated-identity-連合型アイデンティティー&#34;&gt;Federated Identity - 連合型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;複数のサービス間でIDについて合意を取ることで，連合内ではIDの持ち運びが可能となるようなIDのことです．Single Sign-Onと呼ばれることもあります．1つのIDで複数サービスにログインできるサービス間での相互運用性Interoperabilityを実現します．&lt;/p&gt;
+
+&lt;p&gt;連合型アイデンティティーは中央集権型のそれよりもユーザーの利便性は向上する一方で，連合型アイデンティティーであっても，IDそのものの管理は連合を組んでいるサービス提供者側にあります．&lt;/p&gt;
+
+&lt;p&gt;実は連合型アイデンティティーに対する取り組みは，これまで一部で実際に行われてきた歴史があります．1999年にはMicrosoftが&lt;a href=&#34;https://news.microsoft.com/2000/05/17/passport-to-convenience-microsofts-single-sign-in-and-wallet-services-for-online-shopping/&#34; target=&#34;_blank&#34;&gt;Passport&lt;/a&gt;という連合型アイデンティティーサービスに取り組もうとしていました．&lt;/p&gt;
+
+&lt;p&gt;これは，その当時に増加してきていたEコマース事業に対してその利便性を高めることを狙ってMicrosoftが取り組んでいたもので，Windows XPへのPassportでのサインインが可能だったりと結構新し目なことに取り組もうとしたのだと思います．Eコマースサイトに手元のパソコンのアカウントでログインできるということですから，覚えなきゃいけない情報が減るので助かりますね．&lt;/p&gt;
+
+&lt;p&gt;一方で，Microsoftが一社でIDを管理するという色合いが強かったのも事実で，それを嫌ってか，広く利用されるには至らなかったようです．&lt;/p&gt;
+
+&lt;p&gt;実はMicrosoftのPassportに対抗してSun Microsystemsを中心とした企業連合によってLiberty Allianceという同じく連合型アイデンティティーの実現を目指した団体があったようなんですが，これも道半ばで頓挫してしまいました．&lt;/p&gt;
+
+&lt;h4 id=&#34;user-centric-identity-ユーザー中心型アイデンティティー&#34;&gt;User-Centric Identity - ユーザー中心型アイデンティティー&lt;/h4&gt;
+
+&lt;p&gt;「ユーザーは自身のIDを自らの手で制御すべきだ」という考えに基づいて考案されたのがユーザー中心型アイデンティティーです．ユーザー中心型アイデンティティーでは「ユーザーの同意Consent」と「相互運用性Interoperability」に特に重きがおかれました．ユーザー中心型アイデンティティーはThe Identity Commonsという団体がリードしていたプロジェクトで，The Identity CommonsはInternet Identity Workshopを設立し，ユーザー中心型アイデンティティーの仕様策定を推進してきました．Internet Identity WorkshopはOpenID，OpenID Connect，OAuthといった現在多くSingle Sign-Onで利用されている仕様を誕生させています．&lt;/p&gt;
+
+&lt;p&gt;一方でユーザー中心型アイデンティティーでも，IDの管理はIDの発行元によって行われ，もし発行元がIDの削除をしてしまえばそのIDは存在しなくなってしまうわけで，完全なユーザー中心（管理までユーザーの手で行う）というわけではないようです．&lt;/p&gt;
+
+&lt;h4 id=&#34;self-sovereign-identity-自己主権型アイデンティティ&#34;&gt;Self-Sovereign Identity - 自己主権型アイデンティティ&lt;/h4&gt;
+
+&lt;p&gt;「物理世界におけるアイデンティティーの持つ携帯性と情報に対する制御性をデジタルなアイデンティティーに持ち込もう」というのが自己主権型アイデンティティーです．アイデンティティーに管理を自分の手で行おうとするのが自己主権に指す意味です．&lt;/p&gt;
+
+&lt;h2 id=&#34;self-sovereign-identityの仕組み&#34;&gt;Self-Sovereign Identityの仕組み&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;信頼できる第三者がユーザーの身分を証明する証明書を発行し，その証明書に電子署名を施す．この際に信頼できる第三者に対する識別子と署名情報を情報を耐改竄性のある公共アクセスが可能なストレージに保存する&lt;/li&gt;
+&lt;li&gt;ユーザーは信頼できる第三者によって電子署名の施された証明書に対して自分の電子署名を施して，手元に保管する．この際，ユーザーに対する識別子と署名情報を耐改竄性のある公共アクセスが可能なストレージに保存する&lt;/li&gt;
+&lt;li&gt;身分証明を要求する検証者はユーザーから提示された証明書（もしくはその一部）に対して，その証明書が正当であることを公共アクセス可能なストレージに保存されている情報をもとに判断する&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;この「耐改竄性のある公共アクセスが可能なストレージ」がブロックチェーンを用いることで実現できるかもしれないということで，Self-Sovereign Identityの実現可能性が見えてきているのです．&lt;/p&gt;
+
+&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@AlexPreukschat/self-sovereign-identity-a-guide-to-privacy-for-your-digital-identity-5b9e95677778&#34; target=&#34;_blank&#34;&gt;https://medium.com/@AlexPreukschat/self-sovereign-identity-a-guide-to-privacy-for-your-digital-identity-5b9e95677778&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.windley.com/archives/2018/09/multi-source_and_self-sovereign_identity.shtml&#34; target=&#34;_blank&#34;&gt;https://www.windley.com/archives/2018/09/multi-source_and_self-sovereign_identity.shtml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.w3.org/TR/2019/WD-did-core-20191107/&#34; target=&#34;_blank&#34;&gt;https://www.w3.org/TR/2019/WD-did-core-20191107/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jnsa.org/seminar/2018/0126/data/2-3.pdf&#34; target=&#34;_blank&#34;&gt;https://www.jnsa.org/seminar/2018/0126/data/2-3.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.icr.co.jp/newsletter/wtr346-20180126-ogawa.html&#34; target=&#34;_blank&#34;&gt;https://www.icr.co.jp/newsletter/wtr346-20180126-ogawa.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.dappsway.com/entry/what-is-ssi&#34; target=&#34;_blank&#34;&gt;https://www.dappsway.com/entry/what-is-ssi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.windley.com/archives/2017/10/fixing_the_five_problems_of_internet_identity.shtml&#34; target=&#34;_blank&#34;&gt;https://www.windley.com/archives/2017/10/fixing_the_five_problems_of_internet_identity.shtml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ibm.com/blogs/blockchain/category/trusted-identity/self-sovereign-identity/&#34; target=&#34;_blank&#34;&gt;https://www.ibm.com/blogs/blockchain/category/trusted-identity/self-sovereign-identity/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html&#34; target=&#34;_blank&#34;&gt;http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Internal of Golang Concurrency Primitives</title>
+      <link>/ja/post/internal-of-golang-concurrency-primitives/</link>
+      <pubDate>Fri, 01 Nov 2019 14:07:56 +0900</pubDate>
+      <guid>/ja/post/internal-of-golang-concurrency-primitives/</guid>
+      <description>
+
+&lt;h2 id=&#34;並行処理-並列処理&#34;&gt;並行処理？並列処理？&lt;/h2&gt;
+
+&lt;p&gt;並行処理とか並列処理って一体なんなのでしょう．&lt;/p&gt;
+
+&lt;p&gt;黎明期の計算機では，並行処理だの並列処理だのなんてことは，一切考えていませんでした．入力された命令を1つずつ，真面目に実行していくことで計算を実行していたのです．黎明期の計算機は，人間が紙と鉛筆でちんたら計算をするよりも，何倍も高速にかつ正確に計算をすることができたので，とても人気になりました．ただ，その当時の計算機は物理的にサイズもデカくて高価なものでした．なので，計算機を導入・設置できるのは大学などのお金と部屋が余っている組織ぐらいしかなかったわけです．&lt;/p&gt;
+
+&lt;p&gt;大学に計算機が設置されると，大学の研究者たちは喜びました．これで面倒な手計算から解放されるわけですからそりゃそうでしょう．みんなでこぞって計算機を使いたくなります．でも「計算機を利用したい研究者の人数」が「設置してある計算機の台数」と比較して圧倒的に多いので，計算機の使用を巡って争奪戦が起こります．だって，当時の計算機は「入力された命令を1つずつ，真面目に実行していく」タイプの計算機なので，他の誰かが計算機に計算をさせている間は，他の研究者はその計算機を使うことができないからです．そんなの不便すぎます．せっかく便利でしかもめちゃんこ高価な計算機が設置してあるのに，しかも使いたい人はたくさんいるのに使わせてあげられないなんて，もう不満タラタラです．そこで研究者たちは考えました．&lt;/p&gt;
+
+&lt;p&gt;「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」&lt;/p&gt;
+
+&lt;p&gt;「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」&lt;/p&gt;
+
+&lt;p&gt;ここからoperating systemとかprocessとかいろんな概念が確立されていくわけです．&lt;/p&gt;
+
+&lt;p&gt;「並行」というのは，英語ではconcurrentに相当し，「1台のマシンで複数のタスクを同時に実行している（ように見える）様」を意味します．concurrentな処理は「限られたリソースを有効活用すること」を目的としていて，現在の計算機では「同時に処理しているように見せるために，複数のタスクを時間的に細切れにして全部のタスクをちょっとずつ進める」ことでconcurrentな処理を実現しています．&lt;/p&gt;
+
+&lt;p&gt;一方で，似たような概念として「並列」というものもあります．英語ではparallelに相当し，「複数台のマシンで1つのタスクを実行している様」を意味します．parallelな処理は「（複数のマシンという）豊富なリソースを利用して1つのタスクを高速に実行すること」を目的としていて，concurrentとは目的が違います．&lt;/p&gt;
+
+&lt;h2 id=&#34;concurrentなプログラム&#34;&gt;concurrentなプログラム&lt;/h2&gt;
+
+&lt;p&gt;ここまで計算機の進化の歴史を本当にざっくり見てみましたが，じゃあconcurrentという概念がプログラムとどう絡んでいくのでしょうか．&lt;/p&gt;
+
+&lt;p&gt;プログラムというのは大体「CPUでの演算」「データのI/O」「ネットワーキング」を部品として構成されています．それぞれの部品には特徴があって，「CPUでの演算」はとても高速に実行できるけれども，「データのI/O」と「ネットーワーキング」は（「CPUでの演算」と比較して）桁違いに，本当に桁違いに時間がかかります．もし計算機が「入力された命令を1つずつ，真面目に実行していく」方式で動いていたとすると，「データのI/O」と「ネットーワーキング」に取り組んでいる間，計算機はうんともすんとも言わずに黙り込んでしまうことになります．これは明らかに無駄です．CPUは何も計算を進めないでただ存在しているだけになるわけです．&lt;/p&gt;
+
+&lt;p&gt;concurrentという概念の背景には「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」という問題があったわけです．この問題意識が一歩進むと，「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」となり，さらに一歩進んで「（複数のタスクで構成される）1つのプログラムを1台のCPUで効率的に処理するためにはどういう仕組みが必要なんだろう？&amp;hellip;そうだ！CPUが暇な時間帯には別の仕事をさせよう！」となるわけです．&lt;/p&gt;
+
+&lt;p&gt;「時間がかかってしまう処理をやっている間に，他にできる計算をCPUにやらせよう」というのがconcurrentなプログラムを書きたい理由です．だってそうした方がやりたいこと早く終わるでしょう．しかもPersonalな計算機が世の中に普及して「計算機はより高速にユーザーの動作に応答しなきゃいけない（うんともすんとも言わない計算機は嫌われてる）」し「ユーザーは大抵の場合音楽聴きながらメールチェックしつつYoutubeで動画も見たいワガママな存在」なので，CPUに暇な時間なんてものはないわけですよ．&lt;/p&gt;
+
+&lt;p&gt;「プログラムはconcurrentに実行されるべき」となるとconcurrentなプログラムを記述して，それを実際にconcurrentに実行する機構が必要になります．&lt;/p&gt;
+
+&lt;p&gt;「実際にconcurrentに実行する機構」についてはOperating Systemが頑張って，プログラムがconcurrentに実行されるように実行環境を提供します．Operating Systemは結構頑張るのですが，やっぱり頑固なハードウェアさんとやりとりしないといけないので，相当大変そうです．提供してくれる実行環境の効率にも限度がありそうです．&lt;/p&gt;
+
+&lt;p&gt;「concurrentなプログラムを記述」するところについては，プログラミング言語の守備範囲なわけですが，いろんな言語がいろんなアプローチを取って，concurrentなプログラムをより簡単に書けるように，プログラム開発者に部品primitiveを提供してくれます．&lt;/p&gt;
+
+&lt;p&gt;でも古参のプログラミング言語たちは，そのデザインの根幹に「プログラムがconcurrentに実行される」とか想定していないわけで，いざやろうとすると不自然なところとかがやっぱりでてきてしまいます．なのでgolangは，言語のデザインの段階でconcurrencyを考慮した言語として誕生しました．そうすれば，concurrentなプログラムがより直感的にわかりやすく書けるようになるわけです．&lt;/p&gt;
+
+&lt;h2 id=&#34;goroutineとchannel&#34;&gt;goroutineとchannel&lt;/h2&gt;
+
+&lt;p&gt;golangはconcurrentなプログラムを書くためのprimitiveとしてgoroutineとchannelを提供しています．というのもgolangでは，concurrentなプログラムを「goroutineたちがメッセージをやりとりしながら進行する計算」としてモデル化しているのです．ここで注意しておきたいのが，concurrentなプログラムを表現する別のモデルも考えられるという点です．モデル化にはバリエーションがあるので「goroutineたちがmessage passing」だけが唯一のモデルというわけではないです．&lt;/p&gt;
+
+&lt;p&gt;goroutineというのは，概念的にはOSの提供するプロセスとかスレッドみたいなもので，実行中の処理を抽象化したものです．直感的にはOSのスレッドと思っていてもいいかもしれません．実態はちょっと違うんですけどね．この「抽象化された処理」同士がmessage passingによって情報を共有することでconcurrentな処理が実現できることになります．&lt;/p&gt;
+
+&lt;p&gt;channelというのは，goroutine間でのコミュニケーションをサポートするためにメッセージキューです．&lt;/p&gt;
+
+&lt;p&gt;golangは言語設計の根底にある思想として&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;を，掲げています．要するに「goroutineたちは共有メモリを設けるのではなくてmessage passingでコミュニケーションをとる」ように設計しようということです．&lt;/p&gt;
+
+&lt;h2 id=&#34;goroutineとchannelの設計と実装を眺める&#34;&gt;goroutineとchannelの設計と実装を眺める&lt;/h2&gt;
+
+&lt;h3 id=&#34;goroutine&#34;&gt;goroutine&lt;/h3&gt;
+
+&lt;p&gt;goroutineは「実行中の処理を抽象化したもの」と書きましたが，これは具体的には「計算に用いるstackと実行状態を保持している構造体」として実装されています．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type g struct {
+	// Stack parameters.
+	// stack describes the actual stack memory: [stack.lo, stack.hi).
+	// stackguard0 is the stack pointer compared in the Go stack growth prologue.
+	// It is stack.lo+StackGuard normally, but can be StackPreempt to trigger a preemption.
+	// stackguard1 is the stack pointer compared in the C stack growth prologue.
+	// It is stack.lo+StackGuard on g0 and gsignal stacks.
+	// It is ~0 on other goroutine stacks, to trigger a call to morestackc (and crash).
+	stack       stack   // offset known to runtime/cgo
+	stackguard0 uintptr // offset known to liblink
+	stackguard1 uintptr // offset known to liblink
+
+	// ,,,
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;「それってOSの提供するプロセスとかスレッドと同じじゃないの？」&lt;/p&gt;
+
+&lt;p&gt;それは確かにそうなんですが，goroutineはOSの提供するプロセスとかスレッドと同レベルの存在ではなくて，goroutineは，OSの提供するスレッドに対してM:Nでマッピングされる「golangのruntimeが提供する，ユーザー空間で定義されたスレッド」として存在しています．golangのruntimeはgoroutineを管理していて「いつ，どのgoroutineを実行するか」を決定するschedulerとしての役割も担っています．つまりgolangのruntimeはユーザー空間で動く「ミニOS」のようなものな訳です．とは言いつつも，実際に実行されるためにはOSの提供するスレッドとして実行されなければいけないわけですから，goroutineはスレッドにマッピングされることになります．golangのschedulerはgoroutineとOSのスレッドを，M:Nでマッピングします．つまり複数のgoroutineが複数のOSスレッドとして実行されるわけです．1つのgoroutineが複数のOSスレッドとして実行されるし，1つのOSスレッドでは複数のgoroutineを実行することになります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;goroutine.jpeg&#34; data-caption=&#34;OS Process v.s. OS Thread v.s. Goroutine&#34;&gt;
+&lt;img src=&#34;goroutine.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    OS Process v.s. OS Thread v.s. Goroutine
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;となると，重要なのは「golangのruntimeがどのようなルールでgoroutineの実行計画を立てるのか」です．&lt;/p&gt;
+
+&lt;h4 id=&#34;golangのruntimeによるgoroutineのスケジューリング&#34;&gt;golangのruntimeによるgoroutineのスケジューリング&lt;/h4&gt;
+
+&lt;p&gt;登場するのは&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;G&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;の三人．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;machineの&lt;code&gt;M&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;OSスレッドに相当する&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;G&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;goroutineの&lt;code&gt;G&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;processorの&lt;code&gt;P&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;スケジューリングのコンテキスト（次どの&lt;code&gt;G&lt;/code&gt;を実行するのか）を管理している&lt;/li&gt;
+&lt;li&gt;具体的に言えば，runnableなgoroutineのキューを管理しているのが&lt;code&gt;P&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;gmp.jpeg&#34; data-caption=&#34;G，M，P&#34;&gt;
+&lt;img src=&#34;gmp.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    &lt;code&gt;G&lt;/code&gt;，&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;まず，環境変数&lt;code&gt;GOMAXPROCS&lt;/code&gt;の数だけ&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;がセットされます．以下では，&lt;code&gt;GOMAXPROCS = 2&lt;/code&gt;とします．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;gmp2.jpeg&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;runnableな&lt;code&gt;G&lt;/code&gt;が&lt;code&gt;P&lt;/code&gt;にenqueueされ，&lt;code&gt;M&lt;/code&gt;は&lt;code&gt;P&lt;/code&gt;からrunnableな&lt;code&gt;G&lt;/code&gt;を1個取り出して実行します．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;assignment.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;もし，queueにrunnableな&lt;code&gt;G&lt;/code&gt;が0個になってしまったら，他のqueueから半分盗みます．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;work-stealing.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;「自分のqueueが空になったら他の&lt;code&gt;M&lt;/code&gt;の持つ&lt;code&gt;P&lt;/code&gt;から半分奪う」というスケジューリングアルゴリズムはwork stealingアルゴリズムと呼ばれています．golangのruntimeのスケジューラーはこのwork stealingアルゴリズムに従ってgoroutineのスケジューリングを行います．このアルゴリズムはCPUをたくさん使うような処理にスケジューリングには効率的である一方でI/O待ちを伴う処理（&lt;code&gt;syscall&lt;/code&gt;の実行やネットワーク処理）とは相性が悪いです．そのため，いくつかの工夫がされています．&lt;/p&gt;
+
+&lt;p&gt;まず，golangのruntimeに存在しているものを整理します．上で登場した&lt;code&gt;M&lt;/code&gt;，&lt;code&gt;G&lt;/code&gt;，&lt;code&gt;P&lt;/code&gt;の他にruntimeには&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;グローバルキュー
+
+&lt;ul&gt;
+&lt;li&gt;各&lt;code&gt;M&lt;/code&gt;-&lt;code&gt;P&lt;/code&gt;に対応するqueueとは別に存在するキュー&lt;/li&gt;
+&lt;li&gt;通常&lt;code&gt;G&lt;/code&gt;がrunnableになると&lt;code&gt;P&lt;/code&gt;の持つキューに入るが，いくつかの状況ではこちらに入ります&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/golang/go/blob/15ea61c50ca25295497e78354f7f8397e73e3590/src/runtime/proc.go#L4427:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;sysmon&lt;/code&gt;&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GOMAXPROCS&lt;/code&gt;の数だけの&lt;code&gt;M&lt;/code&gt;と&lt;code&gt;P&lt;/code&gt;の他に，&lt;code&gt;sysmon&lt;/code&gt;という関数を実行し続ける特別な&lt;code&gt;M&lt;/code&gt;が存在しています&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysmon&lt;/code&gt;の実態は無限ループで，そのループの中で&lt;code&gt;netpoll&lt;/code&gt;のチェックなどを行っています&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; Idle List
+
+&lt;ul&gt;
+&lt;li&gt;暇な&lt;code&gt;P&lt;/code&gt;のリスト&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;M&lt;/code&gt; Idle List
+
+&lt;ul&gt;
+&lt;li&gt;暇な&lt;code&gt;M&lt;/code&gt;のリスト&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;syscall-を実行した場合&#34;&gt;&lt;code&gt;syscall&lt;/code&gt;を実行した場合&lt;/h5&gt;
+
+&lt;p&gt;時間のかかる&lt;code&gt;syscall&lt;/code&gt;を実行した場合，&lt;code&gt;sysmon&lt;/code&gt;がそれを検知し，&lt;code&gt;syscall&lt;/code&gt;を発行した&lt;code&gt;G&lt;/code&gt;を実行している&lt;code&gt;M&lt;/code&gt;から&lt;code&gt;P&lt;/code&gt;を切り離し，別の&lt;code&gt;M&lt;/code&gt;にその&lt;code&gt;P&lt;/code&gt;をアタッチして処理を継続させます．
+&lt;code&gt;syscall&lt;/code&gt;終了後は，まず&lt;code&gt;P&lt;/code&gt; Idle Listを確認して暇そうにしている&lt;code&gt;P&lt;/code&gt;を自身（&lt;code&gt;M&lt;/code&gt;）にアタッチして処理を進めます．&lt;code&gt;P&lt;/code&gt; Idle Listがからの場合は&lt;code&gt;syscall&lt;/code&gt;を発行した&lt;code&gt;G&lt;/code&gt;をグローバルキューに突っ込み（この&lt;code&gt;G&lt;/code&gt;はいずれGCされる），自身（&lt;code&gt;M&lt;/code&gt;）は&lt;code&gt;M&lt;/code&gt; Idle Listに入ります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;syscall.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;h5 id=&#34;ネットワーク処理をした場合&#34;&gt;ネットワーク処理をした場合&lt;/h5&gt;
+
+&lt;p&gt;ネットワーク処理の発生時には&lt;code&gt;netpoller&lt;/code&gt;という仕組みに，ネットワーク処理を実行しているgoroutineが登録され，&lt;code&gt;sysmon&lt;/code&gt;が&lt;code&gt;netpoller&lt;/code&gt;にポーリングします．ネットワーク処理が終了したら&lt;code&gt;netpoller&lt;/code&gt;からグローバルキューに追加されて，&lt;code&gt;M&lt;/code&gt;で続きを実行されるのを待つことになります．&lt;/p&gt;
+
+&lt;p&gt;golangの標準ライブラリが提供するネットワーキングのAPIはブロッキングな処理となっていますが，goroutineはOSスレッドに対してM:Nでマッピングされるため，&lt;code&gt;netpoller&lt;/code&gt;をによってノンブロッキングな処理として実行されることになります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;network-read.gif&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;channel&#34;&gt;channel&lt;/h3&gt;
+
+&lt;p&gt;channelはgoroutine間でのメッセージングをサポートするキューです．channelにはいくつかの面白い特徴があります．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;channelはgoroutine-safe
+
+&lt;ul&gt;
+&lt;li&gt;複数のgoroutineがあるchannelに同時にアクセスしても問題が発生しないようにロック機構が組み込まれています&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;channelはgoroutine間でFIFOなデータの受け渡しが可能です&lt;/li&gt;
+&lt;li&gt;channelはその状況次第ではgoroutineをブロックしたりアンブロックしたりできます
+
+&lt;ul&gt;
+&lt;li&gt;バッファ0のchannelはgoroutineを同期させることができます．つまりあるgorotuineがchannelに書き込むと，相手のgoroutineがそれを読み込むまで書き込んだgoroutineの実行はブロックされるし，channelから読み込みたいgoroutineの実行は，相手のgoroutineが何かを書き込むまでブロックされます．&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;channelは&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L32:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;hchan&lt;/code&gt;&lt;/a&gt;という名前の構造体で実装されています．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;type hchan struct {
+	qcount   uint           // total data in the queue
+	dataqsiz uint           // size of the circular queue
+	buf      unsafe.Pointer // points to an array of dataqsiz elements
+	elemsize uint16
+	closed   uint32
+	elemtype *_type // element type
+	sendx    uint   // send index
+	recvx    uint   // receive index
+	recvq    waitq  // list of recv waiters
+	sendq    waitq  // list of send waiters
+
+	// lock protects all fields in hchan, as well as several
+	// fields in sudogs blocked on this channel.
+	//
+	// Do not change another G&#39;s status while holding this lock
+	// (in particular, do not ready a G), as this can deadlock
+	// with stack shrinking.
+	lock mutex
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;まず，構造体&lt;code&gt;hchan&lt;/code&gt;のメンバーとして&lt;code&gt;lock mutex&lt;/code&gt;が見えるので，channelはgoroutine-safeです．複数のgoroutineが同時にアクセスしても問題が発生しないようになっています．goroutineがchannelに対して読み書きをしたくなったらロックを取ってから行うようになっているということです．&lt;/p&gt;
+
+&lt;p&gt;上に示した通り，channelの実体は「circular queue（へのポインタ）」です．組み込みの&lt;code&gt;make()&lt;/code&gt;でchannelを作ると，実体はheap領域に確保され，それへのポインタが返されます．&lt;code&gt;buf&lt;/code&gt;がバッファ先頭へのポインタで，&lt;code&gt;sendx&lt;/code&gt;・&lt;code&gt;recvx&lt;/code&gt;がそれぞれキューの先頭とお尻の番号になっています．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;hchan.jpeg&#34; data-caption=&#34;構造体hchan&#34;&gt;
+&lt;img src=&#34;hchan.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    構造体&lt;code&gt;hchan&lt;/code&gt;
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;なので，channelにメッセージが送り込まれたら，&lt;code&gt;buf[0]&lt;/code&gt;にメッセージが入り，&lt;code&gt;sendx&lt;/code&gt;がインクリメントされて1になります．続けてメッセージが2個送り込まれると&lt;code&gt;buf[1]&lt;/code&gt;，&lt;code&gt;buf[2]&lt;/code&gt;にメッセージが書き込まれ，&lt;code&gt;sendx&lt;/code&gt;が0に戻ります．ここでメッセージが1個読まれると&lt;code&gt;buf[0]&lt;/code&gt;の内容がdequeueて&lt;code&gt;recvx&lt;/code&gt;が1になります．特に難しいことはなく，一般のcircular queueの動作ですね．&lt;/p&gt;
+
+&lt;p&gt;channel間のメッセージングはとても直感的に実現することができます．channelにメッセージを書き込む時は，まず&lt;code&gt;hchan&lt;/code&gt;のロックを取って，次に&lt;code&gt;buf&lt;/code&gt;のお尻に送りたいデータをメモリコピーして，アンロック．channelからメッセージを読み込む時は，同様にまず&lt;code&gt;hchan&lt;/code&gt;のロックを取って，&lt;code&gt;buf&lt;/code&gt;の先頭をメモリコピーして，アンロック．とてもシンプルな動作です．&lt;/p&gt;
+
+&lt;p&gt;実はこの挙動こそが，golangの&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;を実装している箇所と言えます．&lt;/p&gt;
+
+&lt;p&gt;goroutine間で共有しているのは構造体&lt;code&gt;hchan&lt;/code&gt;だけです．しかも&lt;code&gt;hchan&lt;/code&gt;はロックによって排他処理が施されるため，goroutine-safeです．&lt;code&gt;hchan&lt;/code&gt;の&lt;code&gt;buf&lt;/code&gt;に値を書き込む（つまりchannelに値を送る）・値を読み込む（つまりchannelから値を取り出す）動作は全て&lt;strong&gt;メモリコピー&lt;/strong&gt;で行われます．goroutine間でやり取りする情報は（メモリを共有するのではなくて）メモリコピーして渡しましょうというのが，上の標語の実装と言えます．&lt;/p&gt;
+
+&lt;p&gt;channelはgoroutineの挙動をブロックしたりアンブロックしたりすることができます．バッファに空きが無いchannel（バッファ0のchannelや容量一杯データが書き込まれているchannel）に対してデータを送り込もうとすると，&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L162&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;gopark()&lt;/code&gt;&lt;/a&gt;が実行されます．この関数は，golangのruntimeのスケジューラを呼び出して，バッファに空きが無いchannelにデータを送り込もうとしたgoroutineの状態を&lt;code&gt;wait&lt;/code&gt;にして別のgoroutineの実行を始めます．channelに対してデータを送り込むロジックの中に，goroutineをブロックするロジックが組み込まれているということになります．では，どうやってブロックされたgoroutineの実行を再開するのでしょうか．&lt;/p&gt;
+
+&lt;p&gt;ここで興味深いのが，&lt;code&gt;gopark()&lt;/code&gt;の実行の直前に「どのgoroutineがどんな値を送り込もうとしていたのかをchannelの中に記録しておく」というところです．構造体&lt;code&gt;hchan&lt;/code&gt;には&lt;code&gt;sendq&lt;/code&gt;，&lt;code&gt;recvq&lt;/code&gt;というメンバがあり，そこに「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」という情報を保持しています．「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」を保持する構造体は&lt;a href=&#34;https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/runtime2.go#L342:6&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;sudog&lt;/code&gt;&lt;/a&gt;という名前になっています．なぜこの名前なのかは&lt;a href=&#34;https://groups.google.com/forum/#!topic/golang-codereviews/rC9BLPFvkW8&#34; target=&#34;_blank&#34;&gt;ここのメーリスの一連の流れ&lt;/a&gt;を読むとわかるかもしれませんよ．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;// sudog represents a g in a wait list, such as for sending/receiving
+// on a channel.
+//
+// sudog is necessary because the g ↔ synchronization object relation
+// is many-to-many. A g can be on many wait lists, so there may be
+// many sudogs for one g; and many gs may be waiting on the same
+// synchronization object, so there may be many sudogs for one object.
+//
+// sudogs are allocated from a special pool. Use acquireSudog and
+// releaseSudog to allocate and free them.
+type sudog struct {
+	// The following fields are protected by the hchan.lock of the
+	// channel this sudog is blocking on. shrinkstack depends on
+	// this for sudogs involved in channel ops.
+
+	g *g
+
+	// isSelect indicates g is participating in a select, so
+	// g.selectDone must be CAS&#39;d to win the wake-up race.
+	isSelect bool
+	next     *sudog
+	prev     *sudog
+	elem     unsafe.Pointer // data element (may point to stack)
+
+	// The following fields are never accessed concurrently.
+	// For channels, waitlink is only accessed by g.
+	// For semaphores, all fields (including the ones above)
+	// are only accessed when holding a semaRoot lock.
+
+	acquiretime int64
+	releasetime int64
+	ticket      uint32
+	parent      *sudog // semaRoot binary tree
+	waitlink    *sudog // g.waiting list or semaRoot
+	waittail    *sudog // semaRoot
+	c           *hchan // channel
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;gopark()&lt;/code&gt;によって受け取り手のgoroutineの実行が開始されると，&lt;strong&gt;受け取り手のgoroutineが，channelの&lt;code&gt;sendq&lt;/code&gt;の中身を確認して，実行をブロックされてしまった送り手のgoroutineが最後にchannelに送り込もうとした値を（送り手側に代わって）受け取り手側がchannelの&lt;code&gt;buf&lt;/code&gt;にコピーします&lt;/strong&gt;．これはある種の最適化です．真面目に，送り手側の実行が再開されてからchannelにデータを送り込むことにするとchannelに対するロックを取る必要があり，排他処理をする回数が1回増えてしまいます．「誰がどんな値を送ろうとしていたのか」が自明であるならば，先にやってしまえという考えのようです．&lt;/p&gt;
+
+&lt;p&gt;channelから値を1個受け取ると，&lt;code&gt;goready()&lt;/code&gt;が実行されて，スケジューラーが起動し，バッファに空きが無いchannelにメッセージを送ろうとしたgoroutineの状態をrunnableにセットして実行待ちのキューに入ります．&lt;/p&gt;
+
+&lt;p&gt;goroutineが空のchannelに対して読み込みを行おうとすると，そのgoroutineの動作はブロックされます．この挙動はchannelからデータを受け取るロジックである&lt;code&gt;recv()&lt;/code&gt;関数内に記述されています．さらに面白いのが，「どのgoroutineが，どこに値を受け取ろうとしていたのか」を&lt;code&gt;recvq&lt;/code&gt;に保存していることです．これによって，channelにデータを送り込むgoroutineが，受け取り先のgoroutineのスタック領域を直接いじってデータを送り切ってしまうことが可能となります．goroutineの実体は（雑に言えば）stackを持つ構造体で，OSプロセスのスタック領域に置かれています．つまり別のgoroutineの持つstackを直接いじることが，channelでのデータのやり取りの限られた状況においてのみ許されているというのが興味深いです．&lt;/p&gt;
+
+&lt;p&gt;golangのchannel周りの実装を見て，&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「排他処理を含む簡潔な実装の方が，排他処理なしの複雑な実装よりマシ．いくらパフォーマンスが良くても，それが複雑なコードでも良いことの理由にはならない」&lt;/li&gt;
+&lt;li&gt;「パフォーマンスの観点から，goroutineというユーザーレベルのスレッドを実装し（OSスレッドをブロックさせない），異なるgoroutineを跨いだメモリコピーを許す（その分実装がやや複雑になるがそれは許容する）」&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という相反する考えが感じられます．つまり&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;simplicityとperformaceには明確なtrade-offが存在する&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ということですね．&lt;/p&gt;
+
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに&lt;/h2&gt;
+
+&lt;p&gt;今回初めてruntimeをじっくり読みました．今まで概念として理解していたものの実体をコードとして掴めたので，とても楽しかったです．今回はgoroutineとchannel周りが中心だったので，次はスケジューラー周辺をもっとつぶさに見ていきたいと思います．&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Golang channels tutorial</title>
+      <link>/ja/post/golang-channels-tutorial/</link>
+      <pubDate>Thu, 31 Oct 2019 22:32:28 +0900</pubDate>
+      <guid>/ja/post/golang-channels-tutorial/</guid>
+      <description>&lt;h2 id=&#34;golangとconcurrentなプログラミング&#34;&gt;golangとconcurrentなプログラミング&lt;/h2&gt;
+
+&lt;p&gt;「concurrentな処理をどのように実現するか」はざっくり分けて2アプローチがある．&lt;/p&gt;
+
+&lt;p&gt;1つは「shared-memory communication」．つまり処理を実行しているworker同士は，メモリを共有して，その共有しているメモリを用いてコミュニケーションを取るというもの．この場合，データ競合が発生しないようにロックを取ったりなどの排他処理を伴うことになって，大抵の場合実装が難しくなるとされている．&lt;/p&gt;
+
+&lt;p&gt;もう1つは「message-passing communication」．つまり処理を実行しているworker同士は，メッセージをやり取りし合うことでコミュニケーションを取るというもの．&lt;/p&gt;
+
+&lt;p&gt;それぞれのアプローチでいろんな実装が世の中にはすでに存在していて，例えばCでconcurrentなプログラムを書こうとするとshared-memory communicationな形で書くことになる．一方でErlangは言語としてconcurrentなプログラミングをサポートしていて，Actorモデルを実装してる．&lt;/p&gt;
+
+&lt;p&gt;golangは，設計の時点でconcurrentなプログラミングは&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Do not communicate by sharing memory; instead, share memory by communicating&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;という思想で実装することとしている．golangのconcurrentなプログラミングの実装は「&lt;a href=&#34;http://en.wikipedia.org/wiki/Communicating_sequential_processes&#34;&gt;Communicating Sequential Processes&lt;/a&gt;」と「&lt;a href=&#34;http://en.wikipedia.org/wiki/%CE%A0-calculus&#34;&gt;$\pi$-caluculus&lt;/a&gt;」を参考にしている．&lt;/p&gt;
+
+&lt;p&gt;golangは「concurrentなプログラミングを簡潔にわかりやすく記述すること」を言語の設計レベルからサポートしているので，concurrentな処理がとても書きやすくなっている．じゃあgolangではどうやってconcurrentなプログラミングをサポートしているのかというと，concurrentなプログラミングのプリミティブとしてgoroutine，channelを提供している．&lt;/p&gt;
+
+&lt;p&gt;「golangはconcurrentな処理が書きやすいんだよね」という話をすると混乱しがちなのが， &lt;strong&gt;「golangはconcurrentな処理を書くための道具を提供してくれるが，その実行がparallelであるかどうかはハードウェアに依存する」&lt;/strong&gt; という点．concurrentな処理は，parallelに実行することができるかもしれない（し大抵parallelに実行できるならそうしたほうがいい）が，それはハードウェアがparallelな実行をサポートしているか（例えばCPUが複数コア搭載しているか）によって決まってくる話であって，&lt;strong&gt;「プログラムがconcurrentであること」と「プログラムの実行がparallelであること」は関連はしているけれども，全く別の話．&lt;/strong&gt;Rob Pike先生も&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Concurrency is about dealing with lots of things at once. Parallelism is about doing lots of things at once. Not the same, but related. &lt;strong&gt;Concurrency is about structure, parallelism is about execution.&lt;/strong&gt; Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;って仰っている．&lt;/p&gt;
+
+&lt;h2 id=&#34;hello-goroutine&#34;&gt;Hello, goroutine!&lt;/h2&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/gHKEj4ai20c&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;「golangではconcurrentなプログラムを書きやすい」ということだったので，実際にconcurrentなプログラムを書いてみると上の例みたいになる．concurrentに処理を実行するworkerは，golangの世界では&lt;code&gt;gorutine&lt;/code&gt;と呼ばれていて，&lt;code&gt;go&lt;/code&gt;という魔法の言葉に続けてworkerで実行してほしい関数を呼び出せば，それでconcurrentな処理を書き下したことになる．なんて簡単なんだ...！&lt;/p&gt;
+
+&lt;p&gt;上の例を実行すると，&lt;code&gt;Hello! I&#39;m main&lt;/code&gt;って印字されて，もしかしたら&lt;code&gt;Hi! I&#39;m goroutine!&lt;/code&gt;も一緒に印字される &lt;strong&gt;かもしれない&lt;/strong&gt;．「かもしれない」っていうのは，goroutineは「あるgoroutineの親は自分の子供の処理が終わるのを待たない」ことになっている．この場合だと&lt;code&gt;main&lt;/code&gt;が親で&lt;code&gt;go fmt.Println(&amp;quot;Hi! I&#39;m goroutine!&amp;quot;)&lt;/code&gt;が子供の関係になっていて，&lt;code&gt;main&lt;/code&gt;の&lt;code&gt;fmt.Println(&amp;quot;Hello! I&#39;m main&amp;quot;)&lt;/code&gt;の終了したら，その時点で子供の実行も終了させられてしまう．もし，子供のgoroutineが自己紹介し終わる前に親が自己紹介しきっちゃえば子供の自己紹介は印字されないし，親の自己紹介が終わる前に子供が自己紹介しきっちゃえば，親子両方の自己紹介が聞けることになる．&lt;/p&gt;
+
+&lt;p&gt;「なるほど．でも親が先に終わっちゃうと子供も強制終了って，それどうにかならないの？」って思った方は賢くて，どうにかするためにgoroutine間でおしゃべりできるchannelというデータ構造が実装してある．&lt;/p&gt;
+
+&lt;h2 id=&#34;nice-to-meet-you-channel&#34;&gt;Nice to meet you, channel!&lt;/h2&gt;
+
+&lt;p&gt;channelはgoroutineたちが同期しながらconcurrentな処理を実行していくためのmessage-passingのメカニズムを提供してくれる．channelは「そのchannelを通じてやり取りするデータの型・バッファサイズ・メッセージのやり取りの方向」で定義されて，組み込み関数の&lt;code&gt;make()&lt;/code&gt;で簡単に作ることができる．&lt;/p&gt;
+
+&lt;p&gt;golangでは「channelはfirst-class value」として扱われる．つまりchannelは，他の値（例えばなんらかの構造体とか&lt;code&gt;int&lt;/code&gt;型の変数とか関数とか）と同じレベルで扱われる．だから関数がchannelを返すなんてこともできるし，関数の引数にchannelを与えることもできるし，channelのchannelも定義できる．&lt;/p&gt;
+
+&lt;p&gt;channelの入出力の方向は&lt;code&gt;&amp;lt;-&lt;/code&gt;という演算子で表現することになっている．&lt;code&gt;&amp;lt;- c&lt;/code&gt;って書けばchannel &lt;code&gt;c&lt;/code&gt;からデータを読み込むことになるし，&lt;code&gt;c &amp;lt;- 1&lt;/code&gt;って書けばchannel &lt;code&gt;c&lt;/code&gt;に&lt;code&gt;1&lt;/code&gt;を書き込んだことになる．&lt;/p&gt;
+
+&lt;p&gt;ということで，channelを使った簡単ばプログラムを書いてみるとこんな感じになる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/id0QnvLdbFn&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;channel &lt;code&gt;done&lt;/code&gt; を使って「僕は自己紹介終わったよママ」って子供のgoroutineが親&lt;code&gt;main&lt;/code&gt;に連絡することで，実行が同期されて両方の自己紹介が聞けるようになった．&lt;/p&gt;
+
+&lt;p&gt;channel &lt;code&gt;done&lt;/code&gt;は「&lt;code&gt;bool&lt;/code&gt;値を通す，バッファが0の，読み書きができるchannel」として定義されている．golangでは「バッファが0のchannelに対する読み書きは，情報の送受信両者がコミュニケーションの準備ができるようになるまでブロックされる」ことになっている．なので，この例だと，確実に子供goroutineの自己紹介を聞くことができることになる．「バッファが0のchannelに対する読み書きは，情報の送受信両者がコミュニケーションの準備ができるようになるまでブロックされる」という挙動から&lt;strong&gt;バッファが0のchannelは「synchronous」と言える&lt;/strong&gt;．&lt;/p&gt;
+
+&lt;p&gt;下の例を実行すると，channel &lt;code&gt;message&lt;/code&gt;に&lt;code&gt;1&lt;/code&gt;を送り終わってから，&lt;code&gt;main&lt;/code&gt;が1秒寝てしまうので，子供はchannel &lt;code&gt;message&lt;/code&gt;に続く&lt;code&gt;2&lt;/code&gt;，&lt;code&gt;3&lt;/code&gt;を送れなくて，止められてしまう．この挙動はsynchronousということになる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/3z4aodIMk7v&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;一方で，バッファのあるchannelに対する読み書きは「バッファが空でないなら読み込みはブロックされない」「バッファが一杯でないなら書き込みはブロックされない」という挙動になっている．なので，&lt;strong&gt;バッファのあるchannelは「asynchronous」と言える&lt;/strong&gt;．&lt;/p&gt;
+
+&lt;p&gt;下の例を実行すると，channel &lt;code&gt;message&lt;/code&gt;はバッファを持っているので子供は&lt;code&gt;1&lt;/code&gt;，&lt;code&gt;2&lt;/code&gt;，&lt;code&gt;3&lt;/code&gt;，&lt;code&gt;4&lt;/code&gt;と（&lt;code&gt;main&lt;/code&gt;が眠りから覚める前に）立て続けに送ることができる．この挙動はまさしくasynchronousだ．&lt;/p&gt;
+
+&lt;h2 id=&#34;oh-poor-deadlock&#34;&gt;Oh, poor deadlock...&lt;/h2&gt;
+
+&lt;p&gt;「goroutineもchannelもわかったので」ということで下みたいなプログラムを書くと&lt;strong&gt;deadlock&lt;/strong&gt;と言われてgolangのruntimeから叱られる．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/TbJsGMyAh8r&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;これはつまりどういうことかというと，golangのruntimeが「お前のプログラム実行したけど7行目でバッファのないchannelに&lt;code&gt;42&lt;/code&gt;って送ってる（&lt;code&gt;c &amp;lt;- 42&lt;/code&gt;）けど，それしたら受信者がいないし，受信者がいないと送信者も実行を進められないので，どうすることもできなくなっちゃったぞ」と怒っているのだ．&lt;/p&gt;
+
+&lt;p&gt;「バッファのないchannelはgoroutine間の挙動をsynchronousにするもの」なので「受信者となるgoroutineのいない，バッファ0のchannelに値を送るとdeadlockする」のだ．&lt;/p&gt;
+
+&lt;p&gt;今回の場合だと，受信者が存在しないことが問題なので，受信者となるgoroutineを作ればうまくいく．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/czvQy77d3jU&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&#34;lets-range-channels-and-close-them&#34;&gt;Let&#39;s &lt;code&gt;range&lt;/code&gt; channels and &lt;code&gt;close&lt;/code&gt; them.&lt;/h2&gt;
+
+&lt;p&gt;channelは&lt;code&gt;range&lt;/code&gt;構文を使って1つずつ値を取り出すということも記述できる．でも，&lt;code&gt;range&lt;/code&gt;を使ってchannelから値を次々取り出すときは&lt;strong&gt;channelを明示的に&lt;code&gt;close()&lt;/code&gt;しないといけない&lt;/strong&gt;．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/tTmMX8Ut5gg&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;チャンネルは組み込み関数の&lt;code&gt;close()&lt;/code&gt;で「閉じる」ことができて，閉じられたchannelに対して書き込みを行おうとするとgolangのruntimeは&lt;code&gt;panic&lt;/code&gt;して，閉じられたchannelに対して読み込みを行おうとするとそのchannelの扱う型のゼロ値が得られることになっている．&lt;/p&gt;
+
+&lt;p&gt;「閉じられたchannelに対する読み込み」の特徴は「goroutineに処理の終了を通知させる機構」として応用することができる．大抵，こういう処理終了通知を行う場合は空の構造体&lt;code&gt;struct{}&lt;/code&gt;のchannelを使う．なんてったって空の構造体は0byteだからね．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/aAV4A-7UdZj&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;あと，閉じられたchannelに対する読み込みはブロックされないので，そのまま処理は進む．&lt;/p&gt;
+
+&lt;h2 id=&#34;multiple-channels-and-select&#34;&gt;Multiple channels and &lt;code&gt;select&lt;/code&gt;.&lt;/h2&gt;
+
+&lt;p&gt;goroutineとchannelを使って実際になんらかの意味のあるプログラムを書こうとすると，たくさんのgoroutineとたくさんのchannelを扱うことになるのが普通である．大抵の場合「複数のchannelを同時に待ち受けたい」状況に出くわす．golangでは複数のchannelを同時に待ち受ける&lt;code&gt;select&lt;/code&gt;構文を用意している．&lt;/p&gt;
+
+&lt;iframe src=&#34;https://play.golang.org/p/_CaWUfaJj2E&#34; width=600 height=300 frameborder=0&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;code&gt;select { case ...: ...}&lt;/code&gt;という構文で，複数のchannelを同時に待ち受け，値が書き込まれたchannelだけに対応するという，イベント駆動みたいな処理も簡単に書くことができるようになっている．&lt;/p&gt;
+
+&lt;h2 id=&#34;channelお前最高かよ&#34;&gt;channel，お前最高かよ！&lt;/h2&gt;
+
+&lt;p&gt;channelはマジで便利！でも使いこなすにはchannelの挙動をよく理解していないといけない．&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Concurrent v.s. Parallel</title>
+      <link>/ja/post/concurrent-vs-parallel/</link>
+      <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
+      <guid>/ja/post/concurrent-vs-parallel/</guid>
+      <description>
+
+&lt;h2 id=&#34;日本語にすると&#34;&gt;日本語にすると&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;調べてみると，&lt;strong&gt;「Concurrentは並行」「Parallelは並列」&lt;/strong&gt;と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．&lt;/p&gt;
+
+&lt;h2 id=&#34;っと-その前に広辞苑によれば&#34;&gt;っと，その前に広辞苑によれば&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;【並行】並びゆくこと．また，並び行なわれること．「両案を並行して審議する」&lt;/p&gt;
+
+&lt;p&gt;【並列】並び連なること．直列の対義語&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ダメだった．&lt;/p&gt;
+
+&lt;h2 id=&#34;じゃあ-英英辞典-oxford-dictionary-で引くと&#34;&gt;じゃあ，英英辞典（Oxford Dictionary）で引くと&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;concurrent&lt;/p&gt;
+
+&lt;p&gt;Existing, happening, or done at the same time.
+‘there are three concurrent art fairs around the city’&lt;/p&gt;
+
+&lt;p&gt;parallel&lt;/p&gt;
+
+&lt;p&gt;[Computing] Involving the simultaneous performance of operations.
+‘highly parallel multiprocessor systems’&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;これでもダメだった．&lt;/p&gt;
+
+&lt;h2 id=&#34;僕の理解&#34;&gt;僕の理解&lt;/h2&gt;
+
+&lt;h3 id=&#34;concurrent&#34;&gt;Concurrent&lt;/h3&gt;
+
+&lt;p&gt;並行とは「複数のタスクが，論理的に，同時に処理されているように見えること」&lt;/p&gt;
+
+&lt;p&gt;具体的には，CPUが1コアの時代に，「一つのパソコンでブラウジングしながらメールが読める理由」を説明するのが「CPUがタスクをConcurrentに処理しているから」で，これが僕の「並行」の理解．&lt;/p&gt;
+
+&lt;p&gt;細切れにたくさんの仕事をちょっとずつ進めて，全体として複数のタスクが同時に処理されているように見えるってだけで，実際に複数のタスクが同時に処理されているわけではない．&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;「一人でいろんな仕事を同時に進めている様」&lt;/strong&gt;が並行．&lt;/p&gt;
+
+&lt;h3 id=&#34;parallel&#34;&gt;Parallel&lt;/h3&gt;
+
+&lt;p&gt;並列とは「複数のタスクが，物理的に，同時に処理されていること」&lt;/p&gt;
+
+&lt;p&gt;具体的にはマルチコアのプロセッサが，搭載している複数のプロセッサをちゃんと使い切って演算をしている様は，並列という言葉で形容できる．&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;「複数人が同時に，それぞれの仕事を進めている様」&lt;/strong&gt;が並列．&lt;/p&gt;
+
+&lt;p&gt;ちなみに，「並列であれば常に並行である」という主張もあるらしい．「複数人が同時に，それぞれの仕事を進めている様」は側から見ると「いろんな仕事を同時に進めている」ように見えるから，確かにそうかもしれない．&lt;/p&gt;
+
+&lt;h3 id=&#34;rob-pike先生によれば&#34;&gt;Rob Pike先生によれば&amp;hellip;&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Concurrency is about dealing with lots of things at once.&lt;/p&gt;
+
+&lt;p&gt;Parallelism is about doing lots of things at once.&lt;/p&gt;
+
+&lt;p&gt;Not the same, but related.&lt;/p&gt;
+
+&lt;p&gt;Concurrency is about structure, parallelism is about execution.&lt;/p&gt;
+
+&lt;p&gt;Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;なるほど&lt;/p&gt;
+
+&lt;h3 id=&#34;結局なんだってばよ&#34;&gt;結局なんだってばよ&amp;hellip;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Concurrency is a way of structuring your program to make it easy to understand and scalable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;and Parallelism is simply the execution of multiple goroutine in parallel&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://talks.golang.org/2012/waza.slide#1&#34; target=&#34;_blank&#34;&gt;Concurrency is not Parallelism&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Parallelizing Sequential Graph Computations</title>
+      <link>/ja/post/parallelizing-sequential-graph-computations/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/ja/post/parallelizing-sequential-graph-computations/</guid>
+      <description>&lt;h2 id=&#34;0-これは何&#34;&gt;0. これは何&lt;/h2&gt;
+
+&lt;p&gt;僕が最近研究している「並行グラフ処理系」に関連して，僕自身のテーマにおいて非常に参考になった論文であるParallelizing Sequential Graph Computations&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:0&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:0&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;について，その詳細をまとめました．なお，以下の資料の内容は大学のカリキュラムの一環として行われた発表会で用いたハンドアウトです．&lt;/p&gt;
+
+&lt;h2 id=&#34;1-背景&#34;&gt;1. 背景&lt;/h2&gt;
+
+&lt;p&gt;一台のメモリに載り切らないほど巨大なグラフに対する計算需要の高まりを受け，グラフ計算を並列実行するPregel&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;やGraphLab&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;をはじめとする処理系が考案された．これらは「各頂点を一台の計算機と見なし，頂点ごとに処理を実行し，頂点間でコミュニケーションをとりながら状態を更新し，その収束を以って全体の解とする」ようなThink Like A Vertex(TLAV)という計算モデルを実装している．&lt;/p&gt;
+
+&lt;p&gt;しかし，既存のグラフアルゴリズムは並列実行されることを前提としていないため，これらの処理系を利用するためには実行したいアルゴリズムをTLAVに書き下す必要があるが，これは容易な作業ではない．グラフアルゴリズムはTLAVの登場以前から研究されていて，問題を解決する最適なアルゴリズムが既に存在しているにも関わらず，TLAVな処理系ではアルゴリズムの変換が伴うため，敷居が十分に下がったとは言えない．&lt;/p&gt;
+
+&lt;p&gt;そこで，既存のグラフアルゴリズムのロジックをそのまま用いながらも，並列実行することができるような処理系 $GRAPE$ を提案する． $GRAPE$ では，計算モデルとして，既存の分散グラフ処理系が採用するTLAVではなく，Partial evaluation &amp;amp; Incremental Computationモデル(以下$GRAPE$モデル)を採用し，既存のアルゴリズムのロジックを変更することなく並列化させる．同時に，$GRAPE$モデルはTLAVと比較してコミュニケーションコストを少なく抑えることができることからより効率的な計算の実行が可能となる．&lt;/p&gt;
+
+&lt;h2 id=&#34;2-関連研究&#34;&gt;2. 関連研究&lt;/h2&gt;
+
+&lt;p&gt;分散グラフ処理の計算モデルの変遷と$GRAPE$モデルの位置付けを述べる．分散グラフ処理を実現する計算モデルとして以下の二つがよく用いられる．&lt;/p&gt;
+
+&lt;h3 id=&#34;think-like-a-vertex&#34;&gt;Think Like A Vertex&lt;/h3&gt;
+
+&lt;p&gt;最初に提案された計算モデル．PregelやGiraph&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;，GraphLab&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;に実装されている．頂点ごとに処理を実行し，頂点間でコミュニケーションをとりながら状態を更新．全頂点の状態の収束を以って全体の解とする．&lt;/p&gt;
+
+&lt;h3 id=&#34;think-like-a-graph-or-block-centric&#34;&gt;Think Like A Graph (or Block Centric)&lt;/h3&gt;
+
+&lt;p&gt;TLAVを高速化しようとする研究の中で提案されたモデル．$n$個の頂点をまとめて扱うことでコミュニケーションコストを抑え，実行効率の向上を図る．Blogel&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;で実装されている．&lt;/p&gt;
+
+&lt;p&gt;TLAVとBlock Centricモデルおよび$GRAPE$モデルを，処理単位の粒度，コミュニケーションコストの大小，プログラミングのしやすさという三つの観点から整理すると下表のようになる．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table1.png&#34; data-caption=&#34;表1. 分散グラフ計算モデルの比較&#34;&gt;
+&lt;img src=&#34;table1.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表1. 分散グラフ計算モデルの比較
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;3-partial-evaluation--incremental-computation&#34;&gt;3. Partial evaluation &amp;amp; Incremental computation&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$では，Partial evaluation &amp;amp; Incremental computationという計算モデルを採用している．これは，最初に部分グラフに対して実行したい処理を行って部分解を求め，その部分解の更新を繰り返していくことで全体の解を求めるというモデルである．&lt;/p&gt;
+
+&lt;h3 id=&#34;partial-evaluation&#34;&gt;Partial evaluation&lt;/h3&gt;
+
+&lt;p&gt;コンパイラによるプログラム最適化の文脈で登場し，XML文章中の要素を指定するXPathを分散環境下で評価する研究などでも取り上げられている&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:7&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;．&lt;/p&gt;
+
+&lt;h3 id=&#34;incremental-computation&#34;&gt;Incremental computation&lt;/h3&gt;
+
+&lt;p&gt;巨大な動的グラフ$G$に対するクエリ$Q$の応答速度を向上させる技術．グラフの変化$\Delta G$から$Q(G \oplus \Delta G) = Q(G) \oplus \Delta O$を満たすようなクエリ出力の差分$\Delta O$を求めることで，グラフ全体を用いて再計算することなく，変化後のグラフに対するクエリ結果を求める&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:8&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;．&lt;/p&gt;
+
+&lt;p&gt;例えば，図1のような5ノードからなるグラフ$G$を三つの部分グラフ$F_1$，$F_2$，$F_3$に分割する．部分グラフは，それを構成するノードとそのノードを始点とするエッジの終点も含めるものとして与える．例えば，部分グラフ$F_1$は図2となる．ここで，グラフ$G$に対してノード$1$を始点とする単一始点最短経路問題(SSSP)を考える．$GRAPE$ではまず，部分グラフ$F_1$に対してダイクストラ法を用いて計算する．この結果は$G$全体に対するSSSPの解ではないが，この結果は全体の解のたたき台となっている．この「部分グラフ$F_1$に対するダイクストラ法の適用」がPartial evaluationである．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;graph.png&#34; data-caption=&#34;図1. 全体グラフ&#34;&gt;
+&lt;img src=&#34;graph.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図1. 全体グラフ
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;f1.png&#34; data-caption=&#34;図2. 部分グラフ $F_1$&#34;&gt;
+&lt;img src=&#34;f1.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図2. 部分グラフ $F_1$
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;$F_1$にダイクストラ法を適用することで表2を得る．ここで，ノード$4$および$5$のコストが計算されていることに注目する．これは，$F_1$のpartial evaluationの結果から，$F_3$の状態が変化した(表3におけるノード$4$および$5$の初期状態からの変化)ということであり，この変化を元に$F_3$に対してダイクストラ法を適用することで全体解に収束していく．これが，$GRAPE$のIncremental computationである．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table2.png&#34; data-caption=&#34;表2. 部分グラフ$F_1$に対するPartial evaluation&#34;&gt;
+&lt;img src=&#34;table2.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表2. 部分グラフ$F_1$に対するPartial evaluation
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table3.png&#34; data-caption=&#34;表3. 部分グラフ$F_3$に対するIncremental computation&#34;&gt;
+&lt;img src=&#34;table3.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表3. 部分グラフ$F_3$に対するIncremental computation
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;4-grape&#34;&gt;4. $GRAPE$&lt;/h2&gt;
+
+&lt;p&gt;Partial evaluation &amp;amp; Incremental computationを図3のように組み上げることで処理系$GRAPE$を実現する．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;grape.png&#34; data-caption=&#34;図3. $GRAPE$&#34;&gt;
+&lt;img src=&#34;grape.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図3. $GRAPE$
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;$GRAPE$の利用者は実行したい処理を，$\sf PEval$(Partial evaluation相当)，$\sf IncEval$(Incremental computation)相当，部分解をまとめる$\sf Assemble$という三つのプログラムとして$GRAPE$に与える．$GRAPE$は一つの$\tt coordinator$と複数の$\tt worker$で構成され，$\tt coordinator$は部分グラフ間の接続関係やどの$\tt worker$がどの部分グラフを担当するかを管理している．$\tt worker$は各自が担当する部分グラフに$\sf PEval$や$\sf IncEval$を適用する．&lt;/p&gt;
+
+&lt;p&gt;$GRAPE$での演算は三つのフェーズから成る．まず$\tt coordinator$がクエリの実行を受け付け，$\tt worker$が各自が担当している部分グラフに対して$\sf PEval$を実行する．次に,
+各$\tt worker$が部分グラフの状態変化を$\tt coordinator$に通知する．$\tt coordinator$は部分グラフ同士の接続関係を考慮し，対応する$\tt worker$に変化を伝達する．知らせを受けた$\tt worker$は，状態変化に基づく$\sf IncEval$を実行し自分の担当している部分グラフの状態を更新する．$\sf IncEval$は更新が発生しなくなるまで繰り返される．$\sf IncEval$が収束すると，$\tt coordinator$は各$\tt worker$から部分解を回収し，最終的な出力を得る．&lt;/p&gt;
+
+&lt;h2 id=&#34;5-grapeのアドバンテージ&#34;&gt;5. $GRAPE$のアドバンテージ&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$は処理効率と$GRAPE$モデルの表現力において，既存の処理系に対してアドバンテージがある．$GRAPE$では部分グラフ間の状態変化をやり取りするコストのみで済むため，TLAVと比較して大幅にコミュニケーションコストが抑えられる．これによって，TLAVよりも効率的な処理が実行できる．さらに$GRAPE$で実行されるアルゴリズムのロジックは既存のものと変わらないため，既存のグラフ最適化技法を適用することができ，さらなる高速化も見込むことができる．加えて，$\sf MapReduce$など他の分散計算モデルを$GRAPE$上に表現することも可能である．例えば$\sf IncEval$でやり取りする情報を&lt;code&gt;&amp;lt;key: value&amp;gt;&lt;/code&gt;として$\sf PEval$と偶数回目の$\sf IncEval$を$\sf Map$に，奇数回目の$\sf IncEval$を$\sf Reduce$とすれば$\sf MapReduce$を表現できる．&lt;/p&gt;
+
+&lt;h2 id=&#34;6-評価&#34;&gt;6. 評価&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$モデルがTLAVよりも&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;処理時間&lt;/li&gt;
+&lt;li&gt;コミュニケーションコスト&lt;/li&gt;
+&lt;li&gt;グラフの規模に対するスケーラビリティ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の三点において，TLAVとの性能を比較し$GRAPE$モデルの優位性を検証した．プロセッサの数を64から192まで変化させながら，liveJournal&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:6&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;など複数の実世界グラフに対して単一始点最小経路問題をGiraph，GraphLab，Blogel，$GRAPE$で実行した結果を図4に示す．$GRAPE$はGiraph，GraphLab，Blogeと比べて484，36，15倍高速に処理を実行し，$\tt worker$間でやり取りされるデータ量を0.07%，0.12%，0.7%に抑えられている．&lt;/p&gt;
+
+&lt;p&gt;グラフの規模に対するスケーラビリティを，入力グラフを5Mノード50Mエッジから25Mノード250Mエッジまで変化させながら実行時間とコミュニケーションコストを計測した．その結果を図5の左二図に示す．グラフ規模に対して十分にスケールしていることがわかる．&lt;/p&gt;
+
+&lt;p&gt;図5の右端図から，${GRAPE}$では，並列実行に伴うオーバーヘッドを考慮してもなお，既存のアルゴリズムに対する高速化技法の効果が得られることがわかる．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;evaluation.png&#34; data-caption=&#34;表4. 処理系ごとの実行時間とコミュニケーションコスト&#34;&gt;
+&lt;img src=&#34;evaluation.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表4. 処理系ごとの実行時間とコミュニケーションコスト
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;scalability.png&#34; data-caption=&#34;表5. ${GRAPE}$のスケーラビリティーとグラフレベル最適化の効果&#34;&gt;
+&lt;img src=&#34;scalability.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表5. ${GRAPE}$のスケーラビリティーとグラフレベル最適化の効果
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;7-結論&#34;&gt;7. 結論&lt;/h2&gt;
+
+&lt;p&gt;Partial evaluation &amp;amp; Incremental computationという計算モデルはグラフに対しても有効であり，この計算モデルを用いることで
+既存のグラフアルゴリズムのロジックをほぼ変更することなく並列化を実現でき，分散グラフ処理系を利用する敷居を下げられる．そこでPartial evaluation &amp;amp; Incremental computationを実装する処理系$GRAPE$を提案する．Partial evaluationに相当する$\sf PEval$とIncremental computationに相当する$\sf IncEval$，部分解を集める$\sf Assemble$を定義することで既存のグラフアルゴリズムの並列化を実現する．&lt;/p&gt;
+
+&lt;div class=&#34;responsive-wrap&#34;&gt;
+  &lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vR18vtYd3XhDHVbLaP4DXmGELqvX_OV6s7OIdkwhNv4Wi6hLPREQ7wr1r4ki3PDX2mPhugO248Y4DG3/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;960&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:0&#34;&gt;Wenfei Fan, Wenyuan Yu, Jingbo Xu, Jingren Zhou, Xiaojian Luo, Qiang Yin, Ping Lu, Yang Cao, and Ruiqi Xu. 2018. Parallelizing Sequential Graph Computations. ACM Trans. Database Syst. 43, 4, Article 18 (December 2018), 39 pages. DOI: &lt;a href=&#34;https://doi.org/10.1145/3282488&#34;&gt;https://doi.org/10.1145/3282488&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:0&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Grzegorz Malewicz, Matthew H. Austern, Aart J.C Bik, JamesC. Dehnert, Ilan Horn, Naty Leiser, and Grzegorz Czajkowski.2010. Pregel: a system for large-scale graph processing. In Pro-ceedings of the 2010 ACM SIGMOD International Conferenceon Management of data (SIGMOD ’10). ACM, New York, NY,USA, 135-146.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Yucheng Low, Danny Bickson, Joseph Gonzalez, CarlosGuestrin, Aapo Kyrola, and Joseph M. Hellerstein. 2012. Dis-tributed GraphLab: a framework for machine learning and datamining in the cloud. Proc. VLDB Endow. 5, 8 (April 2012),716-727.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;Giraph. &lt;a href=&#34;http://giraph.apache.org/&#34;&gt;http://giraph.apache.org/&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Yucheng Low, Danny Bickson, Joseph Gonzalez, CarlosGuestrin, Aapo Kyrola, and Joseph M. Hellerstein. 2012. Dis-tributed GraphLab: a framework for machine learning and datamining in the cloud. Proc. VLDB Endow. 5, 8 (April 2012),716-727.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;Da Yan, James Cheng, Yi Lu, and Wilfred Ng. 2014. Blogel:a block-centric framework for distributed computation on real-world graphs. Proc. VLDB Endow. 7, 14 (October 2014), 1981-1992.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34;&gt;Peter Buneman, Gao Cong, Wenfei Fan, and Anastasios Ke-mentsietsidis. 2006. Using partial evaluation in distributedquery evaluation. In Proceedings of the 32nd international con-ference on Very large data bases (VLDB ’06), UmeshwarDayal, Khu-Yong Whang, David Lomet, Gustavo Alonso, GuyLohman, Martin Kersten, Sang K. Cha, and Young-Kuk Kim(Eds.). VLDB Endowment 211-222
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:7&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34;&gt;Wenfei Fan, Chunming Hu, and Chao Tian. 2017. Incremen-tal Graph Computations: Doable and Undoable. In Proceedingsof the 2017 ACM International Conference on Management ofData (SIGMOD ’17). ACM, New York, NY, USA, 155-169.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:8&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34;&gt;Snap. &lt;a href=&#34;http://snap.stanford.edu/data/index.html&#34;&gt;http://snap.stanford.edu/data/index.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:6&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Emulator v.s. Simulator</title>
+      <link>/ja/post/simulator-vs-emulator/</link>
+      <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
+      <guid>/ja/post/simulator-vs-emulator/</guid>
+      <description>
+
+&lt;h2 id=&#34;ある人によれば&#34;&gt;ある人によれば&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Simulation = For analysis and study&lt;/p&gt;
+
+&lt;p&gt;Emulation = For usage as a substitute&lt;/p&gt;
+
+&lt;p&gt;A simulator is an environment which models but an emulator is one that replicates the usage as on the original device or system.&lt;/p&gt;
+
+&lt;p&gt;Simulator mimics the activity of something that it is simulating. It &lt;strong&gt;&amp;ldquo;appears&amp;rdquo;&lt;/strong&gt; (a lot can go with this &amp;ldquo;appears&amp;rdquo;, depending on the context) to be the same as the thing being simulated. For example the flight simulator &amp;ldquo;appears&amp;rdquo; to be a real flight to the user, although it does not transport you from one place to another.&lt;/p&gt;
+
+&lt;p&gt;Emulator, on the other hand, &lt;strong&gt;actually &amp;ldquo;does&amp;rdquo;&lt;/strong&gt; what the thing being emulated does, and in doing so it too &amp;ldquo;appears to be doing the same thing&amp;rdquo;. An emulator may use different set of protocols for mimicking the thing being emulated, but the result/outcome is always the same as the original object. For example, EMU8086 emulates the 8086 microprocessor on your computer, which obviously is not running on 8086 (= different protocols), but the output it gives is what a real 8086 would give.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;また別の人によれば&#34;&gt;また別の人によれば&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Simulator is broader than Emulator&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Simulator tends to imitate/model more global processes/things in general with ability to narrow the imitation down (e.g. capacitor simulator with presets representing some known models)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Emulator tends to imitate certain hardware devices with certain specification, known characteristics and properties (e.g. SNES emulator, Intel 8087 or Roland TB-303)&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;語源を辿ると&#34;&gt;語源を辿ると&amp;hellip;&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;emulate is &amp;ldquo;to be equal&amp;rdquo; (looks like more aggressive and straightforward - rivalry)&lt;/li&gt;
+&lt;li&gt;simulate is &amp;ldquo;to be similar&amp;rdquo; (looks like more sly and tricky - imitation)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;日本語だと&#34;&gt;日本語だと&amp;hellip;&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Emulation: （代替可能なレベルでの）模倣&lt;/li&gt;
+&lt;li&gt;Simulation: 模擬&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;かな？🤔&lt;/p&gt;
+
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/1584617/simulator-or-emulator-what-is-the-difference&#34; target=&#34;_blank&#34;&gt;Simulator or Emulator? What is the difference?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GitHub上でのmerge</title>
+      <link>/ja/post/three-kinds-of-merge-on-github/</link>
+      <pubDate>Tue, 29 Oct 2019 19:50:58 +0900</pubDate>
+      <guid>/ja/post/three-kinds-of-merge-on-github/</guid>
+      <description>
+
+&lt;h2 id=&#34;github上でのmerge&#34;&gt;GitHub上でのmerge&lt;/h2&gt;
+
+&lt;p&gt;GitHub上で行えるmergeには3種類あります．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a merge commit&lt;/li&gt;
+&lt;li&gt;Squash and merge&lt;/li&gt;
+&lt;li&gt;Rebase and merge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これらは，「merge commitの有無」「merge commitのauthorが誰になるのか」などの点で微妙に異なります．&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;merge commitの有無&lt;/th&gt;
+&lt;th&gt;merge commitのauthor&lt;/th&gt;
+&lt;th&gt;merge元のbranchのcommit log&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Create a merge commit&lt;/td&gt;
+&lt;td&gt;有&lt;/td&gt;
+&lt;td&gt;merge先&lt;/td&gt;
+&lt;td&gt;残る&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Squash and merge&lt;/td&gt;
+&lt;td&gt;有&lt;/td&gt;
+&lt;td&gt;merge元&lt;/td&gt;
+&lt;td&gt;残らない&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Rebase and merge&lt;/td&gt;
+&lt;td&gt;無&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;残る&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;create-a-merge-commit&#34;&gt;Create a merge commit&lt;/h3&gt;
+
+&lt;p&gt;「Create a merge commit」では，&lt;code&gt;git merge --no-ff&lt;/code&gt;でmergeすることになります．つまり，merge先に新たなcommitが作成され，そのcommitがmerge元のcommitを取り込みます．このとき作成されるmerge commitのauthorはmerge先のauthorとして記録されます．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
+&lt;li&gt;merge元のbranchがそのまま残るので変更箇所を追いやすい&lt;/li&gt;
+&lt;li&gt;merge後に，merge元のbranchを削除したとしても，このbranchのcommit logがmerge先に残る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．わかりやすい一方で，「merge commitのauthorがmerge元ではない」のが（個人的に）「その人の頑張りを讃えたいのになぁ」とか思っちゃったりしてちょっと申し訳ない気がするとかしないとか．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;create-merge-commit.gif&#34; data-caption=&#34;Create a merge commit&#34;&gt;
+&lt;img src=&#34;create-merge-commit.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Create a merge commit
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;squash-and-merge&#34;&gt;Squash and merge&lt;/h3&gt;
+
+&lt;p&gt;「Squash and merge」では，&lt;code&gt;git merge --squash&lt;/code&gt;でmergeすることになります．つまり，merge元のcommitを一つのcommitにまとめた上で，merge先にmerge commitとして先頭に追加されます．このときのmerge commitのauthorはmerge元のauthorとなります．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
+&lt;li&gt;複数のcommitをまとめて一つにできるのでmerge先のcommit logがわかりやすい&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．一方で，一度commitをまとめてしまうと，「どの変更が誰によってどのcommitで行われたのか」という情報が失われてしまうことになります．他の人の複数のcommitを一つのcommitに押し込むことになるので，個人的には若干怖さがあります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;squash-and-merge.gif&#34; data-caption=&#34;Squash and merge&#34;&gt;
+&lt;img src=&#34;squash-and-merge.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Squash and merge
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;rebase-and-merge&#34;&gt;Rebase and merge&lt;/h3&gt;
+
+&lt;p&gt;「Rebase and merge」では，まずmerge元のブランチにあるcommit列に対して&lt;code&gt;git rebase&lt;/code&gt;して，commit列が一列になったところでfast-forwardの形でmergeが実行されます．&lt;/p&gt;
+
+&lt;p&gt;この方法は&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;mergeした結果，merge先のcommit logが一直線で見やすい&lt;/li&gt;
+&lt;li&gt;merge commitが作成されない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;という特徴があります．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;rebase-and-merge.gif&#34; data-caption=&#34;Rebase and merge&#34;&gt;
+&lt;img src=&#34;rebase-and-merge.gif&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Rebase and merge
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github&#34; target=&#34;_blank&#34;&gt;About merge methods on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Federated Social WebとActivityPub</title>
+      <link>/ja/post/what-is-activitypub/</link>
+      <pubDate>Mon, 28 Oct 2019 17:49:25 +0900</pubDate>
+      <guid>/ja/post/what-is-activitypub/</guid>
+      <description>
+
+&lt;h2 id=&#34;federated-social-webとは&#34;&gt;Federated Social Webとは？&lt;/h2&gt;
+
+&lt;p&gt;Federated Social Webとは，誤解を恐れず端的に言えば「分散Twitter」である．&lt;/p&gt;
+
+&lt;p&gt;「分散Twitter」とは何かを説明するには，Twitterと対比するのがわかりやすい．TwitterはTwitter社が提供しているマイクロブログサービスで，ユーザーはTwitter社が管理するサーバー上に展開されているTwitterというシステム内にアカウントを作成し，テキストメッセージや動画像を投稿（ツイート）したり拡散（リツイート）したりすることができる．アカウントごとにタイムラインというインタフェースが提供され，ユーザーはタイムラインを通じてコンテンツを閲覧することができる．Twitterはアカウントを「Followする」という機能も実装している．これは「他のアカウントの投稿を自分のタイムラインに表示する機能」でユーザーは好みのコンテンツを投稿してくれるアカウントをフォローすることで，より簡単に好みのコンテンツを発見・消費することができるようになる．&lt;/p&gt;
+
+&lt;p&gt;Twitterの抱える問題点は「Twitterというサービスが中央集権的である」という点である．「Twitterというサービスが中央集権的である」とは&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;「TwitterというシステムはTwitter社の管理するマシン上でのみ展開されているため，そのマシンが落ちるとTwitterというシステム全体が落ちてしまう（単一障害点）」&lt;/li&gt;
+&lt;li&gt;「ユーザーがTwitterに投稿した任意のコンテンツやデータは基本的にTwitter社の管理するマシンにしか残らない」&lt;/li&gt;
+&lt;li&gt;「ユーザーは投稿内容についてTwitter社の決めるルールに従わなければならない（コンテンツの価値判断についての自由がユーザーから剥奪される．少なくともTwitter社がコンテンツに対して検閲を行えばそれを回避する手段は存在しない）」&lt;/li&gt;
+&lt;li&gt;「Twitterというサービスを提供するTwitter社の決めるルールに，ユーザーの全員が従わなければならない」&lt;/li&gt;
+&lt;li&gt;「TwitterというサービスのしようがTwitter社の一存で決まるため，Twitterというシステムに乗っかろうとする外部の開発者は地位的にTwitter社の下につくことになる」&lt;/li&gt;
+&lt;li&gt;「Twitterの実装は公開されない（ので，ユーザーがなんらかの不具合に直面しても，ユーザー自身で修正することが根本的に不可能）」&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ということ．&lt;/p&gt;
+
+&lt;p&gt;「Twitterというシステムの管理者がTwitter社しかいない」と「ユーザーはTwitter社の決めたルールの中でした活動できない」ということになる．これは殊「コンテンツ共有」という文脈において大きな問題になる可能性がある．というのも，「コンテンツに対する価値判断やそれを発表することは，基本的に人間に与えられた自由である」からだ．いわゆる「表現の自由」ってやつだ．細かなことを言えば，法律が保証する「表現の自由」の範囲は「公共の福祉を侵害したり他者の自由を侵害しない」ような表現の自由であるようだが．ここで大事なのは，表現の自由を制約するのは「公共の福祉や他社の自由を侵害するかしないか」という社会的な合意であって，Twitterといった一私企業の決めたルールではないということだ．現状のSNSはその点で問題を抱えている（と自由を求めるユーザーは主張している）．無論，Twitter社の決めたルールの範囲内で楽しむので十分というユーザーもいるだろうし，なんならそっちの方が多数派な気もするが．&lt;/p&gt;
+
+&lt;p&gt;そんな問題意識からFederated Social Webという概念が登場している．Federated Social Webが実現したいのは「中央集権ではない形で社会的な人間の在りようをインターネットの世界に実装すること」である．Federated Social Webでは，先に挙げた目的を「Cleint-ServerモデルとServer-Serverモデルの組み合わせ」で実現しようとしている．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;federated-social-web.jpeg&#34; data-caption=&#34;Fededated Social Web&#34;&gt;
+&lt;img src=&#34;federated-social-web.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Fededated Social Web
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;Federated Social Webでは「既存のTwitterのような仕組みを提供するserverが不特定多数の管理者（これは組織でも個人でもいい）によって提供され，彼らが提供するシステムにユーザーが乗っかる」というモデルである．&lt;/p&gt;
+
+&lt;p&gt;「Federated」を英英辞典で引くと&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;(of a country or organization) set up as a single centralized unit within which each state or division keeps some internal autonomy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;とある．つまり，Social Networkingに必要な機能を提供するserverが，（単一の管理者によって定められたルールによって動くのではなくて）複数の管理者が自由に定めたルールに基づいて統治・管理されるということだ．ユーザーは自分の納得するルールで運用されているserverにぶら下がれば，そのユーザーにとって十分な自由を享受できるし，いやになれば異なるルールで動いている他のserverに移ることだって可能だ．さらに言えば「オレオレルール」で運用されるオレオレSNSを構築することだって許されている．&lt;/p&gt;
+
+&lt;h2 id=&#34;activitypubとは&#34;&gt;ActivityPubとは&lt;/h2&gt;
+
+&lt;p&gt;ActivityPubはFederated Social Webを実現する際の通信プロトコルだ．ActivityPubは「あるserverとそれにぶら下がっているclient間の通信プロトコル」と「連合を組むserver間の通信プロトコル」の2つのプロトコルを内包している．&lt;/p&gt;
+
+&lt;p&gt;「あるserverとそれにぶら下がっているclient間の通信プロトコル」は，通常のSNSにおいて必要な投稿だとか他の人の行動のお知らせとかを受け取るために必要な通信を規定しているもの．&lt;/p&gt;
+
+&lt;p&gt;「連合を組むserver間の通信プロトコル」は，不特定多数の管理者が運営するserver間で情報を共有するための通信を規定するもの．これがあることで，「Federated」なSocial Webが初めて実現できる．&lt;/p&gt;
+
+&lt;p&gt;ActivityPubでは，ユーザーは「他のユーザーからのお知らせを受け取る&lt;code&gt;inbox&lt;/code&gt;と自分のシステム上での行動を他の人に通知する&lt;code&gt;outbox&lt;/code&gt;を持つActor」としてモデル化される．&lt;code&gt;inbox&lt;/code&gt;/&lt;code&gt;outbox&lt;/code&gt;の実体はwebの世界で言うところのURLに過ぎず，さらに言えばclientがserverに&lt;code&gt;GET&lt;/code&gt;/&lt;code&gt;POST&lt;/code&gt;する際のapi endpointでしかない．あctivityPubではどんな形式のデータをやりとりするかも規定している．より具体的に言えば「SNSをWeb上で実現する際のJSONメッセージフォーマット」を規定するActivityStreamsの上にActivityPubは規定されている．&lt;/p&gt;
+
+&lt;p&gt;要するに，client-server間の通信とclient-client間の通信のそれぞれについて，ActivityStreamsが定義するデータを用いたSNS上におけるActorの行動に対するCRUDを定義しているのがActivityPubである．&lt;/p&gt;
+
+&lt;h2 id=&#34;疑問&#34;&gt;疑問&lt;/h2&gt;
+
+&lt;p&gt;不特定多数の管理者がそれぞれのルールでSNSを提供するときに，それらSNS同士がやり取りをするための統一的なデータ形式・APIを規定しているのがActivityPubということになるが，各SNSが独自機能を実装して独自データフォーマットを追加したときはどのように対応するのだろう．&lt;/p&gt;
+
+&lt;p&gt;ActivityPubは最低限実装されるべきAPIとして整備されるにしても，独自データフォーマットについては共有する方法とかは規定していない．ActivityPubには「JSON-LDを用いてActivityStreamsは拡張可能である」としている．やり取りされるJSONメッセージに未知のフィールドが存在していたら，無視するか適当に解釈するかしかないので，どうするのだろう．ただ，SNSというある程度要求されるAPIがサービスから予測がつくしそれ以上の独自性がなさそうという感覚からすればActivityStreamsで十分なのかもしれない．この点はActivityStreamsを読んでみないとわからないと思うので気が向いたらやろうかな．&lt;/p&gt;
+
+&lt;h2 id=&#34;mastodon&#34;&gt;Mastodon&lt;/h2&gt;
+
+&lt;p&gt;MastodonはActivityPubを実装しているウェブアプリケーションの1つ．ちょっと前にちょっと流行った．Mastodonの面白いところは，Social Webにおけるグローバルなuser identityをメールアドレスみたいな形式で表現できるようにしたこと．Web上でのIdentityはサービスと強固に結びついていて，現在でもGoogle，Facebook，GitHub認証のサービスがたくさんある．「私はAliceです」と，ただそれだけで主張することができるURLがWeb上には存在していなくて，「FacebookのAliceさん」とか「GoogleのAliceさん」という風にしか自分のことを表現できていない状態にある．Federated Social Webの実装例であるMastodonでは，&lt;code&gt;&amp;lt;user_id&amp;gt;@&amp;lt;federation_id&amp;gt;&lt;/code&gt;みたいな形でユーザーのグローバルなIdentityを与えることにしていて，これは賢いなと思う．&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>共通鍵暗号</title>
+      <link>/ja/post/symmetric-key-encription-scheme/</link>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
+      <guid>/ja/post/symmetric-key-encription-scheme/</guid>
+      <description>
+
+&lt;h2 id=&#34;共通鍵暗号&#34;&gt;共通鍵暗号&lt;/h2&gt;
+
+&lt;p&gt;暗号化・復号で同一の鍵を用いる暗号化方式&lt;/p&gt;
+
+&lt;h2 id=&#34;シナリオ&#34;&gt;シナリオ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Aliceが秘密鍵$key$を作成し，Bobに安全に共有&lt;/li&gt;
+&lt;li&gt;Aliceがメッセージ$m$を$key$で暗号化$c = Enc(m, key)$し，Bobに送信&lt;/li&gt;
+&lt;li&gt;Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;共通鍵暗号の満たすべき性質&#34;&gt;共通鍵暗号の満たすべき性質&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;正当性
+
+&lt;ul&gt;
+&lt;li&gt;$m = Dec(Enc(m, key), key)$が成立すること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;秘匿性
+
+&lt;ul&gt;
+&lt;li&gt;暗号文$c$から平文$m$に関連する情報が得られないこと&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;共通鍵暗号に対する攻撃モデル&#34;&gt;共通鍵暗号に対する攻撃モデル&lt;/h2&gt;
+
+&lt;h3 id=&#34;暗号文単独攻撃-ciphertext-only-attack&#34;&gt;暗号文単独攻撃：Ciphertext Only Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「盗聴した暗号文$c_1$，$c_2$，$c_3$&amp;hellip;$c_k$」を手元に持っている状況での攻撃．通信路の盗聴という攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;既知平文攻撃-known-plaintext-attack&#34;&gt;既知平文攻撃：Known Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「（同一の鍵で暗号化された）ランダムな平文と暗号文の対$(m_1, c_1)$，$(m_2, c_2)$，$(m_3, c_3)$&amp;hellip;$(m_k, c_k)$」を手元に持っている状況での攻撃．過去の平文が特定済みであるような状況での攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択平文攻撃-chosen-plaintext-attack&#34;&gt;選択平文攻撃：Chosen Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の平文に対応する暗号文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択暗号文攻撃-chosen-ciphertext-attack&#34;&gt;選択暗号文攻撃：Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^&lt;em&gt;$」を持ち，「攻撃対象の暗号文$c^&lt;/em&gt;$を入手する前の時点で，攻撃者が自分の選んだ暗号文に対応する平文を入手することができる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;適応的選択暗号文攻撃-adaptive-chosen-ciphertext-attack&#34;&gt;適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h2 id=&#34;鍵全数探索攻撃に対する共通鍵暗号の安全性&#34;&gt;鍵全数探索攻撃に対する共通鍵暗号の安全性&lt;/h2&gt;
+
+&lt;p&gt;秘密鍵が$k$bitであるような共通鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．共通鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．&lt;/p&gt;
+
+&lt;h2 id=&#34;さまざまな共通鍵暗号&#34;&gt;さまざまな共通鍵暗号&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ストリーム暗号
+
+&lt;ul&gt;
+&lt;li&gt;平文を小さい単位で順次処理していく方式&lt;/li&gt;
+&lt;li&gt;アルゴリズムを実行する回数が1回&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ブロック暗号
+
+&lt;ul&gt;
+&lt;li&gt;平文を一定の大きさの単位で処理していく方式&lt;/li&gt;
+&lt;li&gt;アルゴリズムを実行する回数がブロックの個数分&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;バーナム暗号&#34;&gt;バーナム暗号&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍
+
+&lt;ul&gt;
+&lt;li&gt;情報理論的安全性を持つ
+
+&lt;ul&gt;
+&lt;li&gt;たとえ，鍵全数探索を実行できる無限の計算能力を持っている攻撃者であっても解読できない（どれが本当の平文なのかがわからない）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;処理が「平文と鍵で&lt;code&gt;xor&lt;/code&gt;」と単純なので非常に高速&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;👎
+
+&lt;ul&gt;
+&lt;li&gt;少なくとも平文と同じ長さの秘密鍵が必要になるし，基本的に鍵は使い捨てなのでいくら鍵を用意しても足りないし，そもそもこの秘密鍵を安全に共有できるなら暗号化する必要がない&lt;/li&gt;
+&lt;li&gt;鍵の生成に「真性乱数」を用意しなければならず，長い鍵を作るには手間がかかる&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ストリーム暗号&#34;&gt;ストリーム暗号&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍
+
+&lt;ul&gt;
+&lt;li&gt;バーナム暗号と比べて（安全性をやや犠牲にしながらも）効率性を向上&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;👎
+
+&lt;ul&gt;
+&lt;li&gt;擬似乱数生成器の安全性がストリーム暗号の安全性に直結する
+
+&lt;ul&gt;
+&lt;li&gt;過去の系列を見て未来の系列が予測できてしまえば解読されてしまう&lt;/li&gt;
+&lt;li&gt;擬似乱数生成器の初期化に用いる秘密鍵を特定されてしまうと解読されてしまう&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>暗号の基礎技術</title>
+      <link>/ja/post/basic-cryptographic-technologies/</link>
+      <pubDate>Mon, 28 Oct 2019 12:40:48 +0900</pubDate>
+      <guid>/ja/post/basic-cryptographic-technologies/</guid>
+      <description>
+
+&lt;h2 id=&#34;暗号の基礎技術&#34;&gt;暗号の基礎技術&lt;/h2&gt;
+
+&lt;p&gt;暗号技術の中でも基礎となるもの．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;暗号&lt;/li&gt;
+&lt;li&gt;鍵配送&lt;/li&gt;
+&lt;li&gt;ハッシュ関数&lt;/li&gt;
+&lt;li&gt;メッセージ認証コード&lt;/li&gt;
+&lt;li&gt;デジタル署名&lt;/li&gt;
+&lt;li&gt;擬似乱数生成器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;暗号&#34;&gt;暗号&lt;/h3&gt;
+
+&lt;p&gt;暗号とは，「正当な送信者と受信者以外に内容を秘匿する技術」のこと．送信者は平文に対して，なんらかの操作を施すことで，暗号文を生成する．この過程を暗号化という．一方で，受信者は暗号文に対してなんらかの操作を施すことで平文を得る．この過程を復号という．&lt;/p&gt;
+
+&lt;h3 id=&#34;鍵配送&#34;&gt;鍵配送&lt;/h3&gt;
+
+&lt;p&gt;鍵配送とは，暗号化や復号に用いる鍵を安全に配送・共有するための技術や方式のこと．鍵は「第三者に知られないように」配送する必要があります．&lt;/p&gt;
+
+&lt;h3 id=&#34;ハッシュ関数&#34;&gt;ハッシュ関数&lt;/h3&gt;
+
+&lt;p&gt;ハッシュ関数とは，任意長のビット列を入力として固定長のビット列を出力する関数のこと．同一の入力に対して同一の出力をする一方で，異なる入力に対して異なる出力となり，異なる入力に対して同一の出力にならないという性質が求められる．&lt;/p&gt;
+
+&lt;h3 id=&#34;メッセージ認証コード&#34;&gt;メッセージ認証コード&lt;/h3&gt;
+
+&lt;p&gt;メッセージ認証コードとは，「伝送路上を通ってきたデータが改ざんされていないこと」「データが期待した通信相手から送信されていること」を検証するための技術のこと．&lt;/p&gt;
+
+&lt;h3 id=&#34;デジタル署名&#34;&gt;デジタル署名&lt;/h3&gt;
+
+&lt;p&gt;デジタル署名とは，契約書における物理的なサインのデジタル版で，ユーザー認証とデータ認証を同時に実現する技術のこと．メッセージの改ざんを防ぎ，メッセージに対する署名は署名した本人でしか生成できないことから，後から署名者が署名した契約について否認することを防止することができる．&lt;/p&gt;
+
+&lt;h3 id=&#34;擬似乱数生成器&#34;&gt;擬似乱数生成器&lt;/h3&gt;
+
+&lt;p&gt;真の乱数ではないにしても，暗号論的に安全とみなせる乱数列を生成するための技術のこと．&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>情報セキュリティの構成要素</title>
+      <link>/ja/post/six-elements-of-infomation-security/</link>
+      <pubDate>Mon, 28 Oct 2019 11:54:27 +0900</pubDate>
+      <guid>/ja/post/six-elements-of-infomation-security/</guid>
+      <description>
+
+&lt;h2 id=&#34;情報セキュリティの構成要素&#34;&gt;情報セキュリティの構成要素&lt;/h2&gt;
+
+&lt;p&gt;「情報セキュリティ」の言葉の指し示す意味範囲は&lt;a href=&#34;oecd.org/internet/ieconomy/15582260.pdf&#34; target=&#34;_blank&#34;&gt;OECDの情報セキュリティガイドライン&lt;/a&gt;やISO/IEC TR13335&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;として国際的に定義されている．&lt;/p&gt;
+
+&lt;p&gt;ISO/IEC TR13335にて情報セキュリティとは下記6要素のことを指すとされている．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;機密性 Confidentiality&lt;/li&gt;
+&lt;li&gt;完全性 Integrity&lt;/li&gt;
+&lt;li&gt;可用性 Availability&lt;/li&gt;
+&lt;li&gt;責任追跡性 Accountability&lt;/li&gt;
+&lt;li&gt;真正性 Authenticity&lt;/li&gt;
+&lt;li&gt;信頼性 Reliability&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;機密性-confidentiality&#34;&gt;機密性 Confidentiality&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;意図した相手以外に情報が漏れないこと&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;盗聴や内部からの情報漏洩&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;暗号技術&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;完全性-integrity&#34;&gt;完全性 Integrity&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;情報が正確であること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;情報の改ざん，ノイズによるビット反転・ビットの欠落&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;誤り訂正符号，ハッシュ関数，メッセージ認証コード，デジタル署名&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;可用性-availability&#34;&gt;可用性 Availability&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;ある情報にアクセスすることが許されている主体が，任意の時点で情報にアクセスすることができること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;システムへの過負荷，災害，意図しないロック&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;システムの多重化，クラウド化，負荷分散&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;責任追跡性-accountability&#34;&gt;責任追跡性 Accountability&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;ユーザやシステムの振る舞いについて説明が可能であること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;ログの改ざん，否認&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;ロギング，デジタル署名（否認防止）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;真正性-authenticity&#34;&gt;真正性 Authenticity&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;観測されるユーザやシステムの振る舞いが，その主体によるものであること（なりすましではない）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;なりすまし&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;認証，デジタル署名（なりすまし防止）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;信頼性-reliability&#34;&gt;信頼性 Reliability&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;意味
+
+&lt;ul&gt;
+&lt;li&gt;システムが一貫して動作すること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;リスク
+
+&lt;ul&gt;
+&lt;li&gt;盗聴や内部からの情報漏洩&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;対策
+
+&lt;ul&gt;
+&lt;li&gt;システムの多重化，負荷の監視&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;正確には企業のセキュリティリスクを査定する際のガイドラインを定めたものになっている．通称GMITS（Guidelines for the Management for IT Security）
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FramworkとLibraryの違い</title>
+      <link>/ja/post/what-is-the-difference-between-library-and-framework/</link>
+      <pubDate>Fri, 25 Oct 2019 22:45:15 +0900</pubDate>
+      <guid>/ja/post/what-is-the-difference-between-library-and-framework/</guid>
+      <description>
+
+&lt;h2 id=&#34;ありがちな会話&#34;&gt;ありがちな会話&lt;/h2&gt;
+
+&lt;p&gt;「Web Application Frameworkと言ったら，やっぱりRuby on Railsだよね！」&lt;/p&gt;
+
+&lt;p&gt;「Webのフロント開発ではjQueryってライブラリがあってだな&amp;hellip;」&lt;/p&gt;
+
+&lt;p&gt;「最近だと，FacebookがJavascriptのフレームワークとしてReactを発表してるよね」&lt;/p&gt;
+
+&lt;p&gt;「ReactよりAngular JSの方がいいよ」&lt;/p&gt;
+
+&lt;p&gt;Web系の技術の話では，たくさんのFrameworkだのLibraryだのが提案されて使用されていると思います．僕なんかも初めて聞くものがあれば，すぐにググってその正体を知ろうとするのですが，どれもこれも「これは便利なWeb Frameworkです」ぐらいしか教えてくれません．Frameworkの正体って一体何なのでしょうか．気になったので調べてみました．&lt;/p&gt;
+
+&lt;h2 id=&#34;library-v-s-framework&#34;&gt;Library v.s. Framework&lt;/h2&gt;
+
+&lt;h3 id=&#34;library&#34;&gt;Library&lt;/h3&gt;
+
+&lt;p&gt;Libraryは，コードの再利用を目的とした「便利な関数やクラスの（ただの）コレクション」のようなものです．Libraryに含まれる関数やクラスは，ある特定の処理を達成するロジックを含んでいて，開発者がそれらを利用することで開発を進めていくことになります．例えばグラフアルゴリズムのライブラリなら，Dijkstra法とかBellman-Ford法を実装した関数が含まれていて，開発者がその関数を利用することでアプリケーションを開発します．アプリケーションの開発者が書いているロジックにライブラリの関数が利用されるので，アプリケーションの制御は開発者側にあります．&lt;/p&gt;
+
+&lt;p&gt;Libraryを用いることで，他の人の仕事の恩恵に与りながら開発を進めることができます．これはとても嬉しいことです．開発の速度が上がります．&lt;/p&gt;
+
+&lt;p&gt;要するに「&lt;strong&gt;Libraryのコードを開発者が利用する&lt;/strong&gt;」のがLibraryです．&lt;/p&gt;
+
+&lt;h3 id=&#34;framework&#34;&gt;Framework&lt;/h3&gt;
+
+&lt;p&gt;Frameworkは， (初期化から実際の処理，終了といった) アプリケーションの制御は &lt;em&gt;全てFramework側にあります&lt;/em&gt; ．アプリケーションを開発者は，Frameworkが要求するロジックを部品としてFrameworkに提供することになるわけです．Frameworkはアプリケーションの骨格を定義しているともいるかもしれません．外枠だけ定義しているのです．このFrameworkの持つ性質は，ソフトウェア工学的には「制御の反転 IoC (Inversion of Control)」と呼ばれています．&lt;/p&gt;
+
+&lt;p&gt;Frameworkを用いることで，アプリケーション開発者は設計についてあれやこれや悩む必要がなくなります．Frameworkの要求に従っていれば，それなりの品質のシステムが勝手に出来上がることになるからです．また，Frameworkに則ってアプリケーションを開発していくと，コードに一貫性が生まれます．これはコードに可読性を与え，メンテナンスがしやすくなります．&lt;/p&gt;
+
+&lt;p&gt;一方で，Frameworkは「制約の集合」でもあります．アプリケーションの全体としての制御が開発者の自由にできないわけですから，Frameworkを導入するならばFrameworkの課すルールを理解する必要があります．ルールを理解するのには時間がかかるものですし，Frameworkのルールに窮屈さを感じることもあるかもしれません．小規模なその場限りの開発現場などでは，この制約がFrameworkのメリットを上回ることがあるので，Frameworkを導入しないこともあるでしょう．&lt;/p&gt;
+
+&lt;p&gt;要するに「&lt;strong&gt;Frameworkが開発者のコードを利用する&lt;/strong&gt;」のがFrameworkです．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;library-framework-relationship.jpeg&#34; data-caption=&#34;LibraryとFrameworkとあなた&#34;&gt;
+&lt;img src=&#34;library-framework-relationship.jpeg&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    LibraryとFrameworkとあなた
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tech.nikkeibp.co.jp/it/article/lecture/20070205/260697/&#34; target=&#34;_blank&#34;&gt;ソフトウエアのフレームワークとはなにか (日経XTECH)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/azuki8/items/ad7710fdefaedc63e3f7&#34; target=&#34;_blank&#34;&gt;フレームワークとライブラリの違い (Qiita)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.freecodecamp.org/news/the-difference-between-a-framework-and-a-library-bd133054023f/&#34; target=&#34;_blank&#34;&gt;The Difference Between a Framework and a Library (freeCodeCamp)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/148747/what-is-the-difference-between-a-framework-and-a-library&#34; target=&#34;_blank&#34;&gt;What is the difference between a framework and a library? (stackoverflow)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>🚩flagパッケージでコマンドライン引数を扱う</title>
+      <link>/ja/post/handle-commandline-args-with-flag-package/</link>
+      <pubDate>Fri, 25 Oct 2019 19:04:31 +0900</pubDate>
+      <guid>/ja/post/handle-commandline-args-with-flag-package/</guid>
+      <description>
+
+&lt;h2 id=&#34;flag-パッケージ&#34;&gt;&lt;code&gt;flag&lt;/code&gt;パッケージ&lt;/h2&gt;
+
+&lt;p&gt;Golangでは，標準パッケージとしてコマンドライン引数を扱う&lt;a href=&#34;https://golang.org/pkg/flag/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;flag&lt;/code&gt;&lt;/a&gt;パッケージが付属しています．「痒い所に手が届く」とはこのことですね．&lt;/p&gt;
+
+&lt;h2 id=&#34;フラグの立っていないコマンドライン引数の取得&#34;&gt;フラグの立っていないコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Parse()&lt;/code&gt;の後に&lt;code&gt;Args()&lt;/code&gt;で&lt;code&gt;[]string&lt;/code&gt;として取得できます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	args := flag.Args()
+	fmt.Println(args)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag0.go a b c
+[a b c]
+$ go run with-no-flag0.go 1 2 3
+[1 2 3]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;$n$番目の要素のみを取り出したい場合は&lt;code&gt;Arg(n)&lt;/code&gt;で&lt;code&gt;string&lt;/code&gt;として取得できます．$n$番目の要素が存在しない場合は&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;が返ってくるようです．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Parse()
+	fmt.Println(flag.Arg(0), flag.Arg(1))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-no-flag1.go hoge fuga
+hoge fuga
+$ go run with-no-flag1.go 1
+1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの立っているコマンドライン引数の取得&#34;&gt;フラグの立っているコマンドライン引数の取得&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;もしくは&lt;code&gt;型名Var()&lt;/code&gt;で，フラグを定義したのち，&lt;code&gt;Parse()&lt;/code&gt;でそれぞれの変数を取得できます．&lt;/p&gt;
+
+&lt;p&gt;フラグの定義は「フラグ名」「デフォルト値」「ヘルプメッセージ」で行います．&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;型名()&lt;/code&gt;の場合は，指定した型へのポインタが返ってきます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -int 2 -str hello -bool true
+2 hello true
+$ go run with-flag0.go
+0 default false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;型名Var()&lt;/code&gt;の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;time&amp;quot;
+)
+
+func main() {
+	var (
+		d time.Duration
+		f float64
+	)
+	flag.DurationVar(&amp;amp;d, &amp;quot;dur&amp;quot;, 1 * time.Second, &amp;quot;duration flag&amp;quot;)
+	flag.Float64Var(&amp;amp;f, &amp;quot;float&amp;quot;, 0.1, &amp;quot;float flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(d, f)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag1.go -dur 1h -float 2.3
+1h0m0s 2.3
+$ go run with-flag1.go -float str
+invalid value &amp;quot;str&amp;quot; for flag -float: strconv.ParseFloat: parsing &amp;quot;str&amp;quot;: invalid syntax
+Usage of /var/folders/.../with-flag1:
+  -dur duration
+    	duration flag (default 1s)
+  -float float
+    	float flag (default 0.1)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;フラグの書き方&#34;&gt;フラグの書き方&lt;/h2&gt;
+
+&lt;p&gt;フラグの書き方は次の2通りが可能です．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-flag value&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-flag=value&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ただし，Bool値を取得する場合は&lt;code&gt;flag=value&lt;/code&gt;を使った方がいいかもしれません．というのも， &lt;strong&gt;フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで&lt;code&gt;true&lt;/code&gt;となる&lt;/strong&gt;からです．&lt;/p&gt;
+
+&lt;p&gt;つまり，フラグを立ててBool値を取得したい場合は&lt;code&gt;-bool=true&lt;/code&gt;/&lt;code&gt;-bool=false&lt;/code&gt;としなければならないということです．&lt;code&gt;-bool false&lt;/code&gt;では&lt;code&gt;true&lt;/code&gt;となってしまいます．また&lt;code&gt;-bool false&lt;/code&gt;以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	var (
+		i = flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+		s = flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+		b = flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	)
+	flag.Parse()
+	fmt.Println(*i, *s, *b)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -bool false -int 123 -str abc # falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる
+0 default true 
+$ go run with-flag0.go -bool=true -int 123 -str abc
+123 abc true
+$ go run with-flag0.go -bool=false -int 123 -str abc
+123 abc false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに&lt;code&gt;-h&lt;/code&gt;でヘルプを表示してくれます．賢いですね．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run with-flag0.go -h
+Usage of /var/folders/.../with-flag0:
+  -bool
+    	bool flag
+  -int int
+    	int flag
+  -str string
+    	string flag (default &amp;quot;default&amp;quot;)
+exit status 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;コマンドライン引数の個数を数える&#34;&gt;コマンドライン引数の個数を数える&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;NArg()&lt;/code&gt;で非フラグなものを，&lt;code&gt;NFlag()&lt;/code&gt;でフラグなものをカウントできます．&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-golang&#34;&gt;package main
+
+import (
+	&amp;quot;flag&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+
+func main() {
+	flag.Int(&amp;quot;int&amp;quot;, 0, &amp;quot;int flag&amp;quot;)
+	flag.String(&amp;quot;str&amp;quot;, &amp;quot;default&amp;quot;, &amp;quot;string flag&amp;quot;)
+	flag.Bool(&amp;quot;bool&amp;quot;, false, &amp;quot;bool flag&amp;quot;)
+	flag.Parse()
+	fmt.Println(&amp;quot;non flag:&amp;quot;, flag.NArg())
+	fmt.Println(&amp;quot;flag:&amp;quot;, flag.NFlag())
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ go run flag-test.go -int 1 -str foo -bool=true a b
+non flag: 2
+flag: 3
+$ go run flag-test.go -int 1 -str foo -bool true a b
+non flag: 3
+flag: 3
+$ go run flag-test.go -bool true -int 1 -str foo a b
+non flag: 7
+flag: 1
+$ go run flag-test.go a b c -bool=true -str foo
+non flag: 6
+flag: 0
+$ go run flag-test.go -bool=true -str foo a b c
+non flag: 3
+flag: 2
+$ go run flag-test.go a b c
+non flag: 3
+flag: 0
+$ go run flag-test.go -bool=true -str foo
+non flag: 0
+flag: 2
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>HugoとGitHub Pagesでブログを作ってみた！</title>
+      <link>/ja/post/about-this-site/</link>
+      <pubDate>Fri, 25 Oct 2019 17:21:38 +0900</pubDate>
+      <guid>/ja/post/about-this-site/</guid>
+      <description>
+
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+
+&lt;p&gt;最近はもっぱら卒論の実装ばかりやっています，zakです．&lt;/p&gt;
+
+&lt;p&gt;プログラム書くのって難しいですよね．僕にとってはとても難しいので，わからないことがあったらデキる人のブログを参考にさせていただいたりしています．
+そんな中で，自分もコードを書くことが増えてきて，そこで得た知識をなんらかの形で発信できないかなと思って，このブログを思いつきで始めました．&lt;/p&gt;
+
+&lt;h2 id=&#34;採用技術&#34;&gt;採用技術&lt;/h2&gt;
+
+&lt;p&gt;このブログはサイトジェネレータとしてHugo，ホスティングサービスとしてGitHub Pagesを採用しています．&lt;/p&gt;
+
+&lt;p&gt;HugoはGolangで記述されたオープンソースの静的サイトジェネレーターです．設定をtomlで書いて，記事をMarkdownで書いて，それをHugoがHTMLその他ファイルに爆速でしたためてくれます．真面目にウェブサイトを作ろうとすると，「書きにくいHTMLで文章を書いて，CSSで見栄えを整えて」という感じで作っていくことになります．HTMLってあんまり洗練されていなくて人間にとっては読みずらいですよね．一方でMarkdownは文法が簡単なので，箇条書きでメモってるぐらいの感覚で構造を持った文章が書けてしまいます．Hugoを使うことで，サイト作成者はMarkdownというわかりやすい文法で記事を書くことができ，本来の仕事に専念できるわけです．&lt;/p&gt;
+
+&lt;p&gt;Hugoのいいところはそれだけではありません．Hugoはその便利さから，多くのユーザーから愛されていて，そのユーザーらがそれぞれ美しいデザインテーマを公開してくれています．どれもセンスが良く，機能面でも充実しています．このテーマはオープンソースで公開されているので，カスタマイズも簡単です．そこらへんのブログサービスを利用すると，テーマがどれも陳腐で不満ですよね．&lt;/p&gt;
+
+&lt;p&gt;今回はMarkdownで記事が執筆できるところとHugoで用いることができるAcademicというテーマが気に入ったので，Hugoを使うことにしました．&lt;/p&gt;
+
+&lt;p&gt;GitHub Pagesは，GitHubが提供している静的サイトのホスティングサービスです．GitHubのアカウントさえあれば，誰でも静的なサイトを公開することができます．何より無料なので，これを使わない手はありません．サイトのソースコードをGitHubで管理しつつ公開もできちゃうなんて，GitHubは太っ腹ですね．&lt;/p&gt;
+
+&lt;p&gt;GitHub Pagesの他にもホスティングサービスはありますが，ソースコード管理と一緒にホスティングできるところが便利だと思ったので採用しました．&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;気が向いたら，もうちょっと追記します 🙇&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>🚀最初の投稿</title>
+      <link>/ja/post/first-post/</link>
+      <pubDate>Fri, 25 Oct 2019 17:07:09 +0900</pubDate>
+      <guid>/ja/post/first-post/</guid>
+      <description>
+
+&lt;h1 id=&#34;ご挨拶&#34;&gt;ご挨拶&lt;/h1&gt;
+
+&lt;p&gt;はじめまして．技術ブログ始めてみました．ぼちぼち投稿します 👍&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>

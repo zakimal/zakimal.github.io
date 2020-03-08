@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Distributed Graph Processing | zak</title>
+    <link>/ja/tags/distributed-graph-processing/</link>
+      <atom:link href="/ja/tags/distributed-graph-processing/index.xml" rel="self" type="application/rss+xml" />
+    <description>Distributed Graph Processing</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Tue, 29 Oct 2019 23:54:29 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Distributed Graph Processing</title>
+      <link>/ja/tags/distributed-graph-processing/</link>
+    </image>
+    
+    <item>
+      <title>Parallelizing Sequential Graph Computations</title>
+      <link>/ja/post/parallelizing-sequential-graph-computations/</link>
+      <pubDate>Tue, 29 Oct 2019 23:54:29 +0900</pubDate>
+      <guid>/ja/post/parallelizing-sequential-graph-computations/</guid>
+      <description>&lt;h2 id=&#34;0-これは何&#34;&gt;0. これは何&lt;/h2&gt;
+
+&lt;p&gt;僕が最近研究している「並行グラフ処理系」に関連して，僕自身のテーマにおいて非常に参考になった論文であるParallelizing Sequential Graph Computations&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:0&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:0&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;について，その詳細をまとめました．なお，以下の資料の内容は大学のカリキュラムの一環として行われた発表会で用いたハンドアウトです．&lt;/p&gt;
+
+&lt;h2 id=&#34;1-背景&#34;&gt;1. 背景&lt;/h2&gt;
+
+&lt;p&gt;一台のメモリに載り切らないほど巨大なグラフに対する計算需要の高まりを受け，グラフ計算を並列実行するPregel&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;やGraphLab&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;をはじめとする処理系が考案された．これらは「各頂点を一台の計算機と見なし，頂点ごとに処理を実行し，頂点間でコミュニケーションをとりながら状態を更新し，その収束を以って全体の解とする」ようなThink Like A Vertex(TLAV)という計算モデルを実装している．&lt;/p&gt;
+
+&lt;p&gt;しかし，既存のグラフアルゴリズムは並列実行されることを前提としていないため，これらの処理系を利用するためには実行したいアルゴリズムをTLAVに書き下す必要があるが，これは容易な作業ではない．グラフアルゴリズムはTLAVの登場以前から研究されていて，問題を解決する最適なアルゴリズムが既に存在しているにも関わらず，TLAVな処理系ではアルゴリズムの変換が伴うため，敷居が十分に下がったとは言えない．&lt;/p&gt;
+
+&lt;p&gt;そこで，既存のグラフアルゴリズムのロジックをそのまま用いながらも，並列実行することができるような処理系 $GRAPE$ を提案する． $GRAPE$ では，計算モデルとして，既存の分散グラフ処理系が採用するTLAVではなく，Partial evaluation &amp;amp; Incremental Computationモデル(以下$GRAPE$モデル)を採用し，既存のアルゴリズムのロジックを変更することなく並列化させる．同時に，$GRAPE$モデルはTLAVと比較してコミュニケーションコストを少なく抑えることができることからより効率的な計算の実行が可能となる．&lt;/p&gt;
+
+&lt;h2 id=&#34;2-関連研究&#34;&gt;2. 関連研究&lt;/h2&gt;
+
+&lt;p&gt;分散グラフ処理の計算モデルの変遷と$GRAPE$モデルの位置付けを述べる．分散グラフ処理を実現する計算モデルとして以下の二つがよく用いられる．&lt;/p&gt;
+
+&lt;h3 id=&#34;think-like-a-vertex&#34;&gt;Think Like A Vertex&lt;/h3&gt;
+
+&lt;p&gt;最初に提案された計算モデル．PregelやGiraph&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:3&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;，GraphLab&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;に実装されている．頂点ごとに処理を実行し，頂点間でコミュニケーションをとりながら状態を更新．全頂点の状態の収束を以って全体の解とする．&lt;/p&gt;
+
+&lt;h3 id=&#34;think-like-a-graph-or-block-centric&#34;&gt;Think Like A Graph (or Block Centric)&lt;/h3&gt;
+
+&lt;p&gt;TLAVを高速化しようとする研究の中で提案されたモデル．$n$個の頂点をまとめて扱うことでコミュニケーションコストを抑え，実行効率の向上を図る．Blogel&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:4&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;で実装されている．&lt;/p&gt;
+
+&lt;p&gt;TLAVとBlock Centricモデルおよび$GRAPE$モデルを，処理単位の粒度，コミュニケーションコストの大小，プログラミングのしやすさという三つの観点から整理すると下表のようになる．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table1.png&#34; data-caption=&#34;表1. 分散グラフ計算モデルの比較&#34;&gt;
+&lt;img src=&#34;table1.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表1. 分散グラフ計算モデルの比較
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;3-partial-evaluation--incremental-computation&#34;&gt;3. Partial evaluation &amp;amp; Incremental computation&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$では，Partial evaluation &amp;amp; Incremental computationという計算モデルを採用している．これは，最初に部分グラフに対して実行したい処理を行って部分解を求め，その部分解の更新を繰り返していくことで全体の解を求めるというモデルである．&lt;/p&gt;
+
+&lt;h3 id=&#34;partial-evaluation&#34;&gt;Partial evaluation&lt;/h3&gt;
+
+&lt;p&gt;コンパイラによるプログラム最適化の文脈で登場し，XML文章中の要素を指定するXPathを分散環境下で評価する研究などでも取り上げられている&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:7&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;．&lt;/p&gt;
+
+&lt;h3 id=&#34;incremental-computation&#34;&gt;Incremental computation&lt;/h3&gt;
+
+&lt;p&gt;巨大な動的グラフ$G$に対するクエリ$Q$の応答速度を向上させる技術．グラフの変化$\Delta G$から$Q(G \oplus \Delta G) = Q(G) \oplus \Delta O$を満たすようなクエリ出力の差分$\Delta O$を求めることで，グラフ全体を用いて再計算することなく，変化後のグラフに対するクエリ結果を求める&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:8&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;．&lt;/p&gt;
+
+&lt;p&gt;例えば，図1のような5ノードからなるグラフ$G$を三つの部分グラフ$F_1$，$F_2$，$F_3$に分割する．部分グラフは，それを構成するノードとそのノードを始点とするエッジの終点も含めるものとして与える．例えば，部分グラフ$F_1$は図2となる．ここで，グラフ$G$に対してノード$1$を始点とする単一始点最短経路問題(SSSP)を考える．$GRAPE$ではまず，部分グラフ$F_1$に対してダイクストラ法を用いて計算する．この結果は$G$全体に対するSSSPの解ではないが，この結果は全体の解のたたき台となっている．この「部分グラフ$F_1$に対するダイクストラ法の適用」がPartial evaluationである．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;graph.png&#34; data-caption=&#34;図1. 全体グラフ&#34;&gt;
+&lt;img src=&#34;graph.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図1. 全体グラフ
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;f1.png&#34; data-caption=&#34;図2. 部分グラフ $F_1$&#34;&gt;
+&lt;img src=&#34;f1.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図2. 部分グラフ $F_1$
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;p&gt;$F_1$にダイクストラ法を適用することで表2を得る．ここで，ノード$4$および$5$のコストが計算されていることに注目する．これは，$F_1$のpartial evaluationの結果から，$F_3$の状態が変化した(表3におけるノード$4$および$5$の初期状態からの変化)ということであり，この変化を元に$F_3$に対してダイクストラ法を適用することで全体解に収束していく．これが，$GRAPE$のIncremental computationである．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table2.png&#34; data-caption=&#34;表2. 部分グラフ$F_1$に対するPartial evaluation&#34;&gt;
+&lt;img src=&#34;table2.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表2. 部分グラフ$F_1$に対するPartial evaluation
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;table3.png&#34; data-caption=&#34;表3. 部分グラフ$F_3$に対するIncremental computation&#34;&gt;
+&lt;img src=&#34;table3.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表3. 部分グラフ$F_3$に対するIncremental computation
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;4-grape&#34;&gt;4. $GRAPE$&lt;/h2&gt;
+
+&lt;p&gt;Partial evaluation &amp;amp; Incremental computationを図3のように組み上げることで処理系$GRAPE$を実現する．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;grape.png&#34; data-caption=&#34;図3. $GRAPE$&#34;&gt;
+&lt;img src=&#34;grape.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    図3. $GRAPE$
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;p&gt;$GRAPE$の利用者は実行したい処理を，$\sf PEval$(Partial evaluation相当)，$\sf IncEval$(Incremental computation)相当，部分解をまとめる$\sf Assemble$という三つのプログラムとして$GRAPE$に与える．$GRAPE$は一つの$\tt coordinator$と複数の$\tt worker$で構成され，$\tt coordinator$は部分グラフ間の接続関係やどの$\tt worker$がどの部分グラフを担当するかを管理している．$\tt worker$は各自が担当する部分グラフに$\sf PEval$や$\sf IncEval$を適用する．&lt;/p&gt;
+
+&lt;p&gt;$GRAPE$での演算は三つのフェーズから成る．まず$\tt coordinator$がクエリの実行を受け付け，$\tt worker$が各自が担当している部分グラフに対して$\sf PEval$を実行する．次に,
+各$\tt worker$が部分グラフの状態変化を$\tt coordinator$に通知する．$\tt coordinator$は部分グラフ同士の接続関係を考慮し，対応する$\tt worker$に変化を伝達する．知らせを受けた$\tt worker$は，状態変化に基づく$\sf IncEval$を実行し自分の担当している部分グラフの状態を更新する．$\sf IncEval$は更新が発生しなくなるまで繰り返される．$\sf IncEval$が収束すると，$\tt coordinator$は各$\tt worker$から部分解を回収し，最終的な出力を得る．&lt;/p&gt;
+
+&lt;h2 id=&#34;5-grapeのアドバンテージ&#34;&gt;5. $GRAPE$のアドバンテージ&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$は処理効率と$GRAPE$モデルの表現力において，既存の処理系に対してアドバンテージがある．$GRAPE$では部分グラフ間の状態変化をやり取りするコストのみで済むため，TLAVと比較して大幅にコミュニケーションコストが抑えられる．これによって，TLAVよりも効率的な処理が実行できる．さらに$GRAPE$で実行されるアルゴリズムのロジックは既存のものと変わらないため，既存のグラフ最適化技法を適用することができ，さらなる高速化も見込むことができる．加えて，$\sf MapReduce$など他の分散計算モデルを$GRAPE$上に表現することも可能である．例えば$\sf IncEval$でやり取りする情報を&lt;code&gt;&amp;lt;key: value&amp;gt;&lt;/code&gt;として$\sf PEval$と偶数回目の$\sf IncEval$を$\sf Map$に，奇数回目の$\sf IncEval$を$\sf Reduce$とすれば$\sf MapReduce$を表現できる．&lt;/p&gt;
+
+&lt;h2 id=&#34;6-評価&#34;&gt;6. 評価&lt;/h2&gt;
+
+&lt;p&gt;$GRAPE$モデルがTLAVよりも&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;処理時間&lt;/li&gt;
+&lt;li&gt;コミュニケーションコスト&lt;/li&gt;
+&lt;li&gt;グラフの規模に対するスケーラビリティ&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の三点において，TLAVとの性能を比較し$GRAPE$モデルの優位性を検証した．プロセッサの数を64から192まで変化させながら，liveJournal&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a class=&#34;footnote&#34; href=&#34;#fn:6&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;など複数の実世界グラフに対して単一始点最小経路問題をGiraph，GraphLab，Blogel，$GRAPE$で実行した結果を図4に示す．$GRAPE$はGiraph，GraphLab，Blogeと比べて484，36，15倍高速に処理を実行し，$\tt worker$間でやり取りされるデータ量を0.07%，0.12%，0.7%に抑えられている．&lt;/p&gt;
+
+&lt;p&gt;グラフの規模に対するスケーラビリティを，入力グラフを5Mノード50Mエッジから25Mノード250Mエッジまで変化させながら実行時間とコミュニケーションコストを計測した．その結果を図5の左二図に示す．グラフ規模に対して十分にスケールしていることがわかる．&lt;/p&gt;
+
+&lt;p&gt;図5の右端図から，${GRAPE}$では，並列実行に伴うオーバーヘッドを考慮してもなお，既存のアルゴリズムに対する高速化技法の効果が得られることがわかる．&lt;/p&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;evaluation.png&#34; data-caption=&#34;表4. 処理系ごとの実行時間とコミュニケーションコスト&#34;&gt;
+&lt;img src=&#34;evaluation.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表4. 処理系ごとの実行時間とコミュニケーションコスト
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;scalability.png&#34; data-caption=&#34;表5. ${GRAPE}$のスケーラビリティーとグラフレベル最適化の効果&#34;&gt;
+&lt;img src=&#34;scalability.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    表5. ${GRAPE}$のスケーラビリティーとグラフレベル最適化の効果
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;7-結論&#34;&gt;7. 結論&lt;/h2&gt;
+
+&lt;p&gt;Partial evaluation &amp;amp; Incremental computationという計算モデルはグラフに対しても有効であり，この計算モデルを用いることで
+既存のグラフアルゴリズムのロジックをほぼ変更することなく並列化を実現でき，分散グラフ処理系を利用する敷居を下げられる．そこでPartial evaluation &amp;amp; Incremental computationを実装する処理系$GRAPE$を提案する．Partial evaluationに相当する$\sf PEval$とIncremental computationに相当する$\sf IncEval$，部分解を集める$\sf Assemble$を定義することで既存のグラフアルゴリズムの並列化を実現する．&lt;/p&gt;
+
+&lt;div class=&#34;responsive-wrap&#34;&gt;
+  &lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vR18vtYd3XhDHVbLaP4DXmGELqvX_OV6s7OIdkwhNv4Wi6hLPREQ7wr1r4ki3PDX2mPhugO248Y4DG3/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;960&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:0&#34;&gt;Wenfei Fan, Wenyuan Yu, Jingbo Xu, Jingren Zhou, Xiaojian Luo, Qiang Yin, Ping Lu, Yang Cao, and Ruiqi Xu. 2018. Parallelizing Sequential Graph Computations. ACM Trans. Database Syst. 43, 4, Article 18 (December 2018), 39 pages. DOI: &lt;a href=&#34;https://doi.org/10.1145/3282488&#34;&gt;https://doi.org/10.1145/3282488&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:0&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Grzegorz Malewicz, Matthew H. Austern, Aart J.C Bik, JamesC. Dehnert, Ilan Horn, Naty Leiser, and Grzegorz Czajkowski.2010. Pregel: a system for large-scale graph processing. In Pro-ceedings of the 2010 ACM SIGMOD International Conferenceon Management of data (SIGMOD ’10). ACM, New York, NY,USA, 135-146.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Yucheng Low, Danny Bickson, Joseph Gonzalez, CarlosGuestrin, Aapo Kyrola, and Joseph M. Hellerstein. 2012. Dis-tributed GraphLab: a framework for machine learning and datamining in the cloud. Proc. VLDB Endow. 5, 8 (April 2012),716-727.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;Giraph. &lt;a href=&#34;http://giraph.apache.org/&#34;&gt;http://giraph.apache.org/&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Yucheng Low, Danny Bickson, Joseph Gonzalez, CarlosGuestrin, Aapo Kyrola, and Joseph M. Hellerstein. 2012. Dis-tributed GraphLab: a framework for machine learning and datamining in the cloud. Proc. VLDB Endow. 5, 8 (April 2012),716-727.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;Da Yan, James Cheng, Yi Lu, and Wilfred Ng. 2014. Blogel:a block-centric framework for distributed computation on real-world graphs. Proc. VLDB Endow. 7, 14 (October 2014), 1981-1992.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34;&gt;Peter Buneman, Gao Cong, Wenfei Fan, and Anastasios Ke-mentsietsidis. 2006. Using partial evaluation in distributedquery evaluation. In Proceedings of the 32nd international con-ference on Very large data bases (VLDB ’06), UmeshwarDayal, Khu-Yong Whang, David Lomet, Gustavo Alonso, GuyLohman, Martin Kersten, Sang K. Cha, and Young-Kuk Kim(Eds.). VLDB Endowment 211-222
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:7&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34;&gt;Wenfei Fan, Chunming Hu, and Chao Tian. 2017. Incremen-tal Graph Computations: Doable and Undoable. In Proceedingsof the 2017 ACM International Conference on Management ofData (SIGMOD ’17). ACM, New York, NY, USA, 155-169.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:8&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34;&gt;Snap. &lt;a href=&#34;http://snap.stanford.edu/data/index.html&#34;&gt;http://snap.stanford.edu/data/index.html&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:6&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

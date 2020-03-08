@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OOP | zak</title>
+    <link>/ja/tags/oop/</link>
+      <atom:link href="/ja/tags/oop/index.xml" rel="self" type="application/rss+xml" />
+    <description>OOP</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Sun, 08 Mar 2020 13:47:19 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>OOP</title>
+      <link>/ja/tags/oop/</link>
+    </image>
+    
+    <item>
+      <title>「オブジェクト指向」について考える</title>
+      <link>/ja/post/what-is-object-oriented/</link>
+      <pubDate>Sun, 08 Mar 2020 13:47:19 +0900</pubDate>
+      <guid>/ja/post/what-is-object-oriented/</guid>
+      <description>
+
+&lt;h2 id=&#34;oriented-ってどういう意味なんだろう&#34;&gt;&amp;rdquo;-oriented&amp;rdquo;ってどういう意味なんだろう？&lt;/h2&gt;
+
+&lt;p&gt;プログラミングをお勉強しているので，いろんなカタカナ用語に遭遇する．カタカナ用語ってその言葉の指す意味が字面に現れてこなくて，「それってどういう意味？」となりがちだ．&lt;/p&gt;
+
+&lt;p&gt;最近気になったのは「XXX-oriented」という言葉だ．Object-orientedとかservice-orientedとかで目にする．日本語に訳されるときは「XXX指向」って訳されている．が，日本語に訳されたところで意味は判然としない．「オブジェクト指向 とは」でググるとめちゃめちゃたくさんのブログ記事が出てくる．だいたい「オブジェクト指向ってよくわかんねぇよな！俺が解説してやる！」っていう趣旨の記事で，世界一わかりやすいと謳っている．&lt;/p&gt;
+
+&lt;p&gt;僕もそれらの類の記事はいくつか呼んだことがあるし，オブジェクト指向なプログラミングを文法からサポートするいろんな言語でプログラミングをしたことがあるので，オブジェクト指向とはなんなのか，みたいなところの「手触り感」はなんとなく分かっているけど，もうちょっとメタな視点から「XXX-oriented」の意味を考えてみたくなった．&lt;/p&gt;
+
+&lt;p&gt;「XXX-oriented」の中でも一番有名なのかも知れないのが「Object-oriented」だと思うので，そこから考えてみる．オブジェクト指向でプログラムすると，記述したい事柄を「データとデータに対する操作を一括にまとめたオブジェクト」なるものをたくさん定義して，それらの相互作用でプログラムを記述していくことになる．オブジェクト指向ではプログラムにおける主役は「オブジェクト」であり，プログラマはそれらオブジェクト同士の動きを，あたかも演劇における脚本を書いているかのように操って1つのプログラムに仕立て上げる．僕が思うに，オブジェクト指向で大事なのは「プログラムにおける主役がオブジェクトである」という点がオブジェクト指向の本当のところなのだと思う．「Object-oriented」が「オブジェクトが主役」の意味なら「XXX-oriented」は「XXXが主役」ってことなのだろうか？&lt;/p&gt;
+
+&lt;p&gt;「oriented」を適当に英語辞典で引いてみると，「特定の方向に向く，位置を定める」という意味の「orient」の過去分詞が転じた形容詞と書いてあった．ということは，字面で言えば「オブジェクトの方を向いた」って意味なのか？「オブジェクト指向」という漢字はそういう雰囲気が確かに感じられる．&lt;/p&gt;
+
+&lt;p&gt;Object-orientedって言うときはおそらく「オブジェクトを主役とする（という方向を向いた）思想に基づく技術」って意味なんだろうなぁ．となるとObject-oriented programmingっていうのは「オブジェクトを主役とする（という方向を向いた）思想に基づいて確立されたプログラミング手法」的な意味合いになりそうだし，僕の肌感ともあってくる．&lt;/p&gt;
+
+&lt;p&gt;なるほど，Service-Oriented Architectureもそう考えると，「サービス」が主役として振る舞うアーキテクチャってことなんだろうな&amp;hellip;じゃあ最近話題のマイクロサービスアーキテクチャと何が違うんだろう&amp;hellip;同じような名前だけど&amp;hellip;暇なときにでも調べてみるか．&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;「XXX-oriented」とは「XXXという方向性に基づく（技術）」ぐらいの意味&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

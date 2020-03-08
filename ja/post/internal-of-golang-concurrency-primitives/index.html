@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="尾崎 耀一 (@zak)">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="goroutineとchannelの実装について眺めてみました">
+
+  
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/internal-of-golang-concurrency-primitives/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/ja/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/ja/post/internal-of-golang-concurrency-primitives/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@zak74702675">
+  <meta property="twitter:creator" content="@zak74702675">
+  
+  <meta property="og:site_name" content="zak">
+  <meta property="og:url" content="/ja/post/internal-of-golang-concurrency-primitives/">
+  <meta property="og:title" content="Internal of Golang Concurrency Primitives | zak">
+  <meta property="og:description" content="goroutineとchannelの実装について眺めてみました"><meta property="og:image" content="/ja/post/internal-of-golang-concurrency-primitives/featured.jpeg">
+  <meta property="twitter:image" content="/ja/post/internal-of-golang-concurrency-primitives/featured.jpeg"><meta property="og:locale" content="ja-JP">
+  
+    
+      <meta property="article:published_time" content="2019-11-01T14:07:56&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-11-01T14:07:56&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/internal-of-golang-concurrency-primitives/"
+  },
+  "headline": "Internal of Golang Concurrency Primitives",
+  
+  "image": [
+    "/ja/post/internal-of-golang-concurrency-primitives/featured.jpeg"
+  ],
+  
+  "datePublished": "2019-11-01T14:07:56+09:00",
+  "dateModified": "2019-11-01T14:07:56+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "goroutineとchannelの実装について眺めてみました"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Internal of Golang Concurrency Primitives | zak</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="検索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/ja"><img src="/img/zak.gif" alt="zak"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#about"><span>ホーム</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#posts"><span>ブログ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/post/book-shelf"><span>本棚</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#contact"><span>お問い合わせ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/files/cv.pdf"><span>履歴書</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Internal of Golang Concurrency Primitives</h1>
+
+  
+  <p class="page-subtitle">goroutineとchannelの実装について眺めてみました</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Fri, Nov 1, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    19 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/ja/post/internal-of-golang-concurrency-primitives/featured_hu0554b2fe7bffe6f507f97e3011cec573_147839_720x0_resize_q90_lanczos.jpeg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<h2 id="並行処理-並列処理">並行処理？並列処理？</h2>
+
+<p>並行処理とか並列処理って一体なんなのでしょう．</p>
+
+<p>黎明期の計算機では，並行処理だの並列処理だのなんてことは，一切考えていませんでした．入力された命令を1つずつ，真面目に実行していくことで計算を実行していたのです．黎明期の計算機は，人間が紙と鉛筆でちんたら計算をするよりも，何倍も高速にかつ正確に計算をすることができたので，とても人気になりました．ただ，その当時の計算機は物理的にサイズもデカくて高価なものでした．なので，計算機を導入・設置できるのは大学などのお金と部屋が余っている組織ぐらいしかなかったわけです．</p>
+
+<p>大学に計算機が設置されると，大学の研究者たちは喜びました．これで面倒な手計算から解放されるわけですからそりゃそうでしょう．みんなでこぞって計算機を使いたくなります．でも「計算機を利用したい研究者の人数」が「設置してある計算機の台数」と比較して圧倒的に多いので，計算機の使用を巡って争奪戦が起こります．だって，当時の計算機は「入力された命令を1つずつ，真面目に実行していく」タイプの計算機なので，他の誰かが計算機に計算をさせている間は，他の研究者はその計算機を使うことができないからです．そんなの不便すぎます．せっかく便利でしかもめちゃんこ高価な計算機が設置してあるのに，しかも使いたい人はたくさんいるのに使わせてあげられないなんて，もう不満タラタラです．そこで研究者たちは考えました．</p>
+
+<p>「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」</p>
+
+<p>「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」</p>
+
+<p>ここからoperating systemとかprocessとかいろんな概念が確立されていくわけです．</p>
+
+<p>「並行」というのは，英語ではconcurrentに相当し，「1台のマシンで複数のタスクを同時に実行している（ように見える）様」を意味します．concurrentな処理は「限られたリソースを有効活用すること」を目的としていて，現在の計算機では「同時に処理しているように見せるために，複数のタスクを時間的に細切れにして全部のタスクをちょっとずつ進める」ことでconcurrentな処理を実現しています．</p>
+
+<p>一方で，似たような概念として「並列」というものもあります．英語ではparallelに相当し，「複数台のマシンで1つのタスクを実行している様」を意味します．parallelな処理は「（複数のマシンという）豊富なリソースを利用して1つのタスクを高速に実行すること」を目的としていて，concurrentとは目的が違います．</p>
+
+<h2 id="concurrentなプログラム">concurrentなプログラム</h2>
+
+<p>ここまで計算機の進化の歴史を本当にざっくり見てみましたが，じゃあconcurrentという概念がプログラムとどう絡んでいくのでしょうか．</p>
+
+<p>プログラムというのは大体「CPUでの演算」「データのI/O」「ネットワーキング」を部品として構成されています．それぞれの部品には特徴があって，「CPUでの演算」はとても高速に実行できるけれども，「データのI/O」と「ネットーワーキング」は（「CPUでの演算」と比較して）桁違いに，本当に桁違いに時間がかかります．もし計算機が「入力された命令を1つずつ，真面目に実行していく」方式で動いていたとすると，「データのI/O」と「ネットーワーキング」に取り組んでいる間，計算機はうんともすんとも言わずに黙り込んでしまうことになります．これは明らかに無駄です．CPUは何も計算を進めないでただ存在しているだけになるわけです．</p>
+
+<p>concurrentという概念の背景には「どうやって1台の計算機を複数人で共有して使うことができるだろうか？」という問題があったわけです．この問題意識が一歩進むと，「1台の計算機で複数のタスクを処理するためにはどんな仕組みが必要なんだろうか？」となり，さらに一歩進んで「（複数のタスクで構成される）1つのプログラムを1台のCPUで効率的に処理するためにはどういう仕組みが必要なんだろう？&hellip;そうだ！CPUが暇な時間帯には別の仕事をさせよう！」となるわけです．</p>
+
+<p>「時間がかかってしまう処理をやっている間に，他にできる計算をCPUにやらせよう」というのがconcurrentなプログラムを書きたい理由です．だってそうした方がやりたいこと早く終わるでしょう．しかもPersonalな計算機が世の中に普及して「計算機はより高速にユーザーの動作に応答しなきゃいけない（うんともすんとも言わない計算機は嫌われてる）」し「ユーザーは大抵の場合音楽聴きながらメールチェックしつつYoutubeで動画も見たいワガママな存在」なので，CPUに暇な時間なんてものはないわけですよ．</p>
+
+<p>「プログラムはconcurrentに実行されるべき」となるとconcurrentなプログラムを記述して，それを実際にconcurrentに実行する機構が必要になります．</p>
+
+<p>「実際にconcurrentに実行する機構」についてはOperating Systemが頑張って，プログラムがconcurrentに実行されるように実行環境を提供します．Operating Systemは結構頑張るのですが，やっぱり頑固なハードウェアさんとやりとりしないといけないので，相当大変そうです．提供してくれる実行環境の効率にも限度がありそうです．</p>
+
+<p>「concurrentなプログラムを記述」するところについては，プログラミング言語の守備範囲なわけですが，いろんな言語がいろんなアプローチを取って，concurrentなプログラムをより簡単に書けるように，プログラム開発者に部品primitiveを提供してくれます．</p>
+
+<p>でも古参のプログラミング言語たちは，そのデザインの根幹に「プログラムがconcurrentに実行される」とか想定していないわけで，いざやろうとすると不自然なところとかがやっぱりでてきてしまいます．なのでgolangは，言語のデザインの段階でconcurrencyを考慮した言語として誕生しました．そうすれば，concurrentなプログラムがより直感的にわかりやすく書けるようになるわけです．</p>
+
+<h2 id="goroutineとchannel">goroutineとchannel</h2>
+
+<p>golangはconcurrentなプログラムを書くためのprimitiveとしてgoroutineとchannelを提供しています．というのもgolangでは，concurrentなプログラムを「goroutineたちがメッセージをやりとりしながら進行する計算」としてモデル化しているのです．ここで注意しておきたいのが，concurrentなプログラムを表現する別のモデルも考えられるという点です．モデル化にはバリエーションがあるので「goroutineたちがmessage passing」だけが唯一のモデルというわけではないです．</p>
+
+<p>goroutineというのは，概念的にはOSの提供するプロセスとかスレッドみたいなもので，実行中の処理を抽象化したものです．直感的にはOSのスレッドと思っていてもいいかもしれません．実態はちょっと違うんですけどね．この「抽象化された処理」同士がmessage passingによって情報を共有することでconcurrentな処理が実現できることになります．</p>
+
+<p>channelというのは，goroutine間でのコミュニケーションをサポートするためにメッセージキューです．</p>
+
+<p>golangは言語設計の根底にある思想として</p>
+
+<blockquote>
+<p>Don&rsquo;t communicate by sharing memory, share memory by communicating.</p>
+</blockquote>
+
+<p>を，掲げています．要するに「goroutineたちは共有メモリを設けるのではなくてmessage passingでコミュニケーションをとる」ように設計しようということです．</p>
+
+<h2 id="goroutineとchannelの設計と実装を眺める">goroutineとchannelの設計と実装を眺める</h2>
+
+<h3 id="goroutine">goroutine</h3>
+
+<p>goroutineは「実行中の処理を抽象化したもの」と書きましたが，これは具体的には「計算に用いるstackと実行状態を保持している構造体」として実装されています．</p>
+
+<pre><code class="language-golang">type g struct {
+	// Stack parameters.
+	// stack describes the actual stack memory: [stack.lo, stack.hi).
+	// stackguard0 is the stack pointer compared in the Go stack growth prologue.
+	// It is stack.lo+StackGuard normally, but can be StackPreempt to trigger a preemption.
+	// stackguard1 is the stack pointer compared in the C stack growth prologue.
+	// It is stack.lo+StackGuard on g0 and gsignal stacks.
+	// It is ~0 on other goroutine stacks, to trigger a call to morestackc (and crash).
+	stack       stack   // offset known to runtime/cgo
+	stackguard0 uintptr // offset known to liblink
+	stackguard1 uintptr // offset known to liblink
+
+	// ,,,
+}
+</code></pre>
+
+<p>「それってOSの提供するプロセスとかスレッドと同じじゃないの？」</p>
+
+<p>それは確かにそうなんですが，goroutineはOSの提供するプロセスとかスレッドと同レベルの存在ではなくて，goroutineは，OSの提供するスレッドに対してM:Nでマッピングされる「golangのruntimeが提供する，ユーザー空間で定義されたスレッド」として存在しています．golangのruntimeはgoroutineを管理していて「いつ，どのgoroutineを実行するか」を決定するschedulerとしての役割も担っています．つまりgolangのruntimeはユーザー空間で動く「ミニOS」のようなものな訳です．とは言いつつも，実際に実行されるためにはOSの提供するスレッドとして実行されなければいけないわけですから，goroutineはスレッドにマッピングされることになります．golangのschedulerはgoroutineとOSのスレッドを，M:Nでマッピングします．つまり複数のgoroutineが複数のOSスレッドとして実行されるわけです．1つのgoroutineが複数のOSスレッドとして実行されるし，1つのOSスレッドでは複数のgoroutineを実行することになります．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="goroutine.jpeg" data-caption="OS Process v.s. OS Thread v.s. Goroutine">
+<img src="goroutine.jpeg" alt="" ></a>
+
+
+  
+  
+  <figcaption>
+    OS Process v.s. OS Thread v.s. Goroutine
+  </figcaption>
+
+
+</figure>
+
+
+<p>となると，重要なのは「golangのruntimeがどのようなルールでgoroutineの実行計画を立てるのか」です．</p>
+
+<h4 id="golangのruntimeによるgoroutineのスケジューリング">golangのruntimeによるgoroutineのスケジューリング</h4>
+
+<p>登場するのは<code>M</code>，<code>G</code>，<code>P</code>の三人．</p>
+
+<ul>
+<li><code>M</code>
+
+<ul>
+<li>machineの<code>M</code></li>
+<li>OSスレッドに相当する</li>
+</ul></li>
+<li><code>G</code>
+
+<ul>
+<li>goroutineの<code>G</code></li>
+</ul></li>
+<li><code>P</code>
+
+<ul>
+<li>processorの<code>P</code></li>
+<li>スケジューリングのコンテキスト（次どの<code>G</code>を実行するのか）を管理している</li>
+<li>具体的に言えば，runnableなgoroutineのキューを管理しているのが<code>P</code></li>
+</ul></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="gmp.jpeg" data-caption="G，M，P">
+<img src="gmp.jpeg" alt="" ></a>
+
+
+  
+  
+  <figcaption>
+    <code>G</code>，<code>M</code>，<code>P</code>
+  </figcaption>
+
+
+</figure>
+
+
+<p>まず，環境変数<code>GOMAXPROCS</code>の数だけ<code>M</code>，<code>P</code>がセットされます．以下では，<code>GOMAXPROCS = 2</code>とします．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="gmp2.jpeg" alt="" >
+
+
+
+</figure>
+
+
+<p>runnableな<code>G</code>が<code>P</code>にenqueueされ，<code>M</code>は<code>P</code>からrunnableな<code>G</code>を1個取り出して実行します．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="assignment.gif" alt="" >
+
+
+
+</figure>
+
+
+<p>もし，queueにrunnableな<code>G</code>が0個になってしまったら，他のqueueから半分盗みます．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="work-stealing.gif" alt="" >
+
+
+
+</figure>
+
+
+<p>「自分のqueueが空になったら他の<code>M</code>の持つ<code>P</code>から半分奪う」というスケジューリングアルゴリズムはwork stealingアルゴリズムと呼ばれています．golangのruntimeのスケジューラーはこのwork stealingアルゴリズムに従ってgoroutineのスケジューリングを行います．このアルゴリズムはCPUをたくさん使うような処理にスケジューリングには効率的である一方でI/O待ちを伴う処理（<code>syscall</code>の実行やネットワーク処理）とは相性が悪いです．そのため，いくつかの工夫がされています．</p>
+
+<p>まず，golangのruntimeに存在しているものを整理します．上で登場した<code>M</code>，<code>G</code>，<code>P</code>の他にruntimeには</p>
+
+<ul>
+<li>グローバルキュー
+
+<ul>
+<li>各<code>M</code>-<code>P</code>に対応するqueueとは別に存在するキュー</li>
+<li>通常<code>G</code>がrunnableになると<code>P</code>の持つキューに入るが，いくつかの状況ではこちらに入ります</li>
+</ul></li>
+<li><a href="https://github.com/golang/go/blob/15ea61c50ca25295497e78354f7f8397e73e3590/src/runtime/proc.go#L4427:6" target="_blank"><code>sysmon</code></a>
+
+<ul>
+<li><code>GOMAXPROCS</code>の数だけの<code>M</code>と<code>P</code>の他に，<code>sysmon</code>という関数を実行し続ける特別な<code>M</code>が存在しています</li>
+<li><code>sysmon</code>の実態は無限ループで，そのループの中で<code>netpoll</code>のチェックなどを行っています</li>
+</ul></li>
+<li><code>P</code> Idle List
+
+<ul>
+<li>暇な<code>P</code>のリスト</li>
+</ul></li>
+<li><code>M</code> Idle List
+
+<ul>
+<li>暇な<code>M</code>のリスト</li>
+</ul></li>
+</ul>
+
+<h5 id="syscall-を実行した場合"><code>syscall</code>を実行した場合</h5>
+
+<p>時間のかかる<code>syscall</code>を実行した場合，<code>sysmon</code>がそれを検知し，<code>syscall</code>を発行した<code>G</code>を実行している<code>M</code>から<code>P</code>を切り離し，別の<code>M</code>にその<code>P</code>をアタッチして処理を継続させます．
+<code>syscall</code>終了後は，まず<code>P</code> Idle Listを確認して暇そうにしている<code>P</code>を自身（<code>M</code>）にアタッチして処理を進めます．<code>P</code> Idle Listがからの場合は<code>syscall</code>を発行した<code>G</code>をグローバルキューに突っ込み（この<code>G</code>はいずれGCされる），自身（<code>M</code>）は<code>M</code> Idle Listに入ります．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="syscall.gif" alt="" >
+
+
+
+</figure>
+
+
+<h5 id="ネットワーク処理をした場合">ネットワーク処理をした場合</h5>
+
+<p>ネットワーク処理の発生時には<code>netpoller</code>という仕組みに，ネットワーク処理を実行しているgoroutineが登録され，<code>sysmon</code>が<code>netpoller</code>にポーリングします．ネットワーク処理が終了したら<code>netpoller</code>からグローバルキューに追加されて，<code>M</code>で続きを実行されるのを待つことになります．</p>
+
+<p>golangの標準ライブラリが提供するネットワーキングのAPIはブロッキングな処理となっていますが，goroutineはOSスレッドに対してM:Nでマッピングされるため，<code>netpoller</code>をによってノンブロッキングな処理として実行されることになります．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="network-read.gif" alt="" >
+
+
+
+</figure>
+
+
+<h3 id="channel">channel</h3>
+
+<p>channelはgoroutine間でのメッセージングをサポートするキューです．channelにはいくつかの面白い特徴があります．</p>
+
+<ul>
+<li>channelはgoroutine-safe
+
+<ul>
+<li>複数のgoroutineがあるchannelに同時にアクセスしても問題が発生しないようにロック機構が組み込まれています</li>
+</ul></li>
+<li>channelはgoroutine間でFIFOなデータの受け渡しが可能です</li>
+<li>channelはその状況次第ではgoroutineをブロックしたりアンブロックしたりできます
+
+<ul>
+<li>バッファ0のchannelはgoroutineを同期させることができます．つまりあるgorotuineがchannelに書き込むと，相手のgoroutineがそれを読み込むまで書き込んだgoroutineの実行はブロックされるし，channelから読み込みたいgoroutineの実行は，相手のgoroutineが何かを書き込むまでブロックされます．</li>
+</ul></li>
+</ul>
+
+<p>channelは<a href="https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L32:6" target="_blank"><code>hchan</code></a>という名前の構造体で実装されています．</p>
+
+<pre><code class="language-golang">type hchan struct {
+	qcount   uint           // total data in the queue
+	dataqsiz uint           // size of the circular queue
+	buf      unsafe.Pointer // points to an array of dataqsiz elements
+	elemsize uint16
+	closed   uint32
+	elemtype *_type // element type
+	sendx    uint   // send index
+	recvx    uint   // receive index
+	recvq    waitq  // list of recv waiters
+	sendq    waitq  // list of send waiters
+
+	// lock protects all fields in hchan, as well as several
+	// fields in sudogs blocked on this channel.
+	//
+	// Do not change another G's status while holding this lock
+	// (in particular, do not ready a G), as this can deadlock
+	// with stack shrinking.
+	lock mutex
+}
+</code></pre>
+
+<p>まず，構造体<code>hchan</code>のメンバーとして<code>lock mutex</code>が見えるので，channelはgoroutine-safeです．複数のgoroutineが同時にアクセスしても問題が発生しないようになっています．goroutineがchannelに対して読み書きをしたくなったらロックを取ってから行うようになっているということです．</p>
+
+<p>上に示した通り，channelの実体は「circular queue（へのポインタ）」です．組み込みの<code>make()</code>でchannelを作ると，実体はheap領域に確保され，それへのポインタが返されます．<code>buf</code>がバッファ先頭へのポインタで，<code>sendx</code>・<code>recvx</code>がそれぞれキューの先頭とお尻の番号になっています．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+
+  <a data-fancybox="" href="hchan.jpeg" data-caption="構造体hchan">
+<img src="hchan.jpeg" alt="" ></a>
+
+
+  
+  
+  <figcaption>
+    構造体<code>hchan</code>
+  </figcaption>
+
+
+</figure>
+
+
+<p>なので，channelにメッセージが送り込まれたら，<code>buf[0]</code>にメッセージが入り，<code>sendx</code>がインクリメントされて1になります．続けてメッセージが2個送り込まれると<code>buf[1]</code>，<code>buf[2]</code>にメッセージが書き込まれ，<code>sendx</code>が0に戻ります．ここでメッセージが1個読まれると<code>buf[0]</code>の内容がdequeueて<code>recvx</code>が1になります．特に難しいことはなく，一般のcircular queueの動作ですね．</p>
+
+<p>channel間のメッセージングはとても直感的に実現することができます．channelにメッセージを書き込む時は，まず<code>hchan</code>のロックを取って，次に<code>buf</code>のお尻に送りたいデータをメモリコピーして，アンロック．channelからメッセージを読み込む時は，同様にまず<code>hchan</code>のロックを取って，<code>buf</code>の先頭をメモリコピーして，アンロック．とてもシンプルな動作です．</p>
+
+<p>実はこの挙動こそが，golangの</p>
+
+<blockquote>
+<p>Don&rsquo;t communicate by sharing memory, share memory by communicating.</p>
+</blockquote>
+
+<p>を実装している箇所と言えます．</p>
+
+<p>goroutine間で共有しているのは構造体<code>hchan</code>だけです．しかも<code>hchan</code>はロックによって排他処理が施されるため，goroutine-safeです．<code>hchan</code>の<code>buf</code>に値を書き込む（つまりchannelに値を送る）・値を読み込む（つまりchannelから値を取り出す）動作は全て<strong>メモリコピー</strong>で行われます．goroutine間でやり取りする情報は（メモリを共有するのではなくて）メモリコピーして渡しましょうというのが，上の標語の実装と言えます．</p>
+
+<p>channelはgoroutineの挙動をブロックしたりアンブロックしたりすることができます．バッファに空きが無いchannel（バッファ0のchannelや容量一杯データが書き込まれているchannel）に対してデータを送り込もうとすると，<a href="https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/chan.go#L162" target="_blank"><code>gopark()</code></a>が実行されます．この関数は，golangのruntimeのスケジューラを呼び出して，バッファに空きが無いchannelにデータを送り込もうとしたgoroutineの状態を<code>wait</code>にして別のgoroutineの実行を始めます．channelに対してデータを送り込むロジックの中に，goroutineをブロックするロジックが組み込まれているということになります．では，どうやってブロックされたgoroutineの実行を再開するのでしょうか．</p>
+
+<p>ここで興味深いのが，<code>gopark()</code>の実行の直前に「どのgoroutineがどんな値を送り込もうとしていたのかをchannelの中に記録しておく」というところです．構造体<code>hchan</code>には<code>sendq</code>，<code>recvq</code>というメンバがあり，そこに「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」という情報を保持しています．「このchannelにどのgoroutineがどんなデータを送り込もうとしているのか，取り出すのはどのgoroutineでどこに読み込もうとしているのか」を保持する構造体は<a href="https://github.com/golang/go/blob/1f3339f441e2053f8efd7ead417761ea319fe790/src/runtime/runtime2.go#L342:6" target="_blank"><code>sudog</code></a>という名前になっています．なぜこの名前なのかは<a href="https://groups.google.com/forum/#!topic/golang-codereviews/rC9BLPFvkW8" target="_blank">ここのメーリスの一連の流れ</a>を読むとわかるかもしれませんよ．</p>
+
+<pre><code class="language-golang">// sudog represents a g in a wait list, such as for sending/receiving
+// on a channel.
+//
+// sudog is necessary because the g ↔ synchronization object relation
+// is many-to-many. A g can be on many wait lists, so there may be
+// many sudogs for one g; and many gs may be waiting on the same
+// synchronization object, so there may be many sudogs for one object.
+//
+// sudogs are allocated from a special pool. Use acquireSudog and
+// releaseSudog to allocate and free them.
+type sudog struct {
+	// The following fields are protected by the hchan.lock of the
+	// channel this sudog is blocking on. shrinkstack depends on
+	// this for sudogs involved in channel ops.
+
+	g *g
+
+	// isSelect indicates g is participating in a select, so
+	// g.selectDone must be CAS'd to win the wake-up race.
+	isSelect bool
+	next     *sudog
+	prev     *sudog
+	elem     unsafe.Pointer // data element (may point to stack)
+
+	// The following fields are never accessed concurrently.
+	// For channels, waitlink is only accessed by g.
+	// For semaphores, all fields (including the ones above)
+	// are only accessed when holding a semaRoot lock.
+
+	acquiretime int64
+	releasetime int64
+	ticket      uint32
+	parent      *sudog // semaRoot binary tree
+	waitlink    *sudog // g.waiting list or semaRoot
+	waittail    *sudog // semaRoot
+	c           *hchan // channel
+}
+</code></pre>
+
+<p><code>gopark()</code>によって受け取り手のgoroutineの実行が開始されると，<strong>受け取り手のgoroutineが，channelの<code>sendq</code>の中身を確認して，実行をブロックされてしまった送り手のgoroutineが最後にchannelに送り込もうとした値を（送り手側に代わって）受け取り手側がchannelの<code>buf</code>にコピーします</strong>．これはある種の最適化です．真面目に，送り手側の実行が再開されてからchannelにデータを送り込むことにするとchannelに対するロックを取る必要があり，排他処理をする回数が1回増えてしまいます．「誰がどんな値を送ろうとしていたのか」が自明であるならば，先にやってしまえという考えのようです．</p>
+
+<p>channelから値を1個受け取ると，<code>goready()</code>が実行されて，スケジューラーが起動し，バッファに空きが無いchannelにメッセージを送ろうとしたgoroutineの状態をrunnableにセットして実行待ちのキューに入ります．</p>
+
+<p>goroutineが空のchannelに対して読み込みを行おうとすると，そのgoroutineの動作はブロックされます．この挙動はchannelからデータを受け取るロジックである<code>recv()</code>関数内に記述されています．さらに面白いのが，「どのgoroutineが，どこに値を受け取ろうとしていたのか」を<code>recvq</code>に保存していることです．これによって，channelにデータを送り込むgoroutineが，受け取り先のgoroutineのスタック領域を直接いじってデータを送り切ってしまうことが可能となります．goroutineの実体は（雑に言えば）stackを持つ構造体で，OSプロセスのスタック領域に置かれています．つまり別のgoroutineの持つstackを直接いじることが，channelでのデータのやり取りの限られた状況においてのみ許されているというのが興味深いです．</p>
+
+<p>golangのchannel周りの実装を見て，</p>
+
+<ul>
+<li>「排他処理を含む簡潔な実装の方が，排他処理なしの複雑な実装よりマシ．いくらパフォーマンスが良くても，それが複雑なコードでも良いことの理由にはならない」</li>
+<li>「パフォーマンスの観点から，goroutineというユーザーレベルのスレッドを実装し（OSスレッドをブロックさせない），異なるgoroutineを跨いだメモリコピーを許す（その分実装がやや複雑になるがそれは許容する）」</li>
+</ul>
+
+<p>という相反する考えが感じられます．つまり</p>
+
+<blockquote>
+<p>simplicityとperformaceには明確なtrade-offが存在する</p>
+</blockquote>
+
+<p>ということですね．</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>今回初めてruntimeをじっくり読みました．今まで概念として理解していたものの実体をコードとして掴めたので，とても楽しかったです．今回はgoroutineとchannel周りが中心だったので，次はスケジューラー周辺をもっとつぶさに見ていきたいと思います．</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/ja/tags/golang/">Golang</a>
+  
+  <a class="badge badge-light" href="/ja/tags/goroutine/">Goroutine</a>
+  
+  <a class="badge badge-light" href="/ja/tags/channel/">Channel</a>
+  
+  <a class="badge badge-light" href="/ja/tags/concurrency/">Concurrency</a>
+  
+  <a class="badge badge-light" href="/ja/tags/parallelism/">Parallelism</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/internal-of-golang-concurrency-primitives/&amp;text=Internal%20of%20Golang%20Concurrency%20Primitives" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/internal-of-golang-concurrency-primitives/&amp;t=Internal%20of%20Golang%20Concurrency%20Primitives" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Internal%20of%20Golang%20Concurrency%20Primitives&amp;body=/ja/post/internal-of-golang-concurrency-primitives/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/internal-of-golang-concurrency-primitives/&amp;title=Internal%20of%20Golang%20Concurrency%20Primitives" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Internal%20of%20Golang%20Concurrency%20Primitives%20/ja/post/internal-of-golang-concurrency-primitives/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/internal-of-golang-concurrency-primitives/&amp;title=Internal%20of%20Golang%20Concurrency%20Primitives" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>関連項目</h3>
+    <ul>
+      
+      <li><a href="/ja/post/golang-channels-tutorial/">Golang channels tutorial</a></li>
+      
+      <li><a href="/ja/post/handle-commandline-args-with-flag-package/">🚩flagパッケージでコマンドライン引数を扱う</a></li>
+      
+      <li><a href="/ja/post/about-this-site/">HugoとGitHub Pagesでブログを作ってみた！</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/1c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/abnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/accesslog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/actionscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ada.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/angelscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/apache.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arcade.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arduino.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/armasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/asciidoc.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/aspectj.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autohotkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autoit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/avrasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/axapta.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/basic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/brainfuck.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/capnproto.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ceylon.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clean.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cmake.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coffeescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coq.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crmsh.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crystal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/csp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/d.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dart.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/delphi.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/diff.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/django.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dns.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dsconfig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dts.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ebnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elixir.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/erb.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/excel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/flix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fortran.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fsharp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gams.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gauss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gcode.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gherkin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/glsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/golo.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gradle.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/groovy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/handlebars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haskell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haxe.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hsp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/htmlbars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/inform7.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ini.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/irpf90.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/isbl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/java.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/jboss-cli.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/kotlin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lasso.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ldif.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/leaf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/less.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lisp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livecodeserver.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/llvm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lua.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mathematica.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/maxima.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mercury.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mipsasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mizar.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mojolicious.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/monkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/moonscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/n1ql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nginx.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nimrod.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nsis.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/objectivec.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ocaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/openscad.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/oxygene.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/parser3.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pgsql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/php.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pony.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/powershell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/processing.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/profile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/prolog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/properties.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/protobuf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/puppet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/purebasic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/q.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/qml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/reasonml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rib.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/roboconf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/routeros.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ruby.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scilab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smali.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smalltalk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sqf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stan.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/step21.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stylus.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/subunit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/swift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/taggerscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tcl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/thrift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/typescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbnet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript-html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/verilog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vhdl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/x86asm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xquery.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/zephir.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/ja/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"結果が見つかりませんでした","placeholder":"検索...","results":"results found"};
+      const content_type = {
+        'post': "投稿",
+        'project': "プロジェクト",
+        'publication' : "発表文献",
+        'talk' : "登壇"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; zak 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> コピー
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> ダウンロード
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

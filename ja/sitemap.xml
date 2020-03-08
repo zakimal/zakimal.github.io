@@ -3,18 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/book-shelf/</loc>
-    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+    <loc>/ja/tags/object-oriented-programming/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/book-shelf/</loc>
-    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+    <loc>/ja/tags/oop/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+    <loc>/ja/post/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -23,13 +23,13 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/post/"
+                href="/ja/post/"
                 />
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+    <loc>/ja/tags/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -38,13 +38,18 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/tags/"
+                href="/ja/tags/"
                 />
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+    <loc>/ja/tags/terminology/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -53,307 +58,317 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/"
+                href="/ja/"
                 />
   </url>
   
   <url>
-    <loc>/tags/golang/</loc>
+    <loc>/ja/post/what-is-object-oriented/</loc>
+    <lastmod>2020-03-08T13:47:19+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/post/book-shelf/</loc>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/tags/book-shelf/</loc>
+    <lastmod>2019-11-25T23:57:01+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/tags/golang/</loc>
     <lastmod>2019-11-14T14:57:55+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/golang-structure-implementation-patterns/</loc>
+    <loc>/ja/post/golang-structure-implementation-patterns/</loc>
     <lastmod>2019-11-14T14:57:55+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/implementation-pattern/</loc>
+    <loc>/ja/tags/implementation-pattern/</loc>
     <lastmod>2019-11-14T14:57:55+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/json-vs-protobuf-vs-flatbuf/</loc>
+    <loc>/ja/post/json-vs-protobuf-vs-flatbuf/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/data-serializing/</loc>
+    <loc>/ja/tags/data-serializing/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/flatbuf/</loc>
+    <loc>/ja/tags/flatbuf/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/json/</loc>
+    <loc>/ja/tags/json/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/protobuf/</loc>
+    <loc>/ja/tags/protobuf/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/xml/</loc>
+    <loc>/ja/tags/xml/</loc>
     <lastmod>2019-11-04T01:03:05+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/blockchain/</loc>
+    <loc>/ja/tags/blockchain/</loc>
     <lastmod>2019-11-03T23:48:08+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/distributed-identity/</loc>
+    <loc>/ja/tags/distributed-identity/</loc>
     <lastmod>2019-11-03T23:48:08+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/identity/</loc>
+    <loc>/ja/tags/identity/</loc>
     <lastmod>2019-11-03T23:48:08+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/self-sovereign-identity/</loc>
+    <loc>/ja/tags/self-sovereign-identity/</loc>
     <lastmod>2019-11-03T23:48:08+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/what-is-self-sovereign-identity/</loc>
+    <loc>/ja/post/what-is-self-sovereign-identity/</loc>
     <lastmod>2019-11-03T23:48:08+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/channel/</loc>
+    <loc>/ja/tags/channel/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/concurrency/</loc>
+    <loc>/ja/tags/concurrency/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/goroutine/</loc>
+    <loc>/ja/tags/goroutine/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/internal-of-golang-concurrency-primitives/</loc>
+    <loc>/ja/post/internal-of-golang-concurrency-primitives/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/parallelism/</loc>
+    <loc>/ja/tags/parallelism/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/goalg/</loc>
+    <loc>/ja/tags/goalg/</loc>
     <lastmod>2019-10-31T22:32:28+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/golang-channels-tutorial/</loc>
+    <loc>/ja/post/golang-channels-tutorial/</loc>
     <lastmod>2019-10-31T22:32:28+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/tutorial/</loc>
+    <loc>/ja/tags/tutorial/</loc>
     <lastmod>2019-10-31T22:32:28+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/concurrent/</loc>
+    <loc>/ja/tags/concurrent/</loc>
     <lastmod>2019-10-31T16:26:54+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/concurrent-vs-parallel/</loc>
+    <loc>/ja/post/concurrent-vs-parallel/</loc>
     <lastmod>2019-10-31T16:26:54+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/parallel/</loc>
+    <loc>/ja/tags/parallel/</loc>
     <lastmod>2019-10-31T16:26:54+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/terminology/</loc>
-    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/distributed-graph-processing/</loc>
+    <loc>/ja/tags/distributed-graph-processing/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/grape/</loc>
+    <loc>/ja/tags/grape/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/graph/</loc>
+    <loc>/ja/tags/graph/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/parallel-computation/</loc>
+    <loc>/ja/tags/parallel-computation/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/parallel-graph-computation/</loc>
+    <loc>/ja/tags/parallel-graph-computation/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/parallelizing-sequential-graph-computations/</loc>
+    <loc>/ja/post/parallelizing-sequential-graph-computations/</loc>
     <lastmod>2019-10-29T23:54:29+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/emulator/</loc>
+    <loc>/ja/tags/emulator/</loc>
     <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/simulator-vs-emulator/</loc>
+    <loc>/ja/post/simulator-vs-emulator/</loc>
     <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/simulator/</loc>
+    <loc>/ja/tags/simulator/</loc>
     <lastmod>2019-10-29T23:24:38+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/git/</loc>
+    <loc>/ja/tags/git/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/github/</loc>
+    <loc>/ja/tags/github/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/three-kinds-of-merge-on-github/</loc>
+    <loc>/ja/post/three-kinds-of-merge-on-github/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/tips/</loc>
+    <loc>/ja/tags/tips/</loc>
     <lastmod>2019-10-29T19:50:58+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/activitypub/</loc>
+    <loc>/ja/tags/activitypub/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/decentralization/</loc>
+    <loc>/ja/tags/decentralization/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/distributed-social-network/</loc>
+    <loc>/ja/tags/distributed-social-network/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/federated-social-web/</loc>
+    <loc>/ja/tags/federated-social-web/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/what-is-activitypub/</loc>
+    <loc>/ja/post/what-is-activitypub/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/mastodon/</loc>
+    <loc>/ja/tags/mastodon/</loc>
     <lastmod>2019-10-28T17:49:25+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/cryptography/</loc>
+    <loc>/ja/tags/cryptography/</loc>
     <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/memo/</loc>
+    <loc>/ja/tags/memo/</loc>
     <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/symmetric-key-encryption/</loc>
+    <loc>/ja/tags/symmetric-key-encryption/</loc>
     <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/symmetric-key-encription-scheme/</loc>
+    <loc>/ja/post/symmetric-key-encription-scheme/</loc>
     <lastmod>2019-10-28T17:19:36+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/basic-cryptographic-technologies/</loc>
+    <loc>/ja/post/basic-cryptographic-technologies/</loc>
     <lastmod>2019-10-28T12:40:48+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/security/</loc>
+    <loc>/ja/tags/security/</loc>
     <lastmod>2019-10-28T11:54:27+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/six-elements-of-infomation-security/</loc>
+    <loc>/ja/post/six-elements-of-infomation-security/</loc>
     <lastmod>2019-10-28T11:54:27+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/framework/</loc>
+    <loc>/ja/tags/framework/</loc>
     <lastmod>2019-10-25T22:45:15+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/what-is-the-difference-between-library-and-framework/</loc>
+    <loc>/ja/post/what-is-the-difference-between-library-and-framework/</loc>
     <lastmod>2019-10-25T22:45:15+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/library/</loc>
+    <loc>/ja/tags/library/</loc>
     <lastmod>2019-10-25T22:45:15+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/handle-commandline-args-with-flag-package/</loc>
+    <loc>/ja/post/handle-commandline-args-with-flag-package/</loc>
     <lastmod>2019-10-25T19:04:31+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/hugo/</loc>
+    <loc>/ja/tags/hugo/</loc>
     <lastmod>2019-10-25T17:21:38+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/about-this-site/</loc>
+    <loc>/ja/post/about-this-site/</loc>
     <lastmod>2019-10-25T17:21:38+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/first-post/</loc>
+    <loc>/ja/post/first-post/</loc>
     <lastmod>2019-10-25T17:07:09+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
+    <loc>/ja/authors/admin/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -362,12 +377,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/authors/admin/"
+                href="/ja/authors/admin/"
                 />
   </url>
   
   <url>
-    <loc>/authors/</loc>
+    <loc>/ja/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -376,12 +391,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/authors/"
+                href="/ja/authors/"
                 />
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/ja/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -390,12 +405,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/categories/"
+                href="/ja/categories/"
                 />
   </url>
   
   <url>
-    <loc>/publication_types/</loc>
+    <loc>/ja/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -404,12 +419,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/publication_types/"
+                href="/ja/publication_types/"
                 />
   </url>
   
   <url>
-    <loc>/publication/</loc>
+    <loc>/ja/publication/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -418,12 +433,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/publication/"
+                href="/ja/publication/"
                 />
   </url>
   
   <url>
-    <loc>/talk/</loc>
+    <loc>/ja/talk/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -432,7 +447,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/talk/"
+                href="/ja/talk/"
                 />
   </url>
   

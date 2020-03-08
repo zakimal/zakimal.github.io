@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cryptography | zak</title>
+    <link>/ja/tags/cryptography/</link>
+      <atom:link href="/ja/tags/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    <description>Cryptography</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Mon, 28 Oct 2019 17:19:36 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>Cryptography</title>
+      <link>/ja/tags/cryptography/</link>
+    </image>
+    
+    <item>
+      <title>共通鍵暗号</title>
+      <link>/ja/post/symmetric-key-encription-scheme/</link>
+      <pubDate>Mon, 28 Oct 2019 17:19:36 +0900</pubDate>
+      <guid>/ja/post/symmetric-key-encription-scheme/</guid>
+      <description>
+
+&lt;h2 id=&#34;共通鍵暗号&#34;&gt;共通鍵暗号&lt;/h2&gt;
+
+&lt;p&gt;暗号化・復号で同一の鍵を用いる暗号化方式&lt;/p&gt;
+
+&lt;h2 id=&#34;シナリオ&#34;&gt;シナリオ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Aliceが秘密鍵$key$を作成し，Bobに安全に共有&lt;/li&gt;
+&lt;li&gt;Aliceがメッセージ$m$を$key$で暗号化$c = Enc(m, key)$し，Bobに送信&lt;/li&gt;
+&lt;li&gt;Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;共通鍵暗号の満たすべき性質&#34;&gt;共通鍵暗号の満たすべき性質&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;正当性
+
+&lt;ul&gt;
+&lt;li&gt;$m = Dec(Enc(m, key), key)$が成立すること&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;秘匿性
+
+&lt;ul&gt;
+&lt;li&gt;暗号文$c$から平文$m$に関連する情報が得られないこと&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;共通鍵暗号に対する攻撃モデル&#34;&gt;共通鍵暗号に対する攻撃モデル&lt;/h2&gt;
+
+&lt;h3 id=&#34;暗号文単独攻撃-ciphertext-only-attack&#34;&gt;暗号文単独攻撃：Ciphertext Only Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「盗聴した暗号文$c_1$，$c_2$，$c_3$&amp;hellip;$c_k$」を手元に持っている状況での攻撃．通信路の盗聴という攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;既知平文攻撃-known-plaintext-attack&#34;&gt;既知平文攻撃：Known Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」と「（同一の鍵で暗号化された）ランダムな平文と暗号文の対$(m_1, c_1)$，$(m_2, c_2)$，$(m_3, c_3)$&amp;hellip;$(m_k, c_k)$」を手元に持っている状況での攻撃．過去の平文が特定済みであるような状況での攻撃に相当．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択平文攻撃-chosen-plaintext-attack&#34;&gt;選択平文攻撃：Chosen Plaintext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の平文に対応する暗号文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;選択暗号文攻撃-chosen-ciphertext-attack&#34;&gt;選択暗号文攻撃：Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^&lt;em&gt;$」を持ち，「攻撃対象の暗号文$c^&lt;/em&gt;$を入手する前の時点で，攻撃者が自分の選んだ暗号文に対応する平文を入手することができる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h3 id=&#34;適応的選択暗号文攻撃-adaptive-chosen-ciphertext-attack&#34;&gt;適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack&lt;/h3&gt;
+
+&lt;p&gt;攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．&lt;/p&gt;
+
+&lt;h2 id=&#34;鍵全数探索攻撃に対する共通鍵暗号の安全性&#34;&gt;鍵全数探索攻撃に対する共通鍵暗号の安全性&lt;/h2&gt;
+
+&lt;p&gt;秘密鍵が$k$bitであるような共通鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．共通鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．&lt;/p&gt;
+
+&lt;h2 id=&#34;さまざまな共通鍵暗号&#34;&gt;さまざまな共通鍵暗号&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ストリーム暗号
+
+&lt;ul&gt;
+&lt;li&gt;平文を小さい単位で順次処理していく方式&lt;/li&gt;
+&lt;li&gt;アルゴリズムを実行する回数が1回&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;ブロック暗号
+
+&lt;ul&gt;
+&lt;li&gt;平文を一定の大きさの単位で処理していく方式&lt;/li&gt;
+&lt;li&gt;アルゴリズムを実行する回数がブロックの個数分&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;バーナム暗号&#34;&gt;バーナム暗号&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍
+
+&lt;ul&gt;
+&lt;li&gt;情報理論的安全性を持つ
+
+&lt;ul&gt;
+&lt;li&gt;たとえ，鍵全数探索を実行できる無限の計算能力を持っている攻撃者であっても解読できない（どれが本当の平文なのかがわからない）&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;処理が「平文と鍵で&lt;code&gt;xor&lt;/code&gt;」と単純なので非常に高速&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;👎
+
+&lt;ul&gt;
+&lt;li&gt;少なくとも平文と同じ長さの秘密鍵が必要になるし，基本的に鍵は使い捨てなのでいくら鍵を用意しても足りないし，そもそもこの秘密鍵を安全に共有できるなら暗号化する必要がない&lt;/li&gt;
+&lt;li&gt;鍵の生成に「真性乱数」を用意しなければならず，長い鍵を作るには手間がかかる&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ストリーム暗号&#34;&gt;ストリーム暗号&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;👍
+
+&lt;ul&gt;
+&lt;li&gt;バーナム暗号と比べて（安全性をやや犠牲にしながらも）効率性を向上&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;👎
+
+&lt;ul&gt;
+&lt;li&gt;擬似乱数生成器の安全性がストリーム暗号の安全性に直結する
+
+&lt;ul&gt;
+&lt;li&gt;過去の系列を見て未来の系列が予測できてしまえば解読されてしまう&lt;/li&gt;
+&lt;li&gt;擬似乱数生成器の初期化に用いる秘密鍵を特定されてしまうと解読されてしまう&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>暗号の基礎技術</title>
+      <link>/ja/post/basic-cryptographic-technologies/</link>
+      <pubDate>Mon, 28 Oct 2019 12:40:48 +0900</pubDate>
+      <guid>/ja/post/basic-cryptographic-technologies/</guid>
+      <description>
+
+&lt;h2 id=&#34;暗号の基礎技術&#34;&gt;暗号の基礎技術&lt;/h2&gt;
+
+&lt;p&gt;暗号技術の中でも基礎となるもの．&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;暗号&lt;/li&gt;
+&lt;li&gt;鍵配送&lt;/li&gt;
+&lt;li&gt;ハッシュ関数&lt;/li&gt;
+&lt;li&gt;メッセージ認証コード&lt;/li&gt;
+&lt;li&gt;デジタル署名&lt;/li&gt;
+&lt;li&gt;擬似乱数生成器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;暗号&#34;&gt;暗号&lt;/h3&gt;
+
+&lt;p&gt;暗号とは，「正当な送信者と受信者以外に内容を秘匿する技術」のこと．送信者は平文に対して，なんらかの操作を施すことで，暗号文を生成する．この過程を暗号化という．一方で，受信者は暗号文に対してなんらかの操作を施すことで平文を得る．この過程を復号という．&lt;/p&gt;
+
+&lt;h3 id=&#34;鍵配送&#34;&gt;鍵配送&lt;/h3&gt;
+
+&lt;p&gt;鍵配送とは，暗号化や復号に用いる鍵を安全に配送・共有するための技術や方式のこと．鍵は「第三者に知られないように」配送する必要があります．&lt;/p&gt;
+
+&lt;h3 id=&#34;ハッシュ関数&#34;&gt;ハッシュ関数&lt;/h3&gt;
+
+&lt;p&gt;ハッシュ関数とは，任意長のビット列を入力として固定長のビット列を出力する関数のこと．同一の入力に対して同一の出力をする一方で，異なる入力に対して異なる出力となり，異なる入力に対して同一の出力にならないという性質が求められる．&lt;/p&gt;
+
+&lt;h3 id=&#34;メッセージ認証コード&#34;&gt;メッセージ認証コード&lt;/h3&gt;
+
+&lt;p&gt;メッセージ認証コードとは，「伝送路上を通ってきたデータが改ざんされていないこと」「データが期待した通信相手から送信されていること」を検証するための技術のこと．&lt;/p&gt;
+
+&lt;h3 id=&#34;デジタル署名&#34;&gt;デジタル署名&lt;/h3&gt;
+
+&lt;p&gt;デジタル署名とは，契約書における物理的なサインのデジタル版で，ユーザー認証とデータ認証を同時に実現する技術のこと．メッセージの改ざんを防ぎ，メッセージに対する署名は署名した本人でしか生成できないことから，後から署名者が署名した契約について否認することを防止することができる．&lt;/p&gt;
+
+&lt;h3 id=&#34;擬似乱数生成器&#34;&gt;擬似乱数生成器&lt;/h3&gt;
+
+&lt;p&gt;真の乱数ではないにしても，暗号論的に安全とみなせる乱数列を生成するための技術のこと．&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

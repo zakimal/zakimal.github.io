@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="尾崎 耀一 (@zak)">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="聞いたことのあるシリアライゼーション形式について調べてみました">
+
+  
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/json-vs-protobuf-vs-flatbuf/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/ja/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/ja/post/json-vs-protobuf-vs-flatbuf/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@zak74702675">
+  <meta property="twitter:creator" content="@zak74702675">
+  
+  <meta property="og:site_name" content="zak">
+  <meta property="og:url" content="/ja/post/json-vs-protobuf-vs-flatbuf/">
+  <meta property="og:title" content="Data Serializationのさまざま | zak">
+  <meta property="og:description" content="聞いたことのあるシリアライゼーション形式について調べてみました"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  
+    
+      <meta property="article:published_time" content="2019-11-04T01:03:05&#43;09:00">
+    
+    <meta property="article:modified_time" content="2019-11-04T01:03:05&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/json-vs-protobuf-vs-flatbuf/"
+  },
+  "headline": "Data Serializationのさまざま",
+  
+  "datePublished": "2019-11-04T01:03:05+09:00",
+  "dateModified": "2019-11-04T01:03:05+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "聞いたことのあるシリアライゼーション形式について調べてみました"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Data Serializationのさまざま | zak</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="検索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/ja"><img src="/img/zak.gif" alt="zak"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#about"><span>ホーム</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#posts"><span>ブログ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/post/book-shelf"><span>本棚</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#contact"><span>お問い合わせ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/files/cv.pdf"><span>履歴書</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Data Serializationのさまざま</h1>
+
+  
+  <p class="page-subtitle">XML v.s. JSON v.s. BSON v.s. Protocol Buffers v.s. Flat Buffers</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mon, Nov 4, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+<p><img src="communication.gif" alt="通信し合うサーバーたち" /></p>
+
+<h2 id="データのserialization-deserialization">データのserialization/deserialization</h2>
+
+<p>イマドキのソフトウェアは，機能ごとにプログラムを整理整頓して，それらが情報をやりとりしながらサービスを提供します．システムを構成するコンポーネント間でメッセージングをしなければならず，その際にやりとりするデータについて「どういう表現であるのか」について共有しておかないといけません．人間の会話で言うならば「何語を喋るか」に近いのかな．</p>
+
+<p>「どんな形式でデータを表現するか」についてはいくつかの形式が提案されていて，それぞれについて一長一短がある．代表的なのはXML，JSON，BSON，Protocol Buffers，FlatBuffers．他にもいろいろあります．</p>
+
+<h2 id="xml">XML</h2>
+
+<p>XMLとは「e<strong>X</strong>tended <strong>M</strong>arkdown <strong>L</strong>anguage」の略で，文章の電子化に源流があるデータ形式．前提に「文章のデジタル化」があるので，XMLの仕様にはデータの「型」が定義されていません．</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;breakfast_menu&gt;
+&lt;food&gt;
+	&lt;name&gt;Belgian Waffles&lt;/name&gt;
+	&lt;price&gt;$5.95&lt;/price&gt;
+	&lt;description&gt;
+		Two of our famous Belgian Waffles with plenty of real maple syrup
+	&lt;/description&gt;
+	&lt;calories&gt;650&lt;/calories&gt;
+&lt;/food&gt;
+&lt;food&gt;
+	&lt;name&gt;Strawberry Belgian Waffles&lt;/name&gt;
+	&lt;price&gt;$7.95&lt;/price&gt;
+	&lt;description&gt;
+		Light Belgian waffles covered with strawberries and whipped cream
+	&lt;/description&gt;
+	&lt;calories&gt;900&lt;/calories&gt;
+&lt;/food&gt;
+&lt;/breakfast_menu&gt;
+</code></pre>
+
+<p>XMLは文章のデジタル化が前提にあるので，HTMLみたいな見た目になっています．</p>
+
+<p>XMLの特徴として「XMLはself-describingである」と評されることが多くあります．これは「<strong>データ自体の構造がデータそのものに表現されている</strong>」ということです．つまり事前に通信の両端でやり取りするデータの方についての合意をとっていなくても（やり取りするデータを眺めれば）データの齟齬のない解釈が可能であるということです．JSONだとこれはできません．XMLはタグだけをみることで，そのデータの構造を即座に読み取ることができます．JSONでは，タグに相当するものをハッシュのキーとして表現すればできないわけではないが，それはデータの型を表現したわけではなくて，ハッシュを用いて似たようなデータ型を表現しただけです．</p>
+
+<p>XMLで記述されたデータはそれ自身のメタな構造をも表現しているという点が分散システムにおけるデータのやり取りで非常に有用なので，古くからよく使われています．</p>
+
+<h2 id="json">JSON</h2>
+
+<p>JSONとは「<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation」の略．JSONをシステム間のデータの表現形式として用いると「JavaScriptでのデータのリテラルな表現をそのままシステム間のデータ表現形式」として用いることになって，webな世界だとJavaScriptのインタプリタでそのまま処理できるので扱いやすくてよく用いられがち．しかも，JSONは人間にとってもパッと見でデータの構造が把握しやすくて人気が出ました．それなりに古参なデータ形式ですが，現在もバリバリの現役です．視認性が良いのがやっぱり人気の理由なんですかね．デバッグしやすいし．</p>
+
+<p>JSONは「プログラミング言語におけるデータのリテラル表現」が出所なので，仕様として「型」が含まれていて，扱いやすいです．「型」が仕様として存在しているので「空の値」を型ごとに区別することができます．</p>
+
+<pre><code class="language-json">{
+	&quot;null&quot;: null,
+	&quot;string&quot;: &quot;&quot;,
+	&quot;array&quot;: [],
+	&quot;dict&quot;: {}
+}
+</code></pre>
+
+<p>JSONは，こんなにシステム間で情報をやりとりする際のデータ形式として用いられるようになることを全然想定していなかったので，扱いづらさがあったりするらしい．僕は具体的に表現することができないが「古臭い」なんて言われることもあります．</p>
+
+<p>「どういうフィールドを持ったJSONデータを扱うのか」について通信の両端点で合意しておく必要があるのはもちろんですが，JSONのデータ形式はスキーマを直接的に表現しているわけではない（つまりインタフェースをJSONが規定しているわけではない）という認識も大事だと思います．そのままのJSONはただのデータ形式に過ぎなくて，スキーマ言語としての「データ型を定義する」というメタな機能はないということです．</p>
+
+<p>JSONなどでも「JSONでJSONのスキーマを書いてしまおう」という<a href="https://json-schema.org/" target="_blank">JSON Schema</a>なるものが存在しているそうですが，やっぱりだいぶ書きにくそうです．</p>
+
+<pre><code class="language-json">{
+	&quot;productId&quot;: 1,
+	&quot;productName&quot;: &quot;An ice sculpture&quot;,
+	&quot;price&quot;: 12.50,
+	&quot;tags&quot;: [ &quot;cold&quot;, &quot;ice&quot; ],
+	&quot;dimensions&quot;: {
+		&quot;length&quot;: 7.0,
+		&quot;width&quot;: 12.0,
+		&quot;height&quot;: 9.5
+	},
+ 	&quot;warehouseLocation&quot;: {
+		&quot;latitude&quot;: -78.75,
+		&quot;longitude&quot;: 20.4
+	}
+}
+</code></pre>
+
+<p>というスキーマをJSONで書くと</p>
+
+<pre><code class="language-json">{
+	&quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,
+	&quot;$id&quot;: &quot;http://example.com/product.schema.json&quot;,
+	&quot;title&quot;: &quot;Product&quot;,
+	&quot;description&quot;: &quot;A product from Acme's catalog&quot;,
+	&quot;type&quot;: &quot;object&quot;,
+	&quot;properties&quot;: {
+		&quot;productId&quot;: {
+			&quot;description&quot;: &quot;The unique identifier for a product&quot;,
+			&quot;type&quot;: &quot;integer&quot;
+		},
+		&quot;productName&quot;: {
+			&quot;description&quot;: &quot;Name of the product&quot;,
+			&quot;type&quot;: &quot;string&quot;
+		},
+		&quot;price&quot;: {
+			&quot;description&quot;: &quot;The price of the product&quot;,
+			&quot;type&quot;: &quot;number&quot;,
+			&quot;exclusiveMinimum&quot;: 0
+		},
+		&quot;tags&quot;: {
+			&quot;description&quot;: &quot;Tags for the product&quot;,
+			&quot;type&quot;: &quot;array&quot;,
+			&quot;items&quot;: {
+				&quot;type&quot;: &quot;string&quot;
+			},
+			&quot;minItems&quot;: 1,
+			&quot;uniqueItems&quot;: true
+		},
+		&quot;dimensions&quot;: {
+			&quot;type&quot;: &quot;object&quot;,
+			&quot;properties&quot;: {
+				&quot;length&quot;: {
+					&quot;type&quot;: &quot;number&quot;
+				},
+				&quot;width&quot;: {
+		    		&quot;type&quot;: &quot;number&quot;
+				},
+				&quot;height&quot;: {
+					&quot;type&quot;: &quot;number&quot;
+				}
+			},
+			&quot;required&quot;: [ &quot;length&quot;, &quot;width&quot;, &quot;height&quot; ]
+		},
+		&quot;warehouseLocation&quot;: {
+			&quot;description&quot;: &quot;Coordinates of the warehouse where the product is located.&quot;,
+			&quot;$ref&quot;: &quot;https://example.com/geographical-location.schema.json&quot;
+		}
+	},
+	&quot;required&quot;: [ &quot;productId&quot;, &quot;productName&quot;, &quot;price&quot; ]
+}
+</code></pre>
+
+<p>🤔 ﾁｮｯﾄﾐﾆｸｲ&hellip;</p>
+
+<h2 id="bson">BSON</h2>
+
+<p>JSONはテキストベース（つまりシリアライズ・デシリアライズの際に扱われるデータの単位がbitじゃなくてbyte）でしたが，それを改めたBSON = <strong>B</strong>inary J<strong>SON</strong>というのも存在します．つまりBSONではデータがバイナリベース（つまりシリアライズ・デシリアライズの際に扱われるデータの大きさの単位がbit）になっています．BSONは後述するProtocol Buffersとよく似ていて，度々比較されています．公式によると，</p>
+
+<blockquote>
+<p><strong>Lightweight</strong></p>
+
+<ul>
+<li>Keep­ing spa­tial over­head to a min­im­um is im­port­ant for any data rep­res­ent­a­tion format, es­pe­cially when used over the net­work.</li>
+</ul>
+
+<p><strong>Traversable</strong></p>
+
+<ul>
+<li>BSON is de­signed to be tra­versed eas­ily. This is a vi­tal prop­erty in its role as the primary data rep­res­ent­a­tion for Mon­goDB.</li>
+</ul>
+
+<p><strong>Efficient</strong></p>
+
+<ul>
+<li>En­cod­ing data to BSON and de­cod­ing from BSON can be per­formed very quickly in most lan­guages due to the use of C data types.</li>
+</ul>
+</blockquote>
+
+<p>という特徴があります．</p>
+
+<p>BSONは，Protocol Buffersと比較して</p>
+
+<blockquote>
+<p>more &ldquo;schema-less&rdquo;</p>
+</blockquote>
+
+<p>であるとされています．つまり，サービス間のインタフェースの仕様そのものとやりとりするデータ形式の関係性が（Protocol Buffersと比較して）疎で，より柔軟性があるということです．一方で，BSONはProtocol Buffersと比べてメッセージのフィールド名のエンコードに関してやや冗長であるとされています．</p>
+
+<p>MongoDBがBSONをデータの表現方式として採用しているのが興味深いですね．多くの主要言語でBSONのエンコード・デコードをサポートするライブラリが実装されていて手軽に使えそうな印象です．ただ，バイナリベースということもあって，BSONをそのまま眺めても人間には意味がわからないので，デバッグはちょっと大変なのかもしれませんね．</p>
+
+<p>例えば<code>{&quot;hello&quot;: &quot;world&quot;}</code>をBSONでエンコードすると以下のようになります．</p>
+
+<pre><code>  \x16\x00\x00\x00                   // total document size
+  \x02                               // 0x02 = type String
+  hello\x00                          // field name
+  \x06\x00\x00\x00world\x00          // field value
+  \x00                               // 0x00 = type EOO ('end of object')
+
+</code></pre>
+
+<h2 id="protocol-buffers">Protocol Buffers</h2>
+
+<p>Protocol BuffersはGoogleが社内のシステム間で情報をやりとりする際に用いていたデータ形式で2008年にオープンソース化されました．Googleが出している公式のドキュメントによれば</p>
+
+<blockquote>
+<p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler.</p>
+</blockquote>
+
+<p>ということらしいです．Protocol Buffersはシステム間で情報をやりとりする際に用いるデータ形式の一種なんですが，それは嘘じゃないんですけど，Protocol Buffersの指す意味範囲はそれだけにとどまらず，サービス間のインタフェースを定義するスキーマ言語としての顔もあるのが特徴です．もっというと，このスキーマ言語が優秀であるというのがProtocol Buffersの人気を大きく支えている理由なのだと思います．「Protocol Buffersがスキーマ言語である」というのはどういうことかというと，Protocol Buffersでは「システムのインタフェース（つまり，どんな型のデータをやりとりするのか）を定義する独自言語」であるということです．</p>
+
+<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
+package example.protobuf;
+
+message SimpleMessage {
+	message HeaderItem {
+		string name = 1;
+		string value = 2;
+	}
+	enum Type {
+		START = 0;
+		BLOB = 1;
+		END = 2;
+	}
+
+	uint64 id = 1;
+	Type message_type = 2;
+	repeated HeaderItem headers = 3;
+	bytes blob = 4; 
+}
+</code></pre>
+
+<p>Protocol Buffersは，サービス間でやりとりするデータの型を表現する独自言語とともに，その独自言語で記述されたインタフェースを特定の言語にコンパイルするツールまでもが同梱されています．</p>
+
+<p>スキーマ言語が存在すると，非常に便利です．モダンなソフトウェアシステムでは，いろんなところにデータが保存されているかもしれないし，バックエンドで動いているサーバーもいくつかあるかもしれないし，もはやそれが普通になってきています．となると，システムの中のありとあらゆる場所でデータのシリアライズ・デシリアライズをしなければならないし，通信している両者でデータの解釈に矛盾が発生しないように整える必要があります．スキーマ言語があると，この「整える作業」がとてもやりやすくなります．自然言語と違って，スキーマ言語では解釈に差異が発生しないからです．「管理者が一人」みたいなシステムでは，スキーマ言語なんてたいそうなものを持ち出してくる必要はないと思うんですけど，webみたいな自律分散的な系だと，ますますスキーマ言語としてのProtocol Buffersの良さが際立ってくるわけです．</p>
+
+<p>Protocol Buffersのスキーマ言語としての良さは，その簡潔さではないでしょうか．プログラムを書く人間にとっては，特に難しいことを考えずに意図が汲み取れる程度の決まりごとしかないし，スキーマ言語としてプログラミング言語から独立している点も，ツールの作りやすさとかに影響していて，Protocol Buffersが人気な理由なんだと思います．</p>
+
+<p>Protocol Buffersでは，<code>.proto</code>ファイルとしてサービスインタフェースを記述します．</p>
+
+<pre><code class="language-protobuf">message Person {
+	required string name = 1;
+	required int32 id = 2;
+	optional string email = 3;
+
+	enum PhoneType {
+		MOBILE = 0;
+		HOME = 1;
+		WORK = 2;
+	}
+
+	message PhoneNumber {
+		required string number = 1;
+		optional PhoneType type = 2 [default = HOME];
+	}
+
+	repeated PhoneNumber phone = 4;
+}
+</code></pre>
+
+<p>明確なサービスインタフェースをコンパイラによって適切に所望の言語のプログラムに変換してくれるので，開発を進めやすくなります．</p>
+
+<p>Protocol Buffersではサービスのインタフェースの変更に対して後方互換性を維持した形でメッセージのやり取りをできるように「未知なフィールドに遭遇したら無視する」ということになっています．こうすれば，サービスのインタフェースが更新されたとしても，既存のプログラムは動くことには動くことになります．</p>
+
+<p>Protocol Buffersの公式のドキュメントでは，XMLと比較して</p>
+
+<blockquote>
+<p>Protocol buffers</p>
+
+<ul>
+<li>are simpler</li>
+<li>are 3 to 10 times smaller</li>
+<li>are 20 to 100 times faster</li>
+<li>are less ambiguous</li>
+<li>generate data access classes that are easier to use programmatically</li>
+</ul>
+</blockquote>
+
+<p>と主張しています．確かにXMLはいちいちタグで括らなきゃいけないしProtocol Buffersは効率が良さそうです．</p>
+
+<p>Protocol Buffersのデフォルトのシリアライズはバイナリベースです．人間が眺めて構造が取れるような見た目にはなっていません．しかしProtocol Buffersはシリアライズのフォーマットとして様々な形式（例えばJSONなど）も扱えるように周辺ツールが充実しているので，「スキーマ言語としてのProtocol Buffersでサービスのインフェースを記述して，実際にやり取りするデータはJSON」ということも可能になっています．</p>
+
+<h2 id="flat-buffers">Flat Buffers</h2>
+
+<p>これもGoogleによってオープンソース化されたデータのシリアライズ・デシリアライズ方式．公式によれば，</p>
+
+<blockquote>
+<ul>
+<li>Access to serialized data without parsing/unpacking</li>
+<li>Memory efficiency and speed</li>
+<li>Flexible</li>
+<li>Tiny code footprint</li>
+<li>Strongly typed</li>
+<li>Convenient to use</li>
+<li>Cross platform code with no dependencies</li>
+</ul>
+</blockquote>
+
+<p>という特徴があります．面白いのが「Access to serialized data without parsing/unpacking」ってところですね．FlatBuffersでは階層構造を持つデータを，パースすることなく直接扱うことができるらしいです．</p>
+
+<p>Protocol Buffersの進化系として自らを位置づけていて，Flat Buffersではデータをパースする必要がないのでProtocol Buffersと比較してコード量が桁違いで削減できて，さらにFlat BuffersではProtocol Buffersより強力に型をサポートしているところが進化ポイントですね．white paperのmotivationの章には</p>
+
+<blockquote>
+<p>In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games.</p>
+</blockquote>
+
+<p>とあり，シリアライズの効率について高水準なものが求められる状況で用いられることが想定されているそうです．</p>
+
+<p>Facebookで用いられているらしいですが，Protocol Buffersの人気に押されて，あまり流行っている感じはしないんですがどうなんでしょうか．</p>
+
+<h2 id="ref">Ref</h2>
+
+<h3 id="xml-1">XML</h3>
+
+<ul>
+<li>hoge</li>
+<li>hoge</li>
+</ul>
+
+<h3 id="json-1">JSON</h3>
+
+<ul>
+<li><a href="https://www.w3schools.com/whatis/whatis_json.asp" target="_blank">What is JSON - W3Schools</a></li>
+<li><a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON Introduction - W3Schools</a></li>
+<li><a href="https://json-schema.org/" target="_blank">JSON Schema</a></li>
+</ul>
+
+<h3 id="bson-1">BSON</h3>
+
+<ul>
+<li><a href="http://bsonspec.org/" target="_blank">BSON</a></li>
+</ul>
+
+<h3 id="protocol-buffers-1">Protocol Buffers</h3>
+
+<ul>
+<li><a href="https://developers.google.com/protocol-buffers" target="_blank">Protocol Buffers</a></li>
+</ul>
+
+<h3 id="flat-buffers-1">Flat Buffers</h3>
+
+<ul>
+<li><a href="https://google.github.io/flatbuffers/" target="_blank">Flat Buffers</a></li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/ja/tags/xml/">XML</a>
+  
+  <a class="badge badge-light" href="/ja/tags/json/">JSON</a>
+  
+  <a class="badge badge-light" href="/ja/tags/protobuf/">ProtoBuf</a>
+  
+  <a class="badge badge-light" href="/ja/tags/flatbuf/">FlatBuf</a>
+  
+  <a class="badge badge-light" href="/ja/tags/data-serializing/">Data Serializing</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/json-vs-protobuf-vs-flatbuf/&amp;text=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/json-vs-protobuf-vs-flatbuf/&amp;t=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be&amp;body=/ja/post/json-vs-protobuf-vs-flatbuf/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/json-vs-protobuf-vs-flatbuf/&amp;title=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be%20/ja/post/json-vs-protobuf-vs-flatbuf/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/json-vs-protobuf-vs-flatbuf/&amp;title=Data%20Serialization%e3%81%ae%e3%81%95%e3%81%be%e3%81%96%e3%81%be" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/1c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/abnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/accesslog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/actionscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ada.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/angelscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/apache.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arcade.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arduino.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/armasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/asciidoc.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/aspectj.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autohotkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autoit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/avrasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/axapta.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/basic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/brainfuck.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/capnproto.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ceylon.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clean.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cmake.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coffeescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coq.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crmsh.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crystal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/csp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/d.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dart.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/delphi.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/diff.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/django.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dns.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dsconfig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dts.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ebnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elixir.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/erb.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/excel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/flix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fortran.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fsharp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gams.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gauss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gcode.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gherkin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/glsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/golo.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gradle.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/groovy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/handlebars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haskell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haxe.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hsp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/htmlbars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/inform7.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ini.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/irpf90.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/isbl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/java.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/jboss-cli.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/kotlin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lasso.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ldif.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/leaf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/less.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lisp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livecodeserver.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/llvm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lua.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mathematica.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/maxima.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mercury.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mipsasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mizar.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mojolicious.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/monkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/moonscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/n1ql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nginx.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nimrod.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nsis.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/objectivec.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ocaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/openscad.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/oxygene.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/parser3.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pgsql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/php.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pony.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/powershell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/processing.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/profile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/prolog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/properties.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/protobuf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/puppet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/purebasic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/q.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/qml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/reasonml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rib.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/roboconf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/routeros.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ruby.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scilab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smali.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smalltalk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sqf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stan.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/step21.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stylus.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/subunit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/swift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/taggerscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tcl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/thrift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/typescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbnet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript-html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/verilog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vhdl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/x86asm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xquery.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/zephir.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/ja/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"結果が見つかりませんでした","placeholder":"検索...","results":"results found"};
+      const content_type = {
+        'post': "投稿",
+        'project': "プロジェクト",
+        'publication' : "発表文献",
+        'talk' : "登壇"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; zak 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> コピー
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> ダウンロード
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
