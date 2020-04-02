@@ -17,24 +17,14 @@
       <link>/ja/post/what-is-object-oriented/</link>
       <pubDate>Sun, 08 Mar 2020 13:47:19 +0900</pubDate>
       <guid>/ja/post/what-is-object-oriented/</guid>
-      <description>
-
-&lt;h2 id=&#34;oriented-ってどういう意味なんだろう&#34;&gt;&amp;rdquo;-oriented&amp;rdquo;ってどういう意味なんだろう？&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;-orientedってどういう意味なんだろう&#34;&gt;&amp;ldquo;-oriented&amp;quot;ってどういう意味なんだろう？&lt;/h2&gt;
 &lt;p&gt;プログラミングをお勉強しているので，いろんなカタカナ用語に遭遇する．カタカナ用語ってその言葉の指す意味が字面に現れてこなくて，「それってどういう意味？」となりがちだ．&lt;/p&gt;
-
 &lt;p&gt;最近気になったのは「XXX-oriented」という言葉だ．Object-orientedとかservice-orientedとかで目にする．日本語に訳されるときは「XXX指向」って訳されている．が，日本語に訳されたところで意味は判然としない．「オブジェクト指向 とは」でググるとめちゃめちゃたくさんのブログ記事が出てくる．だいたい「オブジェクト指向ってよくわかんねぇよな！俺が解説してやる！」っていう趣旨の記事で，世界一わかりやすいと謳っている．&lt;/p&gt;
-
 &lt;p&gt;僕もそれらの類の記事はいくつか呼んだことがあるし，オブジェクト指向なプログラミングを文法からサポートするいろんな言語でプログラミングをしたことがあるので，オブジェクト指向とはなんなのか，みたいなところの「手触り感」はなんとなく分かっているけど，もうちょっとメタな視点から「XXX-oriented」の意味を考えてみたくなった．&lt;/p&gt;
-
 &lt;p&gt;「XXX-oriented」の中でも一番有名なのかも知れないのが「Object-oriented」だと思うので，そこから考えてみる．オブジェクト指向でプログラムすると，記述したい事柄を「データとデータに対する操作を一括にまとめたオブジェクト」なるものをたくさん定義して，それらの相互作用でプログラムを記述していくことになる．オブジェクト指向ではプログラムにおける主役は「オブジェクト」であり，プログラマはそれらオブジェクト同士の動きを，あたかも演劇における脚本を書いているかのように操って1つのプログラムに仕立て上げる．僕が思うに，オブジェクト指向で大事なのは「プログラムにおける主役がオブジェクトである」という点がオブジェクト指向の本当のところなのだと思う．「Object-oriented」が「オブジェクトが主役」の意味なら「XXX-oriented」は「XXXが主役」ってことなのだろうか？&lt;/p&gt;
-
 &lt;p&gt;「oriented」を適当に英語辞典で引いてみると，「特定の方向に向く，位置を定める」という意味の「orient」の過去分詞が転じた形容詞と書いてあった．ということは，字面で言えば「オブジェクトの方を向いた」って意味なのか？「オブジェクト指向」という漢字はそういう雰囲気が確かに感じられる．&lt;/p&gt;
-
 &lt;p&gt;Object-orientedって言うときはおそらく「オブジェクトを主役とする（という方向を向いた）思想に基づく技術」って意味なんだろうなぁ．となるとObject-oriented programmingっていうのは「オブジェクトを主役とする（という方向を向いた）思想に基づいて確立されたプログラミング手法」的な意味合いになりそうだし，僕の肌感ともあってくる．&lt;/p&gt;
-
 &lt;p&gt;なるほど，Service-Oriented Architectureもそう考えると，「サービス」が主役として振る舞うアーキテクチャってことなんだろうな&amp;hellip;じゃあ最近話題のマイクロサービスアーキテクチャと何が違うんだろう&amp;hellip;同じような名前だけど&amp;hellip;暇なときにでも調べてみるか．&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;「XXX-oriented」とは「XXXという方向性に基づく（技術）」ぐらいの意味&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -46,88 +36,68 @@
       <link>/ja/post/concurrent-vs-parallel/</link>
       <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
       <guid>/ja/post/concurrent-vs-parallel/</guid>
-      <description>
-
-&lt;h2 id=&#34;日本語にすると&#34;&gt;日本語にすると&amp;hellip;&lt;/h2&gt;
-
-&lt;p&gt;調べてみると，&lt;strong&gt;「Concurrentは並行」「Parallelは並列」&lt;/strong&gt;と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．&lt;/p&gt;
-
-&lt;h2 id=&#34;っと-その前に広辞苑によれば&#34;&gt;っと，その前に広辞苑によれば&amp;hellip;&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;日本語にすると&#34;&gt;日本語にすると&amp;hellip;&lt;/h2&gt;
+&lt;p&gt;調べてみると，**「Concurrentは並行」「Parallelは並列」**と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．&lt;/p&gt;
+&lt;h2 id=&#34;っとその前に広辞苑によれば&#34;&gt;っと，その前に広辞苑によれば&amp;hellip;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;【並行】並びゆくこと．また，並び行なわれること．「両案を並行して審議する」&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;【並列】並び連なること．直列の対義語&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;ダメだった．&lt;/p&gt;
-
-&lt;h2 id=&#34;じゃあ-英英辞典-oxford-dictionary-で引くと&#34;&gt;じゃあ，英英辞典（Oxford Dictionary）で引くと&amp;hellip;&lt;/h2&gt;
-
+&lt;h2 id=&#34;じゃあ英英辞典oxford-dictionaryで引くと&#34;&gt;じゃあ，英英辞典（Oxford Dictionary）で引くと&amp;hellip;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;concurrent&lt;/p&gt;
-
 &lt;p&gt;Existing, happening, or done at the same time.
 ‘there are three concurrent art fairs around the city’&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;parallel&lt;/p&gt;
-
 &lt;p&gt;[Computing] Involving the simultaneous performance of operations.
 ‘highly parallel multiprocessor systems’&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;これでもダメだった．&lt;/p&gt;
-
 &lt;h2 id=&#34;僕の理解&#34;&gt;僕の理解&lt;/h2&gt;
-
 &lt;h3 id=&#34;concurrent&#34;&gt;Concurrent&lt;/h3&gt;
-
 &lt;p&gt;並行とは「複数のタスクが，論理的に，同時に処理されているように見えること」&lt;/p&gt;
-
 &lt;p&gt;具体的には，CPUが1コアの時代に，「一つのパソコンでブラウジングしながらメールが読める理由」を説明するのが「CPUがタスクをConcurrentに処理しているから」で，これが僕の「並行」の理解．&lt;/p&gt;
-
 &lt;p&gt;細切れにたくさんの仕事をちょっとずつ進めて，全体として複数のタスクが同時に処理されているように見えるってだけで，実際に複数のタスクが同時に処理されているわけではない．&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;「一人でいろんな仕事を同時に進めている様」&lt;/strong&gt;が並行．&lt;/p&gt;
-
+&lt;p&gt;**「一人でいろんな仕事を同時に進めている様」**が並行．&lt;/p&gt;
 &lt;h3 id=&#34;parallel&#34;&gt;Parallel&lt;/h3&gt;
-
 &lt;p&gt;並列とは「複数のタスクが，物理的に，同時に処理されていること」&lt;/p&gt;
-
 &lt;p&gt;具体的にはマルチコアのプロセッサが，搭載している複数のプロセッサをちゃんと使い切って演算をしている様は，並列という言葉で形容できる．&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;「複数人が同時に，それぞれの仕事を進めている様」&lt;/strong&gt;が並列．&lt;/p&gt;
-
+&lt;p&gt;**「複数人が同時に，それぞれの仕事を進めている様」**が並列．&lt;/p&gt;
 &lt;p&gt;ちなみに，「並列であれば常に並行である」という主張もあるらしい．「複数人が同時に，それぞれの仕事を進めている様」は側から見ると「いろんな仕事を同時に進めている」ように見えるから，確かにそうかもしれない．&lt;/p&gt;
-
 &lt;h3 id=&#34;rob-pike先生によれば&#34;&gt;Rob Pike先生によれば&amp;hellip;&lt;/h3&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Concurrency is about dealing with lots of things at once.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Parallelism is about doing lots of things at once.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Not the same, but related.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Concurrency is about structure, parallelism is about execution.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;なるほど&lt;/p&gt;
-
 &lt;h3 id=&#34;結局なんだってばよ&#34;&gt;結局なんだってばよ&amp;hellip;&lt;/h3&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Concurrency is a way of structuring your program to make it easy to understand and scalable&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;and Parallelism is simply the execution of multiple goroutine in parallel&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Concurrency is a way of structuring your program to make it easy to understand and scalable&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;and Parallelism is simply the execution of multiple goroutine in parallel&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://talks.golang.org/2012/waza.slide#1&#34; target=&#34;_blank&#34;&gt;Concurrency is not Parallelism&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://talks.golang.org/2012/waza.slide#1&#34;&gt;Concurrency is not Parallelism&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -137,56 +107,54 @@
       <link>/ja/post/simulator-vs-emulator/</link>
       <pubDate>Tue, 29 Oct 2019 23:24:38 +0900</pubDate>
       <guid>/ja/post/simulator-vs-emulator/</guid>
-      <description>
-
-&lt;h2 id=&#34;ある人によれば&#34;&gt;ある人によれば&amp;hellip;&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;ある人によれば&#34;&gt;ある人によれば&amp;hellip;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Simulation = For analysis and study&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Emulation = For usage as a substitute&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;A simulator is an environment which models but an emulator is one that replicates the usage as on the original device or system.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Simulator mimics the activity of something that it is simulating. It &lt;strong&gt;&amp;ldquo;appears&amp;rdquo;&lt;/strong&gt; (a lot can go with this &amp;ldquo;appears&amp;rdquo;, depending on the context) to be the same as the thing being simulated. For example the flight simulator &amp;ldquo;appears&amp;rdquo; to be a real flight to the user, although it does not transport you from one place to another.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Emulator, on the other hand, &lt;strong&gt;actually &amp;ldquo;does&amp;rdquo;&lt;/strong&gt; what the thing being emulated does, and in doing so it too &amp;ldquo;appears to be doing the same thing&amp;rdquo;. An emulator may use different set of protocols for mimicking the thing being emulated, but the result/outcome is always the same as the original object. For example, EMU8086 emulates the 8086 microprocessor on your computer, which obviously is not running on 8086 (= different protocols), but the output it gives is what a real 8086 would give.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;また別の人によれば&#34;&gt;また別の人によれば&amp;hellip;&lt;/h2&gt;
-
 &lt;blockquote&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Simulator is broader than Emulator&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Simulator tends to imitate/model more global processes/things in general with ability to narrow the imitation down (e.g. capacitor simulator with presets representing some known models)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Emulator tends to imitate certain hardware devices with certain specification, known characteristics and properties (e.g. SNES emulator, Intel 8087 or Roland TB-303)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Simulator is broader than Emulator&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Simulator tends to imitate/model more global processes/things in general with ability to narrow the imitation down (e.g. capacitor simulator with presets representing some known models)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Emulator tends to imitate certain hardware devices with certain specification, known characteristics and properties (e.g. SNES emulator, Intel 8087 or Roland TB-303)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;語源を辿ると&#34;&gt;語源を辿ると&amp;hellip;&lt;/h2&gt;
-
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;emulate is &amp;ldquo;to be equal&amp;rdquo; (looks like more aggressive and straightforward - rivalry)&lt;/li&gt;
 &lt;li&gt;simulate is &amp;ldquo;to be similar&amp;rdquo; (looks like more sly and tricky - imitation)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-
 &lt;h2 id=&#34;日本語だと&#34;&gt;日本語だと&amp;hellip;&lt;/h2&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Emulation: （代替可能なレベルでの）模倣&lt;/li&gt;
 &lt;li&gt;Simulation: 模擬&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;かな？🤔&lt;/p&gt;
-
 &lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/1584617/simulator-or-emulator-what-is-the-difference&#34; target=&#34;_blank&#34;&gt;Simulator or Emulator? What is the difference?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/1584617/simulator-or-emulator-what-is-the-difference&#34;&gt;Simulator or Emulator? What is the difference?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

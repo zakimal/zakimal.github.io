@@ -501,20 +501,14 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="github上でのmerge">GitHub上でのmerge</h2>
-
+      <h2 id="github上でのmerge">GitHub上でのmerge</h2>
 <p>GitHub上で行えるmergeには3種類あります．</p>
-
 <ul>
 <li>Create a merge commit</li>
 <li>Squash and merge</li>
 <li>Rebase and merge</li>
 </ul>
-
 <p>これらは，「merge commitの有無」「merge commitのauthorが誰になるのか」などの点で微妙に異なります．</p>
-
 <table>
 <thead>
 <tr>
@@ -524,7 +518,6 @@
 <th>merge元のbranchのcommit log</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>Create a merge commit</td>
@@ -532,14 +525,12 @@
 <td>merge先</td>
 <td>残る</td>
 </tr>
-
 <tr>
 <td>Squash and merge</td>
 <td>有</td>
 <td>merge元</td>
 <td>残らない</td>
 </tr>
-
 <tr>
 <td>Rebase and merge</td>
 <td>無</td>
@@ -548,21 +539,15 @@
 </tr>
 </tbody>
 </table>
-
 <h3 id="create-a-merge-commit">Create a merge commit</h3>
-
 <p>「Create a merge commit」では，<code>git merge --no-ff</code>でmergeすることになります．つまり，merge先に新たなcommitが作成され，そのcommitがmerge元のcommitを取り込みます．このとき作成されるmerge commitのauthorはmerge先のauthorとして記録されます．</p>
-
 <p>この方法は</p>
-
 <ul>
 <li>「何をmergeしたのか」がmerge commitという形で記録として残る</li>
 <li>merge元のbranchがそのまま残るので変更箇所を追いやすい</li>
 <li>merge後に，merge元のbranchを削除したとしても，このbranchのcommit logがmerge先に残る</li>
 </ul>
-
 <p>という特徴があります．わかりやすい一方で，「merge commitのauthorがmerge元ではない」のが（個人的に）「その人の頑張りを讃えたいのになぁ」とか思っちゃったりしてちょっと申し訳ない気がするとかしないとか．</p>
-
 
 
 
@@ -592,20 +577,14 @@
 
 </figure>
 
-
 <h3 id="squash-and-merge">Squash and merge</h3>
-
 <p>「Squash and merge」では，<code>git merge --squash</code>でmergeすることになります．つまり，merge元のcommitを一つのcommitにまとめた上で，merge先にmerge commitとして先頭に追加されます．このときのmerge commitのauthorはmerge元のauthorとなります．</p>
-
 <p>この方法は</p>
-
 <ul>
 <li>「何をmergeしたのか」がmerge commitという形で記録として残る</li>
 <li>複数のcommitをまとめて一つにできるのでmerge先のcommit logがわかりやすい</li>
 </ul>
-
 <p>という特徴があります．一方で，一度commitをまとめてしまうと，「どの変更が誰によってどのcommitで行われたのか」という情報が失われてしまうことになります．他の人の複数のcommitを一つのcommitに押し込むことになるので，個人的には若干怖さがあります．</p>
-
 
 
 
@@ -635,20 +614,14 @@
 
 </figure>
 
-
 <h3 id="rebase-and-merge">Rebase and merge</h3>
-
 <p>「Rebase and merge」では，まずmerge元のブランチにあるcommit列に対して<code>git rebase</code>して，commit列が一列になったところでfast-forwardの形でmergeが実行されます．</p>
-
 <p>この方法は</p>
-
 <ul>
 <li>mergeした結果，merge先のcommit logが一直線で見やすい</li>
 <li>merge commitが作成されない</li>
 </ul>
-
 <p>という特徴があります．</p>
-
 
 
 
@@ -678,11 +651,9 @@
 
 </figure>
 
-
 <h3 id="reference">Reference</h3>
-
 <ul>
-<li><a href="https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github" target="_blank">About merge methods on GitHub</a></li>
+<li><a href="https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github">About merge methods on GitHub</a></li>
 </ul>
 
     </div>
@@ -821,7 +792,7 @@
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1436,7 +1407,7 @@
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

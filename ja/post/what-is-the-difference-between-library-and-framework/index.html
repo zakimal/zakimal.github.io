@@ -503,40 +503,22 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="ありがちな会話">ありがちな会話</h2>
-
+      <h2 id="ありがちな会話">ありがちな会話</h2>
 <p>「Web Application Frameworkと言ったら，やっぱりRuby on Railsだよね！」</p>
-
 <p>「Webのフロント開発ではjQueryってライブラリがあってだな&hellip;」</p>
-
 <p>「最近だと，FacebookがJavascriptのフレームワークとしてReactを発表してるよね」</p>
-
 <p>「ReactよりAngular JSの方がいいよ」</p>
-
 <p>Web系の技術の話では，たくさんのFrameworkだのLibraryだのが提案されて使用されていると思います．僕なんかも初めて聞くものがあれば，すぐにググってその正体を知ろうとするのですが，どれもこれも「これは便利なWeb Frameworkです」ぐらいしか教えてくれません．Frameworkの正体って一体何なのでしょうか．気になったので調べてみました．</p>
-
-<h2 id="library-v-s-framework">Library v.s. Framework</h2>
-
+<h2 id="library-vs-framework">Library v.s. Framework</h2>
 <h3 id="library">Library</h3>
-
 <p>Libraryは，コードの再利用を目的とした「便利な関数やクラスの（ただの）コレクション」のようなものです．Libraryに含まれる関数やクラスは，ある特定の処理を達成するロジックを含んでいて，開発者がそれらを利用することで開発を進めていくことになります．例えばグラフアルゴリズムのライブラリなら，Dijkstra法とかBellman-Ford法を実装した関数が含まれていて，開発者がその関数を利用することでアプリケーションを開発します．アプリケーションの開発者が書いているロジックにライブラリの関数が利用されるので，アプリケーションの制御は開発者側にあります．</p>
-
 <p>Libraryを用いることで，他の人の仕事の恩恵に与りながら開発を進めることができます．これはとても嬉しいことです．開発の速度が上がります．</p>
-
 <p>要するに「<strong>Libraryのコードを開発者が利用する</strong>」のがLibraryです．</p>
-
 <h3 id="framework">Framework</h3>
-
 <p>Frameworkは， (初期化から実際の処理，終了といった) アプリケーションの制御は <em>全てFramework側にあります</em> ．アプリケーションを開発者は，Frameworkが要求するロジックを部品としてFrameworkに提供することになるわけです．Frameworkはアプリケーションの骨格を定義しているともいるかもしれません．外枠だけ定義しているのです．このFrameworkの持つ性質は，ソフトウェア工学的には「制御の反転 IoC (Inversion of Control)」と呼ばれています．</p>
-
 <p>Frameworkを用いることで，アプリケーション開発者は設計についてあれやこれや悩む必要がなくなります．Frameworkの要求に従っていれば，それなりの品質のシステムが勝手に出来上がることになるからです．また，Frameworkに則ってアプリケーションを開発していくと，コードに一貫性が生まれます．これはコードに可読性を与え，メンテナンスがしやすくなります．</p>
-
 <p>一方で，Frameworkは「制約の集合」でもあります．アプリケーションの全体としての制御が開発者の自由にできないわけですから，Frameworkを導入するならばFrameworkの課すルールを理解する必要があります．ルールを理解するのには時間がかかるものですし，Frameworkのルールに窮屈さを感じることもあるかもしれません．小規模なその場限りの開発現場などでは，この制約がFrameworkのメリットを上回ることがあるので，Frameworkを導入しないこともあるでしょう．</p>
-
 <p>要するに「<strong>Frameworkが開発者のコードを利用する</strong>」のがFrameworkです．</p>
-
 
 
 
@@ -566,14 +548,12 @@
 
 </figure>
 
-
 <h2 id="参考">参考</h2>
-
 <ul>
-<li><a href="https://tech.nikkeibp.co.jp/it/article/lecture/20070205/260697/" target="_blank">ソフトウエアのフレームワークとはなにか (日経XTECH)</a></li>
-<li><a href="https://qiita.com/azuki8/items/ad7710fdefaedc63e3f7" target="_blank">フレームワークとライブラリの違い (Qiita)</a></li>
-<li><a href="https://www.freecodecamp.org/news/the-difference-between-a-framework-and-a-library-bd133054023f/" target="_blank">The Difference Between a Framework and a Library (freeCodeCamp)</a></li>
-<li><a href="https://stackoverflow.com/questions/148747/what-is-the-difference-between-a-framework-and-a-library" target="_blank">What is the difference between a framework and a library? (stackoverflow)</a></li>
+<li><a href="https://tech.nikkeibp.co.jp/it/article/lecture/20070205/260697/">ソフトウエアのフレームワークとはなにか (日経XTECH)</a></li>
+<li><a href="https://qiita.com/azuki8/items/ad7710fdefaedc63e3f7">フレームワークとライブラリの違い (Qiita)</a></li>
+<li><a href="https://www.freecodecamp.org/news/the-difference-between-a-framework-and-a-library-bd133054023f/">The Difference Between a Framework and a Library (freeCodeCamp)</a></li>
+<li><a href="https://stackoverflow.com/questions/148747/what-is-the-difference-between-a-framework-and-a-library">What is the difference between a framework and a library? (stackoverflow)</a></li>
 </ul>
 
     </div>
@@ -710,7 +690,7 @@
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1314,7 +1294,7 @@
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

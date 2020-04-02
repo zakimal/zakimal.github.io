@@ -17,20 +17,14 @@
       <link>/ja/post/three-kinds-of-merge-on-github/</link>
       <pubDate>Tue, 29 Oct 2019 19:50:58 +0900</pubDate>
       <guid>/ja/post/three-kinds-of-merge-on-github/</guid>
-      <description>
-
-&lt;h2 id=&#34;github上でのmerge&#34;&gt;GitHub上でのmerge&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;github上でのmerge&#34;&gt;GitHub上でのmerge&lt;/h2&gt;
 &lt;p&gt;GitHub上で行えるmergeには3種類あります．&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Create a merge commit&lt;/li&gt;
 &lt;li&gt;Squash and merge&lt;/li&gt;
 &lt;li&gt;Rebase and merge&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;これらは，「merge commitの有無」「merge commitのauthorが誰になるのか」などの点で微妙に異なります．&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -40,7 +34,6 @@
 &lt;th&gt;merge元のbranchのcommit log&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Create a merge commit&lt;/td&gt;
@@ -48,14 +41,12 @@
 &lt;td&gt;merge先&lt;/td&gt;
 &lt;td&gt;残る&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;Squash and merge&lt;/td&gt;
 &lt;td&gt;有&lt;/td&gt;
 &lt;td&gt;merge元&lt;/td&gt;
 &lt;td&gt;残らない&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;Rebase and merge&lt;/td&gt;
 &lt;td&gt;無&lt;/td&gt;
@@ -64,21 +55,15 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;h3 id=&#34;create-a-merge-commit&#34;&gt;Create a merge commit&lt;/h3&gt;
-
 &lt;p&gt;「Create a merge commit」では，&lt;code&gt;git merge --no-ff&lt;/code&gt;でmergeすることになります．つまり，merge先に新たなcommitが作成され，そのcommitがmerge元のcommitを取り込みます．このとき作成されるmerge commitのauthorはmerge先のauthorとして記録されます．&lt;/p&gt;
-
 &lt;p&gt;この方法は&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
 &lt;li&gt;merge元のbranchがそのまま残るので変更箇所を追いやすい&lt;/li&gt;
 &lt;li&gt;merge後に，merge元のbranchを削除したとしても，このbranchのcommit logがmerge先に残る&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;という特徴があります．わかりやすい一方で，「merge commitのauthorがmerge元ではない」のが（個人的に）「その人の頑張りを讃えたいのになぁ」とか思っちゃったりしてちょっと申し訳ない気がするとかしないとか．&lt;/p&gt;
-
 
 
 
@@ -108,20 +93,14 @@
 
 &lt;/figure&gt;
 
-
 &lt;h3 id=&#34;squash-and-merge&#34;&gt;Squash and merge&lt;/h3&gt;
-
 &lt;p&gt;「Squash and merge」では，&lt;code&gt;git merge --squash&lt;/code&gt;でmergeすることになります．つまり，merge元のcommitを一つのcommitにまとめた上で，merge先にmerge commitとして先頭に追加されます．このときのmerge commitのauthorはmerge元のauthorとなります．&lt;/p&gt;
-
 &lt;p&gt;この方法は&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;「何をmergeしたのか」がmerge commitという形で記録として残る&lt;/li&gt;
 &lt;li&gt;複数のcommitをまとめて一つにできるのでmerge先のcommit logがわかりやすい&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;という特徴があります．一方で，一度commitをまとめてしまうと，「どの変更が誰によってどのcommitで行われたのか」という情報が失われてしまうことになります．他の人の複数のcommitを一つのcommitに押し込むことになるので，個人的には若干怖さがあります．&lt;/p&gt;
-
 
 
 
@@ -151,20 +130,14 @@
 
 &lt;/figure&gt;
 
-
 &lt;h3 id=&#34;rebase-and-merge&#34;&gt;Rebase and merge&lt;/h3&gt;
-
 &lt;p&gt;「Rebase and merge」では，まずmerge元のブランチにあるcommit列に対して&lt;code&gt;git rebase&lt;/code&gt;して，commit列が一列になったところでfast-forwardの形でmergeが実行されます．&lt;/p&gt;
-
 &lt;p&gt;この方法は&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;mergeした結果，merge先のcommit logが一直線で見やすい&lt;/li&gt;
 &lt;li&gt;merge commitが作成されない&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;という特徴があります．&lt;/p&gt;
-
 
 
 
@@ -194,11 +167,9 @@
 
 &lt;/figure&gt;
 
-
 &lt;h3 id=&#34;reference&#34;&gt;Reference&lt;/h3&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github&#34; target=&#34;_blank&#34;&gt;About merge methods on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/en/github/administering-a-repository/about-merge-methods-on-github&#34;&gt;About merge methods on GitHub&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -208,29 +179,17 @@
       <link>/ja/post/about-this-site/</link>
       <pubDate>Fri, 25 Oct 2019 17:21:38 +0900</pubDate>
       <guid>/ja/post/about-this-site/</guid>
-      <description>
-
-&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;最近はもっぱら卒論の実装ばかりやっています，zakです．&lt;/p&gt;
-
 &lt;p&gt;プログラム書くのって難しいですよね．僕にとってはとても難しいので，わからないことがあったらデキる人のブログを参考にさせていただいたりしています．
 そんな中で，自分もコードを書くことが増えてきて，そこで得た知識をなんらかの形で発信できないかなと思って，このブログを思いつきで始めました．&lt;/p&gt;
-
 &lt;h2 id=&#34;採用技術&#34;&gt;採用技術&lt;/h2&gt;
-
 &lt;p&gt;このブログはサイトジェネレータとしてHugo，ホスティングサービスとしてGitHub Pagesを採用しています．&lt;/p&gt;
-
 &lt;p&gt;HugoはGolangで記述されたオープンソースの静的サイトジェネレーターです．設定をtomlで書いて，記事をMarkdownで書いて，それをHugoがHTMLその他ファイルに爆速でしたためてくれます．真面目にウェブサイトを作ろうとすると，「書きにくいHTMLで文章を書いて，CSSで見栄えを整えて」という感じで作っていくことになります．HTMLってあんまり洗練されていなくて人間にとっては読みずらいですよね．一方でMarkdownは文法が簡単なので，箇条書きでメモってるぐらいの感覚で構造を持った文章が書けてしまいます．Hugoを使うことで，サイト作成者はMarkdownというわかりやすい文法で記事を書くことができ，本来の仕事に専念できるわけです．&lt;/p&gt;
-
 &lt;p&gt;Hugoのいいところはそれだけではありません．Hugoはその便利さから，多くのユーザーから愛されていて，そのユーザーらがそれぞれ美しいデザインテーマを公開してくれています．どれもセンスが良く，機能面でも充実しています．このテーマはオープンソースで公開されているので，カスタマイズも簡単です．そこらへんのブログサービスを利用すると，テーマがどれも陳腐で不満ですよね．&lt;/p&gt;
-
 &lt;p&gt;今回はMarkdownで記事が執筆できるところとHugoで用いることができるAcademicというテーマが気に入ったので，Hugoを使うことにしました．&lt;/p&gt;
-
 &lt;p&gt;GitHub Pagesは，GitHubが提供している静的サイトのホスティングサービスです．GitHubのアカウントさえあれば，誰でも静的なサイトを公開することができます．何より無料なので，これを使わない手はありません．サイトのソースコードをGitHubで管理しつつ公開もできちゃうなんて，GitHubは太っ腹ですね．&lt;/p&gt;
-
 &lt;p&gt;GitHub Pagesの他にもホスティングサービスはありますが，ソースコード管理と一緒にホスティングできるところが便利だと思ったので採用しました．&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;気が向いたら，もうちょっと追記します 🙇&lt;/p&gt;
 &lt;/blockquote&gt;

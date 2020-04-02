@@ -5,7 +5,7 @@
     <link>/ja/tags/parallel/</link>
       <atom:link href="/ja/tags/parallel/index.xml" rel="self" type="application/rss+xml" />
     <description>Parallel</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 31 Oct 2019 16:26:54 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Fri, 01 Nov 2019 14:07:56 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Parallel</title>
@@ -17,88 +17,68 @@
       <link>/ja/post/concurrent-vs-parallel/</link>
       <pubDate>Thu, 31 Oct 2019 16:26:54 +0900</pubDate>
       <guid>/ja/post/concurrent-vs-parallel/</guid>
-      <description>
-
-&lt;h2 id=&#34;日本語にすると&#34;&gt;日本語にすると&amp;hellip;&lt;/h2&gt;
-
-&lt;p&gt;調べてみると，&lt;strong&gt;「Concurrentは並行」「Parallelは並列」&lt;/strong&gt;と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．&lt;/p&gt;
-
-&lt;h2 id=&#34;っと-その前に広辞苑によれば&#34;&gt;っと，その前に広辞苑によれば&amp;hellip;&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;日本語にすると&#34;&gt;日本語にすると&amp;hellip;&lt;/h2&gt;
+&lt;p&gt;調べてみると，**「Concurrentは並行」「Parallelは並列」**と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．&lt;/p&gt;
+&lt;h2 id=&#34;っとその前に広辞苑によれば&#34;&gt;っと，その前に広辞苑によれば&amp;hellip;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;【並行】並びゆくこと．また，並び行なわれること．「両案を並行して審議する」&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;【並列】並び連なること．直列の対義語&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;ダメだった．&lt;/p&gt;
-
-&lt;h2 id=&#34;じゃあ-英英辞典-oxford-dictionary-で引くと&#34;&gt;じゃあ，英英辞典（Oxford Dictionary）で引くと&amp;hellip;&lt;/h2&gt;
-
+&lt;h2 id=&#34;じゃあ英英辞典oxford-dictionaryで引くと&#34;&gt;じゃあ，英英辞典（Oxford Dictionary）で引くと&amp;hellip;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;concurrent&lt;/p&gt;
-
 &lt;p&gt;Existing, happening, or done at the same time.
 ‘there are three concurrent art fairs around the city’&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;parallel&lt;/p&gt;
-
 &lt;p&gt;[Computing] Involving the simultaneous performance of operations.
 ‘highly parallel multiprocessor systems’&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;これでもダメだった．&lt;/p&gt;
-
 &lt;h2 id=&#34;僕の理解&#34;&gt;僕の理解&lt;/h2&gt;
-
 &lt;h3 id=&#34;concurrent&#34;&gt;Concurrent&lt;/h3&gt;
-
 &lt;p&gt;並行とは「複数のタスクが，論理的に，同時に処理されているように見えること」&lt;/p&gt;
-
 &lt;p&gt;具体的には，CPUが1コアの時代に，「一つのパソコンでブラウジングしながらメールが読める理由」を説明するのが「CPUがタスクをConcurrentに処理しているから」で，これが僕の「並行」の理解．&lt;/p&gt;
-
 &lt;p&gt;細切れにたくさんの仕事をちょっとずつ進めて，全体として複数のタスクが同時に処理されているように見えるってだけで，実際に複数のタスクが同時に処理されているわけではない．&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;「一人でいろんな仕事を同時に進めている様」&lt;/strong&gt;が並行．&lt;/p&gt;
-
+&lt;p&gt;**「一人でいろんな仕事を同時に進めている様」**が並行．&lt;/p&gt;
 &lt;h3 id=&#34;parallel&#34;&gt;Parallel&lt;/h3&gt;
-
 &lt;p&gt;並列とは「複数のタスクが，物理的に，同時に処理されていること」&lt;/p&gt;
-
 &lt;p&gt;具体的にはマルチコアのプロセッサが，搭載している複数のプロセッサをちゃんと使い切って演算をしている様は，並列という言葉で形容できる．&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;「複数人が同時に，それぞれの仕事を進めている様」&lt;/strong&gt;が並列．&lt;/p&gt;
-
+&lt;p&gt;**「複数人が同時に，それぞれの仕事を進めている様」**が並列．&lt;/p&gt;
 &lt;p&gt;ちなみに，「並列であれば常に並行である」という主張もあるらしい．「複数人が同時に，それぞれの仕事を進めている様」は側から見ると「いろんな仕事を同時に進めている」ように見えるから，確かにそうかもしれない．&lt;/p&gt;
-
 &lt;h3 id=&#34;rob-pike先生によれば&#34;&gt;Rob Pike先生によれば&amp;hellip;&lt;/h3&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Concurrency is about dealing with lots of things at once.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Parallelism is about doing lots of things at once.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Not the same, but related.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Concurrency is about structure, parallelism is about execution.&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;なるほど&lt;/p&gt;
-
 &lt;h3 id=&#34;結局なんだってばよ&#34;&gt;結局なんだってばよ&amp;hellip;&lt;/h3&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Concurrency is a way of structuring your program to make it easy to understand and scalable&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;and Parallelism is simply the execution of multiple goroutine in parallel&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Concurrency is a way of structuring your program to make it easy to understand and scalable&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;and Parallelism is simply the execution of multiple goroutine in parallel&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://talks.golang.org/2012/waza.slide#1&#34; target=&#34;_blank&#34;&gt;Concurrency is not Parallelism&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://talks.golang.org/2012/waza.slide#1&#34;&gt;Concurrency is not Parallelism&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

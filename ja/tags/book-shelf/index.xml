@@ -17,10 +17,7 @@
       <link>/ja/post/book-shelf/</link>
       <pubDate>Mon, 25 Nov 2019 23:57:01 +0900</pubDate>
       <guid>/ja/post/book-shelf/</guid>
-      <description>
-
-&lt;h1 id=&#34;読みたい&#34;&gt;読みたい&lt;/h1&gt;
-
+      <description>&lt;h1 id=&#34;読みたい&#34;&gt;読みたい&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;［改訂新版］プログラマのための文字コード技術入門&lt;/li&gt;
 &lt;li&gt;みんなのデータ構造&lt;/li&gt;
@@ -56,7 +53,7 @@
 &lt;li&gt;コンパイラ 作りながら学ぶ&lt;/li&gt;
 &lt;li&gt;7 つの言語 7 つの世界&lt;/li&gt;
 &lt;li&gt;江添亮の詳説 C++17&lt;/li&gt;
-&lt;li&gt;Effective Modern C++ ― C++&lt;sup&gt;11&lt;/sup&gt;&amp;frasl;&lt;sub&gt;14&lt;/sub&gt; プログラムを進化させる 42 項目&lt;/li&gt;
+&lt;li&gt;Effective Modern C++ ― C++11/14 プログラムを進化させる 42 項目&lt;/li&gt;
 &lt;li&gt;コーディングを支える技術&lt;/li&gt;
 &lt;li&gt;ls を読まずにプログラマを名乗るな！&lt;/li&gt;
 &lt;li&gt;Effective STL ― STL を効果的に使いこなす 50 の鉄則&lt;/li&gt;
@@ -145,7 +142,7 @@
 &lt;li&gt;24 時間 365 日 サーバ/インフラを支える技術 ― スケーラビリティ、ハイパフォーマンス、省力運用&lt;/li&gt;
 &lt;li&gt;仕事ではじめる機械学習&lt;/li&gt;
 &lt;li&gt;これならわかる深層学習入門&lt;/li&gt;
-&lt;li&gt;ゼロから作る Deep Learning &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;3&lt;/sub&gt;&lt;/li&gt;
+&lt;li&gt;ゼロから作る Deep Learning 2/3&lt;/li&gt;
 &lt;li&gt;作って動かす ALife&lt;/li&gt;
 &lt;li&gt;TensorFlow ではじめる DeepLearning 実装入門&lt;/li&gt;
 &lt;li&gt;はじめてのパターン認識&lt;/li&gt;
@@ -166,9 +163,7 @@
 &lt;li&gt;プログラミングコンテストチャレンジブック&lt;/li&gt;
 &lt;li&gt;目指せ！プログラミング世界一 ― 大学対抗プログラミングコンテスト ICPC への挑戦&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h1 id=&#34;読んだ&#34;&gt;読んだ&lt;/h1&gt;
-
 &lt;ul&gt;
 &lt;li&gt;クラウドを支えるこれからの暗号技術&lt;/li&gt;
 &lt;li&gt;リーダブルコード　より良いコードを書くためのシンプルで実践的なテクニック&lt;/li&gt;

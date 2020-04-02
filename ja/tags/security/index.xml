@@ -17,14 +17,9 @@
       <link>/ja/post/six-elements-of-infomation-security/</link>
       <pubDate>Mon, 28 Oct 2019 11:54:27 +0900</pubDate>
       <guid>/ja/post/six-elements-of-infomation-security/</guid>
-      <description>
-
-&lt;h2 id=&#34;情報セキュリティの構成要素&#34;&gt;情報セキュリティの構成要素&lt;/h2&gt;
-
-&lt;p&gt;「情報セキュリティ」の言葉の指し示す意味範囲は&lt;a href=&#34;oecd.org/internet/ieconomy/15582260.pdf&#34; target=&#34;_blank&#34;&gt;OECDの情報セキュリティガイドライン&lt;/a&gt;やISO/IEC TR13335&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;として国際的に定義されている．&lt;/p&gt;
-
+      <description>&lt;h2 id=&#34;情報セキュリティの構成要素&#34;&gt;情報セキュリティの構成要素&lt;/h2&gt;
+&lt;p&gt;「情報セキュリティ」の言葉の指し示す意味範囲は&lt;a href=&#34;oecd.org/internet/ieconomy/15582260.pdf&#34;&gt;OECDの情報セキュリティガイドライン&lt;/a&gt;やISO/IEC TR13335&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;として国際的に定義されている．&lt;/p&gt;
 &lt;p&gt;ISO/IEC TR13335にて情報セキュリティとは下記6要素のことを指すとされている．&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;機密性 Confidentiality&lt;/li&gt;
 &lt;li&gt;完全性 Integrity&lt;/li&gt;
@@ -33,135 +28,122 @@
 &lt;li&gt;真正性 Authenticity&lt;/li&gt;
 &lt;li&gt;信頼性 Reliability&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h3 id=&#34;機密性-confidentiality&#34;&gt;機密性 Confidentiality&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;意図した相手以外に情報が漏れないこと&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;盗聴や内部からの情報漏洩&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;暗号技術&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;完全性-integrity&#34;&gt;完全性 Integrity&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;情報が正確であること&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;情報の改ざん，ノイズによるビット反転・ビットの欠落&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;誤り訂正符号，ハッシュ関数，メッセージ認証コード，デジタル署名&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;可用性-availability&#34;&gt;可用性 Availability&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;ある情報にアクセスすることが許されている主体が，任意の時点で情報にアクセスすることができること&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;システムへの過負荷，災害，意図しないロック&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;システムの多重化，クラウド化，負荷分散&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;責任追跡性-accountability&#34;&gt;責任追跡性 Accountability&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;ユーザやシステムの振る舞いについて説明が可能であること&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;ログの改ざん，否認&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;ロギング，デジタル署名（否認防止）&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;真正性-authenticity&#34;&gt;真正性 Authenticity&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;観測されるユーザやシステムの振る舞いが，その主体によるものであること（なりすましではない）&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;なりすまし&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;認証，デジタル署名（なりすまし防止）&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;信頼性-reliability&#34;&gt;信頼性 Reliability&lt;/h3&gt;
-
 &lt;ul&gt;
 &lt;li&gt;意味
-
 &lt;ul&gt;
 &lt;li&gt;システムが一貫して動作すること&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;リスク
-
 &lt;ul&gt;
 &lt;li&gt;盗聴や内部からの情報漏洩&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;対策
-
 &lt;ul&gt;
 &lt;li&gt;システムの多重化，負荷の監視&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;正確には企業のセキュリティリスクを査定する際のガイドラインを定めたものになっている．通称GMITS（Guidelines for the Management for IT Security）
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;正確には企業のセキュリティリスクを査定する際のガイドラインを定めたものになっている．通称GMITS（Guidelines for the Management for IT Security） &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </description>
     </item>
     

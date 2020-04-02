@@ -484,117 +484,91 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="共通鍵暗号">共通鍵暗号</h2>
-
+      <h2 id="共通鍵暗号">共通鍵暗号</h2>
 <p>暗号化・復号で同一の鍵を用いる暗号化方式</p>
-
 <h2 id="シナリオ">シナリオ</h2>
-
 <ul>
 <li>Aliceが秘密鍵$key$を作成し，Bobに安全に共有</li>
 <li>Aliceがメッセージ$m$を$key$で暗号化$c = Enc(m, key)$し，Bobに送信</li>
 <li>Bobが受け取った暗号文$c$を$key$で復号$m = Dec(c, key)$して平文$m$を得る</li>
 </ul>
-
 <h2 id="共通鍵暗号の満たすべき性質">共通鍵暗号の満たすべき性質</h2>
-
 <ul>
 <li>正当性
-
 <ul>
 <li>$m = Dec(Enc(m, key), key)$が成立すること</li>
-</ul></li>
+</ul>
+</li>
 <li>秘匿性
-
 <ul>
 <li>暗号文$c$から平文$m$に関連する情報が得られないこと</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="共通鍵暗号に対する攻撃モデル">共通鍵暗号に対する攻撃モデル</h2>
-
-<h3 id="暗号文単独攻撃-ciphertext-only-attack">暗号文単独攻撃：Ciphertext Only Attack</h3>
-
+<h3 id="暗号文単独攻撃ciphertext-only-attack">暗号文単独攻撃：Ciphertext Only Attack</h3>
 <p>攻撃者が「解読対象の暗号文$c^*$」と「盗聴した暗号文$c_1$，$c_2$，$c_3$&hellip;$c_k$」を手元に持っている状況での攻撃．通信路の盗聴という攻撃に相当．</p>
-
-<h3 id="既知平文攻撃-known-plaintext-attack">既知平文攻撃：Known Plaintext Attack</h3>
-
+<h3 id="既知平文攻撃known-plaintext-attack">既知平文攻撃：Known Plaintext Attack</h3>
 <p>攻撃者が「解読対象の暗号文$c^*$」と「（同一の鍵で暗号化された）ランダムな平文と暗号文の対$(m_1, c_1)$，$(m_2, c_2)$，$(m_3, c_3)$&hellip;$(m_k, c_k)$」を手元に持っている状況での攻撃．過去の平文が特定済みであるような状況での攻撃に相当．</p>
-
-<h3 id="選択平文攻撃-chosen-plaintext-attack">選択平文攻撃：Chosen Plaintext Attack</h3>
-
+<h3 id="選択平文攻撃chosen-plaintext-attack">選択平文攻撃：Chosen Plaintext Attack</h3>
 <p>攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の平文に対応する暗号文を自由に入手できる」ような状況での攻撃．</p>
-
-<h3 id="選択暗号文攻撃-chosen-ciphertext-attack">選択暗号文攻撃：Chosen Ciphertext Attack</h3>
-
+<h3 id="選択暗号文攻撃chosen-ciphertext-attack">選択暗号文攻撃：Chosen Ciphertext Attack</h3>
 <p>攻撃者が「解読対象の暗号文$c^<em>$」を持ち，「攻撃対象の暗号文$c^</em>$を入手する前の時点で，攻撃者が自分の選んだ暗号文に対応する平文を入手することができる」ような状況での攻撃．</p>
-
-<h3 id="適応的選択暗号文攻撃-adaptive-chosen-ciphertext-attack">適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack</h3>
-
+<h3 id="適応的選択暗号文攻撃adaptive-chosen-ciphertext-attack">適応的選択暗号文攻撃：Adaptive Chosen Ciphertext Attack</h3>
 <p>攻撃者が「解読対象の暗号文$c^*$」を持ち，「攻撃者が選んだ任意の暗号文に対応する平文を自由に入手できる」ような状況での攻撃．</p>
-
 <h2 id="鍵全数探索攻撃に対する共通鍵暗号の安全性">鍵全数探索攻撃に対する共通鍵暗号の安全性</h2>
-
 <p>秘密鍵が$k$bitであるような共通鍵暗号では，$2^k$個の鍵を全部試せば必ず秘密鍵を得ることができる．共通鍵暗号では「鍵全数探索攻撃よりも効率的に秘密鍵を求めるアルゴリズムが存在しないこと」が安全性に対する条件である．</p>
-
 <h2 id="さまざまな共通鍵暗号">さまざまな共通鍵暗号</h2>
-
 <ul>
 <li>ストリーム暗号
-
 <ul>
 <li>平文を小さい単位で順次処理していく方式</li>
 <li>アルゴリズムを実行する回数が1回</li>
-</ul></li>
+</ul>
+</li>
 <li>ブロック暗号
-
 <ul>
 <li>平文を一定の大きさの単位で処理していく方式</li>
 <li>アルゴリズムを実行する回数がブロックの個数分</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h3 id="バーナム暗号">バーナム暗号</h3>
-
 <ul>
 <li>👍
-
 <ul>
 <li>情報理論的安全性を持つ
-
 <ul>
 <li>たとえ，鍵全数探索を実行できる無限の計算能力を持っている攻撃者であっても解読できない（どれが本当の平文なのかがわからない）</li>
-</ul></li>
+</ul>
+</li>
 <li>処理が「平文と鍵で<code>xor</code>」と単純なので非常に高速</li>
-</ul></li>
+</ul>
+</li>
 <li>👎
-
 <ul>
 <li>少なくとも平文と同じ長さの秘密鍵が必要になるし，基本的に鍵は使い捨てなのでいくら鍵を用意しても足りないし，そもそもこの秘密鍵を安全に共有できるなら暗号化する必要がない</li>
 <li>鍵の生成に「真性乱数」を用意しなければならず，長い鍵を作るには手間がかかる</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h3 id="ストリーム暗号">ストリーム暗号</h3>
-
 <ul>
 <li>👍
-
 <ul>
 <li>バーナム暗号と比べて（安全性をやや犠牲にしながらも）効率性を向上</li>
-</ul></li>
+</ul>
+</li>
 <li>👎
-
 <ul>
 <li>擬似乱数生成器の安全性がストリーム暗号の安全性に直結する
-
 <ul>
 <li>過去の系列を見て未来の系列が予測できてしまえば解読されてしまう</li>
 <li>擬似乱数生成器の初期化に用いる秘密鍵を特定されてしまうと解読されてしまう</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -733,7 +707,7 @@
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1348,7 +1322,7 @@
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

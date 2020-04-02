@@ -168,6 +168,11 @@
   </url>
   
   <url>
+    <loc>/ja/tags/parallel/</loc>
+    <lastmod>2019-11-01T14:07:56+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/ja/tags/parallelism/</loc>
     <lastmod>2019-11-01T14:07:56+09:00</lastmod>
   </url>
@@ -194,11 +199,6 @@
   
   <url>
     <loc>/ja/post/concurrent-vs-parallel/</loc>
-    <lastmod>2019-10-31T16:26:54+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/ja/tags/parallel/</loc>
     <lastmod>2019-10-31T16:26:54+09:00</lastmod>
   </url>
   

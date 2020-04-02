@@ -482,73 +482,47 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="golangでよく見かける構造体実装パターン">Golangでよく見かける構造体実装パターン</h2>
-
+      <h2 id="golangでよく見かける構造体実装パターン">Golangでよく見かける構造体実装パターン</h2>
 <p>よく見かけるパターンをまとめてみた．</p>
-
-<h3 id="コンストラクタとしての-newxxxx">コンストラクタとしての<code>NewXXXX()</code></h3>
-
+<h3 id="コンストラクタとしてのnewxxxx">コンストラクタとしての<code>NewXXXX()</code></h3>
 <p>構造体の初期化と生成に使うパターン</p>
-
 <iframe src="https://play.golang.org/p/7PCxyYTCwek" width=600 height=300 frameborder=0></iframe>
-
 <ul>
 <li>👍 構造体の生成と初期化の内部実装を利用者に見せない</li>
 <li>👍 構造体そのものの構造を利用者に見せない</li>
 </ul>
-
 <h3 id="エクスポートして外部パッケージからのアクセス許可を利用したシングルトン">エクスポートして外部パッケージからのアクセス許可を利用したシングルトン</h3>
-
 <p>「構造体名の先頭を大文字にすることで外部パッケージからのアクセスを許可する」というGolangの特徴を生かしてシングルトンを生成できる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">singleton</span>
 
-<pre><code class="language-golang">package singleton
-
-// 構造体自体を外部に公開しない
-type singleton struct {
+<span style="color:#75715e">// 構造体自体を外部に公開しない
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">singleton</span> <span style="color:#66d9ef">struct</span> {
 }
 
-// 構造体のインスタンスを保持する変数も外部に公開しない
-var instance *singleton
+<span style="color:#75715e">// 構造体のインスタンスを保持する変数も外部に公開しない
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">instance</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">singleton</span>
 
-// シングルトンなインスタンスを取得する関数のみを外部に公開
-func GetInstance() *singleton {
-	if instance == nil {
-	     instance = &amp;singleton{}
+<span style="color:#75715e">// シングルトンなインスタンスを取得する関数のみを外部に公開
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetInstance</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">singleton</span> {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">instance</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+	     <span style="color:#a6e22e">instance</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">singleton</span>{}
 	}
-	return instance
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">instance</span>
 }
-</code></pre>
-
-<h3 id="interface-でポリモーフィズム"><code>interface</code>でポリモーフィズム</h3>
-
+</code></pre></div><h3 id="interfaceでポリモーフィズム"><code>interface</code>でポリモーフィズム</h3>
 <p>Golangには「型の継承」がない．一方で，<code>interface</code>を用いることでポリモーフィズムを実現できる．<code>interface</code>によって振る舞いを定義することで，「同じような振る舞いをするもの」をまとめて扱えるようになる．</p>
-
 <iframe src="https://play.golang.org/p/p-yY5gEOdaG" width=600 height=300 frameborder=0></iframe>
-
 <h3 id="構造体の埋め込みによるポリモーフィズム">構造体の埋め込みによるポリモーフィズム</h3>
-
 <p>ある構造体に対して，特定の振る舞いを実装している構造体を埋め込むことで，その構造体も「埋め込まれた構造体と同様な振る舞いをするもの」として扱うことができる．ただ，これをやると構造体の初期化時に構造体の内部を意識する必要があるため，初期化のための<code>NewXXXX()</code>を用意してあげると良い．</p>
-
 <iframe src="https://play.golang.org/p/MsxaudYhObv" width=600 height=300 frameborder=0></iframe>
-
 <h3 id="埋め込まれた構造体が上位の構造体の関数を使う">埋め込まれた構造体が上位の構造体の関数を使う</h3>
-
 <p>オブジェクト指向では「子クラスが親クラスのメソッドを用いること」ができるが，Golangでもできないことはない．</p>
-
 <iframe src="https://play.golang.org/p/cQ4uSQ7_TLl" width=600 height=300 frameborder=0></iframe>
-
 <h3 id="構造体による処理の移譲">構造体による処理の移譲</h3>
-
 <p>構造体のメンバーとして，特定の処理に対して責任を持つ構造体を持つことで，処理の移譲を実現できる．</p>
-
 <iframe src="https://play.golang.org/p/KPX9i1sY1CK" width=600 height=300 frameborder=0></iframe>
-
 <h3 id="関数による処理の移譲">関数による処理の移譲</h3>
-
 <p>Golangでは関数は第1級市民なので値として扱うことができる．処理を定義した関数をやりとりすることで処理を移譲させることができる．</p>
-
 <iframe src="https://play.golang.org/p/MN93S3LVX9l" width=600 height=300 frameborder=0></iframe>
 
     </div>
@@ -685,7 +659,7 @@ func GetInstance() *singleton {
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1302,7 +1276,7 @@ func GetInstance() *singleton {
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

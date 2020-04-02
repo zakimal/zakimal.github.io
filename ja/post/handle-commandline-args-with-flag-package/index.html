@@ -482,219 +482,174 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="flag-パッケージ"><code>flag</code>パッケージ</h2>
-
-<p>Golangでは，標準パッケージとしてコマンドライン引数を扱う<a href="https://golang.org/pkg/flag/" target="_blank"><code>flag</code></a>パッケージが付属しています．「痒い所に手が届く」とはこのことですね．</p>
-
+      <h2 id="flagパッケージ"><code>flag</code>パッケージ</h2>
+<p>Golangでは，標準パッケージとしてコマンドライン引数を扱う<a href="https://golang.org/pkg/flag/"><code>flag</code></a>パッケージが付属しています．「痒い所に手が届く」とはこのことですね．</p>
 <h2 id="フラグの立っていないコマンドライン引数の取得">フラグの立っていないコマンドライン引数の取得</h2>
-
 <p><code>Parse()</code>の後に<code>Args()</code>で<code>[]string</code>として取得できます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-func main() {
-	flag.Parse()
-	args := flag.Args()
-	fmt.Println(args)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">args</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Args</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">args</span>)
 }
-</code></pre>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-no-flag0.go a b c
+<span style="color:#f92672">[</span>a b c<span style="color:#f92672">]</span>
+$ go run with-no-flag0.go <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> 3<span style="color:#f92672">]</span>
+</code></pre></div><p>$n$番目の要素のみを取り出したい場合は<code>Arg(n)</code>で<code>string</code>として取得できます．$n$番目の要素が存在しない場合は<code>&quot;&quot;</code>が返ってくるようです．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-shell">$ go run with-no-flag0.go a b c
-[a b c]
-$ go run with-no-flag0.go 1 2 3
-[1 2 3]
-</code></pre>
-
-<p>$n$番目の要素のみを取り出したい場合は<code>Arg(n)</code>で<code>string</code>として取得できます．$n$番目の要素が存在しない場合は<code>&quot;&quot;</code>が返ってくるようです．</p>
-
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-func main() {
-	flag.Parse()
-	fmt.Println(flag.Arg(0), flag.Arg(1))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#ae81ff">0</span>), <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Arg</span>(<span style="color:#ae81ff">1</span>))
 }
-</code></pre>
-
-<pre><code class="language-shell">$ go run with-no-flag1.go hoge fuga
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-no-flag1.go hoge fuga
 hoge fuga
-$ go run with-no-flag1.go 1
-1
-</code></pre>
-
-<h2 id="フラグの立っているコマンドライン引数の取得">フラグの立っているコマンドライン引数の取得</h2>
-
+$ go run with-no-flag1.go <span style="color:#ae81ff">1</span>
+<span style="color:#ae81ff">1</span>
+</code></pre></div><h2 id="フラグの立っているコマンドライン引数の取得">フラグの立っているコマンドライン引数の取得</h2>
 <p><code>型名()</code>もしくは<code>型名Var()</code>で，フラグを定義したのち，<code>Parse()</code>でそれぞれの変数を取得できます．</p>
-
 <p>フラグの定義は「フラグ名」「デフォルト値」「ヘルプメッセージ」で行います．</p>
-
 <p><code>型名()</code>の場合は，指定した型へのポインタが返ってきます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-func main() {
-	var (
-		i = flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
-		s = flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
-		b = flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> (
+		<span style="color:#a6e22e">i</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Int</span>(<span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;int flag&#34;</span>)
+		<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;str&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>, <span style="color:#e6db74">&#34;string flag&#34;</span>)
+		<span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;bool flag&#34;</span>)
 	)
-	flag.Parse()
-	fmt.Println(*i, *s, *b)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">i</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">s</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">b</span>)
 }
-</code></pre>
-
-<pre><code class="language-shell">$ go run with-flag0.go -int 2 -str hello -bool true
-2 hello true
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-flag0.go -int <span style="color:#ae81ff">2</span> -str hello -bool true
+<span style="color:#ae81ff">2</span> hello true
 $ go run with-flag0.go
-0 default false
-</code></pre>
+<span style="color:#ae81ff">0</span> default false
+</code></pre></div><p><code>型名Var()</code>の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<p><code>型名Var()</code>の場合は，引数で渡した変数に代入されます．また，適切な値を渡さないと怒られます．ダメな理由も教えてくれるので怒られがいがあります．定義していないフラグも受け付けてくれません．</p>
-
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
-	&quot;time&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
 )
 
-func main() {
-	var (
-		d time.Duration
-		f float64
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> (
+		<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
+		<span style="color:#a6e22e">f</span> <span style="color:#66d9ef">float64</span>
 	)
-	flag.DurationVar(&amp;d, &quot;dur&quot;, 1 * time.Second, &quot;duration flag&quot;)
-	flag.Float64Var(&amp;f, &quot;float&quot;, 0.1, &quot;float flag&quot;)
-	flag.Parse()
-	fmt.Println(d, f)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">DurationVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">d</span>, <span style="color:#e6db74">&#34;dur&#34;</span>, <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>, <span style="color:#e6db74">&#34;duration flag&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Float64Var</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">f</span>, <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#e6db74">&#34;float flag&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">f</span>)
 }
-</code></pre>
-
-<pre><code class="language-shell">$ go run with-flag1.go -dur 1h -float 2.3
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-flag1.go -dur 1h -float 2.3
 1h0m0s 2.3
 $ go run with-flag1.go -float str
-invalid value &quot;str&quot; for flag -float: strconv.ParseFloat: parsing &quot;str&quot;: invalid syntax
+invalid value <span style="color:#e6db74">&#34;str&#34;</span> <span style="color:#66d9ef">for</span> flag -float: strconv.ParseFloat: parsing <span style="color:#e6db74">&#34;str&#34;</span>: invalid syntax
 Usage of /var/folders/.../with-flag1:
   -dur duration
-    	duration flag (default 1s)
+    	duration flag <span style="color:#f92672">(</span>default 1s<span style="color:#f92672">)</span>
   -float float
-    	float flag (default 0.1)
-exit status 2
-</code></pre>
-
-<h2 id="フラグの書き方">フラグの書き方</h2>
-
+    	float flag <span style="color:#f92672">(</span>default 0.1<span style="color:#f92672">)</span>
+exit status <span style="color:#ae81ff">2</span>
+</code></pre></div><h2 id="フラグの書き方">フラグの書き方</h2>
 <p>フラグの書き方は次の2通りが可能です．</p>
-
 <ul>
 <li><code>-flag value</code></li>
 <li><code>-flag=value</code></li>
 </ul>
-
 <p>ただし，Bool値を取得する場合は<code>flag=value</code>を使った方がいいかもしれません．というのも， <strong>フラグの型がBool値かつ引数が続かない場合，フラグが立っただけで<code>true</code>となる</strong>からです．</p>
-
 <p>つまり，フラグを立ててBool値を取得したい場合は<code>-bool=true</code>/<code>-bool=false</code>としなければならないということです．<code>-bool false</code>では<code>true</code>となってしまいます．また<code>-bool false</code>以降の引数が全てフラグ無しで渡された引数として評価されてしまいます．注意が必要ですね．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-func main() {
-	var (
-		i = flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
-		s = flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
-		b = flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> (
+		<span style="color:#a6e22e">i</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Int</span>(<span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;int flag&#34;</span>)
+		<span style="color:#a6e22e">s</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;str&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>, <span style="color:#e6db74">&#34;string flag&#34;</span>)
+		<span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;bool flag&#34;</span>)
 	)
-	flag.Parse()
-	fmt.Println(*i, *s, *b)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">i</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">s</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">b</span>)
 }
-</code></pre>
-
-<pre><code class="language-shell">$ go run with-flag0.go -bool false -int 123 -str abc # falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる
-0 default true 
-$ go run with-flag0.go -bool=true -int 123 -str abc
-123 abc true
-$ go run with-flag0.go -bool=false -int 123 -str abc
-123 abc false
-</code></pre>
-
-<p>ちなみに<code>-h</code>でヘルプを表示してくれます．賢いですね．</p>
-
-<pre><code class="language-shell">$ go run with-flag0.go -h
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-flag0.go -bool false -int <span style="color:#ae81ff">123</span> -str abc <span style="color:#75715e"># falseを含むそれ以降が全て非フラグで渡されたコマンドライン引数として扱われる</span>
+<span style="color:#ae81ff">0</span> default true 
+$ go run with-flag0.go -bool<span style="color:#f92672">=</span>true -int <span style="color:#ae81ff">123</span> -str abc
+<span style="color:#ae81ff">123</span> abc true
+$ go run with-flag0.go -bool<span style="color:#f92672">=</span>false -int <span style="color:#ae81ff">123</span> -str abc
+<span style="color:#ae81ff">123</span> abc false
+</code></pre></div><p>ちなみに<code>-h</code>でヘルプを表示してくれます．賢いですね．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run with-flag0.go -h
 Usage of /var/folders/.../with-flag0:
   -bool
     	bool flag
   -int int
     	int flag
   -str string
-    	string flag (default &quot;default&quot;)
-exit status 2
-</code></pre>
-
-<h2 id="コマンドライン引数の個数を数える">コマンドライン引数の個数を数える</h2>
-
+    	string flag <span style="color:#f92672">(</span>default <span style="color:#e6db74">&#34;default&#34;</span><span style="color:#f92672">)</span>
+exit status <span style="color:#ae81ff">2</span>
+</code></pre></div><h2 id="コマンドライン引数の個数を数える">コマンドライン引数の個数を数える</h2>
 <p><code>NArg()</code>で非フラグなものを，<code>NFlag()</code>でフラグなものをカウントできます．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-golang">package main
-
-import (
-	&quot;flag&quot;
-	&quot;fmt&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;flag&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
 )
 
-func main() {
-	flag.Int(&quot;int&quot;, 0, &quot;int flag&quot;)
-	flag.String(&quot;str&quot;, &quot;default&quot;, &quot;string flag&quot;)
-	flag.Bool(&quot;bool&quot;, false, &quot;bool flag&quot;)
-	flag.Parse()
-	fmt.Println(&quot;non flag:&quot;, flag.NArg())
-	fmt.Println(&quot;flag:&quot;, flag.NFlag())
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Int</span>(<span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;int flag&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;str&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>, <span style="color:#e6db74">&#34;string flag&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Bool</span>(<span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#66d9ef">false</span>, <span style="color:#e6db74">&#34;bool flag&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;non flag:&#34;</span>, <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NArg</span>())
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;flag:&#34;</span>, <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">NFlag</span>())
 }
-</code></pre>
-
-<pre><code class="language-shell">$ go run flag-test.go -int 1 -str foo -bool=true a b
-non flag: 2
-flag: 3
-$ go run flag-test.go -int 1 -str foo -bool true a b
-non flag: 3
-flag: 3
-$ go run flag-test.go -bool true -int 1 -str foo a b
-non flag: 7
-flag: 1
-$ go run flag-test.go a b c -bool=true -str foo
-non flag: 6
-flag: 0
-$ go run flag-test.go -bool=true -str foo a b c
-non flag: 3
-flag: 2
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run flag-test.go -int <span style="color:#ae81ff">1</span> -str foo -bool<span style="color:#f92672">=</span>true a b
+non flag: <span style="color:#ae81ff">2</span>
+flag: <span style="color:#ae81ff">3</span>
+$ go run flag-test.go -int <span style="color:#ae81ff">1</span> -str foo -bool true a b
+non flag: <span style="color:#ae81ff">3</span>
+flag: <span style="color:#ae81ff">3</span>
+$ go run flag-test.go -bool true -int <span style="color:#ae81ff">1</span> -str foo a b
+non flag: <span style="color:#ae81ff">7</span>
+flag: <span style="color:#ae81ff">1</span>
+$ go run flag-test.go a b c -bool<span style="color:#f92672">=</span>true -str foo
+non flag: <span style="color:#ae81ff">6</span>
+flag: <span style="color:#ae81ff">0</span>
+$ go run flag-test.go -bool<span style="color:#f92672">=</span>true -str foo a b c
+non flag: <span style="color:#ae81ff">3</span>
+flag: <span style="color:#ae81ff">2</span>
 $ go run flag-test.go a b c
-non flag: 3
-flag: 0
-$ go run flag-test.go -bool=true -str foo
-non flag: 0
-flag: 2
-</code></pre>
-
+non flag: <span style="color:#ae81ff">3</span>
+flag: <span style="color:#ae81ff">0</span>
+$ go run flag-test.go -bool<span style="color:#f92672">=</span>true -str foo
+non flag: <span style="color:#ae81ff">0</span>
+flag: <span style="color:#ae81ff">2</span>
+</code></pre></div>
     </div>
 
     
@@ -829,7 +784,7 @@ flag: 2
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1442,7 +1397,7 @@ flag: 2
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

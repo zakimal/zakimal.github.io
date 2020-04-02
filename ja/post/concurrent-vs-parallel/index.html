@@ -503,88 +503,68 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="日本語にすると">日本語にすると&hellip;</h2>
-
-<p>調べてみると，<strong>「Concurrentは並行」「Parallelは並列」</strong>と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．</p>
-
-<h2 id="っと-その前に広辞苑によれば">っと，その前に広辞苑によれば&hellip;</h2>
-
+      <h2 id="日本語にすると">日本語にすると&hellip;</h2>
+<p>調べてみると，**「Concurrentは並行」「Parallelは並列」**と訳されるのが一般的らしいですが，日本語にしたところで違いが判然としないので，自分なりの解釈を書いてはっきりさせておきます．</p>
+<h2 id="っとその前に広辞苑によれば">っと，その前に広辞苑によれば&hellip;</h2>
 <blockquote>
 <p>【並行】並びゆくこと．また，並び行なわれること．「両案を並行して審議する」</p>
-
+</blockquote>
+<blockquote>
 <p>【並列】並び連なること．直列の対義語</p>
 </blockquote>
-
 <p>ダメだった．</p>
-
-<h2 id="じゃあ-英英辞典-oxford-dictionary-で引くと">じゃあ，英英辞典（Oxford Dictionary）で引くと&hellip;</h2>
-
+<h2 id="じゃあ英英辞典oxford-dictionaryで引くと">じゃあ，英英辞典（Oxford Dictionary）で引くと&hellip;</h2>
 <blockquote>
 <p>concurrent</p>
-
 <p>Existing, happening, or done at the same time.
 ‘there are three concurrent art fairs around the city’</p>
-
+</blockquote>
+<blockquote>
 <p>parallel</p>
-
 <p>[Computing] Involving the simultaneous performance of operations.
 ‘highly parallel multiprocessor systems’</p>
 </blockquote>
-
 <p>これでもダメだった．</p>
-
 <h2 id="僕の理解">僕の理解</h2>
-
 <h3 id="concurrent">Concurrent</h3>
-
 <p>並行とは「複数のタスクが，論理的に，同時に処理されているように見えること」</p>
-
 <p>具体的には，CPUが1コアの時代に，「一つのパソコンでブラウジングしながらメールが読める理由」を説明するのが「CPUがタスクをConcurrentに処理しているから」で，これが僕の「並行」の理解．</p>
-
 <p>細切れにたくさんの仕事をちょっとずつ進めて，全体として複数のタスクが同時に処理されているように見えるってだけで，実際に複数のタスクが同時に処理されているわけではない．</p>
-
-<p><strong>「一人でいろんな仕事を同時に進めている様」</strong>が並行．</p>
-
+<p>**「一人でいろんな仕事を同時に進めている様」**が並行．</p>
 <h3 id="parallel">Parallel</h3>
-
 <p>並列とは「複数のタスクが，物理的に，同時に処理されていること」</p>
-
 <p>具体的にはマルチコアのプロセッサが，搭載している複数のプロセッサをちゃんと使い切って演算をしている様は，並列という言葉で形容できる．</p>
-
-<p><strong>「複数人が同時に，それぞれの仕事を進めている様」</strong>が並列．</p>
-
+<p>**「複数人が同時に，それぞれの仕事を進めている様」**が並列．</p>
 <p>ちなみに，「並列であれば常に並行である」という主張もあるらしい．「複数人が同時に，それぞれの仕事を進めている様」は側から見ると「いろんな仕事を同時に進めている」ように見えるから，確かにそうかもしれない．</p>
-
 <h3 id="rob-pike先生によれば">Rob Pike先生によれば&hellip;</h3>
-
 <blockquote>
 <p>Concurrency is about dealing with lots of things at once.</p>
-
+</blockquote>
+<blockquote>
 <p>Parallelism is about doing lots of things at once.</p>
-
+</blockquote>
+<blockquote>
 <p>Not the same, but related.</p>
-
+</blockquote>
+<blockquote>
 <p>Concurrency is about structure, parallelism is about execution.</p>
-
+</blockquote>
+<blockquote>
 <p>Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable.</p>
 </blockquote>
-
 <p>なるほど</p>
-
 <h3 id="結局なんだってばよ">結局なんだってばよ&hellip;</h3>
-
 <ul>
-<li><p>Concurrency is a way of structuring your program to make it easy to understand and scalable</p></li>
-
-<li><p>and Parallelism is simply the execution of multiple goroutine in parallel</p></li>
+<li>
+<p>Concurrency is a way of structuring your program to make it easy to understand and scalable</p>
+</li>
+<li>
+<p>and Parallelism is simply the execution of multiple goroutine in parallel</p>
+</li>
 </ul>
-
 <h2 id="ref">ref</h2>
-
 <ul>
-<li><a href="https://talks.golang.org/2012/waza.slide#1" target="_blank">Concurrency is not Parallelism</a></li>
+<li><a href="https://talks.golang.org/2012/waza.slide#1">Concurrency is not Parallelism</a></li>
 </ul>
 
     </div>
@@ -723,7 +703,7 @@
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1336,7 +1316,7 @@
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

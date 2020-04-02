@@ -484,255 +484,196 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<p><img src="communication.gif" alt="通信し合うサーバーたち" /></p>
-
-<h2 id="データのserialization-deserialization">データのserialization/deserialization</h2>
-
+      <p><img src="communication.gif" alt="通信し合うサーバーたち"></p>
+<h2 id="データのserializationdeserialization">データのserialization/deserialization</h2>
 <p>イマドキのソフトウェアは，機能ごとにプログラムを整理整頓して，それらが情報をやりとりしながらサービスを提供します．システムを構成するコンポーネント間でメッセージングをしなければならず，その際にやりとりするデータについて「どういう表現であるのか」について共有しておかないといけません．人間の会話で言うならば「何語を喋るか」に近いのかな．</p>
-
 <p>「どんな形式でデータを表現するか」についてはいくつかの形式が提案されていて，それぞれについて一長一短がある．代表的なのはXML，JSON，BSON，Protocol Buffers，FlatBuffers．他にもいろいろあります．</p>
-
 <h2 id="xml">XML</h2>
-
 <p>XMLとは「e<strong>X</strong>tended <strong>M</strong>arkdown <strong>L</strong>anguage」の略で，文章の電子化に源流があるデータ形式．前提に「文章のデジタル化」があるので，XMLの仕様にはデータの「型」が定義されていません．</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;breakfast_menu&gt;
-&lt;food&gt;
-	&lt;name&gt;Belgian Waffles&lt;/name&gt;
-	&lt;price&gt;$5.95&lt;/price&gt;
-	&lt;description&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;breakfast_menu&gt;</span>
+<span style="color:#f92672">&lt;food&gt;</span>
+	<span style="color:#f92672">&lt;name&gt;</span>Belgian Waffles<span style="color:#f92672">&lt;/name&gt;</span>
+	<span style="color:#f92672">&lt;price&gt;</span>$5.95<span style="color:#f92672">&lt;/price&gt;</span>
+	<span style="color:#f92672">&lt;description&gt;</span>
 		Two of our famous Belgian Waffles with plenty of real maple syrup
-	&lt;/description&gt;
-	&lt;calories&gt;650&lt;/calories&gt;
-&lt;/food&gt;
-&lt;food&gt;
-	&lt;name&gt;Strawberry Belgian Waffles&lt;/name&gt;
-	&lt;price&gt;$7.95&lt;/price&gt;
-	&lt;description&gt;
+	<span style="color:#f92672">&lt;/description&gt;</span>
+	<span style="color:#f92672">&lt;calories&gt;</span>650<span style="color:#f92672">&lt;/calories&gt;</span>
+<span style="color:#f92672">&lt;/food&gt;</span>
+<span style="color:#f92672">&lt;food&gt;</span>
+	<span style="color:#f92672">&lt;name&gt;</span>Strawberry Belgian Waffles<span style="color:#f92672">&lt;/name&gt;</span>
+	<span style="color:#f92672">&lt;price&gt;</span>$7.95<span style="color:#f92672">&lt;/price&gt;</span>
+	<span style="color:#f92672">&lt;description&gt;</span>
 		Light Belgian waffles covered with strawberries and whipped cream
-	&lt;/description&gt;
-	&lt;calories&gt;900&lt;/calories&gt;
-&lt;/food&gt;
-&lt;/breakfast_menu&gt;
-</code></pre>
-
-<p>XMLは文章のデジタル化が前提にあるので，HTMLみたいな見た目になっています．</p>
-
+	<span style="color:#f92672">&lt;/description&gt;</span>
+	<span style="color:#f92672">&lt;calories&gt;</span>900<span style="color:#f92672">&lt;/calories&gt;</span>
+<span style="color:#f92672">&lt;/food&gt;</span>
+<span style="color:#f92672">&lt;/breakfast_menu&gt;</span>
+</code></pre></div><p>XMLは文章のデジタル化が前提にあるので，HTMLみたいな見た目になっています．</p>
 <p>XMLの特徴として「XMLはself-describingである」と評されることが多くあります．これは「<strong>データ自体の構造がデータそのものに表現されている</strong>」ということです．つまり事前に通信の両端でやり取りするデータの方についての合意をとっていなくても（やり取りするデータを眺めれば）データの齟齬のない解釈が可能であるということです．JSONだとこれはできません．XMLはタグだけをみることで，そのデータの構造を即座に読み取ることができます．JSONでは，タグに相当するものをハッシュのキーとして表現すればできないわけではないが，それはデータの型を表現したわけではなくて，ハッシュを用いて似たようなデータ型を表現しただけです．</p>
-
 <p>XMLで記述されたデータはそれ自身のメタな構造をも表現しているという点が分散システムにおけるデータのやり取りで非常に有用なので，古くからよく使われています．</p>
-
 <h2 id="json">JSON</h2>
-
 <p>JSONとは「<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation」の略．JSONをシステム間のデータの表現形式として用いると「JavaScriptでのデータのリテラルな表現をそのままシステム間のデータ表現形式」として用いることになって，webな世界だとJavaScriptのインタプリタでそのまま処理できるので扱いやすくてよく用いられがち．しかも，JSONは人間にとってもパッと見でデータの構造が把握しやすくて人気が出ました．それなりに古参なデータ形式ですが，現在もバリバリの現役です．視認性が良いのがやっぱり人気の理由なんですかね．デバッグしやすいし．</p>
-
 <p>JSONは「プログラミング言語におけるデータのリテラル表現」が出所なので，仕様として「型」が含まれていて，扱いやすいです．「型」が仕様として存在しているので「空の値」を型ごとに区別することができます．</p>
-
-<pre><code class="language-json">{
-	&quot;null&quot;: null,
-	&quot;string&quot;: &quot;&quot;,
-	&quot;array&quot;: [],
-	&quot;dict&quot;: {}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;null&#34;</span>: <span style="color:#66d9ef">null</span>,
+	<span style="color:#f92672">&#34;string&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+	<span style="color:#f92672">&#34;array&#34;</span>: [],
+	<span style="color:#f92672">&#34;dict&#34;</span>: {}
 }
-</code></pre>
-
-<p>JSONは，こんなにシステム間で情報をやりとりする際のデータ形式として用いられるようになることを全然想定していなかったので，扱いづらさがあったりするらしい．僕は具体的に表現することができないが「古臭い」なんて言われることもあります．</p>
-
+</code></pre></div><p>JSONは，こんなにシステム間で情報をやりとりする際のデータ形式として用いられるようになることを全然想定していなかったので，扱いづらさがあったりするらしい．僕は具体的に表現することができないが「古臭い」なんて言われることもあります．</p>
 <p>「どういうフィールドを持ったJSONデータを扱うのか」について通信の両端点で合意しておく必要があるのはもちろんですが，JSONのデータ形式はスキーマを直接的に表現しているわけではない（つまりインタフェースをJSONが規定しているわけではない）という認識も大事だと思います．そのままのJSONはただのデータ形式に過ぎなくて，スキーマ言語としての「データ型を定義する」というメタな機能はないということです．</p>
-
-<p>JSONなどでも「JSONでJSONのスキーマを書いてしまおう」という<a href="https://json-schema.org/" target="_blank">JSON Schema</a>なるものが存在しているそうですが，やっぱりだいぶ書きにくそうです．</p>
-
-<pre><code class="language-json">{
-	&quot;productId&quot;: 1,
-	&quot;productName&quot;: &quot;An ice sculpture&quot;,
-	&quot;price&quot;: 12.50,
-	&quot;tags&quot;: [ &quot;cold&quot;, &quot;ice&quot; ],
-	&quot;dimensions&quot;: {
-		&quot;length&quot;: 7.0,
-		&quot;width&quot;: 12.0,
-		&quot;height&quot;: 9.5
+<p>JSONなどでも「JSONでJSONのスキーマを書いてしまおう」という<a href="https://json-schema.org/">JSON Schema</a>なるものが存在しているそうですが，やっぱりだいぶ書きにくそうです．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;productId&#34;</span>: <span style="color:#ae81ff">1</span>,
+	<span style="color:#f92672">&#34;productName&#34;</span>: <span style="color:#e6db74">&#34;An ice sculpture&#34;</span>,
+	<span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">12.50</span>,
+	<span style="color:#f92672">&#34;tags&#34;</span>: [ <span style="color:#e6db74">&#34;cold&#34;</span>, <span style="color:#e6db74">&#34;ice&#34;</span> ],
+	<span style="color:#f92672">&#34;dimensions&#34;</span>: {
+		<span style="color:#f92672">&#34;length&#34;</span>: <span style="color:#ae81ff">7.0</span>,
+		<span style="color:#f92672">&#34;width&#34;</span>: <span style="color:#ae81ff">12.0</span>,
+		<span style="color:#f92672">&#34;height&#34;</span>: <span style="color:#ae81ff">9.5</span>
 	},
- 	&quot;warehouseLocation&quot;: {
-		&quot;latitude&quot;: -78.75,
-		&quot;longitude&quot;: 20.4
+ 	<span style="color:#f92672">&#34;warehouseLocation&#34;</span>: {
+		<span style="color:#f92672">&#34;latitude&#34;</span>: <span style="color:#ae81ff">-78.75</span>,
+		<span style="color:#f92672">&#34;longitude&#34;</span>: <span style="color:#ae81ff">20.4</span>
 	}
 }
-</code></pre>
-
-<p>というスキーマをJSONで書くと</p>
-
-<pre><code class="language-json">{
-	&quot;$schema&quot;: &quot;http://json-schema.org/draft-07/schema#&quot;,
-	&quot;$id&quot;: &quot;http://example.com/product.schema.json&quot;,
-	&quot;title&quot;: &quot;Product&quot;,
-	&quot;description&quot;: &quot;A product from Acme's catalog&quot;,
-	&quot;type&quot;: &quot;object&quot;,
-	&quot;properties&quot;: {
-		&quot;productId&quot;: {
-			&quot;description&quot;: &quot;The unique identifier for a product&quot;,
-			&quot;type&quot;: &quot;integer&quot;
+</code></pre></div><p>というスキーマをJSONで書くと</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;$schema&#34;</span>: <span style="color:#e6db74">&#34;http://json-schema.org/draft-07/schema#&#34;</span>,
+	<span style="color:#f92672">&#34;$id&#34;</span>: <span style="color:#e6db74">&#34;http://example.com/product.schema.json&#34;</span>,
+	<span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Product&#34;</span>,
+	<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;A product from Acme&#39;s catalog&#34;</span>,
+	<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+	<span style="color:#f92672">&#34;properties&#34;</span>: {
+		<span style="color:#f92672">&#34;productId&#34;</span>: {
+			<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;The unique identifier for a product&#34;</span>,
+			<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;integer&#34;</span>
 		},
-		&quot;productName&quot;: {
-			&quot;description&quot;: &quot;Name of the product&quot;,
-			&quot;type&quot;: &quot;string&quot;
+		<span style="color:#f92672">&#34;productName&#34;</span>: {
+			<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Name of the product&#34;</span>,
+			<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
 		},
-		&quot;price&quot;: {
-			&quot;description&quot;: &quot;The price of the product&quot;,
-			&quot;type&quot;: &quot;number&quot;,
-			&quot;exclusiveMinimum&quot;: 0
+		<span style="color:#f92672">&#34;price&#34;</span>: {
+			<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;The price of the product&#34;</span>,
+			<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;number&#34;</span>,
+			<span style="color:#f92672">&#34;exclusiveMinimum&#34;</span>: <span style="color:#ae81ff">0</span>
 		},
-		&quot;tags&quot;: {
-			&quot;description&quot;: &quot;Tags for the product&quot;,
-			&quot;type&quot;: &quot;array&quot;,
-			&quot;items&quot;: {
-				&quot;type&quot;: &quot;string&quot;
+		<span style="color:#f92672">&#34;tags&#34;</span>: {
+			<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Tags for the product&#34;</span>,
+			<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;array&#34;</span>,
+			<span style="color:#f92672">&#34;items&#34;</span>: {
+				<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
 			},
-			&quot;minItems&quot;: 1,
-			&quot;uniqueItems&quot;: true
+			<span style="color:#f92672">&#34;minItems&#34;</span>: <span style="color:#ae81ff">1</span>,
+			<span style="color:#f92672">&#34;uniqueItems&#34;</span>: <span style="color:#66d9ef">true</span>
 		},
-		&quot;dimensions&quot;: {
-			&quot;type&quot;: &quot;object&quot;,
-			&quot;properties&quot;: {
-				&quot;length&quot;: {
-					&quot;type&quot;: &quot;number&quot;
+		<span style="color:#f92672">&#34;dimensions&#34;</span>: {
+			<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+			<span style="color:#f92672">&#34;properties&#34;</span>: {
+				<span style="color:#f92672">&#34;length&#34;</span>: {
+					<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;number&#34;</span>
 				},
-				&quot;width&quot;: {
-		    		&quot;type&quot;: &quot;number&quot;
+				<span style="color:#f92672">&#34;width&#34;</span>: {
+		    		<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;number&#34;</span>
 				},
-				&quot;height&quot;: {
-					&quot;type&quot;: &quot;number&quot;
+				<span style="color:#f92672">&#34;height&#34;</span>: {
+					<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;number&#34;</span>
 				}
 			},
-			&quot;required&quot;: [ &quot;length&quot;, &quot;width&quot;, &quot;height&quot; ]
+			<span style="color:#f92672">&#34;required&#34;</span>: [ <span style="color:#e6db74">&#34;length&#34;</span>, <span style="color:#e6db74">&#34;width&#34;</span>, <span style="color:#e6db74">&#34;height&#34;</span> ]
 		},
-		&quot;warehouseLocation&quot;: {
-			&quot;description&quot;: &quot;Coordinates of the warehouse where the product is located.&quot;,
-			&quot;$ref&quot;: &quot;https://example.com/geographical-location.schema.json&quot;
+		<span style="color:#f92672">&#34;warehouseLocation&#34;</span>: {
+			<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Coordinates of the warehouse where the product is located.&#34;</span>,
+			<span style="color:#f92672">&#34;$ref&#34;</span>: <span style="color:#e6db74">&#34;https://example.com/geographical-location.schema.json&#34;</span>
 		}
 	},
-	&quot;required&quot;: [ &quot;productId&quot;, &quot;productName&quot;, &quot;price&quot; ]
+	<span style="color:#f92672">&#34;required&#34;</span>: [ <span style="color:#e6db74">&#34;productId&#34;</span>, <span style="color:#e6db74">&#34;productName&#34;</span>, <span style="color:#e6db74">&#34;price&#34;</span> ]
 }
-</code></pre>
-
-<p>🤔 ﾁｮｯﾄﾐﾆｸｲ&hellip;</p>
-
+</code></pre></div><p>🤔 ﾁｮｯﾄﾐﾆｸｲ&hellip;</p>
 <h2 id="bson">BSON</h2>
-
 <p>JSONはテキストベース（つまりシリアライズ・デシリアライズの際に扱われるデータの単位がbitじゃなくてbyte）でしたが，それを改めたBSON = <strong>B</strong>inary J<strong>SON</strong>というのも存在します．つまりBSONではデータがバイナリベース（つまりシリアライズ・デシリアライズの際に扱われるデータの大きさの単位がbit）になっています．BSONは後述するProtocol Buffersとよく似ていて，度々比較されています．公式によると，</p>
-
 <blockquote>
 <p><strong>Lightweight</strong></p>
-
 <ul>
 <li>Keep­ing spa­tial over­head to a min­im­um is im­port­ant for any data rep­res­ent­a­tion format, es­pe­cially when used over the net­work.</li>
 </ul>
-
 <p><strong>Traversable</strong></p>
-
 <ul>
 <li>BSON is de­signed to be tra­versed eas­ily. This is a vi­tal prop­erty in its role as the primary data rep­res­ent­a­tion for Mon­goDB.</li>
 </ul>
-
 <p><strong>Efficient</strong></p>
-
 <ul>
 <li>En­cod­ing data to BSON and de­cod­ing from BSON can be per­formed very quickly in most lan­guages due to the use of C data types.</li>
 </ul>
 </blockquote>
-
 <p>という特徴があります．</p>
-
 <p>BSONは，Protocol Buffersと比較して</p>
-
 <blockquote>
 <p>more &ldquo;schema-less&rdquo;</p>
 </blockquote>
-
 <p>であるとされています．つまり，サービス間のインタフェースの仕様そのものとやりとりするデータ形式の関係性が（Protocol Buffersと比較して）疎で，より柔軟性があるということです．一方で，BSONはProtocol Buffersと比べてメッセージのフィールド名のエンコードに関してやや冗長であるとされています．</p>
-
 <p>MongoDBがBSONをデータの表現方式として採用しているのが興味深いですね．多くの主要言語でBSONのエンコード・デコードをサポートするライブラリが実装されていて手軽に使えそうな印象です．ただ，バイナリベースということもあって，BSONをそのまま眺めても人間には意味がわからないので，デバッグはちょっと大変なのかもしれませんね．</p>
-
 <p>例えば<code>{&quot;hello&quot;: &quot;world&quot;}</code>をBSONでエンコードすると以下のようになります．</p>
-
 <pre><code>  \x16\x00\x00\x00                   // total document size
   \x02                               // 0x02 = type String
   hello\x00                          // field name
   \x06\x00\x00\x00world\x00          // field value
   \x00                               // 0x00 = type EOO ('end of object')
 
-</code></pre>
-
-<h2 id="protocol-buffers">Protocol Buffers</h2>
-
+</code></pre><h2 id="protocol-buffers">Protocol Buffers</h2>
 <p>Protocol BuffersはGoogleが社内のシステム間で情報をやりとりする際に用いていたデータ形式で2008年にオープンソース化されました．Googleが出している公式のドキュメントによれば</p>
-
 <blockquote>
 <p>Protocol buffers are a flexible, efficient, automated mechanism for serializing structured data – think XML, but smaller, faster, and simpler.</p>
 </blockquote>
-
 <p>ということらしいです．Protocol Buffersはシステム間で情報をやりとりする際に用いるデータ形式の一種なんですが，それは嘘じゃないんですけど，Protocol Buffersの指す意味範囲はそれだけにとどまらず，サービス間のインタフェースを定義するスキーマ言語としての顔もあるのが特徴です．もっというと，このスキーマ言語が優秀であるというのがProtocol Buffersの人気を大きく支えている理由なのだと思います．「Protocol Buffersがスキーマ言語である」というのはどういうことかというと，Protocol Buffersでは「システムのインタフェース（つまり，どんな型のデータをやりとりするのか）を定義する独自言語」であるということです．</p>
-
-<pre><code class="language-protobuf">syntax = &quot;proto3&quot;;
-package example.protobuf;
-
-message SimpleMessage {
-	message HeaderItem {
-		string name = 1;
-		string value = 2;
-	}
-	enum Type {
-		START = 0;
-		BLOB = 1;
-		END = 2;
-	}
-
-	uint64 id = 1;
-	Type message_type = 2;
-	repeated HeaderItem headers = 3;
-	bytes blob = 4; 
-}
-</code></pre>
-
-<p>Protocol Buffersは，サービス間でやりとりするデータの型を表現する独自言語とともに，その独自言語で記述されたインタフェースを特定の言語にコンパイルするツールまでもが同梱されています．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example<span style="color:#f92672">.</span>protobuf;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">SimpleMessage</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HeaderItem</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		<span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		<span style="color:#66d9ef">string</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">enum</span> Type {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		START <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		BLOB <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		END <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">uint64</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	Type message_type <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">repeated</span> HeaderItem headers <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">bytes</span> blob <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Protocol Buffersは，サービス間でやりとりするデータの型を表現する独自言語とともに，その独自言語で記述されたインタフェースを特定の言語にコンパイルするツールまでもが同梱されています．</p>
 <p>スキーマ言語が存在すると，非常に便利です．モダンなソフトウェアシステムでは，いろんなところにデータが保存されているかもしれないし，バックエンドで動いているサーバーもいくつかあるかもしれないし，もはやそれが普通になってきています．となると，システムの中のありとあらゆる場所でデータのシリアライズ・デシリアライズをしなければならないし，通信している両者でデータの解釈に矛盾が発生しないように整える必要があります．スキーマ言語があると，この「整える作業」がとてもやりやすくなります．自然言語と違って，スキーマ言語では解釈に差異が発生しないからです．「管理者が一人」みたいなシステムでは，スキーマ言語なんてたいそうなものを持ち出してくる必要はないと思うんですけど，webみたいな自律分散的な系だと，ますますスキーマ言語としてのProtocol Buffersの良さが際立ってくるわけです．</p>
-
 <p>Protocol Buffersのスキーマ言語としての良さは，その簡潔さではないでしょうか．プログラムを書く人間にとっては，特に難しいことを考えずに意図が汲み取れる程度の決まりごとしかないし，スキーマ言語としてプログラミング言語から独立している点も，ツールの作りやすさとかに影響していて，Protocol Buffersが人気な理由なんだと思います．</p>
-
 <p>Protocol Buffersでは，<code>.proto</code>ファイルとしてサービスインタフェースを記述します．</p>
-
-<pre><code class="language-protobuf">message Person {
-	required string name = 1;
-	required int32 id = 2;
-	optional string email = 3;
-
-	enum PhoneType {
-		MOBILE = 0;
-		HOME = 1;
-		WORK = 2;
-	}
-
-	message PhoneNumber {
-		required string number = 1;
-		optional PhoneType type = 2 [default = HOME];
-	}
-
-	repeated PhoneNumber phone = 4;
-}
-</code></pre>
-
-<p>明確なサービスインタフェースをコンパイラによって適切に所望の言語のプログラムに変換してくれるので，開発を進めやすくなります．</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf"><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Person</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">required</span> <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">required</span> <span style="color:#66d9ef">int32</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">optional</span> <span style="color:#66d9ef">string</span> email <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">enum</span> PhoneType {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		MOBILE <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		HOME <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		WORK <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PhoneNumber</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		<span style="color:#66d9ef">required</span> <span style="color:#66d9ef">string</span> number <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>		<span style="color:#66d9ef">optional</span> PhoneType type <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> [<span style="color:#66d9ef">default</span> <span style="color:#f92672">=</span> HOME];<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#66d9ef">repeated</span> PhoneNumber phone <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>明確なサービスインタフェースをコンパイラによって適切に所望の言語のプログラムに変換してくれるので，開発を進めやすくなります．</p>
 <p>Protocol Buffersではサービスのインタフェースの変更に対して後方互換性を維持した形でメッセージのやり取りをできるように「未知なフィールドに遭遇したら無視する」ということになっています．こうすれば，サービスのインタフェースが更新されたとしても，既存のプログラムは動くことには動くことになります．</p>
-
 <p>Protocol Buffersの公式のドキュメントでは，XMLと比較して</p>
-
 <blockquote>
 <p>Protocol buffers</p>
-
 <ul>
 <li>are simpler</li>
 <li>are 3 to 10 times smaller</li>
@@ -741,15 +682,10 @@ message SimpleMessage {
 <li>generate data access classes that are easier to use programmatically</li>
 </ul>
 </blockquote>
-
 <p>と主張しています．確かにXMLはいちいちタグで括らなきゃいけないしProtocol Buffersは効率が良さそうです．</p>
-
 <p>Protocol Buffersのデフォルトのシリアライズはバイナリベースです．人間が眺めて構造が取れるような見た目にはなっていません．しかしProtocol Buffersはシリアライズのフォーマットとして様々な形式（例えばJSONなど）も扱えるように周辺ツールが充実しているので，「スキーマ言語としてのProtocol Buffersでサービスのインフェースを記述して，実際にやり取りするデータはJSON」ということも可能になっています．</p>
-
 <h2 id="flat-buffers">Flat Buffers</h2>
-
 <p>これもGoogleによってオープンソース化されたデータのシリアライズ・デシリアライズ方式．公式によれば，</p>
-
 <blockquote>
 <ul>
 <li>Access to serialized data without parsing/unpacking</li>
@@ -761,52 +697,36 @@ message SimpleMessage {
 <li>Cross platform code with no dependencies</li>
 </ul>
 </blockquote>
-
 <p>という特徴があります．面白いのが「Access to serialized data without parsing/unpacking」ってところですね．FlatBuffersでは階層構造を持つデータを，パースすることなく直接扱うことができるらしいです．</p>
-
 <p>Protocol Buffersの進化系として自らを位置づけていて，Flat Buffersではデータをパースする必要がないのでProtocol Buffersと比較してコード量が桁違いで削減できて，さらにFlat BuffersではProtocol Buffersより強力に型をサポートしているところが進化ポイントですね．white paperのmotivationの章には</p>
-
 <blockquote>
 <p>In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games.</p>
 </blockquote>
-
 <p>とあり，シリアライズの効率について高水準なものが求められる状況で用いられることが想定されているそうです．</p>
-
 <p>Facebookで用いられているらしいですが，Protocol Buffersの人気に押されて，あまり流行っている感じはしないんですがどうなんでしょうか．</p>
-
 <h2 id="ref">Ref</h2>
-
 <h3 id="xml-1">XML</h3>
-
 <ul>
 <li>hoge</li>
 <li>hoge</li>
 </ul>
-
 <h3 id="json-1">JSON</h3>
-
 <ul>
-<li><a href="https://www.w3schools.com/whatis/whatis_json.asp" target="_blank">What is JSON - W3Schools</a></li>
-<li><a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON Introduction - W3Schools</a></li>
-<li><a href="https://json-schema.org/" target="_blank">JSON Schema</a></li>
+<li><a href="https://www.w3schools.com/whatis/whatis_json.asp">What is JSON - W3Schools</a></li>
+<li><a href="https://www.w3schools.com/js/js_json_intro.asp">JSON Introduction - W3Schools</a></li>
+<li><a href="https://json-schema.org/">JSON Schema</a></li>
 </ul>
-
 <h3 id="bson-1">BSON</h3>
-
 <ul>
-<li><a href="http://bsonspec.org/" target="_blank">BSON</a></li>
+<li><a href="http://bsonspec.org/">BSON</a></li>
 </ul>
-
 <h3 id="protocol-buffers-1">Protocol Buffers</h3>
-
 <ul>
-<li><a href="https://developers.google.com/protocol-buffers" target="_blank">Protocol Buffers</a></li>
+<li><a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a></li>
 </ul>
-
 <h3 id="flat-buffers-1">Flat Buffers</h3>
-
 <ul>
-<li><a href="https://google.github.io/flatbuffers/" target="_blank">Flat Buffers</a></li>
+<li><a href="https://google.github.io/flatbuffers/">Flat Buffers</a></li>
 </ul>
 
     </div>
@@ -949,7 +869,7 @@ message SimpleMessage {
 
     <div class="media-body">
       <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学4年 (学士課程)</h6>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
       <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
       <ul class="network-icon" aria-hidden="true">
   
@@ -1553,7 +1473,7 @@ message SimpleMessage {
   
 
   <p class="powered-by">
-    &copy; zak 2020 &middot; 
+    © zak 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
