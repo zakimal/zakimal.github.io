@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="尾崎 耀一 (@zak)">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="全探索 競技プログラミングの「キホン」の「キ」．論理的に考えることになれすぎてると，当たり前過ぎて「なんかずるい」って思うけど，競技プログラム">
+
+  
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/check-all-cases/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/ja/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/ja/post/check-all-cases/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@zak74702675">
+  <meta property="twitter:creator" content="@zak74702675">
+  
+  <meta property="og:site_name" content="zak">
+  <meta property="og:url" content="/ja/post/check-all-cases/">
+  <meta property="og:title" content="全探索 | zak">
+  <meta property="og:description" content="全探索 競技プログラミングの「キホン」の「キ」．論理的に考えることになれすぎてると，当たり前過ぎて「なんかずるい」って思うけど，競技プログラム"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  
+    
+      <meta property="article:published_time" content="2020-04-05T20:32:33&#43;09:00">
+    
+    <meta property="article:modified_time" content="2020-04-05T20:32:33&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/check-all-cases/"
+  },
+  "headline": "全探索",
+  
+  "datePublished": "2020-04-05T20:32:33+09:00",
+  "dateModified": "2020-04-05T20:32:33+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "全探索 競技プログラミングの「キホン」の「キ」．論理的に考えることになれすぎてると，当たり前過ぎて「なんかずるい」って思うけど，競技プログラム"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>全探索 | zak</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="検索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/ja"><img src="/img/zak.gif" alt="zak"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#about"><span>ホーム</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#posts"><span>ブログ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/post/book-shelf"><span>本棚</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#contact"><span>お問い合わせ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/files/cv.pdf"><span>履歴書</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>全探索</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Sun, Apr 5, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    13 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="全探索">全探索</h2>
+<p>競技プログラミングの「キホン」の「キ」．論理的に考えることになれすぎてると，当たり前過ぎて「なんかずるい」って思うけど，競技プログラムでは当たり前に使う．計算機が高速に計算できるんだから，それを使って問題を解決して何が悪いってか．</p>
+<p>全探索とは <strong>「ありうるパターンを全部調べ上げる」</strong> こと．</p>
+<p>百聞は一見にしかずということで例題を見てみる．</p>
+<h3 id="例題">例題</h3>
+<blockquote>
+<p>【<strong>問題</strong>】数字が書かれている$N$枚の紙切れが入った袋がある．この袋から紙切れを取り出し，その紙切れに書いてある数字を確認して袋に戻すことを4回行い，4回の数字の和が$M$になればあなたの勝ちである．紙切れに書かれている数字が${K_1, K_2, &hellip;, K_N}$であるとき，あなたはこのゲームに勝つことができるだろうか．判定せよ．</p>
+<p>【<strong>制約</strong>】$N \leq 50$，$M \leq 10^8$，$N \leq 10^8$</p>
+</blockquote>
+<p>難しいことを考えずに，「1回目に$K_a$，2回目に$K_b$，2回目に$K_c$，1回目に$K_d$を引く」として，起こりうるすべての数字の組$(a, b, c, d)$を全部調べれば判定できる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, m; cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> k;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> k[i];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; a <span style="color:#f92672">&lt;</span> n; a<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; b <span style="color:#f92672">&lt;</span> n; b<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; c <span style="color:#f92672">&lt;</span> n; c<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; d <span style="color:#f92672">&lt;</span> n; d<span style="color:#f92672">++</span>) {
+          <span style="color:#66d9ef">if</span> (k[a] <span style="color:#f92672">+</span> k[b] <span style="color:#f92672">+</span> k[c] <span style="color:#f92672">+</span> k[d] <span style="color:#f92672">==</span> m) {
+            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+          }
+        }
+      }
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="4種類の全探索">4種類の全探索</h2>
+<p>全探索には4種類ある．</p>
+<p>1つ目は，<strong>純粋に全通り調べ上げる全探索</strong>．めちゃめちゃ<code>for</code>ループ書くタイプ．制約次第で有効．</p>
+<p>2つ目は，<strong>工夫して探索の数を減らす全探索</strong>．これもめちゃめちゃ<code>for</code>ループ書くタイプ．問題の性質やちょっとした考察を加えることで，やらなくていい探索をやらずに済ませる．純粋に全探索するのでは制約的に間に合わないような問題でも答えが得られるようになる．　　</p>
+<p>3つ目は，<strong>ビット全探索</strong>．<code>for</code>ループで書きにくい問題はこれで解くことができる．</p>
+<p>4つ目は，<strong>順列全探索</strong>．これも<code>for</code>ループで書きにくい問題を解くときに使う．</p>
+<h3 id="純粋な全探索">純粋な全探索</h3>
+<p>純粋な全探索は上で上げた例題のように，多重ループで全通りを調べ上げる．ループがネストしていくので問題の制約に注意を払う必要がある．上の例題だと4重の<code>for</code>ループになっているが，問題の制約として$N \leq 50$とあるので，最大でも$50^4 = 6.25 \times 10^6$回のループなので，現代的な計算機の性能を考慮すると余裕を持って問題を解くことができる．</p>
+<h3 id="工夫して探索数を減らした全探索">工夫して探索数を減らした全探索</h3>
+<p>問題の性質やちょっとした考察を加えることで，やらなくていいループを見つけることができる．これによって1つ目の全探索よりもサイズの大きい問題を解くことができる．</p>
+<p>例えば，先程の例題だと，$(a, b, c)$が決まってしまえば，$X = M - K_a - K_b - K_c$として，$X$が書かれた紙切れを引くことができるのかを調べれば問題を解くことができる．そのためには予め長さが$10^8$の<code>bool</code>配列を定義しておいて，$1$以上$10^8$以下の整数について，紙切れに書かれているのかを最初に記録しておけば，<code>O(1)</code>で「$X$を引くことができるか」は判定することができる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, m; cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> k;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> exist(<span style="color:#ae81ff">100000005</span>, false);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    cin <span style="color:#f92672">&gt;&gt;</span> k[i];
+    exist[k[i]] <span style="color:#f92672">=</span> true;
+  }
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; a <span style="color:#f92672">&lt;</span> n; a<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; b <span style="color:#f92672">&lt;</span> n; b<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; c <span style="color:#f92672">&lt;</span> n; c<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> m <span style="color:#f92672">-</span> k[a] <span style="color:#f92672">-</span> k[b] <span style="color:#f92672">-</span> k[c];
+        <span style="color:#66d9ef">if</span> (exist[x]) {
+          cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+          <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+        }
+      }
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="ビット全探索">ビット全探索</h3>
+<p>ビット全探索とは，<strong>$n$個の要素からなる集合${0, 1, 2, &hellip;, n-1}$の部分集合をすべて数え上げる手法</strong>のことで，<strong>$N$個のものから，いくつか選ぶ方法を全列挙して調べ上げる手法</strong>である．</p>
+<p>$N$個のものからいくつか選ぶ場合の数は，それぞれについて「選ぶ」「選ばない」の2通りがあるので，ぜんぶで$2^N$通りある．ビット全探索では，<strong>それぞれのものの選び方をビット列に対応付けることで全通りを調べ上げる</strong>．</p>
+<p>「$N$個のものからいくつか選ぶ」系の問題は例えば次のようなものがある．</p>
+<blockquote>
+<p>【<strong>問題</strong>】$N$個の正整数$a_1, a_2, &hellip; a_{N-1}$からいくつか選んでその総和を$W$にすることができるかを判定せよ．</p>
+<p>【<strong>制約</strong>】$1 \leq N \leq 20$</p>
+</blockquote>
+<p>こういう問題は，<code>for</code>ループで調べ上げにくい．そこで登場するのがビット全探索．</p>
+<p>ビット全探索では，<strong>「$N$個のものからいくつか選ぶ方法」を整数値に一対一に対応付ける</strong>
+．ものの選び方を，$i$個目のものを選ぶなら$1$，選ばないなら$0$として2進数の整数にしてあげることでこの対応付けを設ける．</p>
+<p>この対応付けから，$N$個のものの選び方の全探索は</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); bit<span style="color:#f92672">++</span>) {
+  ;
+}
+</code></pre></div><p>と書ける．このループを回るとき<code>bit</code>は<code>000...000</code>から<code>111...111</code>を1つずつ巡っていくことになる．</p>
+<p>数字から「ものの選び方」を復元する際にはビット演算を利用する．<code>bit</code>にエンコードされた「ものの選び方」をしたときに，$i$番目のものは選ばれているのかどうかは</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">if</span> (bit <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i)) {
+  ;
+}
+</code></pre></div><p>で判定できる．<code>1 &lt;&lt; i</code>は「1をiビットだけ左シフトした値」なので，それとの<code>AND</code>を取ることで，<code>bit</code>の$i$番目のビットだけを取り出すことができる．</p>
+<p>ものの選び方を表す整数<code>bit</code>から，そのときの選ばれたアイテムの番号を記録した配列を返す関数は次のように書ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> Bit2Vec(<span style="color:#66d9ef">int</span> bit, <span style="color:#66d9ef">int</span> N) {
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> items;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (bit <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i)) {
+      items.push_back(i);
+    }
+  }
+  <span style="color:#66d9ef">return</span> items;
+}
+</code></pre></div><p>しかし実際には，上のように「ものの選び方」を表す配列を用意することなく，<strong>各アイテム番号<code>i = 0, 1, ...</code>に対して，アイテム<code>i</code>が<code>bit</code>で表現されるアイテムの集合に含まれていることがわかったら，それに応じた処理をその場で行ってしまう</strong>ような実装をしている人が多い．</p>
+<p>また，$i$ビット目を取り出す演算は，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+  ;
+}
+</code></pre></div><p>とも書けて，こっちのほうが安全だったりすることがあるようなことを聞いたことがある（要出典）．</p>
+<h4 id="ビット全探索の例">ビット全探索の例</h4>
+<blockquote>
+<p>【<strong>問題</strong>】$N$個の正整数$a_1, a_2, &hellip; a_{N-1}$と正整数$W$が与えられる．$a_1, a_2, &hellip; a_{N-1}$からいくつか選んでその総和を$W$にすることができるかを判定せよ．</p>
+<p>【<strong>制約</strong>】$1 \leq N \leq 20$</p>
+</blockquote>
+<p>この問題は， <strong>「$N$個の正整数からいくつか選ぶ方法は$2^N$通りあり，それを1つづつ試しながら，総和が$W$になるかを確認する」</strong> ことで解くことができる．正整数の選び方それぞれに対して，$O(N)$かけて総和を取ることになるので，全体の計算量は$O(2^N \times N)$．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> Bit2Vec(<span style="color:#66d9ef">int</span> bit, <span style="color:#66d9ef">int</span> N) {
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> items;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+      items.push_back(i);
+    }
+  }
+  <span style="color:#66d9ef">return</span> items;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, W; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); i<span style="color:#f92672">++</span>) {
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> items <span style="color:#f92672">=</span> Bit2Vec(bit, N);
+    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : items) sum <span style="color:#f92672">+=</span> a[i];
+    <span style="color:#66d9ef">if</span> (sum <span style="color:#f92672">==</span> W) {
+      cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>上の実装でも正しいが，<strong><code>bit</code>に対応するものの選び方において，アイテム<code>i</code>が選ばれるのかの判定と，選ばれるならその際の処理（ここでは総和の計算に用いる）をその場でやってしまう</strong>ような実装にすることもできて，そうすることで<code>Bit2Vec</code>関数を書かなくて済むようになる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, W; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+        sum <span style="color:#f92672">+=</span> a[i];
+      }
+    }
+    <span style="color:#66d9ef">if</span> (sum <span style="color:#f92672">==</span> W) {
+      cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="順列全探索">順列全探索</h3>
+<p>順列全探索は，<strong>順序付きのものの選び方として考えられるものを全て調べ上げる</strong>全探索．例えば「$N$個の都市を，好きな都市から出発して，全ての都市をちょうど1回ずつ訪れる方法のうち，最短の所要時間を求める」という巡回セールスマン問題を考えるとき，都市のめぐり方の総数は$N!$通りなので，その全てを試せば原理的に解ける．</p>
+<p>C++では<code>std::next_permutation()</code>という便利関数があり，順列全探索をかんたんに書くことができる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> INF <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000</span>;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> g(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> g[i][j];
+    }
+  }
+
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> order(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> ; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) order[i] <span style="color:#f92672">=</span> i; <span style="color:#75715e">// 都市番号順に訪れる方法で初期化
+</span><span style="color:#75715e"></span>
+  <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> INF;
+
+  <span style="color:#75715e">// 順列全探索の典型的な書き方
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">do</span> {
+    <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+      tmp <span style="color:#f92672">+=</span> g[order[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]][order[i]];
+    }
+    <span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">&lt;</span> res) {
+      res <span style="color:#f92672">=</span> tmp;
+    }
+  } <span style="color:#66d9ef">while</span> (next_permutation(order.begin(), order.end()));
+
+  cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> end;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p><code>do {...} while (next_permutation(...));</code>で$n!$回ループして，それぞれについて，$O(n)$かけてコストの総和を取るので全体としては$O(n! \times n)$</p>
+<h2 id="全探索の練習問題">全探索の練習問題</h2>
+<h3 id="単純な全探索ちょっと工夫する全探索">単純な全探索・ちょっと工夫する全探索</h3>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc144/tasks/abc144_b">ABC 144 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc150/tasks/abc150_b">ABC 150 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc122/tasks/abc122_b">ABC 122 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc136/tasks/abc136_b">ABC 136 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc106/tasks/abc106_b">ABC 106 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc120/tasks/abc120_b">ABC 120 B</a></li>
+<li><a href="https://atcoder.jp/contests/abc057/tasks/abc057_c">ABC 57 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc095/tasks/arc096_a">ABC 95 C</a></li>
+<li><a href="https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d">住銀2019 D</a></li>
+</ul>
+<h3 id="ビット全探索-1">ビット全探索</h3>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc128/tasks/abc128_c">ABC 128 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc147/tasks/abc147_c">ABC 147 C</a></li>
+</ul>
+<h3 id="順列全探索-1">順列全探索</h3>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc145/tasks/abc145_c">ABC 145 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc150/tasks/abc150_c">ABC 150 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc054/tasks/abc054_c">ABC 54 C</a></li>
+</ul>
+<h2 id="解説">解説</h2>
+<h3 id="abc-144-b">ABC 144 B</h3>
+<p>与えられた整数$N$が$1$以上$9$以下の2整数の積と等しいかを，<strong>$1$以上$9$以下の2整数の積をぜんぶ試しながら調べる</strong>ことで原理的に解ける．制約を考慮しても，特に工夫することなく解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">*</span> j <span style="color:#f92672">==</span> n) {
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+      }
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-150-b">ABC 150 B</h3>
+<p>入力文字列<code>S</code>の$i$文字目から$i+3$文字目までが<code>ABC</code>と一致するかを全ての$i$に対して調べる．入力文字列の大きさがそこまで大きくないので特に工夫せず解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  string s; cin <span style="color:#f92672">&gt;&gt;</span> s;
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&amp;&amp;</span> s[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;B&#39;</span> <span style="color:#f92672">&amp;&amp;</span> s[i<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;C&#39;</span>) {
+      ans<span style="color:#f92672">++</span>;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-122-b">ABC 122 B</h3>
+<p>入力文字列を先頭から一文字づつ舐めていって，その文字が<code>A</code>/<code>C</code>/<code>G</code>/<code>T</code>なら文字列の長さに1を加えて，そうでないならそこで一旦リセット．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  string s; cin <span style="color:#f92672">&gt;&gt;</span> s;
+  <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">||</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;C&#39;</span> <span style="color:#f92672">||</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;G&#39;</span> <span style="color:#f92672">||</span> s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;T&#39;</span>) {
+      len <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+      ans <span style="color:#f92672">=</span> max(ans, len);
+    } <span style="color:#66d9ef">else</span> {
+      len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-136-b">ABC 136 B</h3>
+<p>$N$以下の正整数に対して，桁数が奇数になるのかを調べてやるだけ．整数を文字列に変換する関数は大体の言語でもできる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  string ns; cin <span style="color:#f92672">&gt;&gt;</span> ns;
+  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> stoi(ns);
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+    string s <span style="color:#f92672">=</span> to_string(i);
+    <span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) ans<span style="color:#f92672">++</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-106-b">ABC 106 B</h3>
+<p>$N$以下の各正奇数に対して，正の約数が8個であるかを調べてあげる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">%</span>i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) cnt<span style="color:#f92672">++</span>;
+  }
+  <span style="color:#66d9ef">if</span> (cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>) <span style="color:#66d9ef">return</span> true;
+  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+    <span style="color:#66d9ef">if</span> (check(i)) ans<span style="color:#f92672">++</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-120-b">ABC 120 B</h3>
+<p>与えられた2整数$A$，$B$の約数をぜんぶ調べ上げれば良い．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> a, b, k; cin <span style="color:#f92672">&gt;&gt;</span> a <span style="color:#f92672">&gt;&gt;</span> b <span style="color:#f92672">&gt;&gt;</span> k;
+  <span style="color:#66d9ef">if</span> (b <span style="color:#f92672">&lt;</span> a) swap(a, b);
+  <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> a; <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> i; i<span style="color:#f92672">--</span>) {
+    <span style="color:#66d9ef">if</span> (a<span style="color:#f92672">%</span>i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> b<span style="color:#f92672">%</span>i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      cnt<span style="color:#f92672">++</span>;
+      <span style="color:#66d9ef">if</span> (cnt <span style="color:#f92672">==</span> k) {
+        cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+      }
+    }
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-57-c">ABC 57 C</h3>
+<p>$A &lt; B$としても一般性は失われないので，$1 \leq A \leq \sqrt N$まで調べればいい．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">using</span> ll <span style="color:#f92672">=</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  ll N;
+  cin <span style="color:#f92672">&gt;&gt;</span> N;
+  ll digit <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (ll i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> sqrt(N); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (N<span style="color:#f92672">%</span>i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+      digit <span style="color:#f92672">=</span> i;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> to_string(N<span style="color:#f92672">/</span>digit).length() <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-95-c">ABC 95 C</h3>
+<p>ABピザを奇数枚買って一枚余らせることしてもただの無駄でしかないので，ABピザは2枚1組のABセットとして考える．ここで問題の制約から，AピザでもBピザでもABセットでも，買う個数を$0$から$10^5$までぜんぶ試せば，買い方の場合の数は全て網羅するので原理的に解けることになる．</p>
+<p>というか，ぜんぶABセットで買って余らせるか，Aピザ or Bピザが足りる分までABセットで買って不足分を単品で買い足すか，ABセットを使わずに単品で買い揃えるか，のいずれのパターンで最も安上がりのものを調べれば良いので，探索はいらない．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">int</span> a, b, c, x, y;
+    cin <span style="color:#f92672">&gt;&gt;</span> a <span style="color:#f92672">&gt;&gt;</span> b <span style="color:#f92672">&gt;&gt;</span> c <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> a <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b <span style="color:#f92672">*</span> y;
+    res <span style="color:#f92672">=</span> min(res, (c <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> max(x, y));
+    res <span style="color:#f92672">=</span> min(res, min(x, y) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> c <span style="color:#f92672">+</span> a <span style="color:#f92672">*</span> (x <span style="color:#f92672">-</span> min(x, y)) <span style="color:#f92672">+</span> b <span style="color:#f92672">*</span> (y <span style="color:#f92672">-</span> min(x, y)));
+    cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="住銀2019-d">住銀2019 D</h3>
+<p>まじめに，入力されたラッキーナンバーから3桁取ってきて&hellip;とやると，ラッキーナンバーの桁数が最大30000もあるので制限時間内に終わらない．ここで，<strong>3桁の暗証番号は<code>000</code>から<code>999</code>のどれかにしかならない</strong>ので，暗証番号を決め打ちしてから，その暗証番号を与えられたラッキーナンバーから作れるかを調べたほうが良い．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  string S;
+  cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> S;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000</span>; i<span style="color:#f92672">++</span>) {
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> c <span style="color:#f92672">=</span> {i<span style="color:#f92672">/</span><span style="color:#ae81ff">100</span>, (i<span style="color:#f92672">/</span><span style="color:#ae81ff">10</span>)<span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>, i<span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>};
+    <span style="color:#66d9ef">int</span> f <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> N; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (S.at(j) <span style="color:#f92672">==</span> (<span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">+</span> c.at(f))) {
+        f<span style="color:#f92672">++</span>;
+      }
+      <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) {
+        <span style="color:#66d9ef">break</span>;
+      }
+    }
+    <span style="color:#66d9ef">if</span> (f <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) {
+      cnt<span style="color:#f92672">++</span>;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> cnt <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-128-c">ABC 128 C</h3>
+<p>$N$個のスイッチの状態はぜんぶで$2^N$通りで，それを全部試して，$M$個ある電球が全部点灯するかを調べれば原理的には解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, M; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> M;
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vec(M);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> M; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> k; cin <span style="color:#f92672">&gt;&gt;</span> k;
+    vec[i].resize(k);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> k; j<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> vec[i][j];
+      vec[i][j] <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+    }
+  }
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(M);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> M; i<span style="color:#f92672">++</span>) {
+    cin <span style="color:#f92672">&gt;&gt;</span> p[i];
+  }
+
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); bit<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">bool</span> ok <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> M; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// 電球jにつながっていて，かつonになっているスイッチの個数
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> id : vec[j]) {
+        <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> id) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+          c<span style="color:#f92672">++</span>;
+        }
+      }
+      c <span style="color:#f92672">%=</span> <span style="color:#ae81ff">2</span>;
+      <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">!=</span> p[j]) {
+        ok <span style="color:#f92672">=</span> false;
+      }
+    }
+    <span style="color:#66d9ef">if</span> (ok) ans<span style="color:#f92672">++</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div><h3 id="abc-147-c">ABC 147 C</h3>
+<p>「だれが正直者で，だれが不親切なのか」を先に決め打ちしてしまい，それに対して与えられた情報が矛盾しないかを考えてやることで解くことができる．数学パズルが好きな人には「それはずるい」って言われる気がするがまあいいや．「だれが正直者で，だれが不親切なのか」のパターンはぜんぶで$2^N$通りで，ビット全探索が使える．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">using</span> testimony <span style="color:#f92672">=</span> pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>; <span style="color:#75715e">// first: 人, second: 正直者か不親切か
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> N;
+vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>testimony<span style="color:#f92672">&gt;&gt;</span> testimonies;
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> bit) {
+  <span style="color:#75715e">// N人それぞれについて
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+
+    <span style="color:#75715e">// その人が「不親切な人」ならその人の証言は調べなくて良い
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">continue</span>;
+
+    <span style="color:#75715e">// 各証言の整合性を取る
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> test : testimonies[i]) {
+      <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> test.first;
+      <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> test.second;
+      <span style="color:#66d9ef">if</span> (y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> ((bit <span style="color:#f92672">&gt;&gt;</span> x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">return</span> false;
+      <span style="color:#66d9ef">if</span> (y <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>((bit <span style="color:#f92672">&gt;&gt;</span> x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">return</span> false;
+    }
+  }
+  <span style="color:#66d9ef">return</span> true;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  cin <span style="color:#f92672">&gt;&gt;</span> N;
+  testimonies.resize(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> A; cin <span style="color:#f92672">&gt;&gt;</span> A;
+    testimonies[i].resize(A);
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> A; j<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> testimonies[i][j].first <span style="color:#f92672">&gt;&gt;</span> testimonies[i][j].second;
+      testimonies[i][j].first <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+    }
+  }
+
+  <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+  <span style="color:#75715e">// 全通りを調べ上げる
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); bit<span style="color:#f92672">++</span>) {
+
+    <span style="color:#75715e">// 決め打ちした「正直者-不親切な人分布」与えられた証言と整合性があるか
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (check(bit)) {
+      <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+
+      <span style="color:#75715e">// 正直者をカウント
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+          cnt<span style="color:#f92672">++</span>;
+        }
+      }
+      res <span style="color:#f92672">=</span> max(res, cnt);
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-145-c">ABC 145 C</h3>
+<p>順列全探索を使えっていう意図が丸裸って感じの問題．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> N;
+<span style="color:#66d9ef">double</span> x[<span style="color:#ae81ff">10</span>], y[<span style="color:#ae81ff">10</span>];
+
+<span style="color:#66d9ef">double</span> <span style="color:#a6e22e">dist</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+  <span style="color:#66d9ef">double</span> dx <span style="color:#f92672">=</span> x[i] <span style="color:#f92672">-</span> x[j];
+  <span style="color:#66d9ef">double</span> dy <span style="color:#f92672">=</span> y[i] <span style="color:#f92672">-</span> y[j];
+  <span style="color:#66d9ef">return</span> pow(dx<span style="color:#f92672">*</span>dx <span style="color:#f92672">+</span> dy<span style="color:#f92672">*</span>dy, <span style="color:#ae81ff">0.5</span>);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  cin <span style="color:#f92672">&gt;&gt;</span> N;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> x[i] <span style="color:#f92672">&gt;&gt;</span> y[i];
+  <span style="color:#66d9ef">double</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> towns(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) towns[i] <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">do</span> {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+      sum <span style="color:#f92672">+=</span> dist(towns[i], towns[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]);
+    }
+  } <span style="color:#66d9ef">while</span> (next_permutation(towns.begin(), towns.end()));
+  <span style="color:#66d9ef">int</span> fact <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> N; i<span style="color:#f92672">++</span>) fact <span style="color:#f92672">*=</span> i;
+  cout <span style="color:#f92672">&lt;&lt;</span> fixed <span style="color:#f92672">&lt;&lt;</span> setprecision(<span style="color:#ae81ff">12</span>) <span style="color:#f92672">&lt;&lt;</span> sum<span style="color:#f92672">/</span>fact <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-150-c">ABC 150 C</h3>
+<p><code>do {...} while (next_permutation());</code>の練習問題．ソートし直すのを忘れないように．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(n), q(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> p[i];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> q[i];
+
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) s[i] <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">int</span> pidx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">int</span> qidx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">do</span> {
+    <span style="color:#66d9ef">bool</span> pflag <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">!=</span> p[i]) pflag <span style="color:#f92672">=</span> false;
+    }
+    <span style="color:#66d9ef">if</span> (pflag) {
+      pidx <span style="color:#f92672">=</span> i;
+      <span style="color:#66d9ef">break</span>;
+    } <span style="color:#66d9ef">else</span> i<span style="color:#f92672">++</span>;
+  } <span style="color:#66d9ef">while</span> (next_permutation(s.begin(), s.end()));
+  sort(s.begin(), s.end());
+  i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">do</span> {
+    <span style="color:#66d9ef">bool</span> qflag <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">!=</span> q[i]) qflag <span style="color:#f92672">=</span> false;
+    }
+    <span style="color:#66d9ef">if</span> (qflag) {
+      qidx <span style="color:#f92672">=</span> i;
+      <span style="color:#66d9ef">break</span>;
+    } <span style="color:#66d9ef">else</span> i<span style="color:#f92672">++</span>;
+  } <span style="color:#66d9ef">while</span> (next_permutation(s.begin(), s.end()));
+
+  cout <span style="color:#f92672">&lt;&lt;</span> abs(pidx <span style="color:#f92672">-</span> qidx) <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-54-c">ABC 54 C</h3>
+<p><code>1</code>を始点とするDFSで条件を満たすパスを数え上げる方法が一番素直だけれども，制約に注目すると，与えられるグラフの頂点数が最大でも8ということを考慮すると，<strong>頂点の訪問順序を，生えている辺を無視して順列全探索をして，編の生え方に矛盾しないものをカウントする</strong>としても解ける．まあ教育的な観点からはDFSの練習として思った方が良さそうだけれど．</p>
+<ul>
+<li>DFSによる解答</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#75715e">// 1を始点としてDFSでグラフ上を探索し条件を満たすパスを数え上げる
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> nmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+<span style="color:#66d9ef">bool</span> graph[nmax][nmax];
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> N, <span style="color:#66d9ef">bool</span> has_visited[nmax]) {
+  <span style="color:#66d9ef">bool</span> has_visited_all <span style="color:#f92672">=</span> true;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (has_visited[i] <span style="color:#f92672">==</span> false) {
+      has_visited_all <span style="color:#f92672">=</span> false;
+    }
+  }
+  <span style="color:#66d9ef">if</span> (has_visited_all) {
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+  }
+
+  <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (graph[v][i] <span style="color:#f92672">==</span> false) <span style="color:#66d9ef">continue</span>;
+    <span style="color:#66d9ef">if</span> (has_visited[i]) <span style="color:#66d9ef">continue</span>;
+    has_visited[i] <span style="color:#f92672">=</span> true;
+    ret <span style="color:#f92672">+=</span> dfs(i, N, has_visited);
+    has_visited[i] <span style="color:#f92672">=</span> false;
+  }
+  <span style="color:#66d9ef">return</span> ret;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, M; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> M;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> M; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> A, B; cin <span style="color:#f92672">&gt;&gt;</span> A <span style="color:#f92672">&gt;&gt;</span> B;
+    graph[A<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][B<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> graph[B<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][A<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
+  }
+  <span style="color:#66d9ef">bool</span> has_visited[nmax];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    has_visited[i] <span style="color:#f92672">=</span> false;
+  }
+  has_visited[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> true;
+  cout <span style="color:#f92672">&lt;&lt;</span> dfs(<span style="color:#ae81ff">0</span>, N, has_visited) <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><ul>
+<li>順列全探索による解答</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> nmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+<span style="color:#66d9ef">bool</span> graph[nmax][nmax];
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, M; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> M;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> M; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> A, B; cin <span style="color:#f92672">&gt;&gt;</span> A <span style="color:#f92672">&gt;&gt;</span> B;
+    graph[A<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][B<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> graph[B<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][A<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
+  }
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nodes(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) nodes[i] <span style="color:#f92672">=</span> i;
+  <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">do</span> {
+    <span style="color:#66d9ef">bool</span> flag <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">if</span> (nodes[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (graph[nodes[i]][nodes[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]] <span style="color:#f92672">==</span> false) flag <span style="color:#f92672">=</span> false; <span style="color:#66d9ef">continue</span>;
+    }
+    <span style="color:#66d9ef">if</span> (flag) cnt<span style="color:#f92672">++</span>;
+  } <span style="color:#66d9ef">while</span> (next_permutation(nodes.begin(), nodes.end()));
+  cout <span style="color:#f92672">&lt;&lt;</span> cnt <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="おわりに">おわりに</h2>
+<p>😄 これでぼくも全探索マスター！</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/ja/tags/atcoder/">AtCoder</a>
+  
+  <a class="badge badge-light" href="/ja/tags/competitive-programming/">Competitive Programming</a>
+  
+  <a class="badge badge-light" href="/ja/tags/c&#43;&#43;/">C&#43;&#43;</a>
+  
+  <a class="badge badge-light" href="/ja/tags/cpp/">cpp</a>
+  
+  <a class="badge badge-light" href="">競技プログラミング</a>
+  
+  <a class="badge badge-light" href="">競プロ</a>
+  
+  <a class="badge badge-light" href="">全探索</a>
+  
+  <a class="badge badge-light" href="">ビット全探索</a>
+  
+  <a class="badge badge-light" href="">順列全探索</a>
+  
+  <a class="badge badge-light" href="/ja/tags/abc/">ABC</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/check-all-cases/&amp;text=%e5%85%a8%e6%8e%a2%e7%b4%a2" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/check-all-cases/&amp;t=%e5%85%a8%e6%8e%a2%e7%b4%a2" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%e5%85%a8%e6%8e%a2%e7%b4%a2&amp;body=/ja/post/check-all-cases/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/check-all-cases/&amp;title=%e5%85%a8%e6%8e%a2%e7%b4%a2" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%e5%85%a8%e6%8e%a2%e7%b4%a2%20/ja/post/check-all-cases/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/check-all-cases/&amp;title=%e5%85%a8%e6%8e%a2%e7%b4%a2" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/1c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/abnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/accesslog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/actionscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ada.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/angelscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/apache.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arcade.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arduino.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/armasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/asciidoc.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/aspectj.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autohotkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autoit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/avrasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/axapta.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/basic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/brainfuck.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/capnproto.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ceylon.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clean.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cmake.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coffeescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coq.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crmsh.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crystal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/csp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/d.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dart.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/delphi.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/diff.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/django.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dns.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dsconfig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dts.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ebnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elixir.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/erb.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/excel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/flix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fortran.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fsharp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gams.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gauss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gcode.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gherkin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/glsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/golo.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gradle.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/groovy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/handlebars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haskell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haxe.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hsp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/htmlbars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/inform7.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ini.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/irpf90.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/isbl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/java.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/jboss-cli.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/kotlin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lasso.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ldif.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/leaf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/less.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lisp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livecodeserver.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/llvm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lua.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mathematica.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/maxima.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mercury.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mipsasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mizar.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mojolicious.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/monkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/moonscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/n1ql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nginx.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nimrod.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nsis.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/objectivec.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ocaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/openscad.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/oxygene.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/parser3.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pgsql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/php.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pony.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/powershell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/processing.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/profile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/prolog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/properties.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/protobuf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/puppet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/purebasic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/q.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/qml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/reasonml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rib.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/roboconf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/routeros.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ruby.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scilab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smali.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smalltalk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sqf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stan.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/step21.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stylus.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/subunit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/swift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/taggerscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tcl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/thrift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/typescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbnet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript-html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/verilog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vhdl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/x86asm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xquery.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/zephir.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/ja/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"結果が見つかりませんでした","placeholder":"検索...","results":"results found"};
+      const content_type = {
+        'post': "投稿",
+        'project': "プロジェクト",
+        'publication' : "発表文献",
+        'talk' : "登壇"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © zak 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> コピー
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> ダウンロード
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
