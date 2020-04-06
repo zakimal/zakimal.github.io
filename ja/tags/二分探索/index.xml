@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>二分探索 | zak</title>
+    <link>/ja/tags/%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2/</link>
+      <atom:link href="/ja/tags/%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2/index.xml" rel="self" type="application/rss+xml" />
+    <description>二分探索</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Mon, 06 Apr 2020 14:55:21 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>二分探索</title>
+      <link>/ja/tags/%E4%BA%8C%E5%88%86%E6%8E%A2%E7%B4%A2/</link>
+    </image>
+    
+    <item>
+      <title>二分探索</title>
+      <link>/ja/post/binary-search/</link>
+      <pubDate>Mon, 06 Apr 2020 14:55:21 +0900</pubDate>
+      <guid>/ja/post/binary-search/</guid>
+      <description>&lt;h2 id=&#34;二分探索&#34;&gt;二分探索&lt;/h2&gt;
+&lt;p&gt;二分探索というと「ソート済み配列の中から目的の値を効率よく（具体的には$O(\log n)$）で探し出す手法」として説明されることが圧倒的で，ともすると，「二分探索はソート済み配列から値を探すためだけのアルゴリズム」と勘違いしてしまう．実際，僕もそう思っていた．&lt;/p&gt;
+&lt;p&gt;二分探索の「半分にしてサイズの小さい問題を解く」というエッセンスは実に多くの問題に適用することができる．一般化された二分探索とも言うべきか．&lt;/p&gt;
+&lt;h2 id=&#34;ソート済み配列から目的のアイテムを探す二分探索&#34;&gt;「ソート済み配列から目的のアイテムを探す」二分探索&lt;/h2&gt;
+&lt;p&gt;まずは，「ソート済み配列から目的のアイテムを探す」という，よくある二分探索を実装してみる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;bits/stdc++.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+
+vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;243&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;419&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;750&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;910&lt;/span&gt;};
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; key) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)a.size() &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (a[mid] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; key) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mid;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; a[mid]) right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (a[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; key) left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+  }
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;探索範囲を半分ずつ小さくしてくことで目的のものを見つけ出す．探索範囲が指数の速度で小さくなっていくので，探索対象がソートされていれば，$O(\log n)$で目的のアイテムを見つけ出すことができる．&lt;/p&gt;
+&lt;p&gt;二分探索の実装はちょっとややこしい．ループの終了条件とか，&lt;code&gt;left&lt;/code&gt;・&lt;code&gt;right&lt;/code&gt;の更新ってどうしてたっけとか考えると直感的にスラスラ書ける感じではない．&lt;/p&gt;
+&lt;h2 id=&#34;ソート済み配列に対して目的のアイテム以上となる最小のインデックスを求める二分探索&#34;&gt;「ソート済み配列に対して，目的のアイテム以上となる最小のインデックスを求める」二分探索&lt;/h2&gt;
+&lt;p&gt;二分探索を「ソート済み配列から目的のアイテムを探す」ではなくて，**「ソート済み配列に対して，目的のアイテム以上となる最小のインデックスを求める」**とするだけで，二分探索をいろんな問題に適用することができるようになる．&lt;/p&gt;
+&lt;p&gt;「ソート済み配列に対する，目的のアイテム&lt;strong&gt;以上&lt;/strong&gt;となる最小のインデックス」からは&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目的のアイテムが，探索範囲内で何番目に小さいのかがわかる&lt;/li&gt;
+&lt;li&gt;目的のアイテムが探索範囲内に複数存在するなら，それらのうち最小のインデックスを取れる&lt;/li&gt;
+&lt;li&gt;「目的のアイテム&lt;strong&gt;より&lt;/strong&gt;大きくなる最小のインデックス」を取れれば，探索範囲内にいくつ同じアイテムが存在するかを知ることができる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;と，より多くの情報を計算することができるようになる．&lt;/p&gt;
+&lt;p&gt;このような探索の汎化の有用性は，例えば&lt;code&gt;std::lower_bound()&lt;/code&gt;関数・&lt;code&gt;std::upper_bound()&lt;/code&gt;関数が標準テンプレートライブラリ内で提供されていることからもうかがい知ることができる．関数がどんな返り値を返すか次第で，その関数の便利度合いも変わってくる．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;std::lower_bound()&lt;/code&gt;関数は，ソート済み配列&lt;code&gt;a&lt;/code&gt;と目的のアイテム&lt;code&gt;key&lt;/code&gt;を与えることで，&lt;code&gt;key &amp;lt;= a[index]&lt;/code&gt;となる最小の&lt;code&gt;index&lt;/code&gt;を返す．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;std::upper_bound()&lt;/code&gt;関数は，ソート済み配列&lt;code&gt;a&lt;/code&gt;と目的のアイテム&lt;code&gt;key&lt;/code&gt;を与えることで，&lt;code&gt;key &amp;lt; a[index]&lt;/code&gt;となる最小の&lt;code&gt;index&lt;/code&gt;を返す．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;bounds.png&#34; data-caption=&#34;std::lower_bound()とstd:upper_bound()&#34;&gt;
+&lt;img src=&#34;bounds.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    &lt;code&gt;std::lower_bound()&lt;/code&gt;と&lt;code&gt;std:upper_bound()&lt;/code&gt;
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;一般化された二分探索&#34;&gt;一般化された二分探索&lt;/h2&gt;
+&lt;p&gt;「ソート済み配列に対して，目的のアイテム以上となる最小のインデックス」が得られたほうが便利ということがわかったところで，一般化された二分探索を考えると，二分探索は，「&lt;strong&gt;ある条件について，探索範囲において，その条件を満たすかどうかについて単調性が認められる（つまり，あるインデックスより小さいアイテムはその条件を満たさないけど，あるインデックス以上のアイテムはその条件を満たす）とき，その条件を満たす最小のアイテムを見つける」アルゴリズム&lt;/strong&gt;として一般化させることができる．二分探索をこのように捉えておくと，直感的な実装ができるようになる．&lt;/p&gt;
+&lt;p&gt;「ソート済み配列に対して，目的のアイテム以上となる最小のインデックスを求める」二分探索は次のように実装できる．このとき，「ある条件」とは「&lt;code&gt;key&lt;/code&gt;以上」に相当し，配列に格納されているアイテムはソートされているので，条件を満たすか否かについての単調性が認められる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;bits/stdc++.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+
+vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;243&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;419&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;750&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;910&lt;/span&gt;};
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; key) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; a[index]) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; true;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; false;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; key) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)a.size();
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (is_ok(mid, key)) right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid;
+  }
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; right;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;この実装では，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;left&lt;/code&gt;は「常に条件を満たさない要素のインデックス」&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;right&lt;/code&gt;は「常に条件を満たす要素のインデックス」&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;とし，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;right - left == 1&lt;/code&gt;となるまで，つまり&lt;code&gt;left&lt;/code&gt;と&lt;code&gt;right&lt;/code&gt;が隣り合うまで，条件を満たす・満たさないの境界を動かしていく&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;ことを繰り返している．最終的に，&lt;code&gt;right&lt;/code&gt;が「条件を満たす最小のインデックス」となる．&lt;/p&gt;
+&lt;p&gt;条件を満たすか否かの単調性が認められるとき，このように境界を移動させていくことで，条件を満たす最小のインデックスを求めることができる．一方で，単調性がない探索範囲においてこれを実行すると，条件を満たす・満たさないの境界の1つを見つけることができ，これは方程式の解の1つを求めるような場面で使える．&lt;/p&gt;
+&lt;h2 id=&#34;めぐる式二分探索&#34;&gt;めぐる式二分探索&lt;/h2&gt;
+&lt;p&gt;上の実装では，&lt;code&gt;left&lt;/code&gt;/&lt;code&gt;right&lt;/code&gt;の性質を考慮する必要があったが，それすら考慮することなく実装に落とし込むことができる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;bits/stdc++.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+
+vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;243&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;419&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;750&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;910&lt;/span&gt;};
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; key) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; a[index]) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; true;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; false;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; key) {
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)a.size();
+
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ok &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ng)) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ok &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ng) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (is_ok(mid, key)) ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid;
+  }
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; right;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; binary_search(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

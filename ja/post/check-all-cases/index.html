@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    13 分で読める
+    18 分で読める
   </span>
   
 
@@ -686,6 +686,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
 <h2 id="全探索の練習問題">全探索の練習問題</h2>
 <h3 id="単純な全探索ちょっと工夫する全探索">単純な全探索・ちょっと工夫する全探索</h3>
 <ul>
+<li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_B&amp;lang=ja">ITP 1-7 B</a></li>
 <li><a href="https://atcoder.jp/contests/abc144/tasks/abc144_b">ABC 144 B</a></li>
 <li><a href="https://atcoder.jp/contests/abc150/tasks/abc150_b">ABC 150 B</a></li>
 <li><a href="https://atcoder.jp/contests/abc122/tasks/abc122_b">ABC 122 B</a></li>
@@ -695,20 +696,50 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
 <li><a href="https://atcoder.jp/contests/abc057/tasks/abc057_c">ABC 57 C</a></li>
 <li><a href="https://atcoder.jp/contests/abc095/tasks/arc096_a">ABC 95 C</a></li>
 <li><a href="https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d">住銀2019 D</a></li>
+<li><a href="https://atcoder.jp/contests/pakencamp-2019-day3/tasks/pakencamp_2019_day3_c">パ研杯2019 C</a></li>
+<li><a href="https://atcoder.jp/contests/joi2007ho/tasks/joi2007ho_c">JOI2017 本選3</a></li>
+<li><a href="https://atcoder.jp/contests/s8pc-6/tasks/s8pc_6_b">Square869120Contest #6 B</a></li>
+<li><a href="https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_d">JOI2008 予選4</a></li>
 </ul>
 <h3 id="ビット全探索-1">ビット全探索</h3>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc128/tasks/abc128_c">ABC 128 C</a></li>
 <li><a href="https://atcoder.jp/contests/abc147/tasks/abc147_c">ABC 147 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc002/tasks/abc002_4">ABC 2 D</a></li>
+<li><a href="https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_e">JOI2008 予選5</a></li>
+<li><a href="https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_b">Square869120Contest #4 B</a></li>
 </ul>
 <h3 id="順列全探索-1">順列全探索</h3>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc145/tasks/abc145_c">ABC 145 C</a></li>
 <li><a href="https://atcoder.jp/contests/abc150/tasks/abc150_c">ABC 150 C</a></li>
 <li><a href="https://atcoder.jp/contests/abc054/tasks/abc054_c">ABC 54 C</a></li>
+<li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_13_A&amp;lang=ja">ALDS 1-13 A</a></li>
 </ul>
 <h2 id="解説">解説</h2>
-<h3 id="abc-144-b">ABC 144 B</h3>
+<h3 id="単純な全探索ちょっと工夫する全探索-1">単純な全探索・ちょっと工夫する全探索</h3>
+<h4 id="itp-1-7-bhttpjudgeu-aizuacjponlinejudgedescriptionjspiditp1_7_blangja"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_B&amp;lang=ja">ITP 1-7 B</a></h4>
+<p>「$1$から$n$までの整数の中から，重複無しで3つの数を選ぶ」ときの数の選び方は${}_n\mathrm{P}_3$通りあり，全通り試してみれば原理的に解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, x;
+  <span style="color:#66d9ef">while</span> (cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> x) {
+    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; j<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> n; k<span style="color:#f92672">++</span>) {
+          <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> k <span style="color:#f92672">==</span> x) cnt<span style="color:#f92672">++</span>;
+        }
+      }
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> cnt <span style="color:#f92672">&lt;&lt;</span> endl;
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="abc-144-bhttpsatcoderjpcontestsabc144tasksabc144_b"><a href="https://atcoder.jp/contests/abc144/tasks/abc144_b">ABC 144 B</a></h4>
 <p>与えられた整数$N$が$1$以上$9$以下の2整数の積と等しいかを，<strong>$1$以上$9$以下の2整数の積をぜんぶ試しながら調べる</strong>ことで原理的に解ける．制約を考慮しても，特に工夫することなく解ける．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -726,7 +757,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-150-b">ABC 150 B</h3>
+</code></pre></div><h4 id="abc-150-bhttpsatcoderjpcontestsabc150tasksabc150_b"><a href="https://atcoder.jp/contests/abc150/tasks/abc150_b">ABC 150 B</a></h4>
 <p>入力文字列<code>S</code>の$i$文字目から$i+3$文字目までが<code>ABC</code>と一致するかを全ての$i$に対して調べる．入力文字列の大きさがそこまで大きくないので特に工夫せず解ける．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -743,7 +774,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-122-b">ABC 122 B</h3>
+</code></pre></div><h4 id="abc-122-bhttpsatcoderjpcontestsabc122tasksabc122_b"><a href="https://atcoder.jp/contests/abc122/tasks/abc122_b">ABC 122 B</a></h4>
 <p>入力文字列を先頭から一文字づつ舐めていって，その文字が<code>A</code>/<code>C</code>/<code>G</code>/<code>T</code>なら文字列の長さに1を加えて，そうでないならそこで一旦リセット．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -763,7 +794,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-136-b">ABC 136 B</h3>
+</code></pre></div><h4 id="abc-136-bhttpsatcoderjpcontestsabc136tasksabc136_b"><a href="https://atcoder.jp/contests/abc136/tasks/abc136_b">ABC 136 B</a></h4>
 <p>$N$以下の正整数に対して，桁数が奇数になるのかを調べてやるだけ．整数を文字列に変換する関数は大体の言語でもできる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -779,7 +810,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-106-b">ABC 106 B</h3>
+</code></pre></div><h4 id="abc-106-bhttpsatcoderjpcontestsabc106tasksabc106_b"><a href="https://atcoder.jp/contests/abc106/tasks/abc106_b">ABC 106 B</a></h4>
 <p>$N$以下の各正奇数に対して，正の約数が8個であるかを調べてあげる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -802,7 +833,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-120-b">ABC 120 B</h3>
+</code></pre></div><h4 id="abc-120-bhttpsatcoderjpcontestsabc120tasksabc120_b"><a href="https://atcoder.jp/contests/abc120/tasks/abc120_b">ABC 120 B</a></h4>
 <p>与えられた2整数$A$，$B$の約数をぜんぶ調べ上げれば良い．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -822,7 +853,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   }
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-57-c">ABC 57 C</h3>
+</code></pre></div><h4 id="abc-57-chttpsatcoderjpcontestsabc057tasksabc057_c"><a href="https://atcoder.jp/contests/abc057/tasks/abc057_c">ABC 57 C</a></h4>
 <p>$A &lt; B$としても一般性は失われないので，$1 \leq A \leq \sqrt N$まで調べればいい．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -841,7 +872,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> to_string(N<span style="color:#f92672">/</span>digit).length() <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-95-c">ABC 95 C</h3>
+</code></pre></div><h4 id="abc-95-chttpsatcoderjpcontestsabc095tasksarc096_a"><a href="https://atcoder.jp/contests/abc095/tasks/arc096_a">ABC 95 C</a></h4>
 <p>ABピザを奇数枚買って一枚余らせることしてもただの無駄でしかないので，ABピザは2枚1組のABセットとして考える．ここで問題の制約から，AピザでもBピザでもABセットでも，買う個数を$0$から$10^5$までぜんぶ試せば，買い方の場合の数は全て網羅するので原理的に解けることになる．</p>
 <p>というか，ぜんぶABセットで買って余らせるか，Aピザ or Bピザが足りる分までABセットで買って不足分を単品で買い足すか，ABセットを使わずに単品で買い揃えるか，のいずれのパターンで最も安上がりのものを調べれば良いので，探索はいらない．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
@@ -856,7 +887,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
     cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> endl;
     <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="住銀2019-d">住銀2019 D</h3>
+</code></pre></div><h4 id="住銀2019-dhttpsatcoderjpcontestssumitrust2019taskssumitb2019_d"><a href="https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d">住銀2019 D</a></h4>
 <p>まじめに，入力されたラッキーナンバーから3桁取ってきて&hellip;とやると，ラッキーナンバーの桁数が最大30000もあるので制限時間内に終わらない．ここで，<strong>3桁の暗証番号は<code>000</code>から<code>999</code>のどれかにしかならない</strong>ので，暗証番号を決め打ちしてから，その暗証番号を与えられたラッキーナンバーから作れるかを調べたほうが良い．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -883,7 +914,137 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> cnt <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-128-c">ABC 128 C</h3>
+</code></pre></div><h4 id="パ研杯2019-chttpsatcoderjpcontestspakencamp-2019-day3taskspakencamp_2019_day3_c"><a href="https://atcoder.jp/contests/pakencamp-2019-day3/tasks/pakencamp_2019_day3_c">パ研杯2019 C</a></h4>
+<p>コンテストで実際に歌う歌の組み合わせはぜんぶで${}_M\mathrm{C}_2$通りあり，$2 \leq M \leq 100$という制約を考慮して，全通り試せば原理的に解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, m; cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;&gt;</span> a(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span>(m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> m; j<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> a[i][j];
+      }
+  }
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> done(m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, false));
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> m; j<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (done[j][i]) <span style="color:#66d9ef">continue</span>;
+      done[i][j] <span style="color:#f92672">=</span> done[j][i] <span style="color:#f92672">=</span> true;
+      <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; k <span style="color:#f92672">&lt;=</span> n; k<span style="color:#f92672">++</span>) {
+        s <span style="color:#f92672">+=</span> max(a[k][i], a[k][j]);
+      }
+      ans <span style="color:#f92672">=</span> max(ans, s);
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="joi2017-本選3httpsatcoderjpcontestsjoi2007hotasksjoi2007ho_c"><a href="https://atcoder.jp/contests/joi2007ho/tasks/joi2007ho_c">JOI2017 本選3</a></h4>
+<p>入力された$n$個の点から$2$点選び，その$2$点を結ぶ線分を1辺とする正方形を構成する他の2点を計算し，その頂点が存在するかを調べれば正方形を構成することができるかを判定することができ，$n$の大きさに対する制約を考えると，全部試しても間に合う．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> points;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> x, y; cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+    points.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(x, y));
+  }
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> c: points) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v: points) {
+      <span style="color:#66d9ef">if</span> (c <span style="color:#f92672">==</span> v) <span style="color:#66d9ef">continue</span>;
+      <span style="color:#66d9ef">int</span> dx <span style="color:#f92672">=</span> v.first <span style="color:#f92672">-</span> c.first;
+      <span style="color:#66d9ef">int</span> dy <span style="color:#f92672">=</span> v.second <span style="color:#f92672">-</span> c.second;
+      <span style="color:#66d9ef">int</span> nx1 <span style="color:#f92672">=</span> v.first <span style="color:#f92672">-</span> dy;
+      <span style="color:#66d9ef">int</span> ny1 <span style="color:#f92672">=</span> v.second <span style="color:#f92672">+</span> dx;
+      <span style="color:#66d9ef">int</span> nx2 <span style="color:#f92672">=</span> c.first <span style="color:#f92672">-</span> dy;
+      <span style="color:#66d9ef">int</span> ny2 <span style="color:#f92672">=</span> c.second <span style="color:#f92672">+</span> dx;
+
+      <span style="color:#66d9ef">if</span> (points.count(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(nx1, ny1)) <span style="color:#f92672">&amp;&amp;</span> points.count(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(nx2, ny2))) {
+        sum <span style="color:#f92672">=</span> dy <span style="color:#f92672">*</span> dy <span style="color:#f92672">+</span> dx <span style="color:#f92672">*</span> dx;
+        ans <span style="color:#f92672">=</span> max(ans ,sum);
+      }
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="square869120contest-6-bhttpsatcoderjpcontestss8pc-6taskss8pc_6_b"><a href="https://atcoder.jp/contests/s8pc-6/tasks/s8pc_6_b">Square869120Contest #6 B</a></h4>
+<p>出入り口を，わざわざ買い物しない店に設けるのは無駄でしかないので，<strong>出入り口の候補は$a_1, a_2, &hellip;, a_N$，$b_1, b_2, &hellip;, b_N$</strong>．出入り口の候補は$O(n^2)$通りあり，買い物客それぞれに対して移動時間を$O(n)$で計算し，その合計を調べ上げれば原理的に解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">using</span> ll <span style="color:#f92672">=</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n;cin <span style="color:#f92672">&gt;&gt;</span> n;
+  vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> a(n), b(n);
+  set<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> ab;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    ll _a, _b;
+    cin <span style="color:#f92672">&gt;&gt;</span> _a <span style="color:#f92672">&gt;&gt;</span> _b;
+    ab.insert(_a); ab.insert(_b);
+    a[i] <span style="color:#f92672">=</span> _a;
+    b[i] <span style="color:#f92672">=</span> _b;
+  }
+  ll s, t;
+  ll ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">9223372036854775807</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> s : ab) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> t : ab) {
+      ll elapsed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> n; k<span style="color:#f92672">++</span>) {
+        elapsed <span style="color:#f92672">+=</span> abs(s <span style="color:#f92672">-</span> a[k]) <span style="color:#f92672">+</span> abs(a[k] <span style="color:#f92672">-</span> b[k]) <span style="color:#f92672">+</span> abs(t <span style="color:#f92672">-</span> b[k]);
+      }
+      ans <span style="color:#f92672">=</span> min(ans, elapsed);
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="joi2008-予選4httpsatcoderjpcontestsjoi2008yotasksjoi2008yo_d"><a href="https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_d">JOI2008 予選4</a></h4>
+<p>$n$個の与えられた星の位置から1つずつ取り出して，それを星座を構成する$m$個の星の位置の1つと仮定して，星座を構成する星を移動し，移動した先の位置が星の位置として妥当かどうかを全ての場合について調べ上げれば原理的に解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> m; cin <span style="color:#f92672">&gt;&gt;</span> m;
+  set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> sign;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> x, y; cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+    sign.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(x, y));
+  }
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> night_sky;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> x, y; cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+    night_sky.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(x, y));
+  }
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> star: night_sky) {
+    pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ss <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>begin(sign);
+    <span style="color:#66d9ef">int</span> dx <span style="color:#f92672">=</span> star.first <span style="color:#f92672">-</span> ss.first;
+    <span style="color:#66d9ef">int</span> dy <span style="color:#f92672">=</span> star.second <span style="color:#f92672">-</span> ss.second;
+    <span style="color:#66d9ef">bool</span> flag <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> sstar: sign) {
+      <span style="color:#66d9ef">int</span> nx <span style="color:#f92672">=</span> sstar.first <span style="color:#f92672">+</span> dx;
+      <span style="color:#66d9ef">int</span> ny <span style="color:#f92672">=</span> sstar.second <span style="color:#f92672">+</span> dy;
+      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(night_sky.count(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(nx, ny)))) flag <span style="color:#f92672">=</span> false;
+    }
+    <span style="color:#66d9ef">if</span> (flag) {
+      cout <span style="color:#f92672">&lt;&lt;</span> dx <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> dy <span style="color:#f92672">&lt;&lt;</span> endl;
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="ビット全探索-2">ビット全探索</h3>
+<h4 id="abc-128-chttpsatcoderjpcontestsabc128tasksabc128_c"><a href="https://atcoder.jp/contests/abc128/tasks/abc128_c">ABC 128 C</a></h4>
 <p>$N$個のスイッチの状態はぜんぶで$2^N$通りで，それを全部試して，$M$個ある電球が全部点灯するかを調べれば原理的には解ける．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -923,7 +1084,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   }
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
 }
-</code></pre></div><h3 id="abc-147-c">ABC 147 C</h3>
+</code></pre></div><h4 id="abc-147-chttpsatcoderjpcontestsabc147tasksabc147_c"><a href="https://atcoder.jp/contests/abc147/tasks/abc147_c">ABC 147 C</a></h4>
 <p>「だれが正直者で，だれが不親切なのか」を先に決め打ちしてしまい，それに対して与えられた情報が矛盾しないかを考えてやることで解くことができる．数学パズルが好きな人には「それはずるい」って言われる気がするがまあいいや．「だれが正直者で，だれが不親切なのか」のパターンはぜんぶで$2^N$通りで，ビット全探索が使える．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -985,7 +1146,119 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-145-c">ABC 145 C</h3>
+</code></pre></div><h4 id="abc-2-dhttpsatcoderjpcontestsabc002tasksabc002_4"><a href="https://atcoder.jp/contests/abc002/tasks/abc002_4">ABC 2 D</a></h4>
+<p>$N$人いる国会議員について，最大派閥に所属するか否かの場合の数の総数は$2^N$通りであり，$1 \leq N \leq 12$という$N$の制約を考えると全パターンを調べ上げることで原理的に解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, m; cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> friends(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(n, false));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> x, y; cin <span style="color:#f92672">&gt;&gt;</span> x <span style="color:#f92672">&gt;&gt;</span> y;
+    x<span style="color:#f92672">--</span>; y<span style="color:#f92672">--</span>;
+    friends[x][y] <span style="color:#f92672">=</span> friends[y][x] <span style="color:#f92672">=</span> true;
+  }
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> n); bit<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">bool</span> flag <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>) {
+          <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> j) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>friends[i][j]) flag <span style="color:#f92672">=</span> false;
+          }
+        }
+      }
+    }
+    <span style="color:#66d9ef">if</span> (flag) ans <span style="color:#f92672">=</span> max(ans, __builtin_popcount(bit));
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="joi2008-予選5httpsatcoderjpcontestsjoi2008yotasksjoi2008yo_e"><a href="https://atcoder.jp/contests/joi2008yo/tasks/joi2008yo_e">JOI2008 予選5</a></h4>
+<p>行のひっくり返し方を固定したとき，ある列をひっくり返すか否かは他の列をひっくり返すか否かの判断に影響を与えない．よって，各列において出荷可能なせんべいの枚数を最大化するしたとき，全体として出荷できるせんべいの枚数を（その行のひっくり返し方において）最大化できるといえる．各列のひっくり返すか中の判断は，「列を上から舐めていき，表になっているせんべいの枚数のほうが裏になっているせんべいより多ければひっくり返す．そうでなければひっくり返さない」とすればその列で焼いているせんべいのうち，出荷可能なせんべいの枚数を最大にすることができる．</p>
+<p>まとめると，行のひっくり返し方（総数$2^C$通り）のそれぞれに対して，各列の状態を見ていき，「表になっているせんべいの枚数のほうが裏になっているせんべいより多ければひっくり返す．そうでなければひっくり返さない」という操作を行って，全体として出荷できるせんべいの枚数を調べ，その最大値を計算する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> table[<span style="color:#ae81ff">10</span>][<span style="color:#ae81ff">10000</span>];
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> row, col; cin <span style="color:#f92672">&gt;&gt;</span> row <span style="color:#f92672">&gt;&gt;</span> col;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> row; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> col; j<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> table[i][j];
+    }
+  }
+
+  <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> row); bit<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> col; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> omote <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, ura <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, state;
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; r <span style="color:#f92672">&lt;</span> row; r<span style="color:#f92672">++</span>) {
+        state <span style="color:#f92672">=</span> table[r][j];
+        <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> r) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+          state <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>state;
+        }
+        <span style="color:#66d9ef">if</span> (state) omote<span style="color:#f92672">++</span>;
+        <span style="color:#66d9ef">else</span> ura<span style="color:#f92672">++</span>;
+      }
+      cnt <span style="color:#f92672">+=</span> max(omote, ura);
+    }
+    ans <span style="color:#f92672">=</span> max(ans, cnt);
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="square869120contest-4-bhttpsatcoderjpcontestss8pc-4taskss8pc_4_b"><a href="https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_b">Square869120Contest #4 B</a></h4>
+<p>$N$個ある建物について，どの建物が見えて，どの建物が見えないかはぜんぶで$2^N$通りであるが，$K$色見えてほしいので，<strong>$N$桁のビット列から$K$桁だけ<code>1</code>が立っているようなビット列を計算できたら，ビット全探索と同様に考えることができる</strong>．建物の見え方を固定したとき，建物を左から順番に見ていって，見えてほしい建物はその建物より左側にある最も背の高い建物より1だけ高く，見えなくてもいい建物はそのままにしておく．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">next_combination</span>(<span style="color:#66d9ef">int</span> bit) {
+  <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> bit <span style="color:#f92672">&amp;</span> <span style="color:#f92672">-</span>bit;
+  <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> bit <span style="color:#f92672">+</span> x;
+  <span style="color:#66d9ef">return</span> (((bit <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>y) <span style="color:#f92672">/</span> x) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">|</span> y;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n, k; cin <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> k;
+  k<span style="color:#f92672">--</span>;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> a(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
+  <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+  }
+  n<span style="color:#f92672">--</span>;
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">1001001001001</span>;
+  <span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> k) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> n); bit <span style="color:#f92672">=</span> next_combination(bit)) {
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> highest <span style="color:#f92672">=</span> a[<span style="color:#ae81ff">0</span>];
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> ((bit <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) {
+        <span style="color:#66d9ef">if</span> (a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> highest) {
+          tmp <span style="color:#f92672">+=</span> (highest <span style="color:#f92672">-</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+          highest <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        } <span style="color:#66d9ef">else</span> {
+          highest <span style="color:#f92672">=</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+        }
+      } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">if</span> (highest <span style="color:#f92672">&lt;</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]) {
+          highest <span style="color:#f92672">=</span> a[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+        }
+      }
+    }
+    res <span style="color:#f92672">=</span> min(res, tmp);
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> res <span style="color:#f92672">&lt;&lt;</span>endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="順列全探索-2">順列全探索</h3>
+<h4 id="abc-145-chttpsatcoderjpcontestsabc145tasksabc145_c"><a href="https://atcoder.jp/contests/abc145/tasks/abc145_c">ABC 145 C</a></h4>
 <p>順列全探索を使えっていう意図が丸裸って感じの問題．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1015,7 +1288,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   cout <span style="color:#f92672">&lt;&lt;</span> fixed <span style="color:#f92672">&lt;&lt;</span> setprecision(<span style="color:#ae81ff">12</span>) <span style="color:#f92672">&lt;&lt;</span> sum<span style="color:#f92672">/</span>fact <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-150-c">ABC 150 C</h3>
+</code></pre></div><h4 id="abc-150-chttpsatcoderjpcontestsabc150tasksabc150_c"><a href="https://atcoder.jp/contests/abc150/tasks/abc150_c">ABC 150 C</a></h4>
 <p><code>do {...} while (next_permutation());</code>の練習問題．ソートし直すのを忘れないように．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1057,7 +1330,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   cout <span style="color:#f92672">&lt;&lt;</span> abs(pidx <span style="color:#f92672">-</span> qidx) <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="abc-54-c">ABC 54 C</h3>
+</code></pre></div><h4 id="abc-54-chttpsatcoderjpcontestsabc054tasksabc054_c"><a href="https://atcoder.jp/contests/abc054/tasks/abc054_c">ABC 54 C</a></h4>
 <p><code>1</code>を始点とするDFSで条件を満たすパスを数え上げる方法が一番素直だけれども，制約に注目すると，与えられるグラフの頂点数が最大でも8ということを考慮すると，<strong>頂点の訪問順序を，生えている辺を無視して順列全探索をして，編の生え方に矛盾しないものをカウントする</strong>としても解ける．まあ教育的な観点からはDFSの練習として思った方が良さそうだけれど．</p>
 <ul>
 <li>DFSによる解答</li>
