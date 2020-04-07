@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    5 分で読める
+    9 分で読める
   </span>
   
 
@@ -615,7 +615,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
     <span style="color:#66d9ef">if</span> (is_ok(mid, key)) ok <span style="color:#f92672">=</span> mid;
     <span style="color:#66d9ef">else</span> ng <span style="color:#f92672">=</span> mid;
   }
-  <span style="color:#66d9ef">return</span> right;
+  <span style="color:#66d9ef">return</span> ok;
 }
 
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
@@ -623,7 +623,190 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   cout <span style="color:#f92672">&lt;&lt;</span> binary_search(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div>
+</code></pre></div><h2 id="二分探索の練習問題">二分探索の練習問題</h2>
+<ul>
+<li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_B&amp;lang=ja">ALDS 1-4 B</a></li>
+<li><a href="https://atcoder.jp/contests/joi2009ho/tasks/joi2009ho_b">JOI2009本選 2</a></li>
+<li><a href="https://atcoder.jp/contests/abc077/tasks/arc084_a">ABC 77 C</a></li>
+<li><a href="https://atcoder.jp/contests/abc023/tasks/abc023_d">ABC 34 D</a></li>
+<li><a href="https://atcoder.jp/contests/joi2008ho/tasks/joi2008ho_c">JOI2008 本選3</a></li>
+</ul>
+<h2 id="解説">解説</h2>
+<h3 id="alds-1-4-bhttpjudgeu-aizuacjponlinejudgedescriptionjspidalds1_4_blangja"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_B&amp;lang=ja">ALDS 1-4 B</a></h3>
+<p><code>map</code>を使えば解決するけれども，二分探索でも解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> n, q;
+vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> S(n), T(q);
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_ok</span>(<span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">int</span> key) {
+  <span style="color:#66d9ef">if</span> (key <span style="color:#f92672">&lt;=</span> S[index]) <span style="color:#66d9ef">return</span> true;
+  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binary_search</span>(<span style="color:#66d9ef">int</span> key) {
+  <span style="color:#66d9ef">int</span> ng <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">int</span> ok <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)S.size();
+
+  <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ok <span style="color:#f92672">-</span> ng)) {
+    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> (ok <span style="color:#f92672">+</span> ng) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">if</span> (is_ok(mid, key)) ok <span style="color:#f92672">=</span> mid;
+    <span style="color:#66d9ef">else</span> ng <span style="color:#f92672">=</span> mid;
+  }
+  <span style="color:#66d9ef">return</span> ok;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  cin <span style="color:#f92672">&gt;&gt;</span> n;
+  S.resize(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> S[i];
+  cin <span style="color:#f92672">&gt;&gt;</span> q;
+  T.resize(q);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> q; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> T[i];
+
+  <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> k : T) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> binary_search(k) <span style="color:#f92672">&amp;&amp;</span> binary_search(k) <span style="color:#f92672">&lt;</span> n) cnt<span style="color:#f92672">++</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> cnt <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div><h3 id="joi2009本選-2httpsatcoderjpcontestsjoi2009hotasksjoi2009ho_b"><a href="https://atcoder.jp/contests/joi2009ho/tasks/joi2009ho_b">JOI2009本選 2</a></h3>
+<p>ピザ屋さんと宅配先の位置関係（つまり，宅配先のすぐ両脇にあるピザ屋）がわかれば，宅配先の両隣のうちの近い方から宅配することで無駄なコストを掛けずにピザを運び届けることができる．両隣以外の店から宅配しようとしたら，その道中で両隣の店の一方に遭遇するはずだ．そりゃそうだ．なので，調べるべきは，<strong>宅配先のすぐ両隣にあるピザ屋がどれなのか</strong>．ピザ屋を，本店からの距離でソートしておいて，宅配先がどの位置に入るのかを二分探索で求める．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> d;
+  <span style="color:#66d9ef">int</span> n, m;
+  cin <span style="color:#f92672">&gt;&gt;</span> d <span style="color:#f92672">&gt;&gt;</span> n <span style="color:#f92672">&gt;&gt;</span> m;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pizza_stores(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> pizza_stores[i];
+  pizza_stores[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  pizza_stores[n] <span style="color:#f92672">=</span> d;
+  sort(pizza_stores.begin(), pizza_stores.end());
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> houses(m);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> houses[i];
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>  ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">auto</span> iter <span style="color:#f92672">=</span> lower_bound(pizza_stores.begin(), pizza_stores.end(), houses[i]);
+    ans <span style="color:#f92672">+=</span> min(abs(<span style="color:#f92672">*</span>iter <span style="color:#f92672">-</span> houses[i]), abs(<span style="color:#f92672">*</span>(iter <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">-</span> houses[i]));
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-77-chttpsatcoderjpcontestsabc077tasksarc084_a"><a href="https://atcoder.jp/contests/abc077/tasks/arc084_a">ABC 77 C</a></h3>
+<p>中部のパーツのサイズを$B_i$に固定すると，上部に使えるパーツのサイズは$B_i$より小さいもので，下部に使えるパーツのサイズは$B_i$より大きいものである．上部・下部に使えるパーツをそれぞれ大きさ順にソートしておいて二分探索によって，$B_i$より小さい・大きいパーツがいくつあるかを数えて掛け合わせれば，中部にサイズ$B_i$のパーツを使った祭壇の種類が得られるので，これを$i$について前通り試せば答えが求まる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> n; cin <span style="color:#f92672">&gt;&gt;</span> n;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> a(n), b(n), c(n);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> b[i];
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> c[i];
+  sort(a.begin(), a.end());
+  sort(b.begin(), b.end());
+  sort(c.begin(), c.end());
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> bi <span style="color:#f92672">=</span> b[i];
+    <span style="color:#66d9ef">auto</span> aiter <span style="color:#f92672">=</span> lower_bound(a.begin(), a.end(), bi);
+    <span style="color:#66d9ef">auto</span> citer <span style="color:#f92672">=</span> upper_bound(c.begin(), c.end(), bi);
+    ans <span style="color:#f92672">+=</span> distance(a.begin(), aiter) <span style="color:#f92672">*</span> distance(citer, c.end());
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="abc-34-dhttpsatcoderjpcontestsabc023tasksabc023_d"><a href="https://atcoder.jp/contests/abc023/tasks/abc023_d">ABC 34 D</a></h3>
+<p>風船の割り方の総数は$N!$通りだが，$1 \leq N \leq 100000$であることからぜんぶ探索するのでは間に合わない．</p>
+<p>問題を「ペナルティの最小化問題」と捉えるのではなく，「全ての風船を高度$X$を超える前に割ることができるか」という判定問題として捉え，全ての風船を割ることができる高度$X$の最小値が求める答えとなる．</p>
+<p>「$X$を固定したとき，全ての風船を割ることができるか」は高度$X$に到達するまでの猶予が短い風船から割る貪欲法で調べることができる．</p>
+<p>一方で$X$の値は，「高度$X$以下で，全ての風船を割ることができるか」という条件を満たす最小のものとして二分探索によって決定することができる．「高度$X$以下で，全ての風船を割ることができるか」という条件は，ある値$H$未満の$X$に対しては偽となり，$H$以上の$X$に対して真となる単調性がある．「高度10cmまでにぜんぶの風船を割れ」と言われても無理だけど，「高度1000kmまでにぜんぶの風船を割れ」と言われても余裕ということ．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">using</span> ll <span style="color:#f92672">=</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span>;
+ll N;
+ll H[<span style="color:#ae81ff">100010</span>], S[<span style="color:#ae81ff">100010</span>];
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  cin <span style="color:#f92672">&gt;&gt;</span> N;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> H[i] <span style="color:#f92672">&gt;&gt;</span> S[i];
+  ll ng <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  ll ok <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e15</span>;
+  vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> hist(N); <span style="color:#75715e">// hist[i]: 時刻iまでに割らなければならない風船の個数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ok <span style="color:#f92672">-</span> ng)) {
+    ll mid <span style="color:#f92672">=</span> (ok <span style="color:#f92672">+</span> ng) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">bool</span> flag <span style="color:#f92672">=</span> true;
+
+    <span style="color:#75715e">// 以下でbool is_ok(mid){...}を計算
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) hist[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (mid <span style="color:#f92672">&lt;</span> H[i]) flag <span style="color:#f92672">=</span> false; <span style="color:#75715e">// 時刻0ですでに高度midより上に風船がある
+</span><span style="color:#75715e"></span>      ll remind_time <span style="color:#f92672">=</span> (mid <span style="color:#f92672">-</span> H[i]) <span style="color:#f92672">/</span> S[i]; <span style="color:#75715e">// 高度midに到達するまでの時間的猶予
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> (remind_time <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {
+        flag <span style="color:#f92672">=</span> false;
+        <span style="color:#66d9ef">break</span>;
+      }
+      hist[min(remind_time, N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)]<span style="color:#f92672">++</span>;
+    }
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) hist[i] <span style="color:#f92672">+=</span> hist[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> hist[i]) flag <span style="color:#f92672">=</span> false; <span style="color:#75715e">// 時刻iまでに割れる最大の風船の個数はi+1個（時刻0のときに1つ割ることに注意）
+</span><span style="color:#75715e"></span>    }
+
+    <span style="color:#66d9ef">if</span> (flag) ok <span style="color:#f92672">=</span> mid;
+    <span style="color:#66d9ef">else</span> ng <span style="color:#f92672">=</span> mid;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ok <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="joi2008-本選3httpsatcoderjpcontestsjoi2008hotasksjoi2008ho_c"><a href="https://atcoder.jp/contests/joi2008ho/tasks/joi2008ho_c">JOI2008 本選3</a></h3>
+<p>矢のあたり方の総数は，（「矢を投げない」を「$0$点の的に当たる」と考えて，）$(N+1)^4$通りあるので，ぜんぶを調べ上げれば原理的に解ける．しかし$N$の制約からこれでは満点は取れない．この解法の無駄なところは，4本全ての矢を投げないと得点を計算できないとしている点である．例えば，2本投げた時点ですでに当たった的の合計が$M$を超えてしまえば最終得点は（残り2本の矢を投げるまでもなく）$0$に決定する．そこで，矢を2本ごとに投げることを一つの単位として最大得点を調べ上げることにする．具体的には，まず最初の2本の矢を投げたときに得られる合計得点$Q_1$（最大で$(N+1)^2$通りの値）を計算し昇順にソートしておく．続く2本の矢を投げたときの得点$Q_2$を，条件「$Q_1 + Q_2 \leq M$」を満たす最大の値として二分探索する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N; <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> M; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> M;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> P(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> P[i];
+  P.push_back(<span style="color:#ae81ff">0LL</span>);
+  N <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> Q;
+  set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> tmp;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; j<span style="color:#f92672">++</span>) {
+      tmp.insert(P[i] <span style="color:#f92672">+</span> P[j]);
+    }
+  }
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> iter <span style="color:#f92672">=</span> tmp.begin(); iter <span style="color:#f92672">!=</span> tmp.end(); iter<span style="color:#f92672">++</span>) Q.push_back(<span style="color:#f92672">*</span>iter);
+  sort(Q.begin(), Q.end());
+
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">int</span>)Q.size(); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> total <span style="color:#f92672">=</span> Q[i];
+    <span style="color:#66d9ef">if</span> (M <span style="color:#f92672">&lt;</span> total) <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">int</span> ok <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">int</span> ng <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)Q.size();
+    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ok <span style="color:#f92672">-</span> ng)) {
+      <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> (ok <span style="color:#f92672">+</span> ng) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+      <span style="color:#66d9ef">bool</span> is_ok <span style="color:#f92672">=</span> true;
+      <span style="color:#66d9ef">if</span> (M <span style="color:#f92672">&lt;</span> total <span style="color:#f92672">+</span> Q[mid]) is_ok <span style="color:#f92672">=</span> false;
+      <span style="color:#66d9ef">if</span> (is_ok) ok <span style="color:#f92672">=</span> mid;
+      <span style="color:#66d9ef">else</span> ng <span style="color:#f92672">=</span> mid;
+    }
+    total <span style="color:#f92672">+=</span> Q[ok];
+    ans <span style="color:#f92672">=</span> max(ans, total);
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="最後に">最後に</h2>
+<p><strong>二分探索：ソート済みの配列に対して，条件$X$を満たす最小のアイテムを探し当てる</strong></p>
+
     </div>
 
     
