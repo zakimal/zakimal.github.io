@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="尾崎 耀一 (@zak)">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="スタックとキュー スタックとキューはとても基本的なデータ構造．スタックとキューの本質は データをどのように扱うか という部分．スタックやキューは配">
+
+  
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/stack-and-queue/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/ja/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/ja/post/stack-and-queue/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@zak74702675">
+  <meta property="twitter:creator" content="@zak74702675">
+  
+  <meta property="og:site_name" content="zak">
+  <meta property="og:url" content="/ja/post/stack-and-queue/">
+  <meta property="og:title" content="スタックとキュー | zak">
+  <meta property="og:description" content="スタックとキュー スタックとキューはとても基本的なデータ構造．スタックとキューの本質は データをどのように扱うか という部分．スタックやキューは配"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  
+    
+      <meta property="article:published_time" content="2020-04-10T21:18:07&#43;09:00">
+    
+    <meta property="article:modified_time" content="2020-04-10T21:18:07&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/stack-and-queue/"
+  },
+  "headline": "スタックとキュー",
+  
+  "datePublished": "2020-04-10T21:18:07+09:00",
+  "dateModified": "2020-04-10T21:18:07+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "スタックとキュー スタックとキューはとても基本的なデータ構造．スタックとキューの本質は データをどのように扱うか という部分．スタックやキューは配"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>スタックとキュー | zak</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="検索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/ja"><img src="/img/zak.gif" alt="zak"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#about"><span>ホーム</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#posts"><span>ブログ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/post/book-shelf"><span>本棚</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#contact"><span>お問い合わせ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/files/cv.pdf"><span>履歴書</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>スタックとキュー</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Fri, Apr 10, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="スタックとキュー">スタックとキュー</h2>
+<p>スタックとキューはとても基本的なデータ構造．スタックとキューの本質は <strong>データをどのように扱うか</strong> という部分．スタックやキューは配列や連結リストを用いて用意に実装でき，配列や連結リストの上手な使い方の部分がスタックやキューの本質であるとも言える．まあ，組み込み系など資源が限られている環境では実装方法自体に注意を向ける必要があることもある．</p>
+<h3 id="スタック">スタック</h3>
+<p>スタックは「データをLast-In-First-Outというマナーで扱う」データ構造である．スタックには，「データを積む」と「データを取り出す」という操作ができる．ここで大事なのは， <strong>一番最後に追加したアイテムを一番最初に取り出す</strong> というところである．</p>
+<h3 id="キュー">キュー</h3>
+<p>キューは「データをFirst-In-First-Outというマナーで扱う」データ構造である．キューには「データを入れる」と「データを取り出す」という操作ができ，大事なのは <strong>一番最初に追加したアテムを一番最初に取り出す</strong> というところである．</p>
+<h2 id="実装">実装</h2>
+<p>簡易的な実装をしてみる．スタックとキューはとても基本的で大事なデータ構造なので，大抵の場合もっと作り込まれた実装が標準ライブラリなどの形で提供されているので，自前実装よりそっちを使うほうが安心感がある．以下では配列を用いた実装を示すが，ほかにも連結リストを用いて実装することもできる．</p>
+<h3 id="スタック-1">スタック</h3>
+<p>スタックを配列を用いて実装する．ここではスタックの一番上を指す変数<code>top</code>が必要になり，この<code>top</code>がスタックの真髄．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000</span>;
+
+<span style="color:#66d9ef">int</span> st[MAX];
+<span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() {
+  top <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_empty</span>() {
+  <span style="color:#66d9ef">return</span> (top <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
+}
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_full</span>() {
+  <span style="color:#66d9ef">return</span> (top <span style="color:#f92672">==</span> MAX);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">int</span> v) {
+  <span style="color:#66d9ef">if</span> (is_full()) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;error: stack is full&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span>;
+  }
+  st[top] <span style="color:#f92672">=</span> v;
+  top<span style="color:#f92672">++</span>;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pop</span>() {
+  <span style="color:#66d9ef">if</span> (is_empty()) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;error: sstack is empty&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  }
+  top<span style="color:#f92672">--</span>;
+  <span style="color:#66d9ef">return</span> st[top];
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  init();
+
+  push(<span style="color:#ae81ff">3</span>);
+  push(<span style="color:#ae81ff">5</span>);
+  push(<span style="color:#ae81ff">7</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> pop() <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> pop() <span style="color:#f92672">&lt;&lt;</span> endl;
+
+  push(<span style="color:#ae81ff">9</span>);
+  cout <span style="color:#f92672">&lt;&lt;</span> pop() <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="キュー-1">キュー</h3>
+<p>キューを配列を用いて実装する．ここではキューの頭とお尻の管理が必要になる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000</span>;
+
+<span style="color:#66d9ef">int</span> qu[MAX];
+<span style="color:#66d9ef">int</span> tail <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, head <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() {
+  head <span style="color:#f92672">=</span> tail <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_empty</span>() {
+  <span style="color:#66d9ef">return</span> (head <span style="color:#f92672">==</span> tail);
+}
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">is_full</span>() {
+  <span style="color:#66d9ef">return</span> (head <span style="color:#f92672">==</span> (tail<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">%</span>MAX);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enqueue</span>(<span style="color:#66d9ef">int</span> v) {
+  <span style="color:#66d9ef">if</span> (is_full()) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;error: queue is full&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span>;
+  }
+  qu[tail] <span style="color:#f92672">=</span> v;
+  tail<span style="color:#f92672">++</span>;
+  <span style="color:#66d9ef">if</span> (tail <span style="color:#f92672">==</span> MAX) {
+    tail <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dequeue</span>() {
+  <span style="color:#66d9ef">if</span> (is_empty()) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;error: queue is empty&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  }
+  <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> qu[head];
+  head<span style="color:#f92672">++</span>;
+  <span style="color:#66d9ef">if</span> (head <span style="color:#f92672">==</span> MAX) head <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">return</span> res;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  init();
+
+  enqueue(<span style="color:#ae81ff">3</span>);
+  enqueue(<span style="color:#ae81ff">5</span>);
+  enqueue(<span style="color:#ae81ff">7</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> dequeue() <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> dequeue() <span style="color:#f92672">&lt;&lt;</span> endl;
+
+  enqueue(<span style="color:#ae81ff">9</span>);
+  cout <span style="color:#f92672">&lt;&lt;</span> dequeue() <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="標準ライブラリを使う">標準ライブラリを使う</h3>
+<ul>
+<li><code>std::stack</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s;
+  s.push(<span style="color:#ae81ff">3</span>);
+  s.push(<span style="color:#ae81ff">5</span>);
+  s.push(<span style="color:#ae81ff">7</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> s.top() <span style="color:#f92672">&lt;&lt;</span> endl; s.pop();
+  cout <span style="color:#f92672">&lt;&lt;</span> s.top() <span style="color:#f92672">&lt;&lt;</span> endl; s.pop();
+  cout <span style="color:#f92672">&lt;&lt;</span> s.top() <span style="color:#f92672">&lt;&lt;</span> endl; s.pop();
+
+  s.push(<span style="color:#ae81ff">9</span>);
+  cout <span style="color:#f92672">&lt;&lt;</span> s.top() <span style="color:#f92672">&lt;&lt;</span> endl; s.pop();
+  reteurn <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><ul>
+<li><code>std::queue</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
+  q.push(<span style="color:#ae81ff">3</span>);
+  q.push(<span style="color:#ae81ff">5</span>);
+  q.push(<span style="color:#ae81ff">7</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> q.front() <span style="color:#f92672">&lt;&lt;</span> endl; q.pop();
+  cout <span style="color:#f92672">&lt;&lt;</span> q.front() <span style="color:#f92672">&lt;&lt;</span> endl; q.pop();
+  cout <span style="color:#f92672">&lt;&lt;</span> q.front() <span style="color:#f92672">&lt;&lt;</span> endl; q.pop();
+
+  q.push(<span style="color:#ae81ff">9</span>);
+  cout <span style="color:#f92672">&lt;&lt;</span> q.front() <span style="color:#f92672">&lt;&lt;</span> endl; q.pop();
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="スタックやキューで解決できる問題">スタックやキューで解決できる問題</h2>
+<h3 id="カッコ列の整合性をスタックを用いて確認する問題">カッコ列の整合性をスタックを用いて確認する問題</h3>
+<p><code>((()(()))())(())</code>のようなカッコ記号の列が与えられたときに，左括弧と右括弧の対応がきちんと取れているのかを確認する問題は，スタックを用いることできれいに解ける．</p>
+<p>カッコ列の特徴は，カッコ列を左から読んでいったときに <strong>一番最後に見つけた左括弧に対応するのは，一番最初に見つけた右括弧である</strong> というところである．この性質がまさしく LIFOであり，スタックを用いるときれいに解ける理由である．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">const</span> string <span style="color:#f92672">&amp;</span>s) {
+  stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> st;
+  vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ps;
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">int</span>)s.size(); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) st.push(i);
+    <span style="color:#66d9ef">else</span> {
+      <span style="color:#66d9ef">if</span> (st.empty()) {
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;error&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> false;
+      }
+      <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> st.top(); st.pop();
+      ps.push_back(make_pair(t, i));
+    }
+  }
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>st.empty()) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;too many (&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> false;
+  }
+
+  sort(ps.begin(), ps.end());
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> p: ps) {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;[&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.first <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.second <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;]&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  }
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  check(<span style="color:#e6db74">&#34;((()(()))())(())&#34;</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="逆ポーランド記法で記述された数式の計算">逆ポーランド記法で記述された数式の計算</h3>
+<p>逆ポーランド記法とは，数式の記法の1つで，</p>
+<p>$$
+(1 + 2) \times (3 - 4)
+$$</p>
+<p>という一般的なものに対して，</p>
+<p>$$
+1 \space 2 \space + 3 \space 4 \space - \space \times
+$$</p>
+<p>と， <strong>演算子を，演算対象に対して後置する</strong> ような記法である．</p>
+<p>逆ポーランド記法の特徴は，逆ポーランド記法で書かれた数式を左から右へ読んでいく時に，最初に遭遇する演算子の適用先が，一番最後に遭遇する数字であるという点である．この特徴がスタックのデータの扱い方と符合する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  string s;
+  stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> st;
+  <span style="color:#66d9ef">while</span> (cin <span style="color:#f92672">&gt;&gt;</span> s) {
+    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;|&#34;</span>) <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">int</span> a, b;
+    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;+&#34;</span>) {
+      b <span style="color:#f92672">=</span> st.top(); st.pop();
+      a <span style="color:#f92672">=</span> st.top(); st.pop();
+      st.push(a <span style="color:#f92672">+</span> b);
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;-&#34;</span>) {
+      b <span style="color:#f92672">=</span> st.top(); st.pop();
+      a <span style="color:#f92672">=</span> st.top(); st.pop();
+      st.push(a <span style="color:#f92672">-</span> b);
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;*&#34;</span>) {
+      b <span style="color:#f92672">=</span> st.top(); st.pop();
+      a <span style="color:#f92672">=</span> st.top(); st.pop();
+      st.push(a <span style="color:#f92672">*</span> b);
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;/&#34;</span>) {
+      b <span style="color:#f92672">=</span> st.top(); st.pop();
+      a <span style="color:#f92672">=</span> st.top(); st.pop();
+      st.push(a <span style="color:#f92672">/</span> b);
+    } <span style="color:#66d9ef">else</span> {
+      st.push(stoi(s));
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> st.top() <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="ヒストグラム中の面積最大の長方形">ヒストグラム中の面積最大の長方形</h3>
+<p>ヒストグラムが与えられたときに，そのヒストグラムの外枠に内包されるような長方形のうち，面積が最大のものを求める問題はスタックで解くことができる．</p>
+<p>スタックを使わないで求めようとするならば，長方形の底辺を形成する範囲を全て探索すれば原理的には解くことができ，$O(n^2)$の計算量がかかる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get_rectangle_area</span>(<span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> buffer[]) {
+  <span style="color:#66d9ef">int</span> maxv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> size; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> minh <span style="color:#f92672">=</span> INF;
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> i; k <span style="color:#f92672">&lt;=</span> j; k<span style="color:#f92672">++</span>) {
+        minh <span style="color:#f92672">=</span> min(minh, buffer[k]);
+      }
+      maxv <span style="color:#f92672">=</span> max(maxv, minh <span style="color:#f92672">*</span> (j<span style="color:#f92672">-</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+    }
+  }
+  <span style="color:#66d9ef">return</span> maxv;
+}
+</code></pre></div><p>これをスタックを用いると，$O(n)$で解くことができる．</p>
+<p>スタックにはヒストグラムを形成する各長方形の情報を記録する．この情報には，長方形の高さ<code>height</code>とその左端の位置<code>pos</code>が記録されている．まず，スタックを空にして，ヒストグラムを左から順番に右に向かって見ていきながら（<code>i</code>が<code>0</code>から<code>n-1</code>まで動きながら）</p>
+<ol>
+<li>スタックが空ならば，スタックに今見ている長方形の情報<code>(height, pos)</code>を積む</li>
+<li>スタックの最上位に積まれている長方形の情報の高さが，今見ている長方形より低いならば，スタックに今見ている長方形の<code>(height, pos)</code>を積む</li>
+<li>スタックの最上位に積まれている長方形の情報の高さが，今見ている長方形より等しいならば，何もしない</li>
+<li>スタックの最上位に積まれている長方形の情報の高さが，今見ている長方形より高いならば，
+<ol>
+<li>スタックが空でなく，スタックの最上位に積まれている長方形の情報の高さが，今見ている長方形の高さ以上である限り，スタックから長方形の情報を取り出し，その面積を計算し，最大値を更新する．長方形の横の長さは現在の位置と記録されている左端の位置から計算できる．</li>
+<li>1が終わったら，スタックに今見ている長方形の情報を追加する．ただし，このときの左端の位置は最後にスタックから取り出した長方形の<code>pos</code>の値とする．</li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> MAX <span style="color:#f92672">=</span> <span style="color:#ae81ff">110000</span>;
+
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Rectangle</span> {
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> height;
+  <span style="color:#66d9ef">int</span> pos;
+}
+
+<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">get_rectangle_area</span>(<span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> buffer[]) {
+  stack<span style="color:#f92672">&lt;</span>Rectangle<span style="color:#f92672">&gt;</span> S;
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> maxv <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  buffer[size] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> size; i<span style="color:#f92672">++</span>) {
+    Rectangle rec;
+    rect.height <span style="color:#f92672">=</span> buffer[i];
+    rect.pos <span style="color:#f92672">=</span> i;
+    <span style="color:#66d9ef">if</span> (S.empty()) S.push(rect);
+    <span style="color:#66d9ef">else</span> {
+      <span style="color:#66d9ef">if</span> (S.top().height <span style="color:#f92672">&lt;</span> rect.height) S.push(rect);
+      <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (rect.height <span style="color:#f92672">&lt;</span> S.top().height) {
+        <span style="color:#66d9ef">int</span> target <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>S.empty() <span style="color:#f92672">&amp;&amp;</span> rect.height <span style="color:#f92672">&lt;=</span> S.top().height) {
+          Rectangle pre <span style="color:#f92672">=</span> S.top(); S.pop();
+          <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> area <span style="color:#f92672">=</span> pre.height <span style="color:#f92672">*</span> (i <span style="color:#f92672">-</span> pre.pos);
+          maxv <span style="color:#f92672">=</span> max(maxv, area);
+          target <span style="color:#f92672">=</span> pre.pos;
+        }
+        rect.pos <span style="color:#f92672">=</span> target;
+        S.push(rect);
+      }
+    }
+  }
+  <span style="color:#66d9ef">return</span> maxv;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> size;
+  <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> buffer[MAX <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+  <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>) {
+    cin <span style="color:#f92672">&gt;&gt;</span> size;
+    <span style="color:#66d9ef">if</span> (size <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size; i<span style="color:#f92672">++</span>) {
+      cin <span style="color:#f92672">&gt;&gt;</span> buffer[i];
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> get_rectangle_area(size, buffer) <span style="color:#f92672">&lt;&lt;</span> endl;
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>上のようなアルゴリズムの亜種として，数列$A_1, A_2, &hellip;, A_N$に対して，$A_i \leq A_j$（$j &lt; i$）なる最大の$j$を見つけるアルゴリズムがある．たとえば，数列</p>
+<p>$$
+6, 2, 4, 1, 3, 5, 7
+$$</p>
+<p>に対しては</p>
+<p>$$
+0, 1, 1, 3, 3, 1, 0
+$$</p>
+<p>となる．原理的には，各要素に対してそれより前のすべての要素を探索すればよく，$O(N^2)$かかるが解ける．スタックを用いると$O(N)$で解ける．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stsdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> INF <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000</span>;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N; cin <span style="color:#f92672">&gt;&gt;</span> N;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> A(N);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> A[i];
+
+  stack<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> st;
+  st.push(make_pair(INF, <span style="color:#ae81ff">0</span>));
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">while</span> (st.top().first <span style="color:#f92672">&lt;</span> A[i]) st.pop();
+    cout <span style="color:#f92672">&lt;&lt;</span> st.top().second() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">&gt;&gt;</span>
+    st.push(make_pair(A[i], i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="ラウンドロビンスケジューリング">ラウンドロビンスケジューリング</h3>
+<p>OSのプロセスのスケジューリングに用いられているアルゴリズム．それぞれのプロセスを一定時間だけ処理して，それで終わらなければキューの最後に突っ込む．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> N, Q; cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> Q;
+  queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>string ,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> que;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
+    string name;
+    <span style="color:#66d9ef">int</span> time;
+    cin <span style="color:#f92672">&gt;&gt;</span> name <span style="color:#f92672">&gt;&gt;</span> time;
+    que.push(make_pair(name, time));
+  }
+
+  <span style="color:#66d9ef">int</span> current_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>que.empty()) {
+    <span style="color:#66d9ef">auto</span> now <span style="color:#f92672">=</span> que.front(); que.pop();
+    <span style="color:#66d9ef">if</span> (Q <span style="color:#f92672">&lt;</span> now.second) {
+      current_time <span style="color:#f92672">+=</span> Q;
+      now.second <span style="color:#f92672">-=</span> Q;
+      que.push(now);
+    } <span style="color:#66d9ef">else</span> {
+      current_time <span style="color:#f92672">+=</span> now.second;
+      cout <span style="color:#f92672">&lt;&lt;</span> now.first <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; @ &#34;</span> <span style="color:#f92672">&lt;&lt;</span> current_time <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+  }
+}
+</code></pre></div><h3 id="迷路">迷路</h3>
+<p>グリッドグラフとしてグラフが与えられ，その迷路が解けるのか，解けるなら最短手数はいくつで，そのルートを通れば最短手数で迷路を解けるのかを与える．幅優先探索や深さ優先探索で，スタートからゴールまで探索していくのが良い．以下では幅優先探索で解く．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> dh[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> dw[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#66d9ef">int</span> H, W; cin <span style="color:#f92672">&gt;&gt;</span> H <span style="color:#f92672">&gt;&gt;</span> W;
+  vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> maze(H);
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; h <span style="color:#f92672">&lt;</span> H; h<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> maze[h];
+
+  <span style="color:#66d9ef">int</span> sh, sw, gh, gw;
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> H; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> W; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (maze[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;S&#39;</span>) {
+        sh <span style="color:#f92672">=</span> i;
+        sw <span style="color:#f92672">=</span> j;
+      }
+      <span style="color:#66d9ef">if</span> (maze[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;G&#39;</span>) {
+        gh <span style="color:#f92672">=</span> i;
+        gw <span style="color:#f92672">=</span> j;
+      }
+    }
+  }
+
+
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dist(H, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(W, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+  dist[sh][sw] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> prevh(H, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(W, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> prevw(H, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(W, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+
+  queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+  q.push(make_pair(sh, sw));
+
+  <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>q.empty()) {
+    <span style="color:#66d9ef">auto</span> p <span style="color:#f92672">=</span> q.front(); q.pop();
+    <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> p.first;
+    <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> p.second;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> dir <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; dir <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; dir<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">int</span> nh <span style="color:#f92672">=</span> h <span style="color:#f92672">+</span> dh[dir];
+      <span style="color:#66d9ef">int</span> nw <span style="color:#f92672">=</span> w <span style="color:#f92672">+</span> dw[dir];
+      <span style="color:#66d9ef">if</span> (nh <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> H <span style="color:#f92672">&lt;=</span> nh <span style="color:#f92672">||</span> nw <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> W <span style="color:#f92672">&lt;=</span> nw) <span style="color:#66d9ef">continue</span>;
+      <span style="color:#66d9ef">if</span> (maze[nh][nw] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span>) <span style="color:#66d9ef">continue</span>;
+      <span style="color:#66d9ef">if</span> (dist[nh][nw] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+      q.push(make_pair(nh, nw));
+      dist[nh][nw] <span style="color:#f92672">=</span> dist[h][w] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+      prevh[nh][nw] <span style="color:#f92672">=</span> h;
+      prevw[nh][nw] <span style="color:#f92672">=</span> w;
+    }
+  }
+
+  <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> gh, w <span style="color:#f92672">=</span> gw;
+  <span style="color:#66d9ef">while</span> (h <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> w <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+    maze[h][w] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;o&#39;</span>;
+    <span style="color:#66d9ef">int</span> ph <span style="color:#f92672">=</span> prevh[h];
+    <span style="color:#66d9ef">int</span> pw <span style="color:#f92672">=</span> prevw[w];
+    h <span style="color:#f92672">=</span> ph, w <span style="color:#f92672">=</span> pw;
+  }
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> H; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> W; j<span style="color:#f92672">++</span>) {
+      cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>setw(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">&lt;&lt;</span> maze[i][j];
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/ja/tags/stack/">Stack</a>
+  
+  <a class="badge badge-light" href="">スタック</a>
+  
+  <a class="badge badge-light" href="/ja/tags/queue/">Queue</a>
+  
+  <a class="badge badge-light" href="">キュー</a>
+  
+  <a class="badge badge-light" href="/ja/tags/fifo/">FIFO</a>
+  
+  <a class="badge badge-light" href="/ja/tags/lifo/">LIFO</a>
+  
+  <a class="badge badge-light" href="/ja/tags/atcoder/">AtCoder</a>
+  
+  <a class="badge badge-light" href="/ja/tags/competitive-programming/">Competitive Programming</a>
+  
+  <a class="badge badge-light" href="/ja/tags/c&#43;&#43;/">C&#43;&#43;</a>
+  
+  <a class="badge badge-light" href="/ja/tags/cpp/">cpp</a>
+  
+  <a class="badge badge-light" href="">競技プログラミング</a>
+  
+  <a class="badge badge-light" href="">競プロ</a>
+  
+  <a class="badge badge-light" href="/ja/tags/abc/">ABC</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/stack-and-queue/&amp;text=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/stack-and-queue/&amp;t=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc&amp;body=/ja/post/stack-and-queue/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/stack-and-queue/&amp;title=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc%20/ja/post/stack-and-queue/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/stack-and-queue/&amp;title=%e3%82%b9%e3%82%bf%e3%83%83%e3%82%af%e3%81%a8%e3%82%ad%e3%83%a5%e3%83%bc" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>関連項目</h3>
+    <ul>
+      
+      <li><a href="/ja/post/graph-traversal/">グラフ探索</a></li>
+      
+      <li><a href="/ja/post/binary-search/">二分探索</a></li>
+      
+      <li><a href="/ja/post/check-all-cases/">全探索</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/1c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/abnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/accesslog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/actionscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ada.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/angelscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/apache.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arcade.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arduino.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/armasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/asciidoc.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/aspectj.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autohotkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autoit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/avrasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/axapta.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/basic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/brainfuck.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/capnproto.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ceylon.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clean.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cmake.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coffeescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coq.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crmsh.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crystal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/csp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/d.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dart.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/delphi.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/diff.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/django.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dns.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dsconfig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dts.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ebnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elixir.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/erb.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/excel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/flix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fortran.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fsharp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gams.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gauss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gcode.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gherkin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/glsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/golo.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gradle.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/groovy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/handlebars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haskell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haxe.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hsp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/htmlbars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/inform7.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ini.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/irpf90.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/isbl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/java.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/jboss-cli.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/kotlin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lasso.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ldif.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/leaf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/less.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lisp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livecodeserver.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/llvm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lua.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mathematica.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/maxima.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mercury.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mipsasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mizar.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mojolicious.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/monkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/moonscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/n1ql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nginx.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nimrod.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nsis.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/objectivec.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ocaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/openscad.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/oxygene.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/parser3.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pgsql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/php.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pony.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/powershell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/processing.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/profile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/prolog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/properties.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/protobuf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/puppet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/purebasic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/q.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/qml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/reasonml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rib.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/roboconf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/routeros.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ruby.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scilab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smali.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smalltalk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sqf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stan.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/step21.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stylus.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/subunit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/swift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/taggerscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tcl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/thrift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/typescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbnet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript-html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/verilog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vhdl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/x86asm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xquery.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/zephir.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/ja/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"結果が見つかりませんでした","placeholder":"検索...","results":"results found"};
+      const content_type = {
+        'post': "投稿",
+        'project': "プロジェクト",
+        'publication' : "発表文献",
+        'talk' : "登壇"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © zak 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> コピー
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> ダウンロード
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
