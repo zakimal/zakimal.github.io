@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/ja/post/</loc>
+    <lastmod>2020-04-10T18:20:31+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/ja/post/union-find-tree/</loc>
+    <lastmod>2020-04-10T18:20:31+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/</loc>
+    <lastmod>2020-04-10T18:20:31+09:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="/ja/"
+                />
+  </url>
+  
+  <url>
     <loc>/ja/tags/abc/</loc>
     <lastmod>2020-04-07T10:27:03+09:00</lastmod>
   </url>
@@ -63,21 +98,6 @@
   </url>
   
   <url>
-    <loc>/ja/post/</loc>
-    <lastmod>2020-04-07T10:27:03+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/post/"
-                />
-  </url>
-  
-  <url>
     <loc>/ja/tags/</loc>
     <lastmod>2020-04-07T10:27:03+09:00</lastmod>
     <xhtml:link
@@ -89,21 +109,6 @@
                 rel="alternate"
                 hreflang="ja"
                 href="/ja/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/ja/</loc>
-    <lastmod>2020-04-07T10:27:03+09:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/"
                 />
   </url>
   
