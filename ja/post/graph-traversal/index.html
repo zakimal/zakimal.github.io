@@ -570,7 +570,7 @@ $$</p>
 
 </figure>
 
-<p>グラフ$G$上の2頂点$u$，$v$について，$u$を出発して隣接する頂点をたどることで$v$に到達できるとき，その経路を<strong>$u$-$v$路</strong>という．またこのとき$u$をその路の<strong>始点</strong>，$v$を<strong>終点</strong>という．さらに，路のうち，同じ頂点を2度以上通らないものを<strong>パス</strong>という．また，路のうち，始点と終点が等しいものを<strong>閉路</strong>（または<strong>サイクル</strong>）と呼ぶ．</p>
+<p>グラフ$G$上の 2 頂点$u$，$v$について，$u$を出発して隣接する頂点をたどることで$v$に到達できるとき，その経路を<strong>$u$-$v$路</strong>という．またこのとき$u$をその路の<strong>始点</strong>，$v$を<strong>終点</strong>という．さらに，路のうち，同じ頂点を 2 度以上通らないものを<strong>パス</strong>という．また，路のうち，始点と終点が等しいものを<strong>閉路</strong>（または<strong>サイクル</strong>）と呼ぶ．</p>
 
 
 
@@ -629,7 +629,7 @@ $$</p>
 
 </figure>
 
-<p>グラフ$G$の任意の2頂点$u$，$v$ $\in V$に対して，$u$-$v$パス・$v$-$u$パスが存在するとき，$G$は<strong>連結</strong>であるという．特に，有向グラフ$G$の任意の2頂点$u$，$v$ $\in V$に対して，$u$-$v$パス・$v$-$u$パスが存在するとき，$G$は<strong>強連結</strong>であるという．</p>
+<p>グラフ$G$の任意の 2 頂点$u$，$v$ $\in V$に対して，$u$-$v$パス・$v$-$u$パスが存在するとき，$G$は<strong>連結</strong>であるという．特に，有向グラフ$G$の任意の 2 頂点$u$，$v$ $\in V$に対して，$u$-$v$パス・$v$-$u$パスが存在するとき，$G$は<strong>強連結</strong>であるという．</p>
 
 
 
@@ -703,23 +703,23 @@ $$</p>
 Graph G;
 </code></pre></div><p>例えば，入力が以下のように与えられたとき，グラフ$G$は次のように構築される．</p>
 <blockquote>
-<p>【<strong>入力</strong>】：
-$$
+<p>【<strong>入力</strong>】：</p>
+<p>$$
 N \space M
-$$
-$$
+$$</p>
+<p>$$
 u_1 \space v_1
-$$
-$$
+$$</p>
+<p>$$
 u_2 \space v_2
-$$
-$$
+$$</p>
+<p>$$
 u_3 \space v_3
-$$
-$$
+$$</p>
+<p>$$
 &hellip;
-$$
-$$
+$$</p>
+<p>$$
 u_M \space v_M
 $$</p>
 </blockquote>
@@ -740,23 +740,23 @@ $$</p>
 }
 </code></pre></div><p>辺に重みのあるグラフであれば，<code>Edge</code>という辺を表す構造体を定義してやるとわかりやすい．</p>
 <blockquote>
-<p>【<strong>入力</strong>】：
-$$
+<p>【<strong>入力</strong>】：</p>
+<p>$$
 N \space M
-$$
-$$
+$$</p>
+<p>$$
 u_1 \space v_1 \space w_1
-$$
-$$
+$$</p>
+<p>$$
 u_2 \space v_2 \space w_2
-$$
-$$
+$$</p>
+<p>$$
 u_3 \space v_3 \space w_3
-$$
-$$
+$$</p>
+<p>$$
 &hellip;
-$$
-$$
+$$</p>
+<p>$$
 u_M \space v_M \space w_M
 $$</p>
 </blockquote>
@@ -781,7 +781,7 @@ $$</p>
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h2 id="グラフの探索">グラフの探索</h2>
-<p>一般にグラフ上の探索にはどのような方針が考えられるのだろうか．例えば以下のようなグラフに対する頂点0を始点とした探索を考える．</p>
+<p>一般にグラフ上の探索にはどのような方針が考えられるのだろうか．例えば以下のようなグラフに対する頂点 0 を始点とした探索を考える．</p>
 
 
 
@@ -870,13 +870,13 @@ $$</p>
 
 </figure>
 </p>
-<p>頂点$1$に訪問した後，次に訪問する頂点を探す．つまり，頂点$1$の隣接頂点を調べると，頂点$3$と頂点$4$を発見し保留メモに追記する．．そこで次に訪問する頂点の選び方が2通り考えられる．</p>
+<p>頂点$1$に訪問した後，次に訪問する頂点を探す．つまり，頂点$1$の隣接頂点を調べると，頂点$3$と頂点$4$を発見し保留メモに追記する．．そこで次に訪問する頂点の選び方が 2 通り考えられる．</p>
 <ul>
 <li><strong>「後に保留メモに追記した頂点$3$・頂点$4$を，頂点$2$より先に訪問する」</strong></li>
 <li><strong>「先に保留メモに追記した頂点$2$を，頂点$3$・頂点$4$より先に訪問する」</strong></li>
 </ul>
 <p>「後に保留メモに追記した頂点$3$・頂点$4$を，頂点$2$より先に訪問する」という方針で続く探索を <strong>深さ優先探索 Depth-First Search（DFS）</strong> と呼び，「先に保留メモに追記した頂点$2$を，頂点$3$・頂点$4$より先に訪問する」という方針で続く探索を <strong>幅優先探索 Breadth-First Search（BFS）</strong> と呼ぶ．</p>
-<p>DFSでは保留メモの挙動が，Last-In-First-Outなのでスタックや再帰関数で実装することができる．一方で，BFSでは保留メモの挙動が，First-In-First-Outなのでキューで実装することができる．</p>
+<p>DFS では保留メモの挙動が，Last-In-First-Out なのでスタックや再帰関数で実装することができる．一方で，BFS では保留メモの挙動が，First-In-First-Out なのでキューで実装することができる．</p>
 <p>
 
 
@@ -941,9 +941,9 @@ while (!suspendedが空) {
 }
 </code></pre><p>また，閉路が存在しないかつ連結であるようなグラフは「<strong>木</strong>」と呼ばれる．木は，グラフの特殊型であるので，グラフでの探索と同様の議論が木での探索にも言える．</p>
 <h2 id="深さ優先探索-depth-frist-seachdfs">深さ優先探索 Depth-Frist Seach（DFS)</h2>
-<p>グラフ上を探索する手法として有名．「行けるところまで進んで，行き止まりになったら戻って別の道を試す」という方針でグラフ上を探索する．上の説明で言えば「保留メモからLIFOで頂点を取り出す」のがDFS．「保留メモからLIFOで頂点を取り出す」という方針がスタックや再帰関数の性質と一致し実装に用いられる．</p>
-<h3 id="スタックによるdfsの実装">スタックによるDFSの実装</h3>
-<p>スタックを用いてDFSを実装すると以下のようになる．</p>
+<p>グラフ上を探索する手法として有名．「行けるところまで進んで，行き止まりになったら戻って別の道を試す」という方針でグラフ上を探索する．上の説明で言えば「保留メモから LIFO で頂点を取り出す」のが DFS．「保留メモから LIFO で頂点を取り出す」という方針がスタックや再帰関数の性質と一致し実装に用いられる．</p>
+<h3 id="スタックによる-dfs-の実装">スタックによる DFS の実装</h3>
+<p>スタックを用いて DFS を実装すると以下のようになる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -982,8 +982,8 @@ stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="再帰関数によるdfsの実装">再帰関数によるDFSの実装</h3>
-<p>再帰関数を用いてDFSを実装すると以下のようになる．</p>
+</code></pre></div><h3 id="再帰関数による-dfs-の実装">再帰関数による DFS の実装</h3>
+<p>再帰関数を用いて DFS を実装すると以下のようになる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1015,9 +1015,9 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</s
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h2 id="幅優先探索-breadth-first-searchbfs">幅優先探索 Breadth-First Search（BFS）</h2>
-<p>グラフ上を探索する手法として有名．「分かれ道に遭遇したら，全ての分かれ道についてちょっとずつ等しく訪問していく」という方針でグラフ上を探索する．上の説明で言えば「保留メモからFIFOで頂点を取り出す」のがBFS．「保留メモからFIFOで頂点を取り出す」という方針がキューの性質と一致し実装に用いられる．</p>
-<h3 id="キューによるbfsの実装">キューによるBFSの実装</h3>
-<p>キューを用いてBFSを実装すると以下のようになる．</p>
+<p>グラフ上を探索する手法として有名．「分かれ道に遭遇したら，全ての分かれ道についてちょっとずつ等しく訪問していく」という方針でグラフ上を探索する．上の説明で言えば「保留メモから FIFO で頂点を取り出す」のが BFS．「保留メモから FIFO で頂点を取り出す」という方針がキューの性質と一致し実装に用いられる．</p>
+<h3 id="キューによる-bfs-の実装">キューによる BFS の実装</h3>
+<p>キューを用いて BFS を実装すると以下のようになる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1034,7 +1034,7 @@ queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
     <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> w: G[u]) {
       <span style="color:#66d9ef">if</span> (has_visited[w]) <span style="color:#66d9ef">continue</span>;
       <span style="color:#66d9ef">else</span> {
-          has_visited[u] <span style="color:#f92672">=</span> true;
+          has_visited[w] <span style="color:#f92672">=</span> true;
           suspended.push(w);
       }
     }
@@ -1056,9 +1056,9 @@ queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="bfsにあってdfsにないもの">BFSにあってDFSにないもの</h3>
-<p>BFSは全頂点を始点からの辺の本数によってレベル分けすることになる．特に，全ての辺の重さが$1$であるような重み付きグラフでBFSを行うと，<strong>その始点からの各頂点の最短距離を求めるアルゴリズム</strong>としても使うことができる．ただし，<strong>BFSが最短距離を求めるアルゴリズムとして使えるのは，全ての辺の重さが$1$であるグラフに限る</strong>ことに注意しなければならない．そうでないグラフならdijkstra法など他のアルゴリズムを用いないと正しい答えが得られない．</p>
-<p>BFSですべての辺の重さが$1$であるようなグラフを構成する各頂点の，頂点$0$からの最短距離を求める処理を実装すると次の通り．</p>
+</code></pre></div><h3 id="bfs-にあって-dfs-にないもの">BFS にあって DFS にないもの</h3>
+<p>BFS は全頂点を始点からの辺の本数によってレベル分けすることになる．特に，全ての辺の重さが$1$であるような重み付きグラフで BFS を行うと，<strong>その始点からの各頂点の最短距離を求めるアルゴリズム</strong>としても使うことができる．ただし，<strong>BFS が最短距離を求めるアルゴリズムとして使えるのは，全ての辺の重さが$1$であるグラフに限る</strong>ことに注意しなければならない．そうでないグラフなら dijkstra 法など他のアルゴリズムを用いないと正しい答えが得られない．</p>
+<p>BFS ですべての辺の重さが$1$であるようなグラフを構成する各頂点の，頂点$0$からの最短距離を求める処理を実装すると次の通り．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1102,9 +1102,9 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
 }
 </code></pre></div><h2 id="グラフ探索の例題">グラフ探索の例題</h2>
 <h3 id="到達可能性判定">到達可能性判定</h3>
-<p>2頂点$s$，$t$ $\in V$が与えられ，$s$から$t$へ辺をたどって到達することが可能であるかを判定する問題．単純に，<strong>$s$を始点としたDFSまたはBFSを実行し，<code>has_visited[s]</code>を確かめれば良い</strong>．</p>
+<p>2 頂点$s$，$t$ $\in V$が与えられ，$s$から$t$へ辺をたどって到達することが可能であるかを判定する問題．単純に，<strong>$s$を始点とした DFS または BFS を実行し，<code>has_visited[s]</code>を確かめれば良い</strong>．</p>
 <ul>
-<li>スタックを使ったDFSによる解答</li>
+<li>スタックを使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1143,7 +1143,7 @@ stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>再帰を使ったDFSによる解答</li>
+<li>再帰を使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1174,7 +1174,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</s
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>BFSによる解答</li>
+<li>BFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1230,7 +1230,7 @@ g.#.#.#.#.
 </code></pre></blockquote>
 <p>与えられた迷路内を，上下左右に移動しながら通路マス<code>.</code>のみを通って<code>s</code>から<code>g</code>までたどり着けるかを判定する．</p>
 <ul>
-<li>スタックを使ったDFSによる解答</li>
+<li>スタックを使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1286,7 +1286,7 @@ stack<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>再帰を使ったDFSによる解答</li>
+<li>再帰を使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1336,7 +1336,7 @@ vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>BFSによる解答</li>
+<li>BFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1392,9 +1392,9 @@ queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="連結成分のカウント">連結成分のカウント</h3>
-<p>連結とは限らない（つまりぶった切れているかもしれない）グラフが与えられ，その連結成分の個数を数える．これも単純に<strong>まだ探索していない頂点を1つ選んで$v$とし，$v$を始点とするDFSまたはBFSを実行することを，全頂点が探索済みになるまで繰り返せば良い</strong>．</p>
+<p>連結とは限らない（つまりぶった切れているかもしれない）グラフが与えられ，その連結成分の個数を数える．これも単純に<strong>まだ探索していない頂点を 1 つ選んで$v$とし，$v$を始点とする DFS または BFS を実行することを，全頂点が探索済みになるまで繰り返せば良い</strong>．</p>
 <ul>
-<li>スタックを使ったDFSによる解答</li>
+<li>スタックを使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1438,7 +1438,7 @@ stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>再帰を使ったDFSによる解答</li>
+<li>再帰を使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1474,7 +1474,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</s
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><ul>
-<li>BFSによる解答</li>
+<li>BFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1522,7 +1522,7 @@ queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
 <p>判定方法は簡単である．適当な頂点を白もしくは黒に塗ったとき，その頂点を始点に自動的に隣接頂点たちの色が次々に決まる．塗りながら，隣接する頂点が同じ色になってしまうかを確認すれば判定できる．全頂点を塗ることができれば，そのグラフは二部グラフであると言える．</p>
 <p>また，配列<code>has_visited</code>は未訪問であることを表す色を導入することで，頂点の色を保持する配列にまとめさせることができる．</p>
 <ul>
-<li>再帰を使ったDFSによる解答</li>
+<li>再帰を使った DFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1560,9 +1560,9 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><p>BFSでは「始点頂点からの距離によって頂点をレベル分けする」ことになり，与えられたグラフが二部グラフなら始点からの距離が偶数なら始点と同じ色，奇数なら異なる色となる．ここで，互いに隣接する頂点間では始点からの距離が1だけことなるので，<strong>「グラフが二部グラフである」と「BFSによって計算される各頂点の始点からの距離が等しい2頂点は隣接しない」は同値</strong>となる．</p>
+</code></pre></div><p>BFS では「始点頂点からの距離によって頂点をレベル分けする」ことになり，与えられたグラフが二部グラフなら始点からの距離が偶数なら始点と同じ色，奇数なら異なる色となる．ここで，互いに隣接する頂点間では始点からの距離が 1 だけことなるので，<strong>「グラフが二部グラフである」と「BFS によって計算される各頂点の始点からの距離が等しい 2 頂点は隣接しない」は同値</strong>となる．</p>
 <ul>
-<li>BFSによる解答</li>
+<li>BFS による解答</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -1602,8 +1602,8 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> MM endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="木に対するdfs">木に対するDFS</h3>
-<p>「木」は「閉路のない連結なグラフ」である．木に対するDFSでは，次に訪問する頂点を探すときに，必ず「親がすでに訪問済みである」とマークされている．このことを利用することで，根のない木に対して，与えられた頂点を根としたときの根付き木を計算することができる．以下では，与えられたグラフ$G$を，頂点$0$を根とした根付き木と見たときの，各頂点の深さ（根からの距離）とその頂点を根とする部分木のサイズを計算する．頂点の深さは，根からの距離であり，<strong>行きがけ時に決まる</strong>．なぜなら，ある頂点の深さは，その頂点の親の深さに1を足したものである．一方で，部分木のサイズは，<strong>帰りがけ時に決まる</strong>．なぜなら，自身を根とする部分木のサイズは，自分の子供を根とする部分木のサイズの総和に1足したものである．</p>
+</code></pre></div><h3 id="木に対する-dfs">木に対する DFS</h3>
+<p>「木」は「閉路のない連結なグラフ」である．木に対する DFS では，次に訪問する頂点を探すときに，必ず「親がすでに訪問済みである」とマークされている．このことを利用することで，根のない木に対して，与えられた頂点を根としたときの根付き木を計算することができる．以下では，与えられたグラフ$G$を，頂点$0$を根とした根付き木と見たときの，各頂点の深さ（根からの距離）とその頂点を根とする部分木のサイズを計算する．頂点の深さは，根からの距離であり，<strong>行きがけ時に決まる</strong>．なぜなら，ある頂点の深さは，その頂点の親の深さに 1 を足したものである．一方で，部分木のサイズは，<strong>帰りがけ時に決まる</strong>．なぜなら，自身を根とする部分木のサイズは，自分の子供を根とする部分木のサイズの総和に 1 足したものである．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1648,10 +1648,10 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   }
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><p>一般に，子ノードの情報を用いて親ノードの情報を更新する処理を<strong>木DP</strong>という．<strong>行きがけ時には「親ノードの情報を子ノードに配る」ような処理</strong>をし，<strong>帰りがけ時には「子ノードの情報を親ノードに集めて親ノードの情報を更新する」ような処理</strong>をすると良い．</p>
+</code></pre></div><p>一般に，子ノードの情報を用いて親ノードの情報を更新する処理を<strong>木 DP</strong>という．<strong>行きがけ時には「親ノードの情報を子ノードに配る」ような処理</strong>をし，<strong>帰りがけ時には「子ノードの情報を親ノードに集めて親ノードの情報を更新する」ような処理</strong>をすると良い．</p>
 <h3 id="トポロジカルソート">トポロジカルソート</h3>
-<p>トポロジカルソートとは，閉路の存在しない有向グラフ（このようなグラフをDAGという）に対して，辺の向きが揃うように頂点を並べるようなソートのことを指し，ソフトウェアのモジュール間・ソースコード間の依存関係を解決するような場面で用いられる．また，DAGであることはトポロジカルソートが可能であることと同値であるらしい．</p>
-<p>トポロジカルソートでは，その頂点を始点とする辺が0本であるような頂点（シンクノード）が末尾に来る.シンクノードを取り除き，その頂点に向かっていた辺を削除すると，新たにシンクノードになる頂点が発生する．新たに発生したシンクノードから適当に一つ選び削除し同様のことを行う．これをすべての頂点が削除されるまで行い，頂点の削除された逆順を出力するとトポロジカルソートが実現できる．この方法だと逆向きのBFSっぽい挙動となる．</p>
+<p>トポロジカルソートとは，閉路の存在しない有向グラフ（このようなグラフを DAG という）に対して，辺の向きが揃うように頂点を並べるようなソートのことを指し，ソフトウェアのモジュール間・ソースコード間の依存関係を解決するような場面で用いられる．また，DAG であることはトポロジカルソートが可能であることと同値であるらしい．</p>
+<p>トポロジカルソートでは，その頂点を始点とする辺が 0 本であるような頂点（シンクノード）が末尾に来る.シンクノードを取り除き，その頂点に向かっていた辺を削除すると，新たにシンクノードになる頂点が発生する．新たに発生したシンクノードから適当に一つ選び削除し同様のことを行う．これをすべての頂点が削除されるまで行い，頂点の削除された逆順を出力するとトポロジカルソートが実現できる．この方法だと逆向きの BFS っぽい挙動となる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1684,7 +1684,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v: order) cout <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><p>ここで，DFSの帰りがけ順を考えると，これはまさしくトポロジカルソートとなる．</p>
+</code></pre></div><p>ここで，DFS の帰りがけ順を考えると，これはまさしくトポロジカルソートとなる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1723,8 +1723,8 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="閉路検出">閉路検出</h3>
-<p>グラフに閉路が存在するかを検出する問題．BFSっぽいトポロジカルソートの手法を考慮すると，<strong>サイクルに含まれる頂点はシンクノードになることがない</strong>ので，トポロジカルソートできる範囲でトポロジカルソートした後に，キューに入ったことがない頂点が存在すれば，閉路が存在することがわかる．</p>
-<p>以下は，サイクルを1つ含むことが保証された無向グラフに対して，2頂点$a$，$b$がともにそのサイクル上にあるときは<code>2</code>を，そうでないときは<code>1</code>を出力せよという<a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2891">問題</a>の解答である．</p>
+<p>グラフに閉路が存在するかを検出する問題．BFS っぽいトポロジカルソートの手法を考慮すると，<strong>サイクルに含まれる頂点はシンクノードになることがない</strong>ので，トポロジカルソートできる範囲でトポロジカルソートした後に，キューに入ったことがない頂点が存在すれば，閉路が存在することがわかる．</p>
+<p>以下は，サイクルを 1 つ含むことが保証された無向グラフに対して，2 頂点$a$，$b$がともにそのサイクル上にあるときは<code>2</code>を，そうでないときは<code>1</code>を出力せよという<a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2891">問題</a>の解答である．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1823,21 +1823,21 @@ stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</spa
 <li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_11_B&amp;lang=ja">ALDS 1-11 B</a></li>
 <li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1160&amp;lang=jp">AOJ 1160</a></li>
 <li><a href="https://atcoder.jp/contests/abc138/tasks/abc138_d">ABC 138 D</a></li>
-<li><a href="https://atcoder.jp/contests/joi2009yo/tasks/joi2009yo_d">JOI2009 予選4</a></li>
+<li><a href="https://atcoder.jp/contests/joi2009yo/tasks/joi2009yo_d">JOI2009 予選 4</a></li>
 <li><a href="https://atcoder.jp/contests/arc031/tasks/arc031_2">ARC 31 B</a></li>
 <li><a href="https://atcoder.jp/contests/abc126/tasks/abc126_d">ABC 126 D</a></li>
 <li><a href="https://atcoder.jp/contests/code-festival-2017-qualb/tasks/code_festival_2017_qualb_c">CODE FSTIVAL2017 qualB C</a></li>
 <li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_11_C&amp;lang=ja">ALDS 1-11 C</a></li>
 <li><a href="https://atcoder.jp/contests/abc007/tasks/abc007_3">ABC 7 C</a></li>
-<li><a href="https://atcoder.jp/contests/joi2011yo/tasks/joi2011yo_e">JOI2011 予選5</a></li>
-<li><a href="https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_e">JOI2012 予選5</a></li>
+<li><a href="https://atcoder.jp/contests/joi2011yo/tasks/joi2011yo_e">JOI2011 予選 5</a></li>
+<li><a href="https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_e">JOI2012 予選 5</a></li>
 <li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1166&amp;lang=jp">AOJ 1166</a></li>
 <li><a href="https://atcoder.jp/contests/abc088/tasks/abc088_d">ABC 88 D</a></li>
 <li><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2891">AOJ 2891</a></li>
 </ul>
 <h2 id="解説">解説</h2>
 <h3 id="alds-1-11-bhttpjudgeu-aizuacjponlinejudgedescriptionjspidalds1_11_blangja"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_11_B&amp;lang=ja">ALDS 1-11 B</a></h3>
-<p>基本問題．再帰のDFSが書きやすい．</p>
+<p>基本問題．再帰の DFS が書きやすい．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1929,7 +1929,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="abc-138-dhttpsatcoderjpcontestsabc138tasksabc138_d"><a href="https://atcoder.jp/contests/abc138/tasks/abc138_d">ABC 138 D</a></h3>
-<p>親ノードの情報を子ノードに配るので，DFSで行きがけにカウンタの値を更新する．</p>
+<p>親ノードの情報を子ノードに配るので，DFS で行きがけにカウンタの値を更新する．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -1972,7 +1972,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</s
   }
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="joi2009-予選4httpsatcoderjpcontestsjoi2009yotasksjoi2009yo_d"><a href="https://atcoder.jp/contests/joi2009yo/tasks/joi2009yo_d">JOI2009 予選4</a></h3>
+</code></pre></div><h3 id="joi2009-予選-4httpsatcoderjpcontestsjoi2009yotasksjoi2009yo_d"><a href="https://atcoder.jp/contests/joi2009yo/tasks/joi2009yo_d">JOI2009 予選 4</a></h3>
 <p>薄氷の地図をグリッドグラフとみなすと，割ることのできる薄氷の枚数はグラフの深さに対応する．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -2024,7 +2024,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="arc-31-bhttpsatcoderjpcontestsarc031tasksarc031_2"><a href="https://atcoder.jp/contests/arc031/tasks/arc031_2">ARC 31 B</a></h3>
-<p>グリッドグラフの連結成分カウント問題．DFSで解ける．</p>
+<p>グリッドグラフの連結成分カウント問題．DFS で解ける．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -2081,7 +2081,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="abc-126-dhttpsatcoderjpcontestsabc126tasksabc126_d"><a href="https://atcoder.jp/contests/abc126/tasks/abc126_d">ABC 126 D</a></h3>
-<p>二部グラフ判定問題に似ている．「同じ色に塗られた任意の2頂点についてその距離が偶数」という条件から，ある1つ頂点の色を決めてしまえば，他の頂点の色は自動的に決定してしまう．</p>
+<p>二部グラフ判定問題に似ている．「同じ色に塗られた任意の 2 頂点についてその距離が偶数」という条件から，ある 1 つ頂点の色を決めてしまえば，他の頂点の色は自動的に決定してしまう．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -2138,9 +2138,9 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="code-fstival2017-qualb-chttpsatcoderjpcontestscode-festival-2017-qualbtaskscode_festival_2017_qualb_c"><a href="https://atcoder.jp/contests/code-festival-2017-qualb/tasks/code_festival_2017_qualb_c">CODE FSTIVAL2017 qualB C</a></h3>
-<p>🍎さんが持っているのは，$N$頂点の<strong>連結な</strong>無向グラフ．操作によって頂点$u$-頂点$v$には長さ$3$のパスと長さ$1$のパスが存在することになる．奇数長のパスを持つ2頂点$u$，$v$ $\in V$に対して，「操作」を繰り返すことで$u$，$v$を直接結ぶ辺が登場する．これは帰納的に証明できる．<strong>「グラフに奇数長のパスが存在するかどうか」はそのグラフが二部グラフであるかどうかによって変わる</strong>．</p>
+<p>🍎さんが持っているのは，$N$頂点の<strong>連結な</strong>無向グラフ．操作によって頂点$u$-頂点$v$には長さ$3$のパスと長さ$1$のパスが存在することになる．奇数長のパスを持つ 2 頂点$u$，$v$ $\in V$に対して，「操作」を繰り返すことで$u$，$v$を直接結ぶ辺が登場する．これは帰納的に証明できる．<strong>「グラフに奇数長のパスが存在するかどうか」はそのグラフが二部グラフであるかどうかによって変わる</strong>．</p>
 <p>まず，グラフ$G$が二部グラフであるときを考える．$G$は二部グラフなので頂点を黒・白で塗り分けることができる．異なる色で塗られた任意の頂点対を取ると，$G$は連結なグラフなので，その頂点対間にはパスが存在して，その長さは奇数である．ゆえに，「操作」を繰り返すことでいつかはその頂点対間には辺が張られる．よって，<strong>$G$が二部グラフであるとき，「操作」を繰り返すことで任意の黒色頂点-任意の白色頂点間に辺を張ることができる</strong>．追加できる辺の本数は，黒色頂点数と白色頂点数の積からすでに存在する辺数$M$を引いた値となる．</p>
-<p>次にグラフ$G$が二部グラフでないときを考える．$G$が二部グラフでないならば，同じ色で塗られた頂点を結ぶ辺が存在することになる．$G$は連結でもあるので$V$内の任意の2頂点間にはパスが存在する．よって，同じ色で塗られた頂点を結ぶ辺の端点を含む長さが奇数の閉路が$G$に存在することになる．この閉路を用いることで，$G$内の任意の2頂点間に長さが奇数のパスを見つけることができる．$G$は連結なので，$V$内の任意の2頂点間にはパスが存在し，たとえそれが偶数であっても，奇数長の閉路を余分に経ることでそのパスの長さを奇数にすることができる．奇数長のパスが存在するときその端点の頂点は「操作」を繰り返すことで直接結ぶ辺が張られるので，$G$は完全グラフになっていく．</p>
+<p>次にグラフ$G$が二部グラフでないときを考える．$G$が二部グラフでないならば，同じ色で塗られた頂点を結ぶ辺が存在することになる．$G$は連結でもあるので$V$内の任意の 2 頂点間にはパスが存在する．よって，同じ色で塗られた頂点を結ぶ辺の端点を含む長さが奇数の閉路が$G$に存在することになる．この閉路を用いることで，$G$内の任意の 2 頂点間に長さが奇数のパスを見つけることができる．$G$は連結なので，$V$内の任意の 2 頂点間にはパスが存在し，たとえそれが偶数であっても，奇数長の閉路を余分に経ることでそのパスの長さを奇数にすることができる．奇数長のパスが存在するときその端点の頂点は「操作」を繰り返すことで直接結ぶ辺が張られるので，$G$は完全グラフになっていく．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -2228,7 +2228,7 @@ vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</sp
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="abc-7-chttpsatcoderjpcontestsabc007tasksabc007_3"><a href="https://atcoder.jp/contests/abc007/tasks/abc007_3">ABC 7 C</a></h3>
-<p>グリッド形式での迷路探索．「最小手数」がほしいのでBFSが手軽．</p>
+<p>グリッド形式での迷路探索．「最小手数」がほしいので BFS が手軽．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -2269,7 +2269,7 @@ vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&
   cout <span style="color:#f92672">&lt;&lt;</span> dist[gh][gw] <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="joi2011-予選5httpsatcoderjpcontestsjoi2011yotasksjoi2011yo_e"><a href="https://atcoder.jp/contests/joi2011yo/tasks/joi2011yo_e">JOI2011 予選5</a></h3>
+</code></pre></div><h3 id="joi2011-予選-5httpsatcoderjpcontestsjoi2011yotasksjoi2011yo_e"><a href="https://atcoder.jp/contests/joi2011yo/tasks/joi2011yo_e">JOI2011 予選 5</a></h3>
 <p>ネズミの体力の初期値が$1$であり，チーズ$1$個ごとに体力が$1$増えるので，柔らかさ順にチーズを食べていくことになる．チーズ工場間の最短距離を求めていく．全対最短距離を求めるアルゴリズムを使っても良い．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
@@ -2330,8 +2330,8 @@ Field F;
   cout <span style="color:#f92672">&lt;&lt;</span> ans <span style="color:#f92672">&lt;&lt;</span> endl;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h3 id="joi2012-予選5httpsatcoderjpcontestsjoi2012yotasksjoi2012yo_e"><a href="https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_e">JOI2012 予選5</a></h3>
-<p>チョット変な座標系に対するBFS．建物のない区画に印をつけ，建物のない区画の周囲に建物が立っている区画があればその境界は色を塗ることになる．座標によって周囲6区画の，マス目位置が変わってくることに注意．</p>
+</code></pre></div><h3 id="joi2012-予選-5httpsatcoderjpcontestsjoi2012yotasksjoi2012yo_e"><a href="https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_e">JOI2012 予選 5</a></h3>
+<p>チョット変な座標系に対する BFS．建物のない区画に印をつけ，建物のない区画の周囲に建物が立っている区画があればその境界は色を塗ることになる．座標によって周囲 6 区画の，マス目位置が変わってくることに注意．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
@@ -2412,8 +2412,8 @@ Field F;
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><h3 id="aoj-1166httpjudgeu-aizuacjponlinejudgedescriptionjspid1166langjp"><a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1166&amp;lang=jp">AOJ 1166</a></h3>
-<p>ややトリッキーな形で迷路情報が与えられる．内容は基本的なBFSに過ぎない．BFSのどこで迷路の情報を使うかというと，「隣接マスに行けるのか」を知るタイミングである．よって，縦横の仕切りの情報をそれぞれ別の形で持っておいて，隣接マスへの移動を考えるタイミングでその情報にアクセスするように実装する．</p>
-<p><code>horizontal_partition</code>，<code>vertical_partition</code>という2つの配列で迷路情報を保持する．</p>
+<p>ややトリッキーな形で迷路情報が与えられる．内容は基本的な BFS に過ぎない．BFS のどこで迷路の情報を使うかというと，「隣接マスに行けるのか」を知るタイミングである．よって，縦横の仕切りの情報をそれぞれ別の形で持っておいて，隣接マスへの移動を考えるタイミングでその情報にアクセスするように実装する．</p>
+<p><code>horizontal_partition</code>，<code>vertical_partition</code>という 2 つの配列で迷路情報を保持する．</p>
 
 
 
