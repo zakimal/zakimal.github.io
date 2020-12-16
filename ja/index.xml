@@ -5,12 +5,34 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Mon, 14 Dec 2020 09:00:00 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Wed, 16 Dec 2020 16:01:29 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>if (n &amp; (n-1)) == 0</title>
+      <link>/ja/post/check-n-is-power-of-2/</link>
+      <pubDate>Wed, 16 Dec 2020 16:01:29 +0900</pubDate>
+      <guid>/ja/post/check-n-is-power-of-2/</guid>
+      <description>&lt;h2 id=&#34;忘れないようにメモ&#34;&gt;忘れないようにメモ&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0xF&lt;/code&gt; = &lt;code&gt;0b1111&lt;/code&gt;：&lt;code&gt;0x一文字&lt;/code&gt;は 4bits&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0xFF&lt;/code&gt; = &lt;code&gt;0b1111 1111&lt;/code&gt;：&lt;code&gt;0x二文字&lt;/code&gt;は 8bits（1byte）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;if-n--n-1--0&#34;&gt;&lt;code&gt;if (n &amp;amp; (n-1)) == 0&lt;/code&gt;&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;        n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xxxxx &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;  n - 1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; xxxxx &lt;span style=&#34;color:#ae81ff&#34;&gt;0111&lt;/span&gt;
+------------------------
+n &amp;amp; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;n - 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ????? &lt;span style=&#34;color:#ae81ff&#34;&gt;0000&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;なので，&lt;code&gt;if (n &amp;amp; (n-1)) == 0&lt;/code&gt;が true なら&lt;code&gt;?????&lt;/code&gt;が&lt;code&gt;00000&lt;/code&gt;であり，つまり&lt;code&gt;xxxxx&lt;/code&gt;が&lt;code&gt;00000&lt;/code&gt;であるから，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;n = 00000 1000
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;ということになる．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;if (n &amp;amp; (n-1)) == 0&lt;/code&gt;は「&lt;code&gt;n&lt;/code&gt;が 2 のべき乗であるか」を確認している．&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>組み合わせを高速に計算する</title>
