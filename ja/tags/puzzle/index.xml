@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>puzzle | zak</title>
+    <link>/ja/tags/puzzle/</link>
+      <atom:link href="/ja/tags/puzzle/index.xml" rel="self" type="application/rss+xml" />
+    <description>puzzle</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:30:43 +0900</lastBuildDate>
+    <image>
+      <url>/img/icon-1080.png</url>
+      <title>puzzle</title>
+      <link>/ja/tags/puzzle/</link>
+    </image>
+    
+    <item>
+      <title>Puzzle: Heavy Pill</title>
+      <link>/ja/post/puzzle-heavy-pill/</link>
+      <pubDate>Thu, 17 Dec 2020 17:30:43 +0900</pubDate>
+      <guid>/ja/post/puzzle-heavy-pill/</guid>
+      <description>&lt;h2 id=&#34;the-heavy-pill&#34;&gt;The heavy pill&lt;/h2&gt;
+&lt;p&gt;ref: &lt;a href=&#34;https://www.geeksforgeeks.org/puzzle-10-identical-bottles-pills/&#34;&gt;https://www.geeksforgeeks.org/puzzle-10-identical-bottles-pills/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;目の前に 10 種類の錠剤の瓶が置かれている．それぞれの瓶には十分な量の錠剤が入っている．各瓶には番号が振られており，それぞれ&lt;code&gt;1&lt;/code&gt;/&lt;code&gt;2&lt;/code&gt;/&lt;code&gt;3&lt;/code&gt;/&lt;code&gt;4&lt;/code&gt;/&lt;code&gt;5&lt;/code&gt;/&lt;code&gt;6&lt;/code&gt;/&lt;code&gt;7&lt;/code&gt;/&lt;code&gt;8&lt;/code&gt;/&lt;code&gt;9&lt;/code&gt;/&lt;code&gt;10&lt;/code&gt;である．これらの錠剤のうち，ある一つの瓶に含まれている錠剤は重さが 1.1g で他の錠剤は 1g である．測りを 1 回だけ用いて「どの瓶に含まれる錠剤が重さ 1.1g の錠剤であるか」を求めたい．どのようにすればよいだろうか．&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$i = 1, 2, &amp;hellip;, 9, 10$に対して，瓶$i$から$i$粒の錠剤を取り出し測りに載せる．測りの指す合計重量$X$を読み取る．番号$(X-55)/0.1$の瓶が 1.1g の錠剤の瓶である．&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
