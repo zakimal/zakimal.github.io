@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>puzzle | zak</title>
+    <title>Puzzle | zak</title>
     <link>/ja/tags/puzzle/</link>
       <atom:link href="/ja/tags/puzzle/index.xml" rel="self" type="application/rss+xml" />
-    <description>puzzle</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:30:43 +0900</lastBuildDate>
+    <description>Puzzle</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:46:30 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
-      <title>puzzle</title>
+      <title>Puzzle</title>
       <link>/ja/tags/puzzle/</link>
     </image>
+    
+    <item>
+      <title>Puzzle: Ants on a Polygon</title>
+      <link>/ja/post/puzzle-ants-on-a-polygon/</link>
+      <pubDate>Thu, 17 Dec 2020 17:46:30 +0900</pubDate>
+      <guid>/ja/post/puzzle-ants-on-a-polygon/</guid>
+      <description>&lt;h2 id=&#34;ants-on-a-polygon&#34;&gt;Ants on a Polygon&lt;/h2&gt;
+&lt;p&gt;ref: &lt;a href=&#34;https://www.geeksforgeeks.org/puzzle-21-3-ants-and-triangle/&#34;&gt;https://www.geeksforgeeks.org/puzzle-21-3-ants-and-triangle/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;$n$角形の拡張点に 🐜 がいる．私の掛け声で 🐜 は一斉にどちらかの辺を選んで歩き出す．🐜 が辺上で衝突する確率を求めよ．&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$n$匹の 🐜 が全部同じ方向を選べば衝突はしない．すべての 🐜 が時計回りの枝を選ぶ確率は&lt;/p&gt;
+&lt;p&gt;$$
+\frac{1}{2^n}
+$$&lt;/p&gt;
+&lt;p&gt;同じように，すべての 🐜 が反時計回りの枝を選ぶ確率は&lt;/p&gt;
+&lt;p&gt;$$
+\frac{1}{2^n}
+$$&lt;/p&gt;
+&lt;p&gt;すべての 🐜 が同じ方向を選ぶ確率は&lt;/p&gt;
+&lt;p&gt;$$
+2 \times \frac{1}{2^n} = \frac{1}{2^{n-1}}
+$$&lt;/p&gt;
+&lt;p&gt;よって衝突する確率は&lt;/p&gt;
+&lt;p&gt;$$
+1 - \frac{1}{2^{n-1}}
+$$&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>Puzzle: Heavy Pill</title>
