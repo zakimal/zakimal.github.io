@@ -5,12 +5,31 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:46:30 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:56:26 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Puzzle: 100 Lockers</title>
+      <link>/ja/post/puzzle-100-lockers/</link>
+      <pubDate>Thu, 17 Dec 2020 17:56:26 +0900</pubDate>
+      <guid>/ja/post/puzzle-100-lockers/</guid>
+      <description>&lt;h2 id=&#34;100-lockers&#34;&gt;100 lockers&lt;/h2&gt;
+&lt;p&gt;ref: &lt;a href=&#34;http://mathforum.org/library/drmath/view/56747.html&#34;&gt;http://mathforum.org/library/drmath/view/56747.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ある駅に 100 個のロッカーが設置された．各ロッカーには番号が$1$，$2$，$3$&amp;hellip;，$99$，$100$と振られており，すべての扉が閉じている．今から私は$i$（$i = 1, 2, &amp;hellip;, 99, 100$）回以下の行動をする．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$i$の倍数の番号のロッカーを，開いていれば閉め，閉まっていれば開ける&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;この行動はあまりに奇人なので，やりたくない．が，やったあとに開いている扉がどれなのかはどうしても知りたい．君に教えてほしい．&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;初期状態では扉は全て閉じているので，奇数回操作の対象になると扉が開いていることになる．ここで扉$n$は$n$の約数回目に操作の対象になる．ということは最後に残っているのは扉の番号の約数が奇数個の扉である．約数が奇数個となるような数字は，平方数しかない．よって，最後に開いている扉は$1$，$4$，$9$，$16$，$25$，$36$，$49$，$64$，$81$，$100$の 10 の扉．&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>Puzzle: Ants on a Polygon</title>
