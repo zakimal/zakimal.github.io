@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="部分和問題で全探索に慣れる">
+  <meta name="description" content="zak&#39;s blog">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/partial-sums/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/tags/recursion/">
 
   
 
@@ -91,12 +91,14 @@
 
 
   
+  <link rel="alternate" href="/ja/tags/recursion/index.xml" type="application/rss+xml" title="zak">
+  
 
   <link rel="manifest" href="/ja/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/partial-sums/">
+  <link rel="canonical" href="/ja/tags/recursion/">
 
   
   
@@ -111,67 +113,17 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/partial-sums/">
-  <meta property="og:title" content="部分和問題 | zak">
-  <meta property="og:description" content="部分和問題で全探索に慣れる"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/tags/recursion/">
+  <meta property="og:title" content="recursion | zak">
+  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    
-      <meta property="article:published_time" content="2020-05-12T21:52:41&#43;09:00">
-    
-    <meta property="article:modified_time" content="2020-05-12T21:52:41&#43;09:00">
+    <meta property="og:updated_time" content="2020-04-10T18:10:28&#43;09:00">
   
 
   
 
 
-    
-
-
-
-
-
-
-  
-
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "/ja/post/partial-sums/"
-  },
-  "headline": "部分和問題",
-  
-  "datePublished": "2020-05-12T21:52:41+09:00",
-  "dateModified": "2020-05-12T21:52:41+09:00",
-  
-  "author": {
-    "@type": "Person",
-    "name": "尾崎 耀一 (@zak)"
-  },
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "zak",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/img/zak.gif"
-    }
-  },
-  "description": "部分和問題で全探索に慣れる"
-}
-</script>
-
-  
-
-  
 
 
   
@@ -183,7 +135,7 @@
 
 
 
-  <title>部分和問題 | zak</title>
+  <title>recursion | zak</title>
 
 </head>
 
@@ -397,8 +349,6 @@
 </nav>
 
 
-  <article class="article">
-
   
 
 
@@ -416,555 +366,37 @@
 
   
   
-  
-<div class="article-container pt-3">
-  <h1>部分和問題</h1>
-
-  
-
   
     
-
-
-<div class="article-metadata">
+  
+<div class="universal-wrapper pt-3">
+  <h1>recursion</h1>
 
   
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Tue, May 12, 2020
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
 </div>
 
 
 
-  <div class="article-container">
+<div class="universal-wrapper">
+  
 
+  
+  
+  <div>
+    <h2><a href="/ja/post/recursion/">「再帰」についての学び直し</a></h2>
     <div class="article-style">
-      <h2 id="全探索を再帰関数でやるときの-2-流派">全探索を再帰関数でやるときの 2 流派</h2>
-<p>全探索を再帰関数で書くにはたいてい 2 流派ある．</p>
-<ul>
-<li>状態情報を配っていく再帰</li>
-<li>状態情報を集めていく再帰</li>
-</ul>
-<p>全探索しなければならない問題では，探索すべき状態数が指数的に増加してしまうので，問題の制約が小さめであることが多い．大体 $10$ から $20$ ぐらいだと全探索できる．</p>
-<h2 id="部分和問題">部分和問題</h2>
-<blockquote>
-<p>【問題】 $n$個の整数列 $a_1, a_2, &hellip; , a_{n-1}$ から部分集合をうまく選んで，その集合内の数の和を $W$ に等しくすることができるか判定せよ．</p>
-<p>【制約】 $1 \leq n \leq 20$</p>
-</blockquote>
-<h3 id="状態情報を配っていく再帰">状態情報を配っていく再帰</h3>
-<p>このタイプの再帰では <strong>再帰的な樹形図の最小単位</strong> をそのまま再帰関数が表現していると捉えるとわかりやすい．</p>
-<pre><code>rec(状態を表す変数) {
-    if (状態が樹形図の末端である) { // ベースケース
-        条件に対してこの状態が妥当であるかの確認
-        return;
-    }
-
-    rec(次の状態1)
-    rec(次の遷移2)
-}
-</code></pre><p>樹形図上を深さ優先探索して，末端の状態にたどり着いてから条件との整合性チェックをする．</p>
-<p>この方針で部分和問題を解いてみる．ここでは状態を</p>
-<pre><code>(何番目までの項を用いるか, その時点での部分和)
-</code></pre><p>として表現している．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">int</span> N, W;
-vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a;
-
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">rec</span>(<span style="color:#66d9ef">int</span> depth, <span style="color:#66d9ef">int</span> sum) {
-
-    <span style="color:#75715e">// 樹形図の末端に到達したとき
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (depth <span style="color:#f92672">==</span> N) {
-        <span style="color:#66d9ef">if</span> (sum <span style="color:#f92672">==</span> W) <span style="color:#66d9ef">return</span> true;
-        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
-    }
-
-    <span style="color:#75715e">// a[depth]を部分和計算に用いる場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(depth<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, sum <span style="color:#f92672">+</span> a[depth])) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#75715e">// a[depth]を部分和計算に用いない場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(depth<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, sum)) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#66d9ef">return</span> false;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
-    a.resize(N);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
-
-    <span style="color:#75715e">// 状態(0, 0)から樹形図を末端に向かって深さ優先探索
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)) cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><h3 id="状態情報を集めていく再帰">状態情報を集めていく再帰</h3>
-<p>配っていく再帰との対比で考えると，集めていく再帰では状態を</p>
-<pre><code>(何番目以降の項を用いるか, その時点でのWとの差)
-</code></pre><p>で状態を表現することになる．「実現したい和 W との差」で状態を表現するところが配る再帰とは違っている．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">int</span> N, W;
-vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a;
-
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">rec</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> remain) {
-
-    <span style="color:#75715e">// 樹形図の末端に到達したとき: N番目以降の項を用いるときの部分和は自明
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> N) {
-        <span style="color:#66d9ef">if</span> (remain <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> true;
-        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
-    }
-
-    <span style="color:#75715e">// a[idx]を部分和計算に用いる場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (a[idx] <span style="color:#f92672">&lt;=</span> remain <span style="color:#f92672">&amp;&amp;</span> rec(idx<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, remain <span style="color:#f92672">-</span> a[idx])) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#75715e">// a[idx]を部分和計算に用いない場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(idx<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, remain)) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#66d9ef">return</span> false;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
-    a.resize(N);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
-
-    <span style="color:#75715e">// 状態(0, W)から樹形図を末端に向かって深さ優先探索
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(<span style="color:#ae81ff">0</span>, W)) cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><p>状態の定義次第では別の書き方もできる．状態を</p>
-<pre><code>(0から何番目までの項を用いたか, その時点でのWとの差)
-</code></pre><p>とすると，</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">int</span> N, W;
-vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a;
-
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">rec</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> remain) {
-
-    <span style="color:#75715e">// 樹形図の末端に到達したとき: 0番目までの項を用いた時の部分和は自明
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-        <span style="color:#66d9ef">if</span> (remain <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> true;
-        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
-    }
-
-    <span style="color:#75715e">// a[idx-1]を部分和計算に用いる場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (a[idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> remain <span style="color:#f92672">&amp;&amp;</span> rec(idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, remain <span style="color:#f92672">-</span> a[idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#75715e">// a[idx-1]を部分和計算に用いない場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, remain)) <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#66d9ef">return</span> false;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
-    a.resize(N);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
-
-    <span style="color:#75715e">// 状態(N, W)から樹形図を末端に向かって深さ優先探索
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(N, W)) cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><h3 id="状態情報を集めていく再帰でメモ化">状態情報を集めていく再帰でメモ化</h3>
-<p>集めていく再帰では，サイズ $n$ の問題を解くために サイズ $n-1$ の問題の結果を利用するのだから，それを配列などにメモしておけば再帰計算の無駄を減らせる．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">int</span> N, W;
-vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a;
-
-<span style="color:#75715e">// dp[i][j]: i番目までの項を用いて部分和Wとの差をjにできたか
-</span><span style="color:#75715e">// -1: まだ解決していない
-</span><span style="color:#75715e">//  0: できない
-</span><span style="color:#75715e">//  1: できる
-</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp;
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">rec</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> remain) {
-
-    <span style="color:#75715e">// まずメモを確認
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (dp[idx][remain] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-        <span style="color:#66d9ef">return</span> dp[idx][remain]; <span style="color:#75715e">// すでに計算してあったのでメモの内容を返す
-</span><span style="color:#75715e"></span>
-    <span style="color:#75715e">// 樹形図の末端に到達したとき: 0番目までの工を用いた時の部分和は自明
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-        <span style="color:#66d9ef">if</span> (remain <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> true;
-        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
-    }
-
-    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-
-    <span style="color:#75715e">// a[idx-1]を部分和計算に用いる場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (a[idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> renaib <span style="color:#f92672">&amp;&amp;</span> rec(idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, remain <span style="color:#f92672">-</span> a[idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])) ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-
-    <span style="color:#75715e">// a[idx-1]を部分和計算に用いない場合
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, remain)) ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-
-    <span style="color:#66d9ef">return</span> dp[idx][remain] <span style="color:#f92672">=</span> ans;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
-    a.resize(N);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) cin <span style="color:#f92672">&gt;&gt;</span> a[i];
-
-    <span style="color:#75715e">// dpテーブル初期化
-</span><span style="color:#75715e"></span>    dp.assign(N<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(W<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
-
-    <span style="color:#75715e">// 状態(N, W)から樹形図を末端に向かって深さ優先探索
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (rec(N, W) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">else</span> cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><h3 id="再帰ではなく-bit-全探索で">再帰ではなく bit 全探索で</h3>
-<p>項の選び方を 2 進数にエンコードして状態を表現することもできる．そうすれば bit 全探索になる．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;bits/stdc++.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> N, W;
-    cin <span style="color:#f92672">&gt;&gt;</span> N <span style="color:#f92672">&gt;&gt;</span> W;
-    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> a(N);
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>)
-        cin <span style="color:#f92672">&gt;&gt;</span> a[i];
-
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; bit <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> N); bit<span style="color:#f92672">++</span>) {
-        <span style="color:#66d9ef">int</span> tmpsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> N; i<span style="color:#f92672">++</span>) {
-            <span style="color:#66d9ef">if</span> (bit <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i)) {
-                tmpsum <span style="color:#f92672">+=</span> a[i];
-            }
-        }
-        <span style="color:#66d9ef">if</span> (tmpsum <span style="color:#f92672">==</span> W) {
-            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Yes&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-        }
-    }
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div>
-    </div>
-
-    
-
-
-
-
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="">部分和問題</a>
-  
-  <a class="badge badge-light" href="">全探索</a>
-  
-  <a class="badge badge-light" href="/ja/tags/atcoder/">AtCoder</a>
-  
-  <a class="badge badge-light" href="">競技プログラミング</a>
-  
-  <a class="badge badge-light" href="">競プロ</a>
-  
-</div>
-
-
-
-<div class="share-box" aria-hidden="true">
-  <ul class="share">
-    
       
+      はじめに 再帰関数に対する「なんとなくわかる」を「書ける」にまで持っていきたいので，学び直し． @drken さんの「再帰関数を学ぶと，どんな世界が広がるか
       
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://twitter.com/intent/tweet?url=/ja/post/partial-sums/&amp;text=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c" target="_blank" rel="noopener" class="share-btn-twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.facebook.com/sharer.php?u=/ja/post/partial-sums/&amp;t=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c" target="_blank" rel="noopener" class="share-btn-facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="mailto:?subject=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c&amp;body=/ja/post/partial-sums/" target="_blank" rel="noopener" class="share-btn-email">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/partial-sums/&amp;title=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c" target="_blank" rel="noopener" class="share-btn-linkedin">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://web.whatsapp.com/send?text=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c%20/ja/post/partial-sums/" target="_blank" rel="noopener" class="share-btn-whatsapp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </li>
-    
-      
-      
-      
-        
-      
-      
-      
-      <li>
-        <a href="https://service.weibo.com/share/share.php?url=/ja/post/partial-sums/&amp;title=%e9%83%a8%e5%88%86%e5%92%8c%e5%95%8f%e9%a1%8c" target="_blank" rel="noopener" class="share-btn-weibo">
-          <i class="fab fa-weibo"></i>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-  
-  
-    
-  
-  
-  <div class="media author-card content-widget-hr">
-    
-      
-      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
-    
-
-    <div class="media-body">
-      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
-      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
-      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
-      <ul class="network-icon" aria-hidden="true">
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/ja/#contact" >
-        <i class="fas fa-envelope"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
-        <i class="fab fa-twitter"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-      
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
-        <i class="fab fa-amazon"></i>
-      </a>
-    </li>
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    <li>
-      <a href="/ja/files/cv-ja.pdf" >
-        <i class="ai ai-cv"></i>
-      </a>
-    </li>
-  
-</ul>
-
     </div>
   </div>
-
-
-
-
-<section id="comments">
-  
-    <script src="https://utteranc.es/client.js"
-        repo="zakimal/zakimal.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-  
-</section>
-
-
-
-
-
-
-  
-  
-  <div class="article-widget content-widget-hr">
-    <h3>関連項目</h3>
-    <ul>
-      
-      <li><a href="/ja/post/check-all-cases/">全探索</a></li>
-      
-      <li><a href="/ja/post/stack-and-queue/">スタックとキュー</a></li>
-      
-      <li><a href="/ja/post/recursion/">「再帰」についての学び直し</a></li>
-      
-      <li><a href="/ja/post/graph-traversal/">グラフ探索</a></li>
-      
-      <li><a href="/ja/post/binary-search/">二分探索</a></li>
-      
-    </ul>
-  </div>
   
 
+  
 
-
-  </div>
-</article>
+</div>
 
       
 
