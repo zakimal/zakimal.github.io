@@ -5,12 +5,54 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 01:07:49 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 01:55:13 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Waven Lined List</title>
+      <link>/ja/post/waven-lined-list/</link>
+      <pubDate>Fri, 19 Mar 2021 01:55:13 +0900</pubDate>
+      <guid>/ja/post/waven-lined-list/</guid>
+      <description>&lt;h2 id=&#34;連結リストを織り込みたい&#34;&gt;連結リストを織り込みたい&lt;/h2&gt;
+&lt;p&gt;長さが偶数の連結リストを真ん中で切断して織り込みたい．&lt;/p&gt;
+&lt;p&gt;要するにこれを&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;11&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;12&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;13&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;14&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;15&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;21&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;22&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;23&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;24&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;25&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;こうしたい&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;10&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;20&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;11&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;21&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;12&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;22&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;13&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;23&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;14&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;24&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;15&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;25&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;テク二人走らせる&#34;&gt;テク：二人走らせる&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;二倍の速さで走るポインタを用意すれば真ん中で切ることができる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LinkedListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, data, next_node):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_node
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;waven&lt;/span&gt;(head):
+    faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+    faster&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; slower &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        next_faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        next_slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; next_slower &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_faster
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_faster
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_slower
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; head
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;waven linked list って英語は間違っていそう．&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Zero Matrix</title>
