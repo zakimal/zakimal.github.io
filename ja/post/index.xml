@@ -5,12 +5,51 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 00:13:34 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 01:07:49 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Zero Matrix</title>
+      <link>/ja/post/zero-matrix/</link>
+      <pubDate>Fri, 19 Mar 2021 01:07:49 +0900</pubDate>
+      <guid>/ja/post/zero-matrix/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;二次元配列&lt;code&gt;X&lt;/code&gt;が与えられる．ここで&lt;code&gt;X[i][j] == 0&lt;/code&gt;ならば&lt;code&gt;i&lt;/code&gt;行目全体と&lt;code&gt;j&lt;/code&gt;列目全体を&lt;code&gt;0&lt;/code&gt;にしたい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;何も考えずに左上から右下に向かって走査しながら&lt;code&gt;0&lt;/code&gt;を見つけ次第その行と列を&lt;code&gt;0&lt;/code&gt;にするってやっていくと，行列全体が&lt;code&gt;0&lt;/code&gt;になってかなしい気持ちになる．&lt;/p&gt;
+&lt;h2 id=&#34;落ち着いて真面目にやる&#34;&gt;落ち着いて真面目にやる&lt;/h2&gt;
+&lt;p&gt;走査と&lt;code&gt;0&lt;/code&gt;埋めを別個にやれば全部&lt;code&gt;0&lt;/code&gt;にはならない．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;set_zeros&lt;/span&gt;(table):
+    ROW &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table)
+    COL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+    row_with_zero &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [False &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW)]
+    col_with_zero &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [False &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL)]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; table[r][c] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                row_with_zero[r] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+                col_with_zero[c] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; row_with_zero[r]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL):
+                table[r][c] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; col_with_zero[c]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW):
+                table[r][c] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; table
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>2次元配列を回転したい</title>
