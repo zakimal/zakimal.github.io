@@ -5,12 +5,66 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2020</copyright><lastBuildDate>Thu, 17 Dec 2020 17:56:26 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 00:13:34 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>2次元配列を回転したい</title>
+      <link>/ja/post/rotate-2d-array/</link>
+      <pubDate>Fri, 19 Mar 2021 00:13:34 +0900</pubDate>
+      <guid>/ja/post/rotate-2d-array/</guid>
+      <description>&lt;h2 id=&#34;二次元配列を回転したい&#34;&gt;二次元配列を回転したい&lt;/h2&gt;
+&lt;p&gt;頭が混乱してしまうのでまとめる．&lt;/p&gt;
+&lt;h2 id=&#34;反時計回りに-90-度回転&#34;&gt;反時計回りに 90 度回転&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;回転後の行列を左上から右下へ埋めていくイメージ&lt;/li&gt;
+&lt;li&gt;つまり回転前の行列の右上から左下へ拾っていく&lt;/li&gt;
+&lt;li&gt;僕の頭的には，回転後の行列の座標の軌跡を正として回転前の位置を参照する方が書きやすいみたい．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate_counterclockwise&lt;/span&gt;(table):
+    ROW &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]) &lt;span style=&#34;color:#75715e&#34;&gt;# 回転後の行数は回転前の列数&lt;/span&gt;
+    COL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table)    &lt;span style=&#34;color:#75715e&#34;&gt;# 回転後の列数は回転前の行数&lt;/span&gt;
+
+    rotated &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW)]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL):
+            rotated[r][c] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; table[c][ROW &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rotated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;時計回りに-90-度回転&#34;&gt;時計回りに 90 度回転&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;回転後の行列を左上から右下へ埋めていくイメージ&lt;/li&gt;
+&lt;li&gt;つまり回転前の行列の左下から右上へ拾っていく&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate_clockwise&lt;/span&gt;(table):
+    ROW &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]) &lt;span style=&#34;color:#75715e&#34;&gt;# 回転後の行数は回転前の列数&lt;/span&gt;
+    COL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(table)    &lt;span style=&#34;color:#75715e&#34;&gt;# 回転後の列数は回転前の行数&lt;/span&gt;
+
+    rotated &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW)]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(ROW):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(COL):
+            rotated[r][c] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; table[COL &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][r]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rotated
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;かっこいい書き方&#34;&gt;かっこいい書き方&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;zip&lt;/code&gt;を使うと左 90 度回転はかっこよくかける&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zip&lt;/code&gt;で回転後の行列を行ごとに下から集めたものが取れるので，最後にそれを逆順にする&lt;/li&gt;
+&lt;li&gt;ref: &lt;a href=&#34;https://stackoverflow.com/questions/8421337/rotating-a-two-dimensional-array-in-python&#34;&gt;https://stackoverflow.com/questions/8421337/rotating-a-two-dimensional-array-in-python&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate_counterclockwise&lt;/span&gt;(table):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [list(row) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;table)][::&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;豆知識：左 90 度回転 x 3 == 右 90 度回転&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Puzzle: 100 Lockers</title>
