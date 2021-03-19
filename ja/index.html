@@ -120,7 +120,7 @@
   <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-03-19T01:55:13&#43;09:00">
+    <meta property="og:updated_time" content="2021-03-19T18:38:59&#43;09:00">
   
 
   
@@ -775,12 +775,12 @@
   
 
   <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/waven-lined-list/">Waven Lined List</a>
+    <a href="/ja/post/find-loop-in-linked-list/">Find Loop in Linked List</a>
   </h3>
 
   
   <div class="article-style">
-    <p>連結リストを織り込みたい 長さが偶数の連結リストを真ん中で切断して織り込みたい． 要するにこれを [10] -&gt; [11] -&gt; [12] -&gt; [13] -&gt; [14] -&gt; [15] -&gt; [20] -&gt; [21] -&gt; [22] -&gt; [23] -&gt; [24] -&gt; [25] こ</p>
+    <p>問題 片連結リストが与えられたとき，そのリストがループしているか判定し，しているならどこでループしているのかを求めろ． 答え 2 つのポインタ！ def check_loop(head):</p>
   </div>
   
 
@@ -850,12 +850,12 @@
   
 
   <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/zero-matrix/">Zero Matrix</a>
+    <a href="/ja/post/find-intersection-of-two-linked-lists/">Find Intersection of Two Linked Lists</a>
   </h3>
 
   
   <div class="article-style">
-    <p>問題 二次元配列Xが与えられる．ここでX[i][j] == 0ならばi行目全体とj列目全体を0にしたい． 1 2 3 1 2 0 4 5 0 -&gt; 0 0 0 7 8 9 7 8 0 何も考</p>
+    <p>問題 2 つの片連結リストの頭を与えられる．この 2 つのリストがどこかで交わっているか，交わっているなら交わっているノードのデータを取れ． 解答 交わ</p>
   </div>
   
 
@@ -925,12 +925,12 @@
   
 
   <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/rotate-2d-array/">2次元配列を回転したい</a>
+    <a href="/ja/post/check-if-a-linked-list-is-palindrome/">Check if a Linked List Is Palindrome</a>
   </h3>
 
   
   <div class="article-style">
-    <p>二次元配列を回転したい 頭が混乱してしまうのでまとめる． 反時計回りに 90 度回転 回転後の行列を左上から右下へ埋めていくイメージ つまり回転前の行列の</p>
+    <p>問題 片連結リストが与えられたとき，そのリストが頭から読んでもお尻から読んでも同じかを判定する 答え 逆転させたリストを作って各要素を確認 def reverse_linked_list(head): # base</p>
   </div>
   
 
@@ -971,7 +971,7 @@
     
       
     
-    Thu, Dec 17, 2020
+    Fri, Mar 19, 2021
   </span>
   
 
@@ -1000,12 +1000,12 @@
   
 
   <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/puzzle-100-lockers/">Puzzle: 100 Lockers</a>
+    <a href="/ja/post/sum-up-two-lists/">Sum Up Two Lists</a>
   </h3>
 
   
   <div class="article-style">
-    <p>100 lockers ref: http://mathforum.org/library/drmath/view/56747.html ある駅に 100 個のロッカーが設置された．各ロッカーには番号が$1$，$2$，$3$&hellip;，$99$，$100$と振られており，</p>
+    <p>問題 2 つのリストを要素ごとに足し上げて 1 つのリストにする 要するにこういうこと． (0) (1) (1) + + + [7] -&gt; [1] -&gt; [6] + + + [5] -&gt; [9] -&gt; [2] | | | v v v [2] -&gt; [1] -&gt; [9] (0)</p>
   </div>
   
 
@@ -1046,7 +1046,7 @@
     
       
     
-    Thu, Dec 17, 2020
+    Fri, Mar 19, 2021
   </span>
   
 
@@ -1075,12 +1075,12 @@
   
 
   <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/puzzle-ants-on-a-polygon/">Puzzle: Ants on a Polygon</a>
+    <a href="/ja/post/kth-to-last-in-linked-list/">Kth to Last in Linked List</a>
   </h3>
 
   
   <div class="article-style">
-    <p>Ants on a Polygon ref: https://www.geeksforgeeks.org/puzzle-21-3-ants-and-triangle/ $n$角形の拡張点に 🐜 がいる．私の掛け声で 🐜 は一斉にどちらかの辺を選んで歩き出す．🐜 が辺上で衝突する確率を求めよ． $n$匹の 🐜 が</p>
+    <p>問題 片連結リストの，後ろからk番目の要素を見つける． class LinkedListNode: def __init__(self, data, next_node): self.data = data self.next_node = next_node 答え 片連結リストの長さLが与えられるなら，前からL-k番目を取れ</p>
   </div>
   
 

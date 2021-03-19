@@ -5,12 +5,306 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 01:55:13 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 19 Mar 2021 18:38:59 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Find Loop in Linked List</title>
+      <link>/ja/post/find-loop-in-linked-list/</link>
+      <pubDate>Fri, 19 Mar 2021 18:38:59 +0900</pubDate>
+      <guid>/ja/post/find-loop-in-linked-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;片連結リストが与えられたとき，そのリストがループしているか判定し，しているならどこでループしているのかを求めろ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;2 つのポインタ！&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check_loop&lt;/span&gt;(head):
+    faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; slower:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# there is a loop!&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (False, None)
+
+    slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; slower &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; faster:
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (True, slower)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Find Intersection of Two Linked Lists</title>
+      <link>/ja/post/find-intersection-of-two-linked-lists/</link>
+      <pubDate>Fri, 19 Mar 2021 18:17:26 +0900</pubDate>
+      <guid>/ja/post/find-intersection-of-two-linked-lists/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;2 つの片連結リストの頭を与えられる．この 2 つのリストがどこかで交わっているか，交わっているなら交わっているノードのデータを取れ．&lt;/p&gt;
+&lt;h2 id=&#34;解答&#34;&gt;解答&lt;/h2&gt;
+&lt;p&gt;交わっているか否かは両方のリストのお尻が同じノードなのかで判定できる．&lt;/p&gt;
+&lt;p&gt;どこで交わっているのかは，2 つのリストの長さの差がわかれば簡単にわかる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check_intersection&lt;/span&gt;(ll0, ll1):
+    ll0_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll0
+    ll0_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    ll1_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll1
+    ll1_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ll0_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        ll0_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll0_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        ll0_len &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ll1_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        ll1_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll1_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        ll1_len &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0_tail &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; ll1_tail:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (False, None)
+
+    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(ll0_len &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ll1_len)
+    longer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+    shorter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0_len &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; ll1_len:
+        longer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll1
+        shorter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll0
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        longer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll0
+        shorter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll1
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(diff):
+        longer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; longer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; longer &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; shorter:
+        longer &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; longer&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        shorter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; shorter&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (True, longer)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Check if a Linked List Is Palindrome</title>
+      <link>/ja/post/check-if-a-linked-list-is-palindrome/</link>
+      <pubDate>Fri, 19 Mar 2021 17:33:51 +0900</pubDate>
+      <guid>/ja/post/check-if-a-linked-list-is-palindrome/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;片連結リストが与えられたとき，そのリストが頭から読んでもお尻から読んでも同じかを判定する&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;逆転させたリストを作って各要素を確認&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reverse_linked_list&lt;/span&gt;(head):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; LinkedListNode(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data, None)
+
+    reversed_head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reverse_linked_list(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node)
+    reversed_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed_head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        reversed_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+    reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; LinkedListNode(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data, None)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; reversed_head
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check_palindrome&lt;/span&gt;(head):
+    reversed_head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reverse_linked_list(head)
+    pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    pointer1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed_head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; pointer1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pointer0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; pointer1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pointer0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        pointer1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pointer1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;別解2-つポインタ--stack&#34;&gt;別解：2 つポインタ + stack&lt;/h2&gt;
+&lt;p&gt;2 つのポインタを使えば真ん中らへんが取れる．前半要素の逆順で後半要素が出てくれば Palindrome なのでそれを確認する．入れた順番の逆順で取り出せるデータ構造は&lt;code&gt;stack&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check_palindrome&lt;/span&gt;(head):
+    faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+
+    stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data)
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#75715e&#34;&gt;# skip middle node&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; data &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sum Up Two Lists</title>
+      <link>/ja/post/sum-up-two-lists/</link>
+      <pubDate>Fri, 19 Mar 2021 16:19:13 +0900</pubDate>
+      <guid>/ja/post/sum-up-two-lists/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;2 つのリストを要素ごとに足し上げて 1 つのリストにする&lt;/p&gt;
+&lt;p&gt;要するにこういうこと．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+ +      +      +
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ +      +      +
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;9&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ |      |      |
+ v      v      v
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;9&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+ +      +      +      +
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ +      +      +      |
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;9&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;     |
+ |      |      |      |
+ v      v      v      v
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;筆算みたい．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;「繰り上がりと要素を 2 つ足す」を再帰的に繰り返す．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LinkedListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, data, next_node):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_node
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sum_up_two_linked_lists&lt;/span&gt;(ll0, ll1, carry):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; ll1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; carry &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; None
+
+    data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; carry
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        data &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; ll0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        data &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; ll1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data
+
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; LinkedListNode(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, None)
+    result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; ll1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        next_ll0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+        next_ll1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            next_ll0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ll1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            next_ll1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ll1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        carry &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+        result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum_up_two_linked_list(next_ll0, next_ll1, carry)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;類題&#34;&gt;類題&lt;/h2&gt;
+&lt;p&gt;数字が逆向きについていると&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+ +      +      +      +
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ |      +      +      |
+ |     &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;9&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+ |      |      |      |
+ v      v      v      v
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;類題答え&#34;&gt;類題答え&lt;/h2&gt;
+&lt;p&gt;大変そうなので片連結リストを逆転させて元の問題に帰着させる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# reverseしたリストのheadを返す&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reverse_linked_list&lt;/span&gt;(head):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; LinkedListNode(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data, None)
+
+    reversed_head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reverse_linked_list(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node)
+    reversed_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed_head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        reversed_tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+    reversed_tail&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; LinkedListNode(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data, None)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; reversed_head
+
+reverse_linked_list(
+    sum_up_two_linked_lists(
+        reverse_linked_list(ll0),
+        reverse_linked_list(ll1),
+        &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+    )
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kth to Last in Linked List</title>
+      <link>/ja/post/kth-to-last-in-linked-list/</link>
+      <pubDate>Fri, 19 Mar 2021 15:27:36 +0900</pubDate>
+      <guid>/ja/post/kth-to-last-in-linked-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;片連結リストの，後ろから&lt;code&gt;k&lt;/code&gt;番目の要素を見つける．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LinkedListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, data, next_node):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_node
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;片連結リストの長さ&lt;code&gt;L&lt;/code&gt;が与えられるなら，前から&lt;code&gt;L-k&lt;/code&gt;番目を取ればいい．&lt;/p&gt;
+&lt;p&gt;片連結リストの長さが与えられないときはチョット工夫する．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;再帰で書く&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find_kth_to_last&lt;/span&gt;(node, k):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; find_kth_to_last(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node, k) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; k:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}th to last: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(idx, node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data))
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; idx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;ポインタ 2 つ用意する．ポインタ同士が&lt;code&gt;k&lt;/code&gt;離れているようにしておくことで時間計算量$O(n)$，空間計算量$O(1)$で済む．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find_kth_to_last&lt;/span&gt;(head, k):
+    pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    pointer1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(k):
+        pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pointer0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        pointer0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pointer0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        pointer1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pointer1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}th to last: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(k, pointer1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Remove Dups From Unsorted Linked List</title>
+      <link>/ja/post/remove-dups-from-unsorted-linked-list/</link>
+      <pubDate>Fri, 19 Mar 2021 12:47:55 +0900</pubDate>
+      <guid>/ja/post/remove-dups-from-unsorted-linked-list/</guid>
+      <description>&lt;p&gt;一つずつ舐めながら，重複しているならポインタの付替えをする&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LinkedListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, data, next_node):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next_node
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;remove_dups_from_linked_list&lt;/span&gt;(head):
+    table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+    prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+    curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; curr &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; table:
+            table&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;data)
+            prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+        curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next_node
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Waven Lined List</title>
