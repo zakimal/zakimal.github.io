@@ -5,12 +5,100 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 20 Mar 2021 16:53:54 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 20 Mar 2021 22:27:07 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Dijkstra Algorithm</title>
+      <link>/ja/post/dijkstra-algorithm/</link>
+      <pubDate>Sat, 20 Mar 2021 22:27:07 +0900</pubDate>
+      <guid>/ja/post/dijkstra-algorithm/</guid>
+      <description>&lt;h2 id=&#34;何も見ないで-dijkstra-法を書けるようになりたい&#34;&gt;何も見ないで Dijkstra 法を書けるようになりたい&lt;/h2&gt;
+&lt;p&gt;何も見ないで Dijkstra 法を書けるようになりたい，ので，練習する．
+といってもただただ暗記するのは応用が効かないので，DFS・BFS と比較して覚えることにする．&lt;/p&gt;
+&lt;h2 id=&#34;グラフ上の探索の一般形&#34;&gt;グラフ上の探索の一般形&lt;/h2&gt;
+&lt;p&gt;「発見したけどまだ未訪問」の頂点リストから次に訪問する頂点の選び方の違いによって性格が変わる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;traversal&lt;/span&gt;(graph, start, select_func):
+    has_visited &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+    suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list()
+
+    has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(start)
+    suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(start)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(suspended) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; select_func(suspended) &lt;span style=&#34;color:#75715e&#34;&gt;# ここで探索の性格が決まる&lt;/span&gt;
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(u)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; graph[u]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_visited:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(v)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;select_func&lt;/code&gt;で&lt;code&gt;suspended&lt;/code&gt;を stack みたいに扱うと DFS．
+&lt;code&gt;select_func&lt;/code&gt;で&lt;code&gt;suspended&lt;/code&gt;を queue みたいに扱うと BFS．&lt;/p&gt;
+&lt;h2 id=&#34;suspendedを優先度付きキューとして扱えば-dijkstra-法&#34;&gt;&lt;code&gt;suspended&lt;/code&gt;を優先度付きキューとして扱えば Dijkstra 法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; heapq from heappush, heappop
+
+INF &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dijkstra&lt;/span&gt;(graph, start):
+    has_visited &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+    suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list()
+    dist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [INF &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+
+    has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(start)
+    suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, start))
+    dist[start] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(suspended) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        d, u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heappop(suspended) &lt;span style=&#34;color:#75715e&#34;&gt;# suspendedを優先度付きキューとして扱う&lt;/span&gt;
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(u)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (v, cost) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; graph[u]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_visited &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; dist[u] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; cost &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; dist[v]:
+                dist[v] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dist[u] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; cost
+                heappush(suspended, (dist[v], v))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ついでに-prim-法&#34;&gt;ついでに Prim 法&lt;/h2&gt;
+&lt;p&gt;最小全域木を計算するアルゴリズム．頂点一つからなる木から始めて，木に含まれていない頂点と木に含まれる頂点を結ぶ辺のうち，重さの最小のものを採用し木に含まれる頂点を増やす，ということを繰り返す．Dijkstra 法に雰囲気似ている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; heapq &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; heapify, heappush, heappop
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;prim&lt;/span&gt;(graph):
+    has_used &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+    has_used&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+
+    suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [(cost, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, v) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; v, cost &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; graph[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]]
+    heapify(suspended)
+
+    mst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    mst_weight &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(suspended) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        cost, u, v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heappop(suspended)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_used &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_used:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+
+        has_used&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(u)
+        has_used&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(v)
+        mst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((u, v))
+        mst_weight &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; cost
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w, cost &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; graph[u]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_used:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            heappush(suspended, (cost, u, w))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w, cost &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; graph[v]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_used:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            heappush(suspended, (cost, v, w))
+        suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(set(suspended))
+        heaepify(suspended)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mst, mst_weight
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Binary Search Tree</title>
