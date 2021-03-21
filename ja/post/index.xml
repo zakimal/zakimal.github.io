@@ -5,12 +5,159 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 20 Mar 2021 22:27:07 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 21 Mar 2021 17:14:21 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Closest Pair From Sorted List</title>
+      <link>/ja/post/closest-pair-from-sorted-list/</link>
+      <pubDate>Sun, 21 Mar 2021 17:14:21 +0900</pubDate>
+      <guid>/ja/post/closest-pair-from-sorted-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;昇順にソートされた配列&lt;code&gt;lst&lt;/code&gt;と値&lt;code&gt;x&lt;/code&gt;が与えられたとき，和が&lt;code&gt;x&lt;/code&gt;に最も近くなる 2 要素のペアを&lt;code&gt;lst&lt;/code&gt;から求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;原理的には$O(n^2)$で解けるが，&lt;code&gt;lst&lt;/code&gt;が昇順にソートされていることをうまく使えば$O(n)$で解ける．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$O(n^2)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst, x):
+    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(lst), &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; (lst[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[j])) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; diff:
+                diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; (lst[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[j]))
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (lst[i], lst[j])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;$O(n)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst, x):
+    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; high:
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[low] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[high]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; s) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; diff:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (lst[low], lst[high])
+            diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; s)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; x:
+            low &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            high &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sort Algorithms</title>
+      <link>/ja/post/sort-algorithms/</link>
+      <pubDate>Sun, 21 Mar 2021 13:26:13 +0900</pubDate>
+      <guid>/ja/post/sort-algorithms/</guid>
+      <description>&lt;p&gt;基本的なソートアルゴリズムを復習&lt;/p&gt;
+&lt;h2 id=&#34;bubble-sort&#34;&gt;Bubble Sort&lt;/h2&gt;
+&lt;p&gt;隣り合う要素同士の比較を繰り返すことで，最大要素を順次確定させていく．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bubble_sort&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, idx, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[j]:
+                lst[j], lst[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], lst[j]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;insertion-sort&#34;&gt;Insertion Sort&lt;/h2&gt;
+&lt;p&gt;トランプゲームで手札をソートするときをイメージする．左のカードから，そのカードが挿入されるべき位置を探し出してそこに挿れる．カードを移動しながら挿入位置を探す．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;insertion_sort&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(lst), &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        key &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[i]
+        j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[j]:
+            lst[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[j]
+            j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        lst[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; key
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;merge-sort&#34;&gt;Merge Sort&lt;/h2&gt;
+&lt;p&gt;分割統治法．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merge_sort&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; _merge_sort(lst, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_merge_sort&lt;/span&gt;(lst, left, right):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; right:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [lst[left]]
+
+    middle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    lhs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; _merge_sort(lst, left, middle)
+    rhs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; _merge_sort(lst, middle&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, right)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; __merge(lhs, rhs)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__merge&lt;/span&gt;(a, b):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(a) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(b):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b[j]:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(a[i])
+            i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(b[j])
+            j &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(a):
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; a[i:]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; b[j:]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;heap-sort&#34;&gt;Heap Sort&lt;/h2&gt;
+&lt;p&gt;ヒープを使って最大値を調べ続けることでソートする．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;heap_sort&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        _heapify(lst, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, i)
+        lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], lst[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[i], lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_heapify&lt;/span&gt;(lst, left, right):
+    parent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; parent &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        left_child &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; parent &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        right_child &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; parent &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; left_child: &lt;span style=&#34;color:#75715e&#34;&gt;# no child&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right_child: &lt;span style=&#34;color:#75715e&#34;&gt;# only left child&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[parent] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[left_child]:
+                lst[parent], lst[left_child] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[left_child], lst[parent]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# both child&lt;/span&gt;
+            largest &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right_child &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[left_child] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[right_child] &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; left_child
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[parent] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[largest]:
+                lst[parent], lst[largest], lst[largest], lst[parent]
+        parent &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;quick-sort&#34;&gt;Quick Sort&lt;/h2&gt;
+&lt;p&gt;分割統治法．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;quick_sort&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; []
+    pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# better strategy exists&lt;/span&gt;
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [] &lt;span style=&#34;color:#75715e&#34;&gt;# less than pivot&lt;/span&gt;
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [] &lt;span style=&#34;color:#75715e&#34;&gt;# more than pivot&lt;/span&gt;
+    counter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# number of elements that equal to pivot&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; pivot:
+            left&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(ele)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; pivot:
+            counter &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# pivot &amp;lt; ele&lt;/span&gt;
+            right&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(ele)
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quick_sort(left)
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; quick_sort(right)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [pivot] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; counter &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Dijkstra Algorithm</title>
