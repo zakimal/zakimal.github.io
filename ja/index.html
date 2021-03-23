@@ -120,7 +120,7 @@
   <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-03-21T17:14:21&#43;09:00">
+    <meta property="og:updated_time" content="2021-03-21T20:24:20&#43;09:00">
   
 
   
@@ -708,12 +708,87 @@
 <div class="row">
   <div class="col-12 col-lg-4 section-heading">
     <h1>最近の投稿</h1>
-    <p>研究の話・技術の話から<!-- raw HTML omitted -->好きなもの・好きなことの話まで<!-- raw HTML omitted -->ざっくばらんにお届けします！</p>
+    <p>研究の話・技術の話から<br>好きなもの・好きなことの話まで<br>ざっくばらんにお届けします！</p>
   </div>
   <div class="col-12 col-lg-8">
 
     
 
+    
+      
+        
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="card-simple">
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Sun, Mar 21, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+  
+  
+  
+
+  <h3 class="article-title mb-1 mt-3">
+    <a href="/ja/post/minimum-depth-of-binary-tree/">Minimum Depth of Binary Tree</a>
+  </h3>
+
+  
+  <div class="article-style">
+    <p>問題 二分木が与えられたとき，最小の深さを求めよ． 答え class BinaryTreeNode: def __init__(self, key): self.key = key self.right = None self.left = None def minimum_depth(root): # base case if root is None: return 0 if root.left is not None and root.right is not None: return min(minimum_depth(root.left), minimum_depth(root.right)) + 1 elif root.left is None</p>
+  </div>
+  
+
+  
+
+</div>
+
+      
     
       
         
@@ -1006,81 +1081,6 @@
   
   <div class="article-style">
     <p>二分探索木 二分木の中でも，左の子供 &lt;= 自分 &lt; 右の子供となっているような木． 頂点の挿入順序によって出来上がる木は複数パターンある． 実装 class BinarySearchTreeNode: def __init__(self, key):</p>
-  </div>
-  
-
-  
-
-</div>
-
-      
-    
-      
-        
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sat, Mar 20, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/route-between-nodes/">Route Between Nodes</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 有向グラフと 2 頂点が与えられたとき，その 2 頂点間にパスがあるか判定せよ． 答え 探索するだけ N = int(input()) # number of nodes M = int(input()) # number of edges start = int(input()) goal = int(input()) G = [[] for</p>
   </div>
   
 

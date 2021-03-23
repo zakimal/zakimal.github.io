@@ -28,12 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="問題 二分木が与えられたとき，最小の深さを求めよ． 答え class BinaryTreeNode: def __init__(self, key): self.key = key self.right = None self.left = None def minimum_depth(root): # base case if root is None: return 0 if root.left is not None and root.right is not None: return min(minimum_depth(root.left), minimum_depth(root.right)) &#43; 1 elif root.left is None">
 
   
-  <link rel="alternate" hreflang="en" href="/en/post/">
-  
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/minimum-depth-of-binary-tree/">
 
   
 
@@ -93,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/ja/post/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/ja/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/">
+  <link rel="canonical" href="/ja/post/minimum-depth-of-binary-tree/">
 
   
   
@@ -115,18 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/">
-  <meta property="og:title" content="Posts | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/minimum-depth-of-binary-tree/">
+  <meta property="og:title" content="Minimum Depth of Binary Tree | zak">
+  <meta property="og:description" content="問題 二分木が与えられたとき，最小の深さを求めよ． 答え class BinaryTreeNode: def __init__(self, key): self.key = key self.right = None self.left = None def minimum_depth(root): # base case if root is None: return 0 if root.left is not None and root.right is not None: return min(minimum_depth(root.left), minimum_depth(root.right)) &#43; 1 elif root.left is None"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-03-21T20:24:20&#43;09:00">
+    
+      <meta property="article:published_time" content="2021-03-21T20:24:20&#43;09:00">
+    
+    <meta property="article:modified_time" content="2021-03-21T20:24:20&#43;09:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/minimum-depth-of-binary-tree/"
+  },
+  "headline": "Minimum Depth of Binary Tree",
+  
+  "datePublished": "2021-03-21T20:24:20+09:00",
+  "dateModified": "2021-03-21T20:24:20+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "問題 二分木が与えられたとき，最小の深さを求めよ． 答え class BinaryTreeNode: def __init__(self, key): self.key = key self.right = None self.left = None def minimum_depth(root): # base case if root is None: return 0 if root.left is not None and root.right is not None: return min(minimum_depth(root.left), minimum_depth(root.right)) + 1 elif root.left is None"
+}
+</script>
+
+  
 
   
 
@@ -134,10 +177,13 @@
   
 
 
+  
 
 
 
-  <title>Posts | zak</title>
+
+
+  <title>Minimum Depth of Binary Tree | zak</title>
 
 </head>
 
@@ -341,21 +387,6 @@
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i><span>日本語</span>
-          </a>
-          <ul class="dropdown-menu">
-            
-            <li class="dropdown-item my-0 py-0 mx-0 px-0">
-              <a href="/en/post/">
-                <span>English</span>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
-        
 
         
 
@@ -366,78 +397,33 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1>Minimum Depth of Binary Tree</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Posts</h1>
-
-  
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-
-  
-
-  
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/three-kinds-of-merge-on-github/" >GitHub上でのmerge</a>
-    </h3>
-
-    
-    <div class="article-style">
-      GitHub上で実行できる3種類のmergeについて「どのようなものなのか？」をまとめました．
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
 
 
 <div class="article-metadata">
@@ -451,707 +437,7 @@
     
       
     
-    Tue, Oct 29, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-    
-    <a href="/ja/post/three-kinds-of-merge-on-github/" >
-      <img src="/ja/post/three-kinds-of-merge-on-github/featured_hu6594aacf855bb6cb57b120517308e5de_423790_150x0_resize_q90_lanczos.jpeg" alt="">
-    </a>
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/what-is-activitypub/" >Federated Social WebとActivityPub</a>
-    </h3>
-
-    
-    <div class="article-style">
-      ActivityPubが目指すFederated Social Webについて考えてみました
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Oct 28, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    8 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-    
-    <a href="/ja/post/what-is-activitypub/" >
-      <img src="/ja/post/what-is-activitypub/featured_huaa27509e832ea007f61e918a49c4e7be_641758_150x0_resize_q90_lanczos.jpeg" alt="">
-    </a>
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/symmetric-key-encription-scheme/" >共通鍵暗号</a>
-    </h3>
-
-    
-    <div class="article-style">
-      暗号技術学習メモ #2
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Oct 28, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/basic-cryptographic-technologies/" >暗号の基礎技術</a>
-    </h3>
-
-    
-    <div class="article-style">
-      暗号技術学習メモ #1
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Oct 28, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    2 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/six-elements-of-infomation-security/" >情報セキュリティの構成要素</a>
-    </h3>
-
-    
-    <div class="article-style">
-      暗号技術学習メモ #0
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Oct 28, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    2 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/what-is-the-difference-between-library-and-framework/" >FramworkとLibraryの違い</a>
-    </h3>
-
-    
-    <div class="article-style">
-      ちゃんと説明できますか？
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Fri, Oct 25, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-    
-    <a href="/ja/post/what-is-the-difference-between-library-and-framework/" >
-      <img src="/ja/post/what-is-the-difference-between-library-and-framework/featured_hu4d8e6617fcc2787a93b94905ea9c008a_74760_150x0_resize_lanczos_2.png" alt="">
-    </a>
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/handle-commandline-args-with-flag-package/" >🚩flagパッケージでコマンドライン引数を扱う</a>
-    </h3>
-
-    
-    <div class="article-style">
-      flagパッケージでコマンドライン引数を賢く扱おう！
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Fri, Oct 25, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/about-this-site/" >HugoとGitHub Pagesでブログを作ってみた！</a>
-    </h3>
-
-    
-    <div class="article-style">
-      このブログの技術的なところをまとめてみました！まだ途中です 🙇
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Fri, Oct 25, 2019
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-    
-    <a href="/ja/post/about-this-site/" >
-      <img src="/ja/post/about-this-site/featured_huf72f5c2f7f3ad36232cff80ba5a6d048_110351_150x0_resize_lanczos_2.png" alt="">
-    </a>
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/first-post/" >🚀最初の投稿</a>
-    </h3>
-
-    
-    <div class="article-style">
-      ブログを始めてみたのでお知らせです．
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Fri, Oct 25, 2019
+    Sun, Mar 21, 2021
   </span>
   
 
@@ -1173,34 +459,314 @@
 
 </div>
 
-      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="問題">問題</h2>
+<p>二分木が与えられたとき，最小の深さを求めよ．</p>
+<h2 id="答え">答え</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryTreeNode</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, key):
+        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key
+        self<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> None
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minimum_depth</span>(root):
+    <span style="color:#75715e"># base case</span>
+    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">if</span> root<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> root<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        <span style="color:#66d9ef">return</span> min(minimum_depth(root<span style="color:#f92672">.</span>left),  minimum_depth(root<span style="color:#f92672">.</span>right)) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">elif</span> root<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> root<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        <span style="color:#66d9ef">return</span> minimum_depth(root<span style="color:#f92672">.</span>right) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">elif</span> root<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> root<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">return</span> minimum_depth(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>: <span style="color:#75715e"># root.left is None and root.right is  None</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</code></pre></div>
     </div>
 
     
 
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
 
-    
-  
 
-  
-<nav>
-  <ul class="pagination justify-content-center">
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
     
-    <li class="page-item"><a class="page-link" href="/ja/post/page/4/">&laquo;</a></li>
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/minimum-depth-of-binary-tree/&amp;text=Minimum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
     
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/minimum-depth-of-binary-tree/&amp;t=Minimum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Minimum%20Depth%20of%20Binary%20Tree&amp;body=/ja/post/minimum-depth-of-binary-tree/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/minimum-depth-of-binary-tree/&amp;title=Minimum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Minimum%20Depth%20of%20Binary%20Tree%20/ja/post/minimum-depth-of-binary-tree/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/minimum-depth-of-binary-tree/&amp;title=Minimum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
     
   </ul>
-</nav>
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hu9fb83b96c4efc1104933649bea6266e6_262665_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士1年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
 
       
 
