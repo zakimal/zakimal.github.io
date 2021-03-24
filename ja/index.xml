@@ -5,12 +5,50 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 22 Mar 2021 12:54:36 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 24 Mar 2021 21:20:40 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>All Subsets From a List in Two Ways</title>
+      <link>/ja/post/all-subsets-from-a-list-in-two-ways/</link>
+      <pubDate>Wed, 24 Mar 2021 21:20:40 +0900</pubDate>
+      <guid>/ja/post/all-subsets-from-a-list-in-two-ways/</guid>
+      <description>&lt;h2 id=&#34;配列の部分配列を全部求める&#34;&gt;配列の部分配列を全部求める&lt;/h2&gt;
+&lt;p&gt;要素数$n$の配列の部分配列を全部求めたい．部分配列の総数は$2^n$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1, 2, 3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+-&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt;1, 2, 3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1, 2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1, 3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2, 3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;[]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;再帰で求める&#34;&gt;再帰で求める&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;lst[i:]&lt;/code&gt;の部分配列のそれぞれに&lt;code&gt;lst[i]&lt;/code&gt;が入る・入らないの 2 択．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;subsets&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [[]]
+    x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; subsets(lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [[lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ele &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; x]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(subsets(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ビット全探索&#34;&gt;ビット全探索&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;000&lt;/code&gt;，&lt;code&gt;001&lt;/code&gt;，&lt;code&gt;010&lt;/code&gt;，&lt;code&gt;011&lt;/code&gt;，&lt;code&gt;100&lt;/code&gt;，&lt;code&gt;101&lt;/code&gt;，&lt;code&gt;110&lt;/code&gt;，&lt;code&gt;111&lt;/code&gt;でどの要素を部分配列に入れるか入れないかを決める．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;subsets&lt;/span&gt;(lst):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; len(lst)):
+        sub &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; j):
+                sub&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(lst[j])
+        ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sub)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(subsets(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Leetcode 60 Questions</title>
