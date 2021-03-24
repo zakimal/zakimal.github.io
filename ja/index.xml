@@ -5,12 +5,48 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 24 Mar 2021 21:20:40 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 24 Mar 2021 21:54:26 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Binary Representation of a Given Number</title>
+      <link>/ja/post/binary-representation-of-a-given-number/</link>
+      <pubDate>Wed, 24 Mar 2021 21:54:26 +0900</pubDate>
+      <guid>/ja/post/binary-representation-of-a-given-number/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;数字を 2 進数表示にしなさい．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;再帰で解く．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;num_to_bits&lt;/span&gt;(num):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; num:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; num_to_bits(num &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; str(num &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; str(num &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}:{}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(num, num_to_bits(num)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;繰り返しで解く．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;num_to_bits&lt;/span&gt;(num):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    bits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; num:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            bits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; bits
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            bits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; bits
+        num &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; bits
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}:{}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(num, num_to_bits(num)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>All Subsets From a List in Two Ways</title>

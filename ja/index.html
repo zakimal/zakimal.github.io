@@ -120,7 +120,7 @@
   <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-03-24T21:20:40&#43;09:00">
+    <meta property="og:updated_time" content="2021-03-24T21:54:26&#43;09:00">
   
 
   
@@ -775,6 +775,81 @@
   
 
   <h3 class="article-title mb-1 mt-3">
+    <a href="/ja/post/binary-representation-of-a-given-number/">Binary Representation of a Given Number</a>
+  </h3>
+
+  
+  <div class="article-style">
+    <p>問題 数字を 2 進数表示にしなさい． 答え 再帰で解く． def num_to_bits(num): if 1 &lt; num: return num_to_bits(num // 2) + str(num % 2) return str(num % 2) for num in range(10): print(&#34;{}:{}&#34;.format(num, num_to_bits(num))) 繰り返しで解く． def num_to_bits(num): if num == 0: return 0 bits = &#34;&#34; while num: if</p>
+  </div>
+  
+
+  
+
+</div>
+
+      
+    
+      
+        
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="card-simple">
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Wed, Mar 24, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+  
+  
+  
+
+  <h3 class="article-title mb-1 mt-3">
     <a href="/ja/post/all-subsets-from-a-list-in-two-ways/">All Subsets From a List in Two Ways</a>
   </h3>
 
@@ -1006,81 +1081,6 @@
   
   <div class="article-style">
     <p>問題 昇順にソートされた配列lstと値xが与えられたとき，和がxに最も近くなる 2 要素のペアをlstから求めよ． 答え 原理的には$O(n^2)$で</p>
-  </div>
-  
-
-  
-
-</div>
-
-      
-    
-      
-        
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sun, Mar 21, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/sort-algorithms/">Sort Algorithms</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>基本的なソートアルゴリズムを復習 Bubble Sort 隣り合う要素同士の比較を繰り返すことで，最大要素を順次確定させていく． def bubble_sort(lst): for idx in range(len(lst) - 1, 0, -1): for j in range(0, idx, 1): if</p>
   </div>
   
 
