@@ -5,12 +5,269 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 24 Mar 2021 21:54:26 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Thu, 25 Mar 2021 00:48:36 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Next Lexicographical Permutation</title>
+      <link>/ja/post/next-lexicographical-permutation/</link>
+      <pubDate>Thu, 25 Mar 2021 00:48:36 +0900</pubDate>
+      <guid>/ja/post/next-lexicographical-permutation/</guid>
+      <description>&lt;h2 id=&#34;辞書順で直後の順列を求めたい&#34;&gt;辞書順で直後の順列を求めたい&lt;/h2&gt;
+&lt;p&gt;長さ$n$の配列から$n$個の要素を取り出す順列を考える．ある並びを与えられたときに，順列を辞書順に並べたときの直後の並びを求めたい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 1, 2, 3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 1, 3, 2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 1, 2, 5, 3, 3, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 1, 3, 0, 2, 3, 5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;next_permutation&lt;/span&gt;(lst):
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; lst[i]:
+        i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reverse()
+    i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[i]
+    j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; pivot &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; lst[j]:
+        j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    lst[i], lst[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[j], lst[i]
+    lst[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed(lst[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ref: &lt;a href=&#34;https://www.nayuki.io/page/next-lexicographical-permutation-algorithm&#34;&gt;https://www.nayuki.io/page/next-lexicographical-permutation-algorithm&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Max Subarray Problem by Kadane Algorithm</title>
+      <link>/ja/post/max-subarray-problem-by-kadane-algorithm/</link>
+      <pubDate>Wed, 24 Mar 2021 23:19:25 +0900</pubDate>
+      <guid>/ja/post/max-subarray-problem-by-kadane-algorithm/</guid>
+      <description>&lt;h2 id=&#34;maximum-subarray-problem最大部分配列問題&#34;&gt;Maximum Subarray Problem：最大部分配列問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;arr&lt;/code&gt;を与えられる．&lt;code&gt;arr&lt;/code&gt;の連続する部分配列の和のうち最大となるものの値を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;解放&#34;&gt;解放&lt;/h2&gt;
+&lt;p&gt;いくつかやり方はある．&lt;/p&gt;
+&lt;h3 id=&#34;on3な力技&#34;&gt;$O(n^3)$な力技&lt;/h3&gt;
+&lt;p&gt;部分配列の候補となる添字の組み合わせ全部に対して，その部分配列の和を実際に計算して最大値を出す．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;# ans = 19&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# [2, 5] # index&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst):
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+    idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i, j):
+                s &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; lst[k]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ans &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; s:
+                idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (i, j)
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans, idx
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(solve(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on2な力技&#34;&gt;$O(n^2)$な力技&lt;/h3&gt;
+&lt;p&gt;累積和を計算しておけば&lt;code&gt;lst[i:j]&lt;/code&gt;の和を$O(1)$で計算できるので全体として$O(n^2)$にできる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;# ans = 19&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# [2, 5] # index&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst):
+    accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+        accum&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(accum[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; num)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(accum)
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+    idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accum[j] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; accum[i]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ans &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; s:
+                idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (i, j)
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans, idx
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(solve(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;onな賢いやり方&#34;&gt;$O(n)$な賢いやり方&lt;/h3&gt;
+&lt;p&gt;数列$a$の部分和を&lt;/p&gt;
+&lt;p&gt;$$
+sum(i, j) = a_i + a_{i+1} + &amp;hellip; + a_{j-1} + a_j
+$$&lt;/p&gt;
+&lt;p&gt;とする．ここで最後の要素が$a_j$であるような部分配列の和の最大値を$s_j$とすると，$s_j$は&lt;/p&gt;
+&lt;p&gt;$$
+s_j = max_{i &amp;lt; j} sum(i, j)
+$$&lt;/p&gt;
+&lt;p&gt;最終的に求めたい値は&lt;/p&gt;
+&lt;p&gt;$$
+max_{j} s_j
+$$&lt;/p&gt;
+&lt;p&gt;ここで，$s_{j+1}$は，&lt;/p&gt;
+&lt;p&gt;$$
+s_{j+1} = max(s_j + a_{j+1}, a_{j+1})
+$$&lt;/p&gt;
+&lt;p&gt;$a_{j+1}$と比べる理由は，「$a_{j+1}$のみからなる列」も「最後の要素が$a_{j+1}$で終わる部分列」であり，その要素の和は$a_{j+1}$だから．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;# ans = 19&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# [2, 5] # index&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 最後の要素がlst[i]であるような部分列の和の最大値&lt;/span&gt;
+    dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        dp&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(max(dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(dp)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(solve(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;dp[i+1]&lt;/code&gt;を求めるのに&lt;code&gt;dp[i]&lt;/code&gt;しか使わないので配列も使わない実装も可能．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;]
+&lt;span style=&#34;color:#75715e&#34;&gt;# ans = 19&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# [2, 5] # index&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 最後の要素がlst[i]であるような部分列の和の最大値&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, max(ans &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(solve(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Permutation and Combination in Python</title>
+      <link>/ja/post/permutation-combination-in-python/</link>
+      <pubDate>Wed, 24 Mar 2021 22:17:39 +0900</pubDate>
+      <guid>/ja/post/permutation-combination-in-python/</guid>
+      <description>&lt;h2 id=&#34;順列組み合わせを-python-で求めたい&#34;&gt;順列・組み合わせを Python で求めたい&lt;/h2&gt;
+&lt;p&gt;Python は偉いので，&lt;code&gt;itertools&lt;/code&gt;という便利ライブラリを使えばうんと効率の良い実装が得られる．今回は敢えて&lt;code&gt;itertools&lt;/code&gt;を使わずに書いてみる．要するに実装の練習．&lt;/p&gt;
+&lt;h2 id=&#34;取り出す要素数を固定にした順列組み合わせの実装を考える&#34;&gt;取り出す要素数を固定にした順列・組み合わせの実装を考える&lt;/h2&gt;
+&lt;p&gt;$n$個のものから$r$個取り出すことをいきなり考えると混乱するので，とりあえず$n$個のものから$3$個取り出すことを考える．&lt;/p&gt;
+&lt;h3 id=&#34;重複を許す順列&#34;&gt;重複を許す順列&lt;/h3&gt;
+&lt;p&gt;重複を許す順列は$r$回ネストした&lt;code&gt;for&lt;/code&gt;に等しい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;repeated_permutation&lt;/span&gt;(lst):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([lst[i], lst[j], lst[k]])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;順列&#34;&gt;順列&lt;/h3&gt;
+&lt;p&gt;一度取り出したものは次に取り出せない．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;permutation&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;exclude&lt;/span&gt;(lst, idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[:idx] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[idx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+                ex_i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; exclude(lst, i)
+                ex_ij &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; exclude(ex_i, j)
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([lst[i], ex_i[j], ex_ij[k]])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重複を許す組み合わせ&#34;&gt;重複を許す組み合わせ&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;000&lt;/code&gt; -&amp;gt; &lt;code&gt;001&lt;/code&gt; -&amp;gt; &lt;code&gt;002&lt;/code&gt; -&amp;gt; &lt;del&gt;&lt;code&gt;010&lt;/code&gt;&lt;/del&gt; -&amp;gt; &lt;code&gt;011&lt;/code&gt; -&amp;gt; &amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;repeated_combination&lt;/span&gt;(lst):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i, len(lst)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(j, len(lst)):
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([lst[i], lst[j], lst[k]])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;組み合わせ&#34;&gt;組み合わせ&lt;/h3&gt;
+&lt;p&gt;一度取り出したものは次に取り出せない．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;combination&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;exclude&lt;/span&gt;(lst, idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[:idx] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[idx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i, len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(j, len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+                ex_i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; exclude(lst, i)
+                ex_ij &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; exclude(ex_i, j)
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([lst[i], ex_i[j], ex_ij[k]])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;こうとも言える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;combination&lt;/span&gt;(lst):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(lst)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(lst)):
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([lst[i], lst[j], lst[k]])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;取り出す要素数をr個にした順列組み合わせの実装を考える&#34;&gt;取り出す要素数を$r$個にした順列・組み合わせの実装を考える&lt;/h2&gt;
+&lt;p&gt;$r$回のネストを再帰関数で書く．&lt;/p&gt;
+&lt;h3 id=&#34;重複を許す順列-1&#34;&gt;重複を許す順列&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;repeated_permutation&lt;/span&gt;(lst, r):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; []
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(lst, r, sofar):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+            _recurse(lst, r&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[i]])
+    _recurse(lst, r, [])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;順列-1&#34;&gt;順列&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;permutation&lt;/span&gt;(lst, r):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; []
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(lst, r, sofar):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+            _recurse(lst[i:] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:], r&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[i]])
+    _recurse(lst, r, [])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;重複を許す組み合わせ-1&#34;&gt;重複を許す組み合わせ&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;repeated_combination&lt;/span&gt;(lst, r):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; []
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(lst, r, sofar, start_idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(start_idx, len(lst)):
+            _recurse(lst, r&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[i]], i)
+    _recurse(lst, r, [], &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;組み合わせ-1&#34;&gt;組み合わせ&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;combination&lt;/span&gt;(lst, r):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(lst, r, sofar, start_idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(start_idx, len(lst)):
+            _recurse(lst[:i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:], r&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[i]], i)
+    _recurse(lst, r, [], &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;combination&lt;/span&gt;(lst, r):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(lst, r, sofar, start_idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(start_idx, len(lst)):
+            _recurse(lst, r&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[i]], i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    _recurse(lst, r, [], &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Binary Representation of a Given Number</title>
