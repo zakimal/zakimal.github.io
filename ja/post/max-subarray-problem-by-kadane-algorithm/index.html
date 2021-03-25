@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解放 いくつかや">
+  <meta name="description" content="Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解法 いくつかや">
 
   
   <link rel="alternate" hreflang="ja-JP" href="/ja/post/max-subarray-problem-by-kadane-algorithm/">
@@ -113,7 +113,7 @@
   <meta property="og:site_name" content="zak">
   <meta property="og:url" content="/ja/post/max-subarray-problem-by-kadane-algorithm/">
   <meta property="og:title" content="Max Subarray Problem by Kadane Algorithm | zak">
-  <meta property="og:description" content="Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解放 いくつかや"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:description" content="Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解法 いくつかや"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
     
@@ -165,7 +165,7 @@
       "url": "/img/zak.gif"
     }
   },
-  "description": "Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解放 いくつかや"
+  "description": "Maximum Subarray Problem：最大部分配列問題 整数配列arrを与えられる．arrの連続する部分配列の和のうち最大となるものの値を求めよ． 解法 いくつかや"
 }
 </script>
 
@@ -484,7 +484,7 @@
     <div class="article-style">
       <h2 id="maximum-subarray-problem最大部分配列問題">Maximum Subarray Problem：最大部分配列問題</h2>
 <p>整数配列<code>arr</code>を与えられる．<code>arr</code>の連続する部分配列の和のうち最大となるものの値を求めよ．</p>
-<h2 id="解放">解放</h2>
+<h2 id="解法">解法</h2>
 <p>いくつかやり方はある．</p>
 <h3 id="on3な力技">$O(n^3)$な力技</h3>
 <p>部分配列の候補となる添字の組み合わせ全部に対して，その部分配列の和を実際に計算して最大値を出す．</p>
@@ -564,7 +564,6 @@ $$</p>
 <span style="color:#75715e"># [2, 5] # index</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve</span>(lst):
-    <span style="color:#75715e"># dp[i]: 最後の要素がlst[i]であるような部分列の和の最大値</span>
     ans <span style="color:#f92672">=</span> lst[<span style="color:#ae81ff">0</span>]
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(lst)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
         ans <span style="color:#f92672">=</span> max(ans, max(ans <span style="color:#f92672">+</span> lst[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], lst[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]))

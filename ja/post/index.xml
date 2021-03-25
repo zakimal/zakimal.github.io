@@ -5,12 +5,122 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Thu, 25 Mar 2021 00:48:36 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Thu, 25 Mar 2021 13:58:26 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Longest Increasing Subarray</title>
+      <link>/ja/post/longest-increasing-subarray/</link>
+      <pubDate>Thu, 25 Mar 2021 13:58:26 +0900</pubDate>
+      <guid>/ja/post/longest-increasing-subarray/</guid>
+      <description>&lt;h2 id=&#34;longest-increasing-subarray最長増加部分列問題&#34;&gt;Longest Increasing Subarray：最長増加部分列問題&lt;/h2&gt;
+&lt;p&gt;長さ$N$の数列が与えられたとき，そのうちいくつかの項を順番を変えずに取り出して部分列を作る．これら部分列のうち，それが増加列であるようなものの中で，最大の長さを求めよ．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3, 5, 2, 6, 7, 1, 4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+-&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3, 5, 6, 7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 4&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;h3 id=&#34;o2n-times-nな力技&#34;&gt;$O(2^N \times N)$な力技&lt;/h3&gt;
+&lt;p&gt;考えられる部分列を全て列挙し，それぞれが増加列であるかを調べる．部分列の列挙に$O(2^N)$，ある部分列が増加列であるかを調べるのに$O(N)$かかる．&lt;/p&gt;
+&lt;p&gt;再帰で全探索．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
+    subs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rec&lt;/span&gt;(pos, sofar):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pos &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; len(lst):
+            subs&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        rec(pos &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar)
+        rec(pos &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [lst[pos]])
+    rec(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, [])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_increasing&lt;/span&gt;(lst):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; lst[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; sub &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; subs:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_increasing(sub):
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, len(sub))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ビット全探索．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_increasing&lt;/span&gt;(lst):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; lst[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; len(lst)):
+        sub &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; j):
+                sub&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(lst[j])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_increasing(sub):
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, len(sub))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on2で解く-dp&#34;&gt;$O(N^2)$で解く DP&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;を「&lt;code&gt;lst[i]&lt;/code&gt;が右端となるような増加部分列の最大の長さ」とすると，&lt;code&gt;dp[i+1]&lt;/code&gt;は「&lt;code&gt;j &amp;lt; i + 1&lt;/code&gt;かつ&lt;code&gt;lst[j] &amp;lt;= lst[i + 1]&lt;/code&gt;な&lt;code&gt;j&lt;/code&gt;についての&lt;code&gt;dp[j]&lt;/code&gt;の最大値 + 1」と更新できる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: lst[i]が右端となるような増加部分列の最大の長さ&lt;/span&gt;
+    dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst))]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; lst[i]:
+                dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dp[i], dp[j] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(dp)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on2で解く-dp-1&#34;&gt;$O(N^2)$で解く DP&lt;/h3&gt;
+&lt;p&gt;一つ前のと添字を逆転させる．つまり，&lt;code&gt;dp[i]&lt;/code&gt;を「長さ&lt;code&gt;i + 1&lt;/code&gt;の増加部分列のうちの最小の右端」とする．&lt;code&gt;dp[i+1]&lt;/code&gt;は&lt;code&gt;dp[i]&lt;/code&gt;より大きい最小の&lt;code&gt;lst&lt;/code&gt;要素．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 長さがi+1の増加部分列の最小の右端&lt;/span&gt;
+    INF &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;inf&amp;#39;&lt;/span&gt;)
+    dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [INF &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst))]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(dp)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; dp[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[i]:
+                dp[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(dp[j], lst[i])
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(dp)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; INF:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on-log-nで解く-dp&#34;&gt;$O(N \log N)$で解く DP&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;dp[j]&lt;/code&gt;ごとにそこに入れるべき&lt;code&gt;lst&lt;/code&gt;要素を決めるのでなくて，&lt;code&gt;lst&lt;/code&gt;要素ごとに&lt;code&gt;dp&lt;/code&gt;のどこに入れるべきなのかを二分探索で計算する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; bisect &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; bisect_left
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 長さがi+1の増加部分列の最小の右端&lt;/span&gt;
+    INF &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;inf&amp;#39;&lt;/span&gt;)
+    dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [INF &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst))]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)):
+        dp[bisect_left(dp, lst[i])] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[i]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; bisect_left(dp, INF)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Next Lexicographical Permutation</title>
@@ -47,7 +157,7 @@
       <guid>/ja/post/max-subarray-problem-by-kadane-algorithm/</guid>
       <description>&lt;h2 id=&#34;maximum-subarray-problem最大部分配列問題&#34;&gt;Maximum Subarray Problem：最大部分配列問題&lt;/h2&gt;
 &lt;p&gt;整数配列&lt;code&gt;arr&lt;/code&gt;を与えられる．&lt;code&gt;arr&lt;/code&gt;の連続する部分配列の和のうち最大となるものの値を求めよ．&lt;/p&gt;
-&lt;h2 id=&#34;解放&#34;&gt;解放&lt;/h2&gt;
+&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
 &lt;p&gt;いくつかやり方はある．&lt;/p&gt;
 &lt;h3 id=&#34;on3な力技&#34;&gt;$O(n^3)$な力技&lt;/h3&gt;
 &lt;p&gt;部分配列の候補となる添字の組み合わせ全部に対して，その部分配列の和を実際に計算して最大値を出す．&lt;/p&gt;
@@ -127,7 +237,6 @@ $$&lt;/p&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# [2, 5] # index&lt;/span&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solve&lt;/span&gt;(lst):
-    &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 最後の要素がlst[i]であるような部分列の和の最大値&lt;/span&gt;
     ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
         ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, max(ans &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], lst[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]))
