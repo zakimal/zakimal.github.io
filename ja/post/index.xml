@@ -1795,9 +1795,9 @@ $$&lt;/p&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; check(seq):
                 ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, len(seq))
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DP で解くと$O(n^2)$
-&lt;code&gt;dp[i]&lt;/code&gt;：&lt;code&gt;nums[i]&lt;/code&gt;で終わる最長部分増加列の長さ
-&lt;code&gt;dp[i]&lt;/code&gt;は&lt;code&gt;dp[0]&lt;/code&gt;，&lt;code&gt;dp[1]&lt;/code&gt;，&lt;code&gt;dp[2]&lt;/code&gt;，&amp;hellip;&lt;code&gt;dp[i-1]&lt;/code&gt;を使って計算できる．&lt;code&gt;dp[i]&lt;/code&gt;は「&lt;code&gt;nums[i]&lt;/code&gt;が&lt;code&gt;nums[j]&lt;/code&gt;以上であるような&lt;code&gt;j&lt;/code&gt;の中での最大の&lt;code&gt;dp[j]&lt;/code&gt;に 1 足したもの」&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DP で解くと$O(n^2)$&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;：&lt;code&gt;nums[i]&lt;/code&gt;で終わる最長部分増加列の長さ&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;は&lt;code&gt;dp[0]&lt;/code&gt;，&lt;code&gt;dp[1]&lt;/code&gt;，&lt;code&gt;dp[2]&lt;/code&gt;，&amp;hellip;&lt;code&gt;dp[i-1]&lt;/code&gt;を使って計算できる．&lt;code&gt;dp[i]&lt;/code&gt;は「&lt;code&gt;nums[i]&lt;/code&gt;が&lt;code&gt;nums[j]&lt;/code&gt;以上であるような&lt;code&gt;j&lt;/code&gt;の中での最大の&lt;code&gt;dp[j]&lt;/code&gt;に 1 足したもの」&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, i):
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i]:
         dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dp[i], dp[j] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
