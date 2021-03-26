@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/ja/post/convert-a-number-to-a-number/</loc>
+    <lastmod>2021-03-26T19:14:42+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/ja/post/</loc>
-    <lastmod>2021-03-26T00:41:37+09:00</lastmod>
+    <lastmod>2021-03-26T19:14:42+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,13 +23,8 @@
   </url>
   
   <url>
-    <loc>/ja/post/sub-of-subarray/</loc>
-    <lastmod>2021-03-26T00:41:37+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/ja/</loc>
-    <lastmod>2021-03-26T00:41:37+09:00</lastmod>
+    <lastmod>2021-03-26T19:14:42+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +35,16 @@
                 hreflang="ja"
                 href="/ja/"
                 />
+  </url>
+  
+  <url>
+    <loc>/ja/post/insert-a-number-in-a-number/</loc>
+    <lastmod>2021-03-26T19:06:11+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ja/post/sub-of-subarray/</loc>
+    <lastmod>2021-03-26T00:41:37+09:00</lastmod>
   </url>
   
   <url>
