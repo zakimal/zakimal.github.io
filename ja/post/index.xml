@@ -24,7 +24,7 @@
     smaller &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; b
     larger &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; a
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;helper&lt;/span&gt;(smaller, larger): &lt;span style=&#34;color:#75715e&#34;&gt;# sum up `larger` in `smaller` times&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; smallere &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# 0 x larger = 0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; smaller &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# 0 x larger = 0&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; smaller &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# 1 x larger = larger&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; larger
