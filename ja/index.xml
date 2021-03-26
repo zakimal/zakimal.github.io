@@ -5,12 +5,49 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 26 Mar 2021 22:10:18 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 26 Mar 2021 22:49:09 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Magic Index</title>
+      <link>/ja/post/magic-index/</link>
+      <pubDate>Fri, 26 Mar 2021 22:49:09 +0900</pubDate>
+      <guid>/ja/post/magic-index/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;すべての要素が互いに異なりかつ昇順に整列された配列$a$が与えられる．ここで&lt;/p&gt;
+&lt;p&gt;$$
+a_i = i
+$$&lt;/p&gt;
+&lt;p&gt;つまり，配列$a$の$i$番目の要素が$i$であるような$i$を magic index と呼ぶことにする．&lt;/p&gt;
+&lt;p&gt;配列が与えられたとき，magic index を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;すべての要素を一つずつ見ながら magic index であるかを確認することで求まる．$O(n)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_magic_index&lt;/span&gt;(lst):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(lst):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; idx:
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(idx)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;だが，これでは「与えられる配列が昇順になっている」という条件を使えていない．&lt;/p&gt;
+&lt;p&gt;「昇順」と来たら，二分探索．$O(\log n)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_magic_index&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rec&lt;/span&gt;(lst, left, right):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; left:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[mid] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; mid:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; mid:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rec(lst, mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, right)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[mid]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rec(lst, left, mid &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rec(lst, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>How Many Ways to Run Up the Stairs?</title>
