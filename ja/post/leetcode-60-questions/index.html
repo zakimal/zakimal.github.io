@@ -1675,8 +1675,8 @@ $$</p>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">canAttendMeetings</span>(self, intervals: List[Interval]) <span style="color:#f92672">-&gt;</span> bool:
         intervals<span style="color:#f92672">.</span>sort(key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>start)
-        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(intervals), <span style="color:#ae81ff">1</span>):
-            <span style="color:#66d9ef">if</span> intervals[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;</span> intervals[i][<span style="color:#ae81ff">0</span>]:
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(intervals) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>):
+            <span style="color:#66d9ef">if</span> intervals[i]<span style="color:#f92672">.</span>end <span style="color:#f92672">&gt;</span> intervals[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>start:
                 <span style="color:#66d9ef">return</span> False
         <span style="color:#66d9ef">return</span> True
 </code></pre></div></details>
