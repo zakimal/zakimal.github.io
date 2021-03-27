@@ -5,12 +5,39 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 23:15:43 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 00:30:18 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Pick Up M Elements From List</title>
+      <link>/ja/post/pick-up-m-elements-from-list/</link>
+      <pubDate>Sun, 28 Mar 2021 00:30:18 +0900</pubDate>
+      <guid>/ja/post/pick-up-m-elements-from-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;長さ$N$の配列からランダムに$M$個要素を取り出した配列を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;標準ライブラリを使う．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pick_m_random_elements&lt;/span&gt;(lst, m):
+    random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(lst)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[:m]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Fisher-Yates アルゴリズムと似た感じでやることもできる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pick_m_random_elements&lt;/span&gt;(lst, m):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[:m]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(m, len(lst), &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, i)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; m:
+            ret[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[i]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Shuffle a Deck of Cards</title>
