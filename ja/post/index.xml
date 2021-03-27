@@ -5,12 +5,58 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 17:42:03 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 17:56:58 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Smallest Difference in Two Arrays</title>
+      <link>/ja/post/smallest-difference-in-two-arrays/</link>
+      <pubDate>Sat, 27 Mar 2021 17:56:58 +0900</pubDate>
+      <guid>/ja/post/smallest-difference-in-two-arrays/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;配列&lt;code&gt;a&lt;/code&gt;，&lt;code&gt;b&lt;/code&gt;が与えられる．それぞれの配列から一つずつ要素を選んだとき，その差の絶対値が最小となるような要素のペアとその差を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;全てのペアを全探索しながら最小の差を与えるペアを探せば原理的に解ける．$O(AB)$．ただし$A$，$B$はそれぞれの配列の長さ．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;127&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;235&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_diff&lt;/span&gt;(a, b):
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(a)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(b)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(a[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b[j]) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; diff:
+                diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(a[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b[j])
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a[i], b[j])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; diff, ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(smallest_diff(a, b)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (3, (11, 8))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;両配列を昇順に並び替えてから探すと効率が良くなる．昇順に並び替えてあると，小さい方を動かすことで&lt;code&gt;diff&lt;/code&gt;が小さくなるかもしれないから大きい要素の方の位置を固定して小さい要素の位置を動かす．ソートするのに$O(A \log A + B \log B)$かかり，探索に$O(A + B)$かかるので，全体としては$O(A \log A + B \log B)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_diff&lt;/span&gt;(a, b):
+    a&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    b&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(a) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(b):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(a[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b[j]) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; diff:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a[i], b[j])
+            diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(a[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b[j])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b[j]:
+            i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            j &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; diff, ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(smallest_diff(a, b)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (3, (11, 8))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>How Many Zeros in Suffix of Factorial</title>
