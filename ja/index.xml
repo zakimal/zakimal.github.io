@@ -5,12 +5,69 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 14:01:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 15:06:19 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Find Key in Listy</title>
+      <link>/ja/post/find-key-in-listy/</link>
+      <pubDate>Sat, 27 Mar 2021 15:06:19 +0900</pubDate>
+      <guid>/ja/post/find-key-in-listy/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;List&lt;/code&gt;みたいなデータ構造&lt;code&gt;Listy&lt;/code&gt;を考える．&lt;code&gt;Listy&lt;/code&gt;は次のように定義される．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Listy&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, lst):
+        lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;at&lt;/span&gt;(self, idx):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(lst):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lst[idx]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;基本的に&lt;code&gt;Listy&lt;/code&gt;は要素を昇順に格納している&lt;code&gt;List&lt;/code&gt;のようなものである．ここで&lt;code&gt;Listy&lt;/code&gt;にはその長さを返すメソッドが用意されていない．つまり&lt;code&gt;Listy&lt;/code&gt;の長さを直接知ることはできない．一方で，&lt;code&gt;Listy.at(idx)&lt;/code&gt;メソッドが用意されており，&lt;code&gt;idx&lt;/code&gt;の位置に存在する要素を$O(1)$で返すことができる．もし&lt;code&gt;idx&lt;/code&gt;が&lt;code&gt;Listy&lt;/code&gt;の範囲を超えると&lt;code&gt;-1&lt;/code&gt;を返す．&lt;/p&gt;
+&lt;p&gt;ある&lt;code&gt;Listy&lt;/code&gt;と&lt;code&gt;key&lt;/code&gt;を与えられたとき，&lt;code&gt;key&lt;/code&gt;が&lt;code&gt;Listy&lt;/code&gt;内に存在するかを判定し，存在するならその位置（0-オリジン）を返す関数を書け．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;「要素が昇順に並んでいる」ので二分探索を使いたいところ．&lt;code&gt;Listy&lt;/code&gt;の全長を知ることができないので&lt;code&gt;[2^i, 2^(i + 1))&lt;/code&gt;で探索範囲を広げながら二分探索する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;listy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Listy([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; ,&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;])
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;search&lt;/span&gt;(listy, key):
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# listyの[left:right)から要素がkey以上となる最小の位置を二分探索&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(listy, key, left, right):
+        ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; listy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;at(mid)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ok &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ng):
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ok &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ng) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#75715e&#34;&gt;# okの位置にある要素がkeyと等しければ発見成功&lt;/span&gt;
+        found &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; listy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;at(ok) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; key
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; found, ok
+
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; listy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;at(right) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; listy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;at(right) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; key:
+        right &lt;span style=&#34;color:#f92672&#34;&gt;*=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; binary_search(listy, key, left, right)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (False, 0)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (True, 0)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (True, 1)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;))  &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (True, 2)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (True, 7)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (True, 8)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(search(listy, &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; (False, 16)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Merge Two Sorted Array in Place</title>
