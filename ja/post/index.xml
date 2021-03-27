@@ -5,12 +5,62 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 00:30:18 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 01:18:26 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Find Majority Element From a List</title>
+      <link>/ja/post/find-majority-element-from-a-list/</link>
+      <pubDate>Sun, 28 Mar 2021 01:18:26 +0900</pubDate>
+      <guid>/ja/post/find-majority-element-from-a-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;配列$A$が与えられる．$A$の過半数を占める要素があればそれを見つけなさい．なければ&lt;code&gt;-1&lt;/code&gt;を返しなさい．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;ナイーブなやり方：各要素の頻度を計算して過半数に達しているかを確認する．時間について$O(n^2)$，空間について$O(1)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find_majority_element&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check&lt;/span&gt;(lst, candidate):
+        count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; candidate:
+                count &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; count
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; check(lst, ele):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ele
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;配列を一度舐めるだけで，過半数に達しているかもしれない要素は見つけることができる．これを使うと時間について$O(n)$，空間について$O(1)$で済む．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;find_majority_element&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_candidate&lt;/span&gt;(lst):
+        count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        candidate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#75715e&#34;&gt;# 旧candidateと同数の異なる要素が存在したので候補から落ち，&lt;/span&gt;
+                &lt;span style=&#34;color:#75715e&#34;&gt;# 今見ている要素が新candidateとなる．&lt;/span&gt;
+                candidate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ele
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;  candidate:
+                count &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+              count &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; candidate
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;validate&lt;/span&gt;(lst, candidate):
+        count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; candidate:
+                count &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; count
+
+    candidate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_candidate(lst)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; candidate &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; validate(lst, candidate) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(find_majority_element([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(find_majority_element([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]))    &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; -1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Pick Up M Elements From List</title>
