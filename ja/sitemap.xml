@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/ja/post/add-without-plus/</loc>
+    <lastmod>2021-03-27T21:15:59+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/ja/post/</loc>
-    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
+    <lastmod>2021-03-27T21:15:59+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,13 +23,8 @@
   </url>
   
   <url>
-    <loc>/ja/post/simple-calculator/</loc>
-    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/ja/</loc>
-    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
+    <lastmod>2021-03-27T21:15:59+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +35,11 @@
                 hreflang="ja"
                 href="/ja/"
                 />
+  </url>
+  
+  <url>
+    <loc>/ja/post/simple-calculator/</loc>
+    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
   </url>
   
   <url>

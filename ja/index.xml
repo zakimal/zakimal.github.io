@@ -5,12 +5,46 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 20:40:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 21:15:59 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Add Without Plus</title>
+      <link>/ja/post/add-without-plus/</link>
+      <pubDate>Sat, 27 Mar 2021 21:15:59 +0900</pubDate>
+      <guid>/ja/post/add-without-plus/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;+&lt;/code&gt;を&lt;strong&gt;使わずに&lt;/strong&gt;足し算を実装せよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．これらは別々に計算して最後に足し合わせるというやり方でも正しい足し算ができる．10 進数でやると次の通り．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;762&lt;/span&gt;
++  &lt;span style=&#34;color:#ae81ff&#34;&gt;949&lt;/span&gt;
+------
+   &lt;span style=&#34;color:#ae81ff&#34;&gt;601&lt;/span&gt; &amp;lt;- 繰り上がりを無視した各桁同士の和（各桁同士の和 % 10）
++ &lt;span style=&#34;color:#ae81ff&#34;&gt;1110&lt;/span&gt; &amp;lt;- 繰り上がりだけを並べる
+------
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;1711&lt;/span&gt; &amp;lt;- 正しい答え
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これを 2 進数でやればいい．「繰り上がりを無視した足し算」はそのまま&lt;code&gt;xor&lt;/code&gt;が対応する．「繰り上がりだけ並べる」というのは，&lt;code&gt;&amp;amp;&lt;/code&gt;を取って左 1 シフトと対応する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(a, b):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# a + 0 = a&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a
+    s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+    c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; add(s, c)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;繰り返しで書くと次の通り．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(a, b):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; b:
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+        c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s
+        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Simple Calculator</title>

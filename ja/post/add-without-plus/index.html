@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="問題 一時変数を使わずに整数aとbを交換せよ． 答え a = 10 b = 3 print(a, b) # =&gt; 10 3 a = a - b b = a &#43; b # (1) a = b - a # (2) print(a, b) # =&gt; 3, 10 a，bを交換前の数">
+  <meta name="description" content="問題 &#43;を使わずに足し算を実装せよ． 答え 計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/swap-two-intergers-without-additional-mrmory/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/add-without-plus/">
 
   
 
@@ -96,7 +96,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/swap-two-intergers-without-additional-mrmory/">
+  <link rel="canonical" href="/ja/post/add-without-plus/">
 
   
   
@@ -111,15 +111,15 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/swap-two-intergers-without-additional-mrmory/">
-  <meta property="og:title" content="Swap Two Intergers Without Additional Mrmory | zak">
-  <meta property="og:description" content="問題 一時変数を使わずに整数aとbを交換せよ． 答え a = 10 b = 3 print(a, b) # =&gt; 10 3 a = a - b b = a &#43; b # (1) a = b - a # (2) print(a, b) # =&gt; 3, 10 a，bを交換前の数"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/add-without-plus/">
+  <meta property="og:title" content="Add Without Plus | zak">
+  <meta property="og:description" content="問題 &#43;を使わずに足し算を実装せよ． 答え 計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
     
-      <meta property="article:published_time" content="2021-03-27T17:17:31&#43;09:00">
+      <meta property="article:published_time" content="2021-03-27T21:15:59&#43;09:00">
     
-    <meta property="article:modified_time" content="2021-03-27T17:17:31&#43;09:00">
+    <meta property="article:modified_time" content="2021-03-27T21:15:59&#43;09:00">
   
 
   
@@ -145,12 +145,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/ja/post/swap-two-intergers-without-additional-mrmory/"
+    "@id": "/ja/post/add-without-plus/"
   },
-  "headline": "Swap Two Intergers Without Additional Mrmory",
+  "headline": "Add Without Plus",
   
-  "datePublished": "2021-03-27T17:17:31+09:00",
-  "dateModified": "2021-03-27T17:17:31+09:00",
+  "datePublished": "2021-03-27T21:15:59+09:00",
+  "dateModified": "2021-03-27T21:15:59+09:00",
   
   "author": {
     "@type": "Person",
@@ -165,7 +165,7 @@
       "url": "/img/zak.gif"
     }
   },
-  "description": "問題 一時変数を使わずに整数aとbを交換せよ． 答え a = 10 b = 3 print(a, b) # =\u0026gt; 10 3 a = a - b b = a + b # (1) a = b - a # (2) print(a, b) # =\u0026gt; 3, 10 a，bを交換前の数"
+  "description": "問題 +を使わずに足し算を実装せよ． 答え 計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．"
 }
 </script>
 
@@ -183,7 +183,7 @@
 
 
 
-  <title>Swap Two Intergers Without Additional Mrmory | zak</title>
+  <title>Add Without Plus | zak</title>
 
 </head>
 
@@ -418,7 +418,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>Swap Two Intergers Without Additional Mrmory</h1>
+  <h1>Add Without Plus</h1>
 
   
 
@@ -483,34 +483,32 @@
 
     <div class="article-style">
       <h2 id="問題">問題</h2>
-<p>一時変数を使わずに整数<code>a</code>と<code>b</code>を交換せよ．</p>
+<p><code>+</code>を<strong>使わずに</strong>足し算を実装せよ．</p>
 <h2 id="答え">答え</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
-b <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
-<span style="color:#66d9ef">print</span>(a, b) <span style="color:#75715e"># =&gt; 10 3</span>
-a <span style="color:#f92672">=</span> a <span style="color:#f92672">-</span> b
-b <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> b <span style="color:#75715e"># (1)</span>
-a <span style="color:#f92672">=</span> b <span style="color:#f92672">-</span> a <span style="color:#75715e"># (2)</span>
-<span style="color:#66d9ef">print</span>(a, b) <span style="color:#75715e"># =&gt; 3, 10</span>
-</code></pre></div><p><code>a</code>，<code>b</code>を交換前の数字とすると，</p>
-<ul>
-<li>(1)：<code>(a - b) + b = a</code></li>
-<li>(2)：<code>a - (a - b) = b</code></li>
-</ul>
-<p><code>xor</code>を使う方が汎用性は高そう．<code>a xor a = 0</code>，<code>0 xor a = a</code>という性質を利用する．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
-b <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
-<span style="color:#66d9ef">print</span>(a, b) <span style="color:#75715e"># =&gt; 10 3</span>
-a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b
-b <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b <span style="color:#75715e"># (1)</span>
-a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b <span style="color:#75715e"># (2)</span>
-<span style="color:#66d9ef">print</span>(a, b) <span style="color:#75715e"># =&gt; 3, 10</span>
-</code></pre></div><p><code>a</code>，<code>b</code>を交換前の数字とすると，</p>
-<ul>
-<li>(1)：<code>(a xor b) xor b = a xor (b xor b) = a xor 0 = a</code></li>
-<li>(2)：<code>(a xor b) xor a = b xor (a xor a) = b xor 0 = b</code></li>
-</ul>
-
+<p>計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．これらは別々に計算して最後に足し合わせるというやり方でも正しい足し算ができる．10 進数でやると次の通り．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">   <span style="color:#ae81ff">762</span>
++  <span style="color:#ae81ff">949</span>
+------
+   <span style="color:#ae81ff">601</span> &lt;- 繰り上がりを無視した各桁同士の和（各桁同士の和 % 10）
++ <span style="color:#ae81ff">1110</span> &lt;- 繰り上がりだけを並べる
+------
+  <span style="color:#ae81ff">1711</span> &lt;- 正しい答え
+</code></pre></div><p>これを 2 進数でやればいい．「繰り上がりを無視した足し算」はそのまま<code>xor</code>が対応する．「繰り上がりだけ並べる」というのは，<code>&amp;</code>を取って左 1 シフトと対応する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
+    <span style="color:#66d9ef">if</span> b <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>: <span style="color:#75715e"># a + 0 = a</span>
+        <span style="color:#66d9ef">return</span> a
+    s <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b
+    c <span style="color:#f92672">=</span> (a <span style="color:#f92672">&amp;</span> b) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> add(s, c)
+</code></pre></div><p>繰り返しで書くと次の通り．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
+    <span style="color:#66d9ef">while</span> b:
+        s <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b
+        c <span style="color:#f92672">=</span> (a <span style="color:#f92672">&amp;</span> b) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span>
+        a <span style="color:#f92672">=</span> s
+        b <span style="color:#f92672">=</span> c
+    <span style="color:#66d9ef">return</span> a
+</code></pre></div>
     </div>
 
     
@@ -532,7 +530,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/ja/post/swap-two-intergers-without-additional-mrmory/&amp;text=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/add-without-plus/&amp;text=Add%20Without%20Plus" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -545,7 +543,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/ja/post/swap-two-intergers-without-additional-mrmory/&amp;t=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/add-without-plus/&amp;t=Add%20Without%20Plus" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
@@ -558,7 +556,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="mailto:?subject=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory&amp;body=/ja/post/swap-two-intergers-without-additional-mrmory/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Add%20Without%20Plus&amp;body=/ja/post/add-without-plus/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -571,7 +569,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/swap-two-intergers-without-additional-mrmory/&amp;title=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/add-without-plus/&amp;title=Add%20Without%20Plus" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -584,7 +582,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory%20/ja/post/swap-two-intergers-without-additional-mrmory/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Add%20Without%20Plus%20/ja/post/add-without-plus/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -597,7 +595,7 @@ a <span style="color:#f92672">=</span> a <span style="color:#f92672">^</span> b 
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/ja/post/swap-two-intergers-without-additional-mrmory/&amp;title=Swap%20Two%20Intergers%20Without%20Additional%20Mrmory" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/add-without-plus/&amp;title=Add%20Without%20Plus" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
