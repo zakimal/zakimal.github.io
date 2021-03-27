@@ -536,7 +536,7 @@
 
 <span style="color:#66d9ef">print</span>(LIS(lst))
 </code></pre></div><h3 id="on2で解く-dp">$O(N^2)$で解く DP</h3>
-<p><code>dp[i]</code>を「<code>lst[i]</code>が右端となるような増加部分列の最大の長さ」とすると，<code>dp[i+1]</code>は「<code>j &lt; i + 1</code>かつ<code>lst[j] &lt;= lst[i + 1]</code>な<code>j</code>についての<code>dp[j]</code>の最大値 + 1」と更新できる．</p>
+<p><code>dp[i]</code>を「<code>lst[i]</code>が右端となるような増加部分列の最大の長さ」とすると，<code>dp[i + 1]</code>は「<code>j &lt; i + 1</code>かつ<code>lst[j] &lt;= lst[i + 1]</code>な<code>j</code>についての<code>dp[j]</code>の最大値 + 1」と更新できる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lst <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>] <span style="color:#75715e"># =&gt; 4</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">LIS</span>(lst):

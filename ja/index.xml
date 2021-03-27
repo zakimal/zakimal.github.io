@@ -578,7 +578,7 @@ $$&lt;/p&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(LIS(lst))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on2で解く-dp&#34;&gt;$O(N^2)$で解く DP&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;を「&lt;code&gt;lst[i]&lt;/code&gt;が右端となるような増加部分列の最大の長さ」とすると，&lt;code&gt;dp[i+1]&lt;/code&gt;は「&lt;code&gt;j &amp;lt; i + 1&lt;/code&gt;かつ&lt;code&gt;lst[j] &amp;lt;= lst[i + 1]&lt;/code&gt;な&lt;code&gt;j&lt;/code&gt;についての&lt;code&gt;dp[j]&lt;/code&gt;の最大値 + 1」と更新できる．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;を「&lt;code&gt;lst[i]&lt;/code&gt;が右端となるような増加部分列の最大の長さ」とすると，&lt;code&gt;dp[i + 1]&lt;/code&gt;は「&lt;code&gt;j &amp;lt; i + 1&lt;/code&gt;かつ&lt;code&gt;lst[j] &amp;lt;= lst[i + 1]&lt;/code&gt;な&lt;code&gt;j&lt;/code&gt;についての&lt;code&gt;dp[j]&lt;/code&gt;の最大値 + 1」と更新できる．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LIS&lt;/span&gt;(lst):
@@ -2185,10 +2185,25 @@ $$&lt;/p&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; len(heap)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;43-paint-fence&#34;&gt;43: Paint Fence&lt;/h2&gt;
-&lt;p&gt;Not Yet.&lt;/p&gt;
+&lt;p&gt;$N$本の柱を$K$色で塗り分ける．このとき，連続して同じ色の柱は$2$本より多くなってはならない．塗り分け方の総数を求めよ．&lt;/p&gt;
 &lt;details&gt;
 &lt;summary&gt;答え&lt;/summary&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;
+&lt;p&gt;柱を左から右に塗っていくことを考える．左から&lt;code&gt;pos - 2&lt;/code&gt;，&lt;code&gt;pos - 1&lt;/code&gt;，&lt;code&gt;pos&lt;/code&gt;の位置にある柱の色の塗り方は&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;「&lt;code&gt;pos - 2&lt;/code&gt;，&lt;code&gt;pos - 1&lt;/code&gt;が連続して同じ色 X，&lt;code&gt;pos&lt;/code&gt;が X 以外」で&lt;code&gt;pos&lt;/code&gt;に使える色は$K - 1$色&lt;/li&gt;
+&lt;li&gt;「&lt;code&gt;pos - 2&lt;/code&gt;が色 X，&lt;code&gt;pos - 1&lt;/code&gt;，&lt;code&gt;pos&lt;/code&gt;が連続して X 以外の色」で&lt;code&gt;pos&lt;/code&gt;に使える色は$K - 1$色&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;numWays&lt;/span&gt;(self, n: int, k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; k
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+            reteurn k &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 左からi番目までの柱の塗り分け方&lt;/span&gt;
+        dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, k, k &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, n):
+            dp &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; [(dp[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dp[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dp[n]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;44-move-zeroes&#34;&gt;44: Move Zeroes&lt;/h2&gt;
 &lt;details&gt;

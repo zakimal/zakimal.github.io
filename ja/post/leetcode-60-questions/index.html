@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    19 分で読める
+    20 分で読める
   </span>
   
 
@@ -1703,10 +1703,25 @@ $$</p>
         <span style="color:#66d9ef">return</span> len(heap)
 </code></pre></div></details>
 <h2 id="43-paint-fence">43: Paint Fence</h2>
-<p>Not Yet.</p>
+<p>$N$本の柱を$K$色で塗り分ける．このとき，連続して同じ色の柱は$2$本より多くなってはならない．塗り分け方の総数を求めよ．</p>
 <details>
 <summary>答え</summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">pass</span>
+<p>柱を左から右に塗っていくことを考える．左から<code>pos - 2</code>，<code>pos - 1</code>，<code>pos</code>の位置にある柱の色の塗り方は</p>
+<ul>
+<li>「<code>pos - 2</code>，<code>pos - 1</code>が連続して同じ色 X，<code>pos</code>が X 以外」で<code>pos</code>に使える色は$K - 1$色</li>
+<li>「<code>pos - 2</code>が色 X，<code>pos - 1</code>，<code>pos</code>が連続して X 以外の色」で<code>pos</code>に使える色は$K - 1$色</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">numWays</span>(self, n: int, k: int) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+            <span style="color:#66d9ef">return</span> k
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+            reteurn k <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>
+        <span style="color:#75715e"># dp[i]: 左からi番目までの柱の塗り分け方</span>
+        dp <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, k, k <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, n):
+            dp <span style="color:#f92672">+=</span> [(dp[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> dp[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> (k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)]
+        <span style="color:#66d9ef">return</span> dp[n]
 </code></pre></div></details>
 <h2 id="44-move-zeroes">44: Move Zeroes</h2>
 <details>
