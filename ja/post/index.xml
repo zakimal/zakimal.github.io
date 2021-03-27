@@ -5,12 +5,48 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 15:06:19 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 17:17:31 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Swap Two Intergers Without Additional Mrmory</title>
+      <link>/ja/post/swap-two-intergers-without-additional-mrmory/</link>
+      <pubDate>Sat, 27 Mar 2021 17:17:31 +0900</pubDate>
+      <guid>/ja/post/swap-two-intergers-without-additional-mrmory/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;一時変数を使わずに整数&lt;code&gt;a&lt;/code&gt;と&lt;code&gt;b&lt;/code&gt;を交換せよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(a, b) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 10 3&lt;/span&gt;
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b &lt;span style=&#34;color:#75715e&#34;&gt;# (1)&lt;/span&gt;
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; a &lt;span style=&#34;color:#75715e&#34;&gt;# (2)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(a, b) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 3, 10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;a&lt;/code&gt;，&lt;code&gt;b&lt;/code&gt;を交換前の数字とすると，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1)：&lt;code&gt;(a - b) + b = a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;(2)：&lt;code&gt;a - (a - b) = b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;xor&lt;/code&gt;を使う方が汎用性は高そう．&lt;code&gt;a xor a = 0&lt;/code&gt;，&lt;code&gt;0 xor a = a&lt;/code&gt;という性質を利用する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(a, b) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 10 3&lt;/span&gt;
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b &lt;span style=&#34;color:#75715e&#34;&gt;# (1)&lt;/span&gt;
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b &lt;span style=&#34;color:#75715e&#34;&gt;# (2)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(a, b) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 3, 10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;a&lt;/code&gt;，&lt;code&gt;b&lt;/code&gt;を交換前の数字とすると，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1)：&lt;code&gt;(a xor b) xor b = a xor (b xor b) = a xor 0 = a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;(2)：&lt;code&gt;(a xor b) xor a = b xor (a xor a) = b xor 0 = b&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Find Key in Listy</title>
