@@ -5,12 +5,65 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 21:15:59 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 23:15:43 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Shuffle a Deck of Cards</title>
+      <link>/ja/post/shuffle-a-deck-of-cards/</link>
+      <pubDate>Sat, 27 Mar 2021 23:15:43 +0900</pubDate>
+      <guid>/ja/post/shuffle-a-deck-of-cards/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;$N$枚のカードをシャッフルせよ．シャッフルの結果に偏りがあってはならない．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;標準ライブラリを使うとさすがにチートか．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+cards &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(cards)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(cards)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;http://svn.python.org/projects/python/trunk/Lib/random.py&#34;&gt;&lt;code&gt;random.shuffle&lt;/code&gt;&lt;/a&gt;の内部的には&lt;a href=&#34;https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle&#34;&gt;Fisher-Yates のアルゴリズム&lt;/a&gt;が用いられている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;To shuffle an array A of N elements &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;indices: 0...N-1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i in range&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;N - 1, 0, -1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+        j &amp;lt;- random_integer_between&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0, i&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 0 &amp;lt;= j &amp;lt;= i&lt;/span&gt;
+        swap&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;j&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, A&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Fisher-Yates アルゴリズムでは末尾の要素から決定する．$i$番目の要素を$0$番目から$i$番目までの中からランダムに選択する．&lt;/p&gt;
+&lt;p&gt;自前で実装すると以下．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fisher_yates_shuffle&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, i) &lt;span style=&#34;color:#75715e&#34;&gt;# randint(a, b) returns a random value in a &amp;lt;= n &amp;lt;= b&lt;/span&gt;
+        lst[i], lst[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[j], lst[i]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Fisher-Yates アルゴリズムでは$N - 1$回乱数を引くことになる．乱数を 1 度だけ引くようなシャッフルアルゴリズムは存在しないのだろうか？&lt;/p&gt;
+&lt;p&gt;$N$枚のカードのシャッフル結果の総数は$N!$通りある．そこで，それらに$0$から$N!-1$までのインデックスを付けて，一度だけ引いた乱数がと等しいインデックスの結果をシャッフルの結果とするというのを考える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;shuffle&lt;/span&gt;(lst):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;factorial&lt;/span&gt;(n):
+        memo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        memo[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rec&lt;/span&gt;(n, memo):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; memo[n] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; memo[n]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; rec(n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, memo)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; rec(n, memo)
+    f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; factorial(len(lst))
+    idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randrange(f)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        fi &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; factorial(i)
+        q &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; fi
+        lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(q))
+        idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; fi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;乱数を引く回数が減らせる代わりに，階乗を求めるときの計算でメモリを消費する．&lt;/p&gt;
+&lt;p&gt;手元での実験の感覚では，$N$が大きくなると階乗を計算することが困難になるので，余り効率は良くないと思える．&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Add Without Plus</title>
