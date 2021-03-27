@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="二分探索木 二分木の中でも，左の子供 &lt;= 自分 &lt; 右の子供となっているような木． 頂点の挿入順序によって出来上がる木は複数パターンある． 実装 class BinarySearchTreeNode: def __init__(self, key):">
+  <meta name="description" content="問題 文字列として与えられる数式を計算するプログラムを書け． print(compute(&#34;2*3&#43;5/6*3&#43;15&#34;)) # =&gt; 23.5 答え from enum import Enum, auto class Op(Enum): ADD = auto() SUB = auto() MUL = auto() DIV = auto() NOP = auto() def priority(op): if op == Op.ADD or op == Op.SUB: return 1 elif">
 
   
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/binary-search-tree/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/simple-calculator/">
 
   
 
@@ -96,7 +96,7 @@
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/binary-search-tree/">
+  <link rel="canonical" href="/ja/post/simple-calculator/">
 
   
   
@@ -111,15 +111,15 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/binary-search-tree/">
-  <meta property="og:title" content="Binary Search Tree | zak">
-  <meta property="og:description" content="二分探索木 二分木の中でも，左の子供 &lt;= 自分 &lt; 右の子供となっているような木． 頂点の挿入順序によって出来上がる木は複数パターンある． 実装 class BinarySearchTreeNode: def __init__(self, key):"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/simple-calculator/">
+  <meta property="og:title" content="Simple Calculator | zak">
+  <meta property="og:description" content="問題 文字列として与えられる数式を計算するプログラムを書け． print(compute(&#34;2*3&#43;5/6*3&#43;15&#34;)) # =&gt; 23.5 答え from enum import Enum, auto class Op(Enum): ADD = auto() SUB = auto() MUL = auto() DIV = auto() NOP = auto() def priority(op): if op == Op.ADD or op == Op.SUB: return 1 elif"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
     
-      <meta property="article:published_time" content="2021-03-20T16:53:54&#43;09:00">
+      <meta property="article:published_time" content="2021-03-27T20:40:58&#43;09:00">
     
-    <meta property="article:modified_time" content="2021-03-20T16:53:54&#43;09:00">
+    <meta property="article:modified_time" content="2021-03-27T20:40:58&#43;09:00">
   
 
   
@@ -145,12 +145,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/ja/post/binary-search-tree/"
+    "@id": "/ja/post/simple-calculator/"
   },
-  "headline": "Binary Search Tree",
+  "headline": "Simple Calculator",
   
-  "datePublished": "2021-03-20T16:53:54+09:00",
-  "dateModified": "2021-03-20T16:53:54+09:00",
+  "datePublished": "2021-03-27T20:40:58+09:00",
+  "dateModified": "2021-03-27T20:40:58+09:00",
   
   "author": {
     "@type": "Person",
@@ -165,7 +165,7 @@
       "url": "/img/zak.gif"
     }
   },
-  "description": "二分探索木 二分木の中でも，左の子供 \u0026lt;= 自分 \u0026lt; 右の子供となっているような木． 頂点の挿入順序によって出来上がる木は複数パターンある． 実装 class BinarySearchTreeNode: def __init__(self, key):"
+  "description": "問題 文字列として与えられる数式を計算するプログラムを書け． print(compute(\u0026#34;2*3+5/6*3+15\u0026#34;)) # =\u0026gt; 23.5 答え from enum import Enum, auto class Op(Enum): ADD = auto() SUB = auto() MUL = auto() DIV = auto() NOP = auto() def priority(op): if op == Op.ADD or op == Op.SUB: return 1 elif"
 }
 </script>
 
@@ -183,7 +183,7 @@
 
 
 
-  <title>Binary Search Tree | zak</title>
+  <title>Simple Calculator | zak</title>
 
 </head>
 
@@ -418,7 +418,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>Binary Search Tree</h1>
+  <h1>Simple Calculator</h1>
 
   
 
@@ -437,7 +437,7 @@
     
       
     
-    Sat, Mar 20, 2021
+    Sat, Mar 27, 2021
   </span>
   
 
@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 分で読める
+    1 分で読める
   </span>
   
 
@@ -482,224 +482,94 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="二分探索木">二分探索木</h2>
-<p>二分木の中でも，<code>左の子供 &lt;= 自分 &lt; 右の子供</code>となっているような木．</p>
-<p>頂点の挿入順序によって出来上がる木は複数パターンある．</p>
-<h2 id="実装">実装</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinarySearchTreeNode</span>:
-    <span style="color:#66d9ef">def</span> __init__(self, key):
-        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key
-        self<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> None
-        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> None
+      <h2 id="問題">問題</h2>
+<p>文字列として与えられる数式を計算するプログラムを書け．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(compute(<span style="color:#e6db74">&#34;2*3+5/6*3+15&#34;</span>)) <span style="color:#75715e"># =&gt; 23.5</span>
+</code></pre></div><h2 id="答え">答え</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> enum <span style="color:#f92672">import</span> Enum, auto
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Op</span>(Enum):
+    ADD <span style="color:#f92672">=</span> auto()
+    SUB <span style="color:#f92672">=</span> auto()
+    MUL <span style="color:#f92672">=</span> auto()
+    DIV <span style="color:#f92672">=</span> auto()
+    NOP <span style="color:#f92672">=</span> auto()
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insert</span>(self, key):
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>key <span style="color:#f92672">==</span> key:
-            <span style="color:#66d9ef">return</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">priority</span>(op):
+    <span style="color:#66d9ef">if</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>ADD <span style="color:#f92672">or</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>SUB:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">elif</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>MUL <span style="color:#f92672">or</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>DIV:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">else</span>: <span style="color:#75715e"># op == Op.NOP</span>
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
 
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>key <span style="color:#f92672">&lt;</span> key:
-            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> None:
-                self<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> BinarySearchTreeNode(key)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute</span>(s):
+    num_stack <span style="color:#f92672">=</span> []
+    op_stack <span style="color:#f92672">=</span> []
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_num</span>(s, i):
+        buf <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> len(s) <span style="color:#f92672">and</span> s[i]<span style="color:#f92672">.</span>isdigit():
+            buf <span style="color:#f92672">+=</span> s[i]
+            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> int(buf)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse_op</span>(s, i):
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> len(s):
+            op_str <span style="color:#f92672">=</span> s[i]
+            <span style="color:#66d9ef">if</span> op_str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;+&#34;</span>:
+                <span style="color:#66d9ef">return</span> Op<span style="color:#f92672">.</span>ADD
+            <span style="color:#66d9ef">elif</span> op_str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;-&#34;</span>:
+                <span style="color:#66d9ef">return</span> Op<span style="color:#f92672">.</span>SUB
+            <span style="color:#66d9ef">elif</span> op_str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;*&#34;</span>:
+                <span style="color:#66d9ef">return</span> Op<span style="color:#f92672">.</span>MUL
+            <span style="color:#66d9ef">elif</span> op_str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;/&#34;</span>:
+                <span style="color:#66d9ef">return</span> Op<span style="color:#f92672">.</span>DIV
+        <span style="color:#66d9ef">return</span> Op<span style="color:#f92672">.</span>NOP
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">apply</span>(next_op, num_stack, op_stack):
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&lt;=</span> len(num_stack) <span style="color:#f92672">and</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> len(op_stack):
+            <span style="color:#66d9ef">if</span> priority(next_op) <span style="color:#f92672">&lt;=</span> priority(op_stack[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]):
+                right <span style="color:#f92672">=</span> num_stack<span style="color:#f92672">.</span>pop()
+                op <span style="color:#f92672">=</span> op_stack<span style="color:#f92672">.</span>pop()
+                left <span style="color:#f92672">=</span> num_stack<span style="color:#f92672">.</span>pop()
+
+                <span style="color:#66d9ef">if</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>ADD:
+                    num_stack<span style="color:#f92672">.</span>append(left <span style="color:#f92672">+</span> right)
+                <span style="color:#66d9ef">elif</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>SUB:
+                    num_stack<span style="color:#f92672">.</span>append(left <span style="color:#f92672">-</span> right)
+                <span style="color:#66d9ef">elif</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>MUL:
+                    num_stack<span style="color:#f92672">.</span>append(left <span style="color:#f92672">*</span> right)
+                <span style="color:#66d9ef">elif</span> op <span style="color:#f92672">==</span> Op<span style="color:#f92672">.</span>DIV:
+                    num_stack<span style="color:#f92672">.</span>append(left <span style="color:#f92672">/</span> right)
+                <span style="color:#66d9ef">else</span>: <span style="color:#75715e"># op == Op.NOP</span>
+                    num_stack<span style="color:#f92672">.</span>append(right)
             <span style="color:#66d9ef">else</span>:
-                self<span style="color:#f92672">.</span>right<span style="color:#f92672">.</span>insert(key)
-        <span style="color:#66d9ef">else</span>: <span style="color:#75715e"># key &lt; self.key:</span>
-            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> None:
-                self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> BinarySearchTreeNode(key)
-            <span style="color:#66d9ef">else</span>:
-                self<span style="color:#f92672">.</span>left<span style="color:#f92672">.</span>insert(key)
+                <span style="color:#66d9ef">break</span>
 
-    <span style="color:#75715e"># ref: https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">display</span>(self):
-        lines, <span style="color:#f92672">*</span>_ <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_display()
-        <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
-            <span style="color:#66d9ef">print</span>(line)
+    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;</span> len(s):
+        num <span style="color:#f92672">=</span> parse_num(s, i)
+        num_stack<span style="color:#f92672">.</span>append(num)
+        i <span style="color:#f92672">+=</span> len(str(num))
+        <span style="color:#66d9ef">if</span> len(s) <span style="color:#f92672">&lt;=</span> i:
+            <span style="color:#66d9ef">break</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_display</span>(self):
-        <span style="color:#e6db74">&#34;&#34;&#34;Returns list of strings, width, height, and horizontal coordinate of the root.&#34;&#34;&#34;</span>
-        <span style="color:#75715e"># No child.</span>
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> None:
-            line <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>key
-            width <span style="color:#f92672">=</span> len(line)
-            height <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-            middle <span style="color:#f92672">=</span> width <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
-            <span style="color:#66d9ef">return</span> [line], width, height, middle
+        next_op <span style="color:#f92672">=</span> parse_op(s, i)
+        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 
-        <span style="color:#75715e"># Only left child.</span>
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> None:
-            lines, n, p, x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>left<span style="color:#f92672">.</span>_display()
-            s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>key
-            u <span style="color:#f92672">=</span> len(s)
-            first_line <span style="color:#f92672">=</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> s
-            second_line <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> u) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>
-            shifted_lines <span style="color:#f92672">=</span> [line <span style="color:#f92672">+</span> u <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines]
-            <span style="color:#66d9ef">return</span> [first_line, second_line] <span style="color:#f92672">+</span> shifted_lines, n <span style="color:#f92672">+</span> u, p <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, n <span style="color:#f92672">+</span> u <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+        apply(next_op, num_stack, op_stack)
+        op_stack<span style="color:#f92672">.</span>append(next_op)
 
-        <span style="color:#75715e"># Only right child.</span>
-        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> None:
-            lines, n, p, x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>right<span style="color:#f92672">.</span>_display()
-            s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>key
-            u <span style="color:#f92672">=</span> len(s)
-            first_line <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> x <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>
-            second_line <span style="color:#f92672">=</span> (u <span style="color:#f92672">+</span> x) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>
-            shifted_lines <span style="color:#f92672">=</span> [u <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> line <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines]
-            <span style="color:#66d9ef">return</span> [first_line, second_line] <span style="color:#f92672">+</span> shifted_lines, n <span style="color:#f92672">+</span> u, p <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, u <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+    apply(Op<span style="color:#f92672">.</span>NOP, num_stack, op_stack)
 
-        <span style="color:#75715e"># Two children.</span>
-        left, n, p, x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>left<span style="color:#f92672">.</span>_display()
-        right, m, q, y <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>right<span style="color:#f92672">.</span>_display()
-        s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> self<span style="color:#f92672">.</span>key
-        u <span style="color:#f92672">=</span> len(s)
-        first_line <span style="color:#f92672">=</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> s <span style="color:#f92672">+</span> y <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> (m <span style="color:#f92672">-</span> y) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>
-        second_line <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> (n <span style="color:#f92672">-</span> x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> u <span style="color:#f92672">+</span> y) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> (m <span style="color:#f92672">-</span> y <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>
-        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">&lt;</span> q:
-            left <span style="color:#f92672">+=</span> [n <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>] <span style="color:#f92672">*</span> (q <span style="color:#f92672">-</span> p)
-        <span style="color:#66d9ef">elif</span> q <span style="color:#f92672">&lt;</span> p:
-            right <span style="color:#f92672">+=</span> [m <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span>] <span style="color:#f92672">*</span> (p <span style="color:#f92672">-</span> q)
-        zipped_lines <span style="color:#f92672">=</span> zip(left, right)
-        lines <span style="color:#f92672">=</span> [first_line, second_line] <span style="color:#f92672">+</span> [a <span style="color:#f92672">+</span> u <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> b <span style="color:#66d9ef">for</span> a, b <span style="color:#f92672">in</span> zipped_lines]
-        <span style="color:#66d9ef">return</span> lines, n <span style="color:#f92672">+</span> m <span style="color:#f92672">+</span> u, max(p, q) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, n <span style="color:#f92672">+</span> u <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
-</code></pre></div><h2 id="高さが最小の二分探索木">高さが最小の二分探索木</h2>
-<p>昇順にソートされた<code>key</code>の配列を渡されたときに，それらを格納する二分探索木のうち最も高さの小さいものを作る．</p>
-<p>考え方としては，高さが最小になるとき，左右の木の高さが等しいので，<code>key</code>の真ん中ぐらいの大きさのものから格納していくとできそうという感じ．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_minimum_height_bst</span>(keys):
-    <span style="color:#66d9ef">return</span> _build_minimum_height_bst(keys, <span style="color:#ae81ff">0</span>, len(keys) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_build_minimum_height_bst</span>(keys, start, end):
-    <span style="color:#66d9ef">if</span> end <span style="color:#f92672">&lt;</span> start:
-        <span style="color:#66d9ef">return</span> None
-
-    middle <span style="color:#f92672">=</span> (start <span style="color:#f92672">+</span> end) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
-    root <span style="color:#f92672">=</span> BinarySearchTreeNode(keys[middle])
-    root<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> _build_minimum_height_bst(keys, start, middle <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-    root<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> _build_minimum_height_bst(keys, middle <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end)
-
-    <span style="color:#66d9ef">return</span> root
-</code></pre></div><h2 id="深さごとのkeyのリスト">深さごとの<code>key</code>のリスト</h2>
-<p>二分探索木から<code>[ [深さ0のkeyのリスト], [深さ1のkeyのリスト], ...]</code>を作る．二分探索木を横串に見る感じ．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_of_depths</span>(root, lsts, level):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span>
-
-    lst <span style="color:#f92672">=</span> None
-    <span style="color:#66d9ef">if</span> len(lsts) <span style="color:#f92672">==</span> level: <span style="color:#75715e"># 深さ0のリストの存在に注意</span>
-        lst <span style="color:#f92672">=</span> []
-        lsts<span style="color:#f92672">.</span>append(lst)
+    <span style="color:#66d9ef">if</span> len(num_stack) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> len(op_stack) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        <span style="color:#66d9ef">return</span> num_stack<span style="color:#f92672">.</span>pop()
     <span style="color:#66d9ef">else</span>:
-        lst <span style="color:#f92672">=</span> lsts[level]
-    lst<span style="color:#f92672">.</span>append(root<span style="color:#f92672">.</span>key)
-    list_of_depths(root<span style="color:#f92672">.</span>left, lsts, level <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-    list_of_depths(root<span style="color:#f92672">.</span>right, lsts, level <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
 
-    <span style="color:#66d9ef">return</span> lsts
-</code></pre></div><p>BFS っぽくもできる．$n$段目を見終わった段階で$n+1$段目が<code>suspended</code>に入っているように実装する．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">list_of_depths</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> []
+s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2*3+5/6*3+15&#34;</span>
 
-    suspended <span style="color:#f92672">=</span> []
-    suspended<span style="color:#f92672">.</span>append(root)
-
-    lsts <span style="color:#f92672">=</span> []
-    level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-    <span style="color:#66d9ef">while</span> len(suspended) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
-        <span style="color:#66d9ef">if</span> len(lsts) <span style="color:#f92672">==</span> level:
-            lsts<span style="color:#f92672">.</span>append([])
-        next_suspended <span style="color:#f92672">=</span> []
-        <span style="color:#66d9ef">for</span> u <span style="color:#f92672">in</span> suspended:
-            lsts[level]<span style="color:#f92672">.</span>append(u<span style="color:#f92672">.</span>key)
-            <span style="color:#66d9ef">if</span> u<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-                next_suspended<span style="color:#f92672">.</span>append(u<span style="color:#f92672">.</span>left)
-            <span style="color:#66d9ef">if</span> u<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-                next_suspended<span style="color:#f92672">.</span>append(u<span style="color:#f92672">.</span>right)
-        suspended <span style="color:#f92672">=</span> next_suspended
-        level <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-
-    <span style="color:#66d9ef">return</span> lsts
-</code></pre></div><h2 id="その木は完全にバランスしているか">「その木は完全にバランスしているか？」</h2>
-<p>ここでは「その木に含まれるどの頂点を根とした部分木を考えてもその左右の部分木がバランスしている状態」を「完全にバランスしている」とする．左右の部分木の高さの差が 1 以下になっているかを調べる．要するに木の高さを求められますかという問題．ある頂点を根とする木の高さは，その頂点の左右の子供を根とする部分木のサイズの大きい方+1 なので再帰的に書ける．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_height</span>(root):
-    <span style="color:#75715e"># base case</span>
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
-
-    left <span style="color:#f92672">=</span> get_height(root<span style="color:#f92672">.</span>left)
-    right <span style="color:#f92672">=</span> get_height(root<span style="color:#f92672">.</span>right)
-
-    <span style="color:#66d9ef">return</span> max(left, right) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_balanced</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> true
-    diff <span style="color:#f92672">=</span> abs(get_height(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">-</span> get_height(root<span style="color:#f92672">.</span>right))
-    <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> diff:
-        <span style="color:#66d9ef">return</span> False
-    <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">return</span> is_balanced(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">and</span> is_balanced(root<span style="color:#f92672">.</span>right)
-</code></pre></div><p>ただこれだと効率が悪い．一部がバランスしてない事実が発覚した時点でそれ以上の木の高さを真面目に計算する必要がなくなるので，工夫する余地がある．</p>
-<h2 id="その二分木は二分探索木">その二分木は二分探索木？</h2>
-<p>与えられた二分木が二分探索木になっているかを調べる．根から inorder で走査した結果が昇順にソートされていればその木は二分探索木の定義を満たす．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Integer</span>:
-    <span style="color:#66d9ef">def</span> __init__(self, num):
-        self<span style="color:#f92672">.</span>num <span style="color:#f92672">=</span> num
-
-last_visited <span style="color:#f92672">=</span> None
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_valid</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> True
-
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_valid(root<span style="color:#f92672">.</span>left):
-        <span style="color:#66d9ef">return</span> False
-
-    <span style="color:#66d9ef">if</span> last_visited <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> root<span style="color:#f92672">.</span>key <span style="color:#f92672">&lt;=</span> last_visited<span style="color:#f92672">.</span>num:
-        <span style="color:#66d9ef">return</span> False
-
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_valid(root<span style="color:#f92672">.</span>right):
-        <span style="color:#66d9ef">return</span> False
-
-    <span style="color:#66d9ef">return</span> True
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inorder</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span>
-    inorder(root<span style="color:#f92672">.</span>left)
-    <span style="color:#66d9ef">print</span>(root<span style="color:#f92672">.</span>key)
-    inorder(root<span style="color:#f92672">.</span>right)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preorder</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span>
-    <span style="color:#66d9ef">print</span>(root<span style="color:#f92672">.</span>key)
-    preorder(root<span style="color:#f92672">.</span>left)
-    preorder(root<span style="color:#f92672">.</span>right)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">postorder</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span>
-    postorder(root<span style="color:#f92672">.</span>left)
-    postorder(root<span style="color:#f92672">.</span>right)
-    <span style="color:#66d9ef">print</span>(root<span style="color:#f92672">.</span>key)
-</code></pre></div><h2 id="間順走査順で次の頂点はどれか">間順走査順で次の頂点はどれか</h2>
-<p>注目頂点の右の部分木が存在するなら，その部分木の最も左側の頂点が次に訪問する頂点になる．
-注目頂点の右の部分木が存在しないなら，注目頂点の親にとって注目頂点が左側の子なら，その親自身が次の頂点．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">left_most_child</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> None
-    <span style="color:#66d9ef">while</span> root<span style="color:#f92672">.</span>left <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-        root <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>left
-    <span style="color:#66d9ef">return</span> root
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inorder_successor</span>(root):
-    <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
-        <span style="color:#66d9ef">return</span> None
-
-    <span style="color:#66d9ef">if</span> root<span style="color:#f92672">.</span>right <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-        <span style="color:#66d9ef">return</span> left_most_child(root<span style="color:#f92672">.</span>right)
-    <span style="color:#66d9ef">else</span>:
-        q <span style="color:#f92672">=</span> root
-        x <span style="color:#f92672">=</span> root<span style="color:#f92672">.</span>parent
-        <span style="color:#66d9ef">while</span> x <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> q <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> x<span style="color:#f92672">.</span>left:
-            q <span style="color:#f92672">=</span> x
-            x <span style="color:#f92672">=</span> q<span style="color:#f92672">.</span>parent
-        <span style="color:#66d9ef">return</span> x
+<span style="color:#66d9ef">print</span>(compute(s)) <span style="color:#75715e"># =&gt; 23.5</span>
 </code></pre></div>
     </div>
 
@@ -722,7 +592,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/ja/post/binary-search-tree/&amp;text=Binary%20Search%20Tree" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/simple-calculator/&amp;text=Simple%20Calculator" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -735,7 +605,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/ja/post/binary-search-tree/&amp;t=Binary%20Search%20Tree" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/simple-calculator/&amp;t=Simple%20Calculator" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
@@ -748,7 +618,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="mailto:?subject=Binary%20Search%20Tree&amp;body=/ja/post/binary-search-tree/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Simple%20Calculator&amp;body=/ja/post/simple-calculator/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -761,7 +631,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/binary-search-tree/&amp;title=Binary%20Search%20Tree" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/simple-calculator/&amp;title=Simple%20Calculator" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -774,7 +644,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Binary%20Search%20Tree%20/ja/post/binary-search-tree/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Simple%20Calculator%20/ja/post/simple-calculator/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -787,7 +657,7 @@ last_visited <span style="color:#f92672">=</span> None
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/ja/post/binary-search-tree/&amp;title=Binary%20Search%20Tree" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/simple-calculator/&amp;title=Simple%20Calculator" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

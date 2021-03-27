@@ -5,12 +5,108 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 17:56:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 27 Mar 2021 20:40:58 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Simple Calculator</title>
+      <link>/ja/post/simple-calculator/</link>
+      <pubDate>Sat, 27 Mar 2021 20:40:58 +0900</pubDate>
+      <guid>/ja/post/simple-calculator/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;文字列として与えられる数式を計算するプログラムを書け．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(compute(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2*3+5/6*3+15&amp;#34;&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 23.5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; enum &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Enum, auto
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Op&lt;/span&gt;(Enum):
+    ADD &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; auto()
+    SUB &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; auto()
+    MUL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; auto()
+    DIV &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; auto()
+    NOP &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; auto()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;priority&lt;/span&gt;(op):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ADD &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;SUB:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MUL &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DIV:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# op == Op.NOP&lt;/span&gt;
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;compute&lt;/span&gt;(s):
+    num_stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    op_stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;parse_num&lt;/span&gt;(s, i):
+        buf &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(s) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; s[i]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isdigit():
+            buf &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; s[i]
+            i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; int(buf)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;parse_op&lt;/span&gt;(s, i):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(s):
+            op_str &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s[i]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; op_str &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+&amp;#34;&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ADD
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op_str &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;SUB
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op_str &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MUL
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op_str &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DIV
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NOP
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;apply&lt;/span&gt;(next_op, num_stack, op_stack):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; len(num_stack) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; len(op_stack):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; priority(next_op) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; priority(op_stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]):
+                right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+                op &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; op_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+                left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ADD:
+                    num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;SUB:
+                    num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(left &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; right)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;MUL:
+                    num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(left &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; right)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DIV:
+                    num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(left &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; right)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# op == Op.NOP&lt;/span&gt;
+                    num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(right)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(s):
+        num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parse_num(s, i)
+        num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(num)
+        i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; len(str(num))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(s) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; i:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+
+        next_op &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parse_op(s, i)
+        i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        apply(next_op, num_stack, op_stack)
+        op_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(next_op)
+
+    apply(Op&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;NOP, num_stack, op_stack)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(num_stack) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; len(op_stack) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; num_stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2*3+5/6*3+15&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(compute(s)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 23.5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Smallest Difference in Two Arrays</title>

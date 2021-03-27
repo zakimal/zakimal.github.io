@@ -4,7 +4,7 @@
   
   <url>
     <loc>/ja/post/</loc>
-    <lastmod>2021-03-27T17:56:58+09:00</lastmod>
+    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,13 +18,13 @@
   </url>
   
   <url>
-    <loc>/ja/post/smallest-difference-in-two-arrays/</loc>
-    <lastmod>2021-03-27T17:56:58+09:00</lastmod>
+    <loc>/ja/post/simple-calculator/</loc>
+    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
   </url>
   
   <url>
     <loc>/ja/</loc>
-    <lastmod>2021-03-27T17:56:58+09:00</lastmod>
+    <lastmod>2021-03-27T20:40:58+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +35,11 @@
                 hreflang="ja"
                 href="/ja/"
                 />
+  </url>
+  
+  <url>
+    <loc>/ja/post/smallest-difference-in-two-arrays/</loc>
+    <lastmod>2021-03-27T17:56:58+09:00</lastmod>
   </url>
   
   <url>
