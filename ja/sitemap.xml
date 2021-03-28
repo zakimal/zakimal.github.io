@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/ja/post/find-majority-element-from-a-list/</loc>
-    <lastmod>2021-03-28T01:18:26+09:00</lastmod>
+    <loc>/ja/post/find-k-th-smallest-elements/</loc>
+    <lastmod>2021-03-28T13:06:44+09:00</lastmod>
   </url>
   
   <url>
     <loc>/ja/post/</loc>
-    <lastmod>2021-03-28T01:18:26+09:00</lastmod>
+    <lastmod>2021-03-28T13:06:44+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -24,7 +24,7 @@
   
   <url>
     <loc>/ja/</loc>
-    <lastmod>2021-03-28T01:18:26+09:00</lastmod>
+    <lastmod>2021-03-28T13:06:44+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +35,11 @@
                 hreflang="ja"
                 href="/ja/"
                 />
+  </url>
+  
+  <url>
+    <loc>/ja/post/find-majority-element-from-a-list/</loc>
+    <lastmod>2021-03-28T01:18:26+09:00</lastmod>
   </url>
   
   <url>

@@ -5,12 +5,231 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 01:18:26 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 13:06:44 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Find $K$th Smallest Elements</title>
+      <link>/ja/post/find-k-th-smallest-elements/</link>
+      <pubDate>Sun, 28 Mar 2021 13:06:44 +0900</pubDate>
+      <guid>/ja/post/find-k-th-smallest-elements/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;同一要素を含まない，長さ$n$の配列&lt;code&gt;lst&lt;/code&gt;が与えられる．小さい順に$k$個の要素を取り出せ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;h3 id=&#34;on-log-n昇順にソートして先頭k個取り出す&#34;&gt;$O(n \log n)$：昇順にソートして先頭$k$個取り出す&lt;/h3&gt;
+&lt;p&gt;ソートするのに$O(n \log n)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[:k]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;onkバブルソートを途中でやめる&#34;&gt;$O(nk)$：バブルソートを途中でやめる&lt;/h3&gt;
+&lt;p&gt;先頭$k$個が決定するまで昇順のバブルソートを実行し，途中でやめる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, k, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, i, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; lst[j]:
+                lst[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], lst[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[j], lst[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[:k]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ok-log-nヒープソートを途中でやめる&#34;&gt;$O(k \log n)$：ヒープソートを途中でやめる&lt;/h3&gt;
+&lt;p&gt;先頭$k$個が決定するまで昇順のヒープソートを実行し，途中でやめる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; heapq
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heapify(lst)
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(k):
+        ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappop(lst))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;heapq&lt;/code&gt;にはそれ用の&lt;code&gt;heapq.nsmallest()&lt;/code&gt;関数が用意されている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; heapq
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nsmallest(k, lst)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;on-log-kサイズkの-max-heap-を作る&#34;&gt;$O(n \log k)$：サイズ$k$の Max Heap を作る&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;lst&lt;/code&gt;の要素を一つずつ見ながら Max Heap を作る．今見てる要素より Max Heap の先頭が大きかったら現在の Max Heap の先頭は答えに含まれないので&lt;code&gt;pop&lt;/code&gt;して今見てる要素を&lt;code&gt;push&lt;/code&gt;する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;max_heapify&lt;/span&gt;(lst):
+        p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; p:
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(lst) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(lst) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; lst[p] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[left]:
+                lst[p], lst[left] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[left], lst[p]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; lst[p] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; lst[right]:
+                lst[p], lst[right] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[right], lst[p]
+            p &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;max_heappop&lt;/span&gt;(lst):
+        m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+        max_heapify(lst)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; m
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;max_heappush&lt;/span&gt;(lst, ele):
+        lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(ele)
+        max_heapify(lst)
+
+    heap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(heap) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+            max_heappush(heap, ele)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; heap[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]:
+            max_heappop(heap)
+            max_heappush(heap, ele)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; heap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;onselection-rank-algorithm&#34;&gt;$O(n)$：Selection Rank Algorithm&lt;/h3&gt;
+&lt;p&gt;$k$番目に小さい値を効率よく見つけ出し，それ以上の値を取ってくるというアルゴリズム．分割統治法．最悪の時間計算量は$O(n^2)$だが，うまく行けば$O(n)$が期待できる．クイックソートの探索版を使って$k$番目に小さい値を拾ってくる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(lst, k):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# partition lst[left:right+1] by pivot = lst[right]&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# left, right: 0-origin&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# [left_side] &amp;lt;= pivot &amp;lt; [right_side]&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partition&lt;/span&gt;(lst, left, right):
+        pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[right]
+        left_end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; curr &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(left, right):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lst[curr] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot:
+                lst[left_end], lst[curr] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[curr], lst[left_end]
+                left_end &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        lst[left_end], lst[right] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[right], lst[left_end]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; left_end &lt;span style=&#34;color:#75715e&#34;&gt;# tail index of left side(0-origin)&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# rank, left, right: 0-origin&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_ele_at_rank&lt;/span&gt;(lst, left, right, rank):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; rank &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; rank &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left:
+            left_end &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; partition(lst, left, right)
+            left_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left_end &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 1-origin count&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left_end &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; rank:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lst[left_end]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; rank &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; left_end &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; get_ele_at_rank(lst, left, left_end &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, rank)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; get_ele_at_rank(lst, left_end  &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, right, rank &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left_size)
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# given k: 1-origin&lt;/span&gt;
+    kth_smallest &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_ele_at_rank(lst, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(lst) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [ele &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; kth_smallest]
+
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;)]
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(lst)
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[:&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(lst)
+
+k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}th smallest elements: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(k, smallest_k(lst, k)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;TODO: selection rank の実装&lt;/p&gt;
+&lt;h3 id=&#34;on二分探索木を作って間順走査&#34;&gt;$O(n)$：二分探索木を作って間順走査&lt;/h3&gt;
+&lt;p&gt;正しい二分探索木を間順走査すれば昇順に$k$個の頂点を訪れる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TreeNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, left&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None, right&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt;(self, val):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; val:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; val:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; TreeNode(val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;insert(val)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# self.key &amp;gt; key&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; TreeNode(val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;insert(val)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;display&lt;/span&gt;(self):
+        lines, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_display_aux()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; line &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lines:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(line)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_display_aux&lt;/span&gt;(self):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns list of strings, width, height, and horizontal coordinate of the root.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# No child.&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+            width &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(line)
+            height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            middle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; width &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [line], width, height, middle
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# Only left child.&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            lines, n, p, x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_display_aux()
+            s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+            u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(s)
+            first_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s
+            second_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+            shifted_lines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [line &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; line &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lines]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [first_line, second_line] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; shifted_lines, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u, p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# Only right child.&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            lines, n, p, x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_display_aux()
+            s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+            u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(s)
+            first_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+            second_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (u &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; x) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+            shifted_lines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [u &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; line &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; line &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lines]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [first_line, second_line] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; shifted_lines, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u, p &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, u &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# Two children.&lt;/span&gt;
+        left, n, p, x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_display_aux()
+        right, m, q, y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_display_aux()
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+        u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(s)
+        first_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (m &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+        second_line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (m &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; q:
+            left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; [n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (q &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; p)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; q &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; p:
+            right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; [m &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (p &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; q)
+        zipped_lines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; zip(left, right)
+        lines &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [first_line, second_line] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; a, b &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zipped_lines]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lines, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u, max(p, q) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; u &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [i &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;)]
+random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(lst)
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lst[:&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;]
+
+root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; TreeNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lst[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]:
+    root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;insert(ele)
+root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;display()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smallest_k&lt;/span&gt;(root, k, sofar):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        sofar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; smallest_k(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, k, sofar)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(sofar) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+        sofar&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        sofar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; smallest_k(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, k, sofar)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; sofar
+
+k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; smallest_k(root, k, [])
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(ret)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_bst&lt;/span&gt;(root):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_bst(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; is_bst(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(is_bst(root))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Find Majority Element From a List</title>
@@ -3743,7 +3962,7 @@ reverse_linked_list(
     </item>
     
     <item>
-      <title>Kth to Last in Linked List</title>
+      <title>$K$th to Last in Linked List</title>
       <link>/ja/post/kth-to-last-in-linked-list/</link>
       <pubDate>Fri, 19 Mar 2021 15:27:36 +0900</pubDate>
       <guid>/ja/post/kth-to-last-in-linked-list/</guid>
