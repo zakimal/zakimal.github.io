@@ -2477,6 +2477,20 @@ $$&lt;/p&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
                 left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; middle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nums[left]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;元の配列が昇順に並んであるので「先頭要素より小さくなる最小のインデックスの位置にある要素がほしい」と問題を言い換えられれば，めぐる式二分探索に落とし込める．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findMin&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nums[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ok &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ng):
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ok &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ng) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nums[ok] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ok &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;36-house-robber&#34;&gt;36: House Robber&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;[2,1,1,2]&lt;/code&gt;というパターンを忘れてはならない．&lt;/p&gt;

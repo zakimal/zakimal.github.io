@@ -1421,6 +1421,20 @@ $$</p>
             <span style="color:#66d9ef">else</span>:
                 left <span style="color:#f92672">=</span> middle <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
         <span style="color:#66d9ef">return</span> nums[left]
+</code></pre></div><p>元の配列が昇順に並んであるので「先頭要素より小さくなる最小のインデックスの位置にある要素がほしい」と問題を言い換えられれば，めぐる式二分探索に落とし込める．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findMin</span>(self, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_ok</span>(mid):
+            <span style="color:#66d9ef">return</span> nums[mid] <span style="color:#f92672">&lt;</span> nums[<span style="color:#ae81ff">0</span>]
+        ng <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+        ok <span style="color:#f92672">=</span> len(nums)
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ok <span style="color:#f92672">-</span> ng):
+            mid <span style="color:#f92672">=</span> (ok <span style="color:#f92672">+</span> ng) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+            <span style="color:#66d9ef">if</span> is_ok(mid):
+                ok <span style="color:#f92672">=</span> mid
+            <span style="color:#66d9ef">else</span>:
+                ng <span style="color:#f92672">=</span> mid
+        <span style="color:#66d9ef">return</span> nums[ok] <span style="color:#66d9ef">if</span> ok <span style="color:#f92672">!=</span> len(nums) <span style="color:#66d9ef">else</span> nums[<span style="color:#ae81ff">0</span>]
 </code></pre></div></details>
 <h2 id="36-house-robber">36: House Robber</h2>
 <p><code>[2,1,1,2]</code>というパターンを忘れてはならない．</p>
