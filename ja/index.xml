@@ -5,12 +5,107 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 13:06:44 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 18:07:16 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Volume of Histogram</title>
+      <link>/ja/post/volume-of-histogram/</link>
+      <pubDate>Sun, 28 Mar 2021 18:07:16 +0900</pubDate>
+      <guid>/ja/post/volume-of-histogram/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;あるヒストグラムを考えよう．そのヒストグラムを容器に見立てて上から水を流し込む．このとき，ヒストグラム内に貯まる水の量はいくつか．&lt;/p&gt;
+&lt;p&gt;入力としてヒストグラムはリストの形で与えられる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;                        _
+                       |x|             _
+               _       |x|            |x|
+              |x|      |x|       _    |x|
+              |x|      |x|      |x|   |x|
+              |x|      |x|      |x|   |x|    _
+              |x|      |x|      |x|   |x|   |x|
+        ------------------------------------------------
+input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;左右から，「その位置での直近の最大値」を計算し，各位置で小さい方を取れば水面の高さが取れる．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;algorithm.png&#34; data-caption=&#34;アルゴリズム概観&#34;&gt;
+&lt;img src=&#34;algorithm.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    アルゴリズム概観
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;volume_of_hist&lt;/span&gt;(hist):
+    max_by_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
+    m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; hist[i]:
+            max_by_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
+            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            max_by_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m
+
+    max_by_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
+    m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; hist[i]:
+            max_by_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
+            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            max_by_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m
+
+    height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
+        height[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(max_by_left[i], max_by_right[i])
+
+    volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
+        volume &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (height[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; hist[i])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; volume
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(volume_of_hist(hist)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 26&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;                _
+               |x|             _
+       _       |x|            |x|
+      |x|      |x|       _    |x|
+      |x|      |x|      |x|   |x|
+      |x|      |x|      |x|   |x|    _
+      |x|      |x|      |x|   |x|   |x|
+------------------------------------------------
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- input
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- max_by_left
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 1, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- max_by_right
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 4, 4, 6, 5, 5, 5, 5, 5, 1, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;max_by_left&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, max_by_right&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;])&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 0, 4, 4, 0, 5, 5, 2, 5, 0, 1, 0, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height - input
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Find $K$th Smallest Elements</title>
