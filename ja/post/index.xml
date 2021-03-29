@@ -5,12 +5,82 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 28 Mar 2021 18:07:16 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 29 Mar 2021 15:10:30 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Diameter of a Tree</title>
+      <link>/ja/post/diameter-of-a-tree/</link>
+      <pubDate>Mon, 29 Mar 2021 15:10:30 +0900</pubDate>
+      <guid>/ja/post/diameter-of-a-tree/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;木の直径を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;任意の頂点$x$から BFS をして$x$から最遠の頂点$u$を計算し，再び$u$から BFS して$u$から最遠の頂点$v$を計算する．このとき，$u$-$v$はその木の直径をなすパスの両端点になっている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+
+T &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    s, t, w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    T[s]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((t, w))
+    T[t]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((s, w))
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BFS&lt;/span&gt;(tree, s):
+    dist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+    dist[s] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [s]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; suspended:
+        u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+        cost &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dist[u]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (v, w) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; tree[u]:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dist[v] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+              dist[v] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cost &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; w
+              suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(v)
+    d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dist)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dist&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(d), d
+
+u, _ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BFS(T, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+v, diameter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BFS(T, u)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(diameter)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;対象となる木が「二分木」であるときは別の解き方もできる．ある頂点を根としたとき，「その根の左部分木の直径」，「その根の右部分木の直径」，「その根の左右の部分木の高さの和+1」のうちの最大値がその木の直径となる．これを再帰的に書いても答えが得られる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TreeNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, left&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None, right&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_height&lt;/span&gt;(root):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# root.left is not None and root.right is not None:&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left), get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_diameter&lt;/span&gt;(root):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    left_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+    right_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+
+    root_diameter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left_height &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right_height &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    left_diameter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_diameter(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+    right_diameter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_diameter(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(left_diameter, right_diameter, root_diameter)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Volume of Histogram</title>
