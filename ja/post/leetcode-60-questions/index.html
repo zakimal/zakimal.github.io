@@ -584,29 +584,29 @@ row <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> | 
         int_part <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
         <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> s:
             <span style="color:#66d9ef">if</span> char <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;.&#34;</span>:
-                <span style="color:#66d9ef">break</span>
+                <span style="color:#66d9ef">break</span> <span style="color:#75715e"># 123.4...</span>
             <span style="color:#66d9ef">if</span> char<span style="color:#f92672">.</span>isdigit() <span style="color:#f92672">or</span> char <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;+&#34;</span>, <span style="color:#e6db74">&#34;-&#34;</span>]:
                 <span style="color:#66d9ef">if</span> char <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;+&#34;</span>, <span style="color:#e6db74">&#34;-&#34;</span>] <span style="color:#f92672">and</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;</span> len(int_part):
-                    <span style="color:#66d9ef">break</span>
+                    <span style="color:#66d9ef">break</span> <span style="color:#75715e"># 12345+...</span>
                 int_part <span style="color:#f92672">+=</span> char
-            <span style="color:#66d9ef">else</span>: <span style="color:#75715e"># char is alphabet</span>
-                <span style="color:#66d9ef">break</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">break</span> <span style="color:#75715e"># char is alphabet</span>
         ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         digit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> int_part[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
             <span style="color:#66d9ef">if</span> char <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;-&#34;</span>:
-                ans <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+                ans <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#75715e">#-123</span>
             <span style="color:#66d9ef">elif</span> char <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;+&#34;</span>:
-                <span style="color:#66d9ef">continue</span>
+                <span style="color:#66d9ef">continue</span> <span style="color:#75715e"># +123</span>
             <span style="color:#66d9ef">else</span>:
-                ans <span style="color:#f92672">+=</span> (<span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> digit) <span style="color:#f92672">*</span> int(char)
+                ans <span style="color:#f92672">+=</span> int(char) <span style="color:#f92672">*</span> (<span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span>digit)
                 digit <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span> <span style="color:#f92672">&lt;=</span> ans <span style="color:#f92672">and</span> ans <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>:
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">&lt;=</span> ans <span style="color:#f92672">and</span> ans <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">31</span>:
             <span style="color:#66d9ef">return</span> ans
-        <span style="color:#66d9ef">elif</span> ans <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>:
-            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span>
-        <span style="color:#66d9ef">elif</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span> <span style="color:#f92672">&lt;=</span> ans:
-            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">elif</span> ans <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">31</span>:
+            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">31</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">31</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
 </code></pre></div></details>
 <h2 id="06-valid-parentheses">06: Valid Parentheses</h2>
 <p>閉じカッコに対応するのは，最直近の開きカッコなので，FIFO．だから stack でうまく書ける．</p>
