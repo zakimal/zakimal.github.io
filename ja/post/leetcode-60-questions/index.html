@@ -904,6 +904,16 @@ $$</p>
             s <span style="color:#f92672">=</span> max(s <span style="color:#f92672">+</span> nums[j], nums[j])
             ans <span style="color:#f92672">=</span> max(ans, s)
         <span style="color:#66d9ef">return</span> ans
+</code></pre></div><p>直接的に<code>dp</code>で書くとこうなる．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maxSubArray</span>(self, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#75715e"># dp[i]: nums[i]が右端要素となるような連続する部分配列の和の最大値</span>
+        <span style="color:#75715e"># dp[i+1] = max(dp[i] + nums[i], nums[i])</span>
+        dp <span style="color:#f92672">=</span> [float(<span style="color:#e6db74">&#34;-inf&#34;</span>)] <span style="color:#f92672">*</span> len(nums)
+        dp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(nums) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):
+            dp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max(dp[i] <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>])
+        <span style="color:#66d9ef">return</span> max(dp)
 </code></pre></div></details>
 <h2 id="16-unique-paths">16: Unique Paths</h2>
 <p>中学受験の道の数え上げ問題</p>

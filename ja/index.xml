@@ -2030,6 +2030,16 @@ $$&lt;/p&gt;
             s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(s &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[j], nums[j])
             ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, s)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;直接的に&lt;code&gt;dp&lt;/code&gt;で書くとこうなる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxSubArray&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: nums[i]が右端要素となるような連続する部分配列の和の最大値&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i+1] = max(dp[i] + nums[i], nums[i])&lt;/span&gt;
+        dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-inf&amp;#34;&lt;/span&gt;)] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(nums)
+        dp[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            dp[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], nums[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(dp)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;16-unique-paths&#34;&gt;16: Unique Paths&lt;/h2&gt;
 &lt;p&gt;中学受験の道の数え上げ問題&lt;/p&gt;
