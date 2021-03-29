@@ -72,25 +72,19 @@
 &lt;p&gt;題意は「与えられた文字列に含まれる，ユニークな文字による連続する部分文字列の中で，最長のものの長さを求めよ」&lt;/p&gt;
 &lt;details&gt;
 &lt;summary&gt;答え&lt;/summary&gt;
+&lt;p&gt;これはしゃくとり法．すでに見たことのある文字が出てきた次点で，それを含む範囲を伸ばしても答えにならないので，走査範囲の左端を右端の隣に更新する．$O(n)$．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lengthOfLongestSubstring&lt;/span&gt;(self, s: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;:
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-
-        table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
-        start_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-        current_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# しゃくとり法&lt;/span&gt;
+        start &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
         max_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; current_idx, char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(s):
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; table&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;keys() &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; start_idx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; table[char]:
-                start_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; table[char] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-                table[char] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current_idx
-                current_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current_idx &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; start_idx &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        seen &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict() &lt;span style=&#34;color:#75715e&#34;&gt;# {char: occurrence idx}&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; curr, char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(s):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; seen &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; start &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; seen[char]:
+                start &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; seen[char] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-                table[char] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current_idx
-                current_len &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-                max_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_len, current_len)
+                max_len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_len, curr &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; start &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            seen[char] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max_len
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;04-zigzag-conversion&#34;&gt;04: ZigZag Conversion&lt;/h2&gt;

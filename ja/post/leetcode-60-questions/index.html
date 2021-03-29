@@ -537,25 +537,19 @@
 <p>題意は「与えられた文字列に含まれる，ユニークな文字による連続する部分文字列の中で，最長のものの長さを求めよ」</p>
 <details>
 <summary>答え</summary>
+<p>これはしゃくとり法．すでに見たことのある文字が出てきた次点で，それを含む範囲を伸ばしても答えにならないので，走査範囲の左端を右端の隣に更新する．$O(n)$．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lengthOfLongestSubstring</span>(self, s: str) <span style="color:#f92672">-&gt;</span> int:
-        <span style="color:#66d9ef">if</span> s <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span>:
-            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-
-        table <span style="color:#f92672">=</span> dict()
-        start_idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        current_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#75715e"># しゃくとり法</span>
+        start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
         max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-
-        <span style="color:#66d9ef">for</span> current_idx, char <span style="color:#f92672">in</span> enumerate(s):
-            <span style="color:#66d9ef">if</span> char <span style="color:#f92672">in</span> table<span style="color:#f92672">.</span>keys() <span style="color:#f92672">and</span> start_idx <span style="color:#f92672">&lt;=</span> table[char]:
-                start_idx <span style="color:#f92672">=</span> table[char] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
-                table[char] <span style="color:#f92672">=</span> current_idx
-                current_len <span style="color:#f92672">=</span> current_idx <span style="color:#f92672">-</span> start_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        seen <span style="color:#f92672">=</span> dict() <span style="color:#75715e"># {char: occurrence idx}</span>
+        <span style="color:#66d9ef">for</span> curr, char <span style="color:#f92672">in</span> enumerate(s):
+            <span style="color:#66d9ef">if</span> char <span style="color:#f92672">in</span> seen <span style="color:#f92672">and</span> start <span style="color:#f92672">&lt;=</span> seen[char]:
+                start <span style="color:#f92672">=</span> seen[char] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
             <span style="color:#66d9ef">else</span>:
-                table[char] <span style="color:#f92672">=</span> current_idx
-                current_len <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-                max_len <span style="color:#f92672">=</span> max(max_len, current_len)
+                max_len <span style="color:#f92672">=</span> max(max_len, curr <span style="color:#f92672">-</span> start <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+            seen[char] <span style="color:#f92672">=</span> curr
         <span style="color:#66d9ef">return</span> max_len
 </code></pre></div></details>
 <h2 id="04-zigzag-conversion">04: ZigZag Conversion</h2>
