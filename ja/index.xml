@@ -947,19 +947,37 @@ random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(cards)
   &lt;span style=&#34;color:#ae81ff&#34;&gt;1711&lt;/span&gt; &amp;lt;- 正しい答え
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これを 2 進数でやればいい．「繰り上がりを無視した足し算」はそのまま&lt;code&gt;xor&lt;/code&gt;が対応する．「繰り上がりだけ並べる」というのは，&lt;code&gt;&amp;amp;&lt;/code&gt;を取って左 1 シフトと対応する．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(a, b):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 32 bits integer max&lt;/span&gt;
+    MAX &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x7FFFFFFF&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 32 bits interger min&lt;/span&gt;
+    MIN &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x80000000&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# mask to get last 32 bits&lt;/span&gt;
+    mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0xFFFFFFFF&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# a + 0 = a&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; MAX &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;(a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; mask)
     s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
     c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; add(s, c)
+    a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; mask
+    b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; mask
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; add(a, b)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(add(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;繰り返しで書くと次の通り．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(a, b):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 32 bits integer max&lt;/span&gt;
+    MAX &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x7FFFFFFF&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 32 bits interger min&lt;/span&gt;
+    MIN &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x80000000&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# mask to get last 32 bits&lt;/span&gt;
+    mask &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0xFFFFFFFF&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; b:
         s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
         c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s
-        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; mask
+        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; mask
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; MAX &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;~&lt;/span&gt;(a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; mask)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(add(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
