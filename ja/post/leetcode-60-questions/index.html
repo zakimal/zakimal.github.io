@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    21 分で読める
+    22 分で読める
   </span>
   
 
@@ -2067,6 +2067,13 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubsequence</span>(self, s: str, t: str) <span style="color:#f92672">-&gt;</span> bool:
         t <span style="color:#f92672">=</span> iter(t)
+        <span style="color:#66d9ef">for</span> ch <span style="color:#f92672">in</span> s:
+            <span style="color:#66d9ef">if</span> ch <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> t:
+                <span style="color:#66d9ef">return</span> False
+        <span style="color:#66d9ef">return</span> True
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubsequence</span>(self, s: str, t: str) <span style="color:#f92672">-&gt;</span> bool:
+        t <span style="color:#f92672">=</span> iter(t)
         <span style="color:#66d9ef">return</span> all(char <span style="color:#f92672">in</span> t <span style="color:#66d9ef">for</span> char <span style="color:#f92672">in</span> s)
 </code></pre></div></details>
 <h2 id="53-subarray-sum-equals-k">53: Subarray Sum Equals K</h2>
@@ -2265,6 +2272,7 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
         inorder_traverse(root<span style="color:#f92672">.</span>left)
         inordered<span style="color:#f92672">.</span>append(root<span style="color:#f92672">.</span>val)
         inorder_traverse(root<span style="color:#f92672">.</span>right)
+    inorder_traverse(root)
     idx <span style="color:#f92672">=</span> inordered<span style="color:#f92672">.</span>index(v)
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_bst</span>(i, j):
         <span style="color:#66d9ef">if</span> j <span style="color:#f92672">&lt;</span> i:
@@ -2275,7 +2283,6 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
         root<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> build_bst(mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, j)
         <span style="color:#66d9ef">return</span> root
     <span style="color:#66d9ef">return</span> [build_bst(<span style="color:#ae81ff">0</span>, idx), build(idx, len(inordered)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)]
-
 </code></pre></div></details>
 <h2 id="58-k-th-symbol-in-grammar">58: K-th Symbol in Grammar</h2>
 <p>$i+1$行目のビット列$s_{i+1}$は$i$列目のビット列$s_i$とそのビット反転したものを連結したものになっている．これを使って真面目に文字列を全部求めると時間かかる．$s_{i+1}$の前半は$s_i$と同じなので，問題のサイズを半分にすることができる．</p>
@@ -2284,15 +2291,12 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">kthGrammar</span>(self, N: int, K: int) <span style="color:#f92672">-&gt;</span> int:
         <span style="color:#66d9ef">if</span> N <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
-            <span style="color:#66d9ef">if</span> K <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
-                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-            <span style="color:#66d9ef">else</span>:
-                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-        half <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (N<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+        half <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (N <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
         <span style="color:#66d9ef">if</span> K <span style="color:#f92672">&lt;=</span> half:
             <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>kthGrammar(N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, K)
         <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>kthGrammar(N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, K <span style="color:#f92672">-</span> half) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>kthGrammar(N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, K <span style="color:#f92672">-</span> half) <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>
 </code></pre></div></details>
 <h2 id="59-unique-email-addresses">59: Unique Email Addresses</h2>
 <details>

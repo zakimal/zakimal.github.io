@@ -3193,6 +3193,13 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isSubsequence&lt;/span&gt;(self, s: str, t: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
         t &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; iter(t)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ch &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; s:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ch &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; t:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isSubsequence&lt;/span&gt;(self, s: str, t: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        t &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; iter(t)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all(char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; t &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; s)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;53-subarray-sum-equals-k&#34;&gt;53: Subarray Sum Equals K&lt;/h2&gt;
@@ -3391,6 +3398,7 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
         inorder_traverse(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
         inordered&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
         inorder_traverse(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+    inorder_traverse(root)
     idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; inordered&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(v)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;build_bst&lt;/span&gt;(i, j):
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; i:
@@ -3401,7 +3409,6 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
         root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; build_bst(mid&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, j)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; root
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [build_bst(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, idx), build(idx, len(inordered)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;58-k-th-symbol-in-grammar&#34;&gt;58: K-th Symbol in Grammar&lt;/h2&gt;
 &lt;p&gt;$i+1$行目のビット列$s_{i+1}$は$i$列目のビット列$s_i$とそのビット反転したものを連結したものになっている．これを使って真面目に文字列を全部求めると時間かかる．$s_{i+1}$の前半は$s_i$と同じなので，問題のサイズを半分にすることができる．&lt;/p&gt;
@@ -3410,15 +3417,12 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;kthGrammar&lt;/span&gt;(self, N: int, K: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; K &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-        half &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        half &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; K &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; half:
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;kthGrammar(N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, K)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;kthGrammar(N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, K &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; half) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;kthGrammar(N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, K &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; half) &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;59-unique-email-addresses&#34;&gt;59: Unique Email Addresses&lt;/h2&gt;
 &lt;details&gt;
