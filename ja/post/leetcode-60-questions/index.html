@@ -532,6 +532,67 @@
 
             <span style="color:#66d9ef">return</span> result
         <span style="color:#66d9ef">return</span> _recurse(l1, l2, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>リストが「桁の大きい順」になっている場合はリストを逆転させてこの問題に帰着させるか，スタックを 2 つ使う方法がある．</p>
+<p>リストを逆転させる解法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#75715e"># Definition for singly-linked list.</span>
+<span style="color:#75715e"># class ListNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, next=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.next = next</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">addTwoNumbers</span>(self, l1: ListNode, l2: ListNode) <span style="color:#f92672">-&gt;</span> ListNode:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reverse</span>(root):
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None <span style="color:#f92672">or</span> root<span style="color:#f92672">.</span>next <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> root
+            reversed_head <span style="color:#f92672">=</span> reverse(root<span style="color:#f92672">.</span>next)
+            root<span style="color:#f92672">.</span>next<span style="color:#f92672">.</span>next <span style="color:#f92672">=</span> root
+            root<span style="color:#f92672">.</span>next <span style="color:#f92672">=</span> None
+            <span style="color:#66d9ef">return</span> reversed_head
+
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rec</span>(l1, l2, carry):
+            <span style="color:#66d9ef">if</span> l1 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> l2 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> carry <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                <span style="color:#66d9ef">return</span> None
+            val <span style="color:#f92672">=</span> carry
+            val <span style="color:#f92672">+=</span> l1<span style="color:#f92672">.</span>val <span style="color:#66d9ef">if</span> l1 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+            val <span style="color:#f92672">+=</span> l2<span style="color:#f92672">.</span>val <span style="color:#66d9ef">if</span> l2 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+            ret <span style="color:#f92672">=</span> ListNode(val<span style="color:#f92672">=</span>val <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, next<span style="color:#f92672">=</span>None)
+            l1_next <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>next <span style="color:#66d9ef">if</span> l1 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> None
+            l2_next <span style="color:#f92672">=</span> l2<span style="color:#f92672">.</span>next <span style="color:#66d9ef">if</span> l2 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#66d9ef">else</span> None
+            ret<span style="color:#f92672">.</span>next <span style="color:#f92672">=</span> rec(l1_next, l2_next, val <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>)
+            <span style="color:#66d9ef">return</span> ret
+        <span style="color:#66d9ef">return</span> reverse(rec(reverse(l1), reverse(l2), <span style="color:#ae81ff">0</span>))
+</code></pre></div><p>2 つのスタックを使う解法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for singly-linked list.</span>
+<span style="color:#75715e"># class ListNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, next=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.next = next</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">addTwoNumbers</span>(self, l1: ListNode, l2: ListNode) <span style="color:#f92672">-&gt;</span> ListNode:
+        stack1 <span style="color:#f92672">=</span> []
+        stack2 <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">while</span> l1 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            stack1<span style="color:#f92672">.</span>append(l1<span style="color:#f92672">.</span>val)
+            l1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">.</span>next
+        <span style="color:#66d9ef">while</span> l2 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            stack2<span style="color:#f92672">.</span>append(l2<span style="color:#f92672">.</span>val)
+            l2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">.</span>next
+
+        carry <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        head <span style="color:#f92672">=</span> None
+
+        <span style="color:#66d9ef">print</span>(stack1)
+        <span style="color:#66d9ef">print</span>(stack2)
+
+        <span style="color:#66d9ef">while</span> len(stack1) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> len(stack2) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> carry <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+            val <span style="color:#f92672">=</span> carry
+            val <span style="color:#f92672">+=</span> stack1<span style="color:#f92672">.</span>pop() <span style="color:#66d9ef">if</span> stack1 <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+            val <span style="color:#f92672">+=</span> stack2<span style="color:#f92672">.</span>pop() <span style="color:#66d9ef">if</span> stack2 <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+            carry <span style="color:#f92672">=</span> val <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>
+            head_new <span style="color:#f92672">=</span> ListNode(val<span style="color:#f92672">=</span>val <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, next<span style="color:#f92672">=</span>head)
+            head <span style="color:#f92672">=</span> head_new
+        <span style="color:#66d9ef">return</span> head
 </code></pre></div></details>
 <h2 id="03-longest-substring-without-repeating-characters">03: Longest Substring Without Repeating Characters</h2>
 <p>題意は「与えられた文字列に含まれる，ユニークな文字による連続する部分文字列の中で，最長のものの長さを求めよ」</p>

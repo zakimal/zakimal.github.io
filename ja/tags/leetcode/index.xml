@@ -67,6 +67,67 @@
 
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; _recurse(l1, l2, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;リストが「桁の大きい順」になっている場合はリストを逆転させてこの問題に帰着させるか，スタックを 2 つ使う方法がある．&lt;/p&gt;
+&lt;p&gt;リストを逆転させる解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;addTwoNumbers&lt;/span&gt;(self, l1: ListNode, l2: ListNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; ListNode:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reverse&lt;/span&gt;(root):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; root
+            reversed_head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reverse(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next)
+            root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root
+            root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; reversed_head
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rec&lt;/span&gt;(l1, l2, carry):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; l1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; l2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; carry &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; None
+            val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; carry
+            val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; l1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; l1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; l2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; l2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None)
+            l1_next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; l1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; l1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; None
+            l2_next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; l2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; l2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; None
+            ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; rec(l1_next, l2_next, val &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; reverse(rec(reverse(l1), reverse(l2), &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2 つのスタックを使う解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;addTwoNumbers&lt;/span&gt;(self, l1: ListNode, l2: ListNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; ListNode:
+        stack1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        stack2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; l1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            stack1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(l1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            l1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; l1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; l2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            stack2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(l2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            l2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; l2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+
+        carry &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(stack1)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(stack2)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack1) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; len(stack2) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; carry &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; carry
+            val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; stack1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop() &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; stack1 &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; stack2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop() &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; stack2 &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            carry &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+            head_new &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;head)
+            head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head_new
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; head
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;03-longest-substring-without-repeating-characters&#34;&gt;03: Longest Substring Without Repeating Characters&lt;/h2&gt;
 &lt;p&gt;題意は「与えられた文字列に含まれる，ユニークな文字による連続する部分文字列の中で，最長のものの長さを求めよ」&lt;/p&gt;
