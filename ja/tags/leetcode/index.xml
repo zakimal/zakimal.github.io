@@ -97,7 +97,7 @@
             ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; rec(l1_next, l2_next, val &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; reverse(rec(reverse(l1), reverse(l2), &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2 つのスタックを使う解法&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2 つのスタックを使う解法：スタックを使うことで数字を小さい桁から扱えるようになる．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;

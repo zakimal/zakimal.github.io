@@ -562,7 +562,7 @@
             ret<span style="color:#f92672">.</span>next <span style="color:#f92672">=</span> rec(l1_next, l2_next, val <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>)
             <span style="color:#66d9ef">return</span> ret
         <span style="color:#66d9ef">return</span> reverse(rec(reverse(l1), reverse(l2), <span style="color:#ae81ff">0</span>))
-</code></pre></div><p>2 つのスタックを使う解法</p>
+</code></pre></div><p>2 つのスタックを使う解法：スタックを使うことで数字を小さい桁から扱えるようになる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for singly-linked list.</span>
 <span style="color:#75715e"># class ListNode:</span>
 <span style="color:#75715e">#     def __init__(self, val=0, next=None):</span>
