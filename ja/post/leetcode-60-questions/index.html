@@ -1827,6 +1827,19 @@ $$</p>
             <span style="color:#66d9ef">if</span> nums[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
                 nums[last_non_zero_at], nums[i] <span style="color:#f92672">=</span> nums[i], nums[last_non_zero_at]
                 last_non_zero_at <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><p>非$0$要素の数をカウントというやり方でもいい．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">moveZeroes</span>(self, nums: List[int]) <span style="color:#f92672">-&gt;</span> None:
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Do not return anything, modify nums in-place instead.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        non_zero <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums:
+            <span style="color:#66d9ef">if</span> num <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+                nums[non_zero] <span style="color:#f92672">=</span> num
+                non_zero <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(non_zero, len(nums)):
+            nums[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 </code></pre></div></details>
 <h2 id="45-longest-increasing-subsequence">45: Longest Increasing Subsequence</h2>
 <details>
