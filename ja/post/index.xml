@@ -3009,8 +3009,8 @@ $$&lt;/p&gt;
                 ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, len(seq))
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;DP で解くと$O(n^2)$&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;：&lt;code&gt;nums[i]&lt;/code&gt;で終わる最長部分増加列の長さ&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;は&lt;code&gt;dp[0]&lt;/code&gt;，&lt;code&gt;dp[1]&lt;/code&gt;，&lt;code&gt;dp[2]&lt;/code&gt;，&amp;hellip;&lt;code&gt;dp[i-1]&lt;/code&gt;を使って計算できる．&lt;code&gt;dp[i]&lt;/code&gt;は「&lt;code&gt;nums[i]&lt;/code&gt;が&lt;code&gt;nums[j]&lt;/code&gt;以上であるような&lt;code&gt;j&lt;/code&gt;の中での最大の&lt;code&gt;dp[j]&lt;/code&gt;に 1 足したもの」&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;：&lt;code&gt;nums[i]&lt;/code&gt;で終わる最長部分増加列の長さ
+&lt;code&gt;dp[i]&lt;/code&gt;は&lt;code&gt;dp[0]&lt;/code&gt;，&lt;code&gt;dp[1]&lt;/code&gt;，&lt;code&gt;dp[2]&lt;/code&gt;，&amp;hellip;&lt;code&gt;dp[i-1]&lt;/code&gt;を使って計算できる．&lt;code&gt;dp[i]&lt;/code&gt;は「&lt;code&gt;nums[i]&lt;/code&gt;が&lt;code&gt;nums[j]&lt;/code&gt;以上であるような&lt;code&gt;j&lt;/code&gt;の中での最大の&lt;code&gt;dp[j]&lt;/code&gt;に 1 足したもの」&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, i):
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i]:
         dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dp[i], dp[j] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
@@ -3028,6 +3028,16 @@ $$&lt;/p&gt;
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i]:
                     dp[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(dp[i], dp[j] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(dp)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添字を逆転させた DP を考えると$O(n \log n)$で解ける．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dp[i]&lt;/code&gt;：長さ&lt;code&gt;i + 1&lt;/code&gt;の増加部分列の右端要素の最小値
+全ての部分列を取り出して&lt;code&gt;dp&lt;/code&gt;を埋めたあとのことを考えると，&lt;code&gt;dp&lt;/code&gt;は単調に増加するような数列になっているはず．これは別に全ての部分列を列挙し終わってからでなくても，要素を一つずつ見て最適な&lt;code&gt;dp&lt;/code&gt;の位置に置くことでも得ることができる．つまり，要素を一つずつ見ながら，二分探索でその要素が入る位置を求めて&lt;code&gt;dp&lt;/code&gt;を求めることができる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lengthOfLIS&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: minimum of the last element of an increasing subsequence which length is i+1&lt;/span&gt;
+        dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            dp[bisect_left(dp, num)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; bisect_left(dp, float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;46-coin-change&#34;&gt;46: Coin Change&lt;/h2&gt;
 &lt;details&gt;
