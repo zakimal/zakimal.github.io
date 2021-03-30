@@ -3469,21 +3469,17 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; loaded:
                     elapsed &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
                     loaded &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; weight
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; elapsed &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; D:
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; elapsed &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; D
+
+        ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(weights) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 常に条件を満たさない&lt;/span&gt;
+        ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum(weights) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 常に条件を満たす&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ng &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ok):
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ng &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ok) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
             &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(weights):
-            ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(weights)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 常に条件を満たさない&lt;/span&gt;
-            ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum(weights)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 常に条件を満たす&lt;/span&gt;
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ng &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ok):
-                mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ng &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ok) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
-                    ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
-                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-                    ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; binary_search(weights)
+                ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 </description>
     </item>

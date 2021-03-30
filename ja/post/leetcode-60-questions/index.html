@@ -2343,21 +2343,17 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
                 <span style="color:#66d9ef">if</span> mid <span style="color:#f92672">&lt;</span> loaded:
                     elapsed <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
                     loaded <span style="color:#f92672">=</span> weight
-            <span style="color:#66d9ef">if</span> elapsed <span style="color:#f92672">&lt;=</span> D:
-                <span style="color:#66d9ef">return</span> True
+            <span style="color:#66d9ef">return</span> elapsed <span style="color:#f92672">&lt;=</span> D
+
+        ng <span style="color:#f92672">=</span> max(weights) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 常に条件を満たさない</span>
+        ok <span style="color:#f92672">=</span> sum(weights) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 常に条件を満たす</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ng <span style="color:#f92672">-</span> ok):
+            mid <span style="color:#f92672">=</span> (ng <span style="color:#f92672">+</span> ok) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+            <span style="color:#66d9ef">if</span> is_ok(mid):
+                ok <span style="color:#f92672">=</span> mid
             <span style="color:#66d9ef">else</span>:
-                <span style="color:#66d9ef">return</span> False
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">binary_search</span>(weights):
-            ng <span style="color:#f92672">=</span> max(weights)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># 常に条件を満たさない</span>
-            ok <span style="color:#f92672">=</span> sum(weights)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># 常に条件を満たす</span>
-            <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ng <span style="color:#f92672">-</span> ok):
-                mid <span style="color:#f92672">=</span> (ng <span style="color:#f92672">+</span> ok) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
-                <span style="color:#66d9ef">if</span> is_ok(mid):
-                    ok <span style="color:#f92672">=</span> mid
-                <span style="color:#66d9ef">else</span>:
-                    ng <span style="color:#f92672">=</span> mid
-            <span style="color:#66d9ef">return</span> ok
-        <span style="color:#66d9ef">return</span> binary_search(weights)
+                ng <span style="color:#f92672">=</span> mid
+        <span style="color:#66d9ef">return</span> ok
 </code></pre></div></details>
 
     </div>
