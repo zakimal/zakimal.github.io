@@ -5,12 +5,415 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 29 Mar 2021 15:10:30 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 30 Mar 2021 18:03:45 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>$2$-Sum, $3$-Sum, ..., $N$-Sum Problems</title>
+      <link>/ja/post/n-sum-problems/</link>
+      <pubDate>Tue, 30 Mar 2021 18:03:45 +0900</pubDate>
+      <guid>/ja/post/n-sum-problems/</guid>
+      <description>&lt;p&gt;整数を要素として格納する配列が与えられ，そこから$N$個要素を取り上げてその和が$X$になるような要素のとり方はいくつあるか，要素のとり方そのものを返せ，という系統の問題についてお勉強したのでまとめる．&lt;/p&gt;
+&lt;h2 id=&#34;2-sum&#34;&gt;$2$-Sum&lt;/h2&gt;
+&lt;p&gt;与えられた配列&lt;code&gt;nums&lt;/code&gt;から要素を 2 つ取り出して，その和が&lt;code&gt;target&lt;/code&gt;と等しくなるような組み合わせを配列における位置のペアで返せ．&lt;/p&gt;
+&lt;p&gt;主なアプローチは 3 つありそう&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;「足して&lt;code&gt;target&lt;/code&gt;になる相方」がいるかを管理しながら要素を舐める（$O(n)$）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums&lt;/code&gt;を昇順に整列して「足して&lt;code&gt;target&lt;/code&gt;になる相方」を線形に探索（$O(n)$）
+&lt;ul&gt;
+&lt;li&gt;この方法だと与えられた配列に重複要素が含まれているときに対応しやすい？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums&lt;/code&gt;を昇順に整列して「足して&lt;code&gt;target&lt;/code&gt;になる相方」を二分探索（$O(n \log n)$）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;足してtargetになる相方がいるかを管理しながら要素を舐める&#34;&gt;「足して&lt;code&gt;target&lt;/code&gt;になる相方」がいるかを管理しながら要素を舐める&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;]
+target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum&lt;/span&gt;(nums, target):
+    table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+        remain &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; table:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [idx, table[remain]]
+        table[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(two_sum(nums, target)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [1, 0]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;numsを昇順に整列して足してtargetになる相方を線形に探索&#34;&gt;&lt;code&gt;nums&lt;/code&gt;を昇順に整列して「足して&lt;code&gt;target&lt;/code&gt;になる相方」を線形に探索&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum&lt;/span&gt;(nums, target):
+    nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+        added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [left, right]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+            left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# target &amp;lt; added&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;昇順になっているならば，「足し上げた結果が&lt;code&gt;target&lt;/code&gt;より小さいときは片方を大きくすればいいし，&lt;code&gt;target&lt;/code&gt;を超えちゃったときは片方を小さくすれば良い」という操作をインデックスの隣への移動で実現できる．&lt;/p&gt;
+&lt;p&gt;また，要素の重複があるような配列を渡されたときに重複要素を無視する操作もインデックスの移動でできる．&lt;/p&gt;
+&lt;h3 id=&#34;numsを昇順に整列して足してtargetになる相方を二分探索&#34;&gt;&lt;code&gt;nums&lt;/code&gt;を昇順に整列して「足して&lt;code&gt;target&lt;/code&gt;になる相方」を二分探索&lt;/h3&gt;
+&lt;p&gt;昇順になっていれば相方を二分探索で探すこともできる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;]
+target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum&lt;/span&gt;(nums, target):
+    nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(nums, target):
+        ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums[mid]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ng &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ok):
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ng &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ok) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+        remain &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num
+        remain_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; binary_search(nums, remain)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[remain_idx] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [idx, remain_idx]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(two_sum(nums, target)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [0, 1]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-sum&#34;&gt;$3$-Sum&lt;/h2&gt;
+&lt;p&gt;与えられた配列&lt;code&gt;nums&lt;/code&gt;から要素を 3 つ取り出して，その和が&lt;code&gt;target&lt;/code&gt;と等しくなるような組み合わせを配列における位置のペアで返せ．&lt;/p&gt;
+&lt;p&gt;これは，&lt;code&gt;nums[i] + nums[j] + nums[k] == target&lt;/code&gt;とすると，&lt;code&gt;nums[i] + nums[j] == target - nums[k]&lt;/code&gt;という，「毎回&lt;code&gt;target&lt;/code&gt;の変わる$2$-Sum」と見て解くことができる．&lt;/p&gt;
+&lt;p&gt;なんと Wikipedia に&lt;a href=&#34;https://en.wikipedia.org/wiki/3SUM&#34;&gt;記事&lt;/a&gt;もある．&lt;/p&gt;
+&lt;h2 id=&#34;参考問題&#34;&gt;参考問題&lt;/h2&gt;
+&lt;h3 id=&#34;two-sumhttpsleetcodecomproblemstwo-sum&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum/&#34;&gt;Two Sum&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;これは相方をメモしておく解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;twoSum&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+            remain &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; table:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [idx, table[remain]]
+            table[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;two-sum-ii---input-array-is-sortedhttpsleetcodecomproblemstwo-sum-ii-input-array-is-sorted&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/&#34;&gt;Two Sum II - Input array is sorted&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;相方をメモしておく解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;twoSum&lt;/span&gt;(self, numbers: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(numbers):
+            remain &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; table:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [idx &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, table[remain] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; idx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; table[remain] &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; [table[remain] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, idx &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            table[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;昇順に並んでいることを利用して相方を探す解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;twoSum&lt;/span&gt;(self, numbers: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(numbers) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+            added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; numbers[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; numbers[right]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, right &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# target &amp;lt; added&lt;/span&gt;
+                right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;two-sum-iii---data-structure-designhttpsleetcodecomproblemstwo-sum-iii-data-structure-design&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum-iii-data-structure-design/&#34;&gt;Two Sum III - Data structure design&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Not Yet.&lt;/p&gt;
+&lt;h3 id=&#34;two-sum-iv---input-is-a-bsthttpsleetcodecomproblemstwo-sum-iv-input-is-a-bst&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum-iv-input-is-a-bst/&#34;&gt;Two Sum IV - Input is a BST&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;二分探索木を DFS しながら相方をメモする解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findTarget&lt;/span&gt;(self, root: TreeNode, k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        seen &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+        suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [root]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(suspended) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; seen:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            seen&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;再帰で二分探索木を DFS しながら相方をメモする解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findTarget&lt;/span&gt;(self, root: TreeNode, k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        seen &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DFS&lt;/span&gt;(root):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; seen:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            seen&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; DFS(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; DFS(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; DFS(root)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;BFS で二分探索木を BFS しながら相方をメモする解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findTarget&lt;/span&gt;(self, root: TreeNode, k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        seen &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+        suspended &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [root]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(suspended) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            u &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; seen:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            seen&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                suspended&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(u&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;二分探索木を間順走査すると昇順にソートされた配列が計算できるので，配列に対する$2$-Sum 問題に帰着して解く解法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findTarget&lt;/span&gt;(self, root: TreeNode, k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        inordered &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inorder&lt;/span&gt;(root):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                inorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            inordered&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                inorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+        inorder(root)
+
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(inordered) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+            added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; inordered[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; inordered[right]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; k:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;two-sum-bstshttpsleetcodecomproblemstwo-sum-bsts&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum-bsts/&#34;&gt;Two Sum BSTs&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;2 つの二分探索木が与えられたときの$2$-Sum 問題．二分探索木では&lt;code&gt;root.left.val &amp;lt; root.val &amp;lt; root.right.val&lt;/code&gt;が成立するのである意味「整列している」とも言える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum_bsts&lt;/span&gt;(root1, root2, target):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; helper(root1, root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val, target) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; two_sum_bsts(root1, root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, target) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; two_sum_bsts(root1, root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, target)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;helper&lt;/span&gt;(root1, root2_val, target):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+    added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; root2_val
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; helper(root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, root2_val, target)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# target &amp;lt; added&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; helper(root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, root2_val, target)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;two-sum-less-than-khttpsleetcodecomproblemstwo-sum-less-than-k&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum-less-than-k/&#34;&gt;Two Sum Less Than K&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;配列が与えられて，その中から和が$K$を超えない範囲で最も大きくなるように重複を許さずに 2 つ要素を選んだときの，その和を計算せよ．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;34&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;75&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;33&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;54&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]
+K &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum_less_than_k&lt;/span&gt;(nums, target):
+    nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+        added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, added)
+            left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(two_sum_less_than_k(nums, K)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 58&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3sumhttpsleetcodecomproblems3sum&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/3sum/&#34;&gt;3Sum&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;全体としては$O(n^2)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;threeSum&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[List[int]]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[i]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# skip same num&lt;/span&gt;
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# target = nums[i]&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+                added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                    ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([nums[i], nums[left], nums[right]])
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]: &lt;span style=&#34;color:#75715e&#34;&gt;# skip same num&lt;/span&gt;
+                        left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[right] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]: &lt;span style=&#34;color:#75715e&#34;&gt;# skip same num&lt;/span&gt;
+                        right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# 0 &amp;lt; added&lt;/span&gt;
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3sum-closesthttpsleetcodecomproblems3sum-closest&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/3sum-closest/&#34;&gt;3Sum Closest&lt;/a&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;threeSumClosest&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+                added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; added) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(diff):
+                    diff &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; added
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; diff &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; diff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3sum-smallerhttpsleetcodecomproblems3sum-smaller&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/3sum-smaller/&#34;&gt;3Sum Smaller&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;配列が与えられて，その中から和が$K$を超えない範囲で最も大きくなるように重複を許さずに 3 つ要素を選ぶときの数字の選び方の総数を求めよ．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum_smaller&lt;/span&gt;(nums, target):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum&lt;/span&gt;(nums, target):
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+            added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left)
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+    nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; two_sum(nums[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:], target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; nums[i])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(two_sum_smaller(nums, target)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;4sumhttpsleetcodecomproblems4sum&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/4sum/&#34;&gt;4Sum&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;$3$-Sum と同様に考えれば$K$-Sum は$2$-Sum に帰着できる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fourSum&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[List[int]]:
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k_sum&lt;/span&gt;(nums, target, k):
+            ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; nums[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; two_sum(nums, target)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[i]:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ret &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; k_sum(nums[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:], target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; nums[i], k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+                    ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([nums[i]] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; _ret)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two_sum&lt;/span&gt;(nums, target):
+            ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+                added &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[right]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                    ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([nums[left], nums[right]])
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[left] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                        left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; nums[right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[right]:
+                        right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; added &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; k_sum(nums, target, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;4sum-iihttpsleetcodecomproblems4sum-ii&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/4sum-ii/&#34;&gt;4Sum II&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;（&lt;code&gt;A&lt;/code&gt;，&lt;code&gt;B&lt;/code&gt;）と（&lt;code&gt;C&lt;/code&gt;，&lt;code&gt;D&lt;/code&gt;）でそれぞれの組でありえる組み合わせをメモしておいて，違うに打ち消し合うやつがあればカウントする．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fourSumCount&lt;/span&gt;(self, A: List[int], B: List[int], C: List[int], D: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        counter_AB &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter()
+        counter_CD &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter()
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (a, b) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; product(A, B):
+            counter_AB[a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (c, d) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; product(C, D):
+            counter_CD[c &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; d] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; sum_ab &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; counter_AB:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;sum_ab &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; counter_CD:
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; counter_AB[sum_ab] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; counter_CD[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;sum_ab]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;max-number-of-k-sum-pairshttpsleetcodecomproblemsmax-number-of-k-sum-pairs&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/max-number-of-k-sum-pairs/&#34;&gt;Max Number of K-Sum Pairs&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;相方候補が何人いるかをカウントする．ダブルカウントに注意．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maxOperations&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cnt:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; min(cnt[num], cnt[k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;count-good-mealshttpsleetcodecomproblemscount-good-meals&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/count-good-meals/&#34;&gt;Count Good Meals&lt;/a&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;countPairs&lt;/span&gt;(self, deliciousness: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        MOD &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;_000_000_007
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter(deliciousness)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; item &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cnt:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; item &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; item:
+                    ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; cnt[item] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (cnt[item] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; cnt[item] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; cnt[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; item]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; MOD
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Diameter of a Tree</title>
