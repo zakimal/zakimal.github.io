@@ -5,12 +5,55 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 31 Mar 2021 22:11:52 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 31 Mar 2021 22:36:30 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>String Compression</title>
+      <link>/ja/post/string-compression/</link>
+      <pubDate>Wed, 31 Mar 2021 22:36:30 +0900</pubDate>
+      <guid>/ja/post/string-compression/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;与えられた文字列について次の規則に従って文字列を圧縮せよ&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;もしある文字&lt;code&gt;x&lt;/code&gt;が連続して 1 つしか存在しないなら&lt;code&gt;x&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;もしある文字&lt;code&gt;x&lt;/code&gt;が連続して&lt;code&gt;y&lt;/code&gt;つ以上存在するなら&lt;code&gt;xy&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;compress&lt;/span&gt;(self, chars: List[str]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        pos_anchor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        pos_write &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; pos_read, char &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(chars):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pos_read &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; len(chars) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; char &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; chars[pos_read &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                chars[pos_write] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; char
+                pos_write &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; pos_anchor &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; pos_read:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; digit &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; str(pos_read &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; pos_anchor &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+                        chars[pos_write] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; digit
+                        pos_write &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                pos_anchor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pos_read &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; pos_write
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;英語だと run length compressopm と呼ばれている？&lt;/p&gt;
+&lt;p&gt;反対にデコードする問題も考えられる．&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/&#34;&gt;https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;decompressRLElist&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+            freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i]
+            num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(freq):
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; [num]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/string-compression/&#34;&gt;https://leetcode.com/problems/string-compression/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Count and Say</title>
@@ -41,7 +84,8 @@
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
         ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_next_count_and_say(ret)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これは一種の符号化方式．&lt;/p&gt;
+</description>
     </item>
     
     <item>
