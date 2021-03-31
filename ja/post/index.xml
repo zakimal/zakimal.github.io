@@ -5,12 +5,44 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 31 Mar 2021 00:01:38 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 31 Mar 2021 22:11:52 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Count and Say</title>
+      <link>/ja/post/count-and-say/</link>
+      <pubDate>Wed, 31 Mar 2021 22:11:52 +0900</pubDate>
+      <guid>/ja/post/count-and-say/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; - 1個の1 -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt; - 2個の1 -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;21&lt;/span&gt; - 1個の2と1個の1 -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1211&lt;/span&gt; -&amp;gt; ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上のように続く数列の第$n$項を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count_and_say&lt;/span&gt;(n):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_next_count_and_say&lt;/span&gt;(curr):
+        ch &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(curr)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; curr[i] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; ch:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (str(cnt) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ch)
+                ch &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr[i]
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (str(cnt) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ch)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_next_count_and_say(ret)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Letter Case Permutation</title>
