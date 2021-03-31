@@ -40,7 +40,7 @@
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; pos_write
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;英語だと run length compressopm と呼ばれている？&lt;/p&gt;
 &lt;p&gt;反対にデコードする問題も考えられる．&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/&#34;&gt;https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/decompress-run-length-encoded-list/&#34;&gt;https://leetcode.com/problems/decompress-run-length-encoded-list/&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;decompressRLElist&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
         ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
