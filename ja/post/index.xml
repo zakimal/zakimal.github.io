@@ -2351,6 +2351,7 @@ row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34
 &lt;p&gt;$n$個の&lt;code&gt;()&lt;/code&gt;を正しく並べるときの全通りを出力する．&lt;/p&gt;
 &lt;details&gt;
 &lt;summary&gt;答え&lt;/summary&gt;
+&lt;p&gt;まず左カッコが足りないから並べて，左カッコ書きすぎたら右カッコ書いて閉じなきゃ&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;generateParenthesis&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[str]:
         ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
