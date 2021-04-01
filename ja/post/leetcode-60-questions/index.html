@@ -1781,16 +1781,16 @@ $$</p>
 </code></pre></div><p>もっと賢いやり方がある．部分列の和は，「部分列が長ければ長いほど大きくなる」ので，一度部分列の和が<code>target</code>以上になったらそれ以上その部分列を伸ばして探しても答えに関係ない．部分列の末端の位置が早々に確定できるので，部分列の先頭を回すだけで求まる．$O(n)$．これは世の中では尺取法と呼ばれているそうだ．英語では sliding window と呼ばれているのか？</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minSubArrayLen</span>(self, target: int, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
-        ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">9</span>
-        head <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        subsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-        <span style="color:#66d9ef">for</span> tail <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(nums), <span style="color:#ae81ff">1</span>):
-            subsum <span style="color:#f92672">+=</span> nums[tail]
-            <span style="color:#66d9ef">while</span> target <span style="color:#f92672">&lt;=</span> subsum:
-                ans <span style="color:#f92672">=</span> min(ans, tail <span style="color:#f92672">-</span> head <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-                subsum <span style="color:#f92672">-=</span> nums[head]
-                head <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">9</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+        accum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        ans <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>)
+        <span style="color:#66d9ef">for</span> right, num <span style="color:#f92672">in</span> enumerate(nums):
+            accum <span style="color:#f92672">+=</span> num
+            <span style="color:#66d9ef">while</span> target <span style="color:#f92672">&lt;=</span> accum:
+                ans <span style="color:#f92672">=</span> min(ans, right <span style="color:#f92672">-</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+                accum <span style="color:#f92672">-=</span> nums[left]
+                left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
 </code></pre></div></details>
 <h2 id="40-house-robber-ii">40: House Robber II</h2>
 <details>
