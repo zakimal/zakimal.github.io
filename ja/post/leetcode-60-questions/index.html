@@ -2135,15 +2135,11 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
 <summary>答え</summary>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">firstUniqChar</span>(self, s: str) <span style="color:#f92672">-&gt;</span> int:
-        checked <span style="color:#f92672">=</span> set()
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_unique</span>(i):
-            <span style="color:#66d9ef">return</span> s[i] <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> (s[:i] <span style="color:#f92672">+</span> s[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:])
-        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(s)):
-            <span style="color:#66d9ef">if</span> s[i] <span style="color:#f92672">in</span> checked:
+        <span style="color:#66d9ef">for</span> idx, char <span style="color:#f92672">in</span> enumerate(s):
+            <span style="color:#66d9ef">if</span> char <span style="color:#f92672">in</span> s[:idx] <span style="color:#f92672">+</span> s[idx<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>:]:
                 <span style="color:#66d9ef">continue</span>
-            <span style="color:#66d9ef">if</span> is_unique(i):
-                <span style="color:#66d9ef">return</span> i
-            checked<span style="color:#f92672">.</span>add(s[i])
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">return</span> idx
         <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
 </code></pre></div></details>
 <h2 id="52-is-subsequence">52: Is Subsequence</h2>
