@@ -3728,7 +3728,8 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;topKFrequent&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
         cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [(freq, num) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num, freq &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; Counter(nums)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items()]
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [num &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nlargest(k, cnt)]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/top-k-frequent-words/&#34;&gt;この問題&lt;/a&gt;が復習になる．&lt;/p&gt;
+&lt;/details&gt;
 &lt;h2 id=&#34;49-intersection-of-two-arrays&#34;&gt;49: Intersection of Two Arrays&lt;/h2&gt;
 &lt;p&gt;python が偉い．&lt;/p&gt;
 &lt;details&gt;

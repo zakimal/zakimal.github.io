@@ -2078,7 +2078,8 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">topKFrequent</span>(self, nums: List[int], k: int) <span style="color:#f92672">-&gt;</span> List[int]:
         cnt <span style="color:#f92672">=</span> [(freq, num) <span style="color:#66d9ef">for</span> num, freq <span style="color:#f92672">in</span> Counter(nums)<span style="color:#f92672">.</span>items()]
         <span style="color:#66d9ef">return</span> [num <span style="color:#66d9ef">for</span> _, num <span style="color:#f92672">in</span> heapq<span style="color:#f92672">.</span>nlargest(k, cnt)]
-</code></pre></div></details>
+</code></pre></div><p><a href="https://leetcode.com/problems/top-k-frequent-words/">この問題</a>が復習になる．</p>
+</details>
 <h2 id="49-intersection-of-two-arrays">49: Intersection of Two Arrays</h2>
 <p>python が偉い．</p>
 <details>
