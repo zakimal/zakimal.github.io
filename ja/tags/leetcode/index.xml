@@ -1316,11 +1316,11 @@ $$&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;もっと賢いやり方がある．部分列の和は，「部分列が長ければ長いほど大きくなる」ので，一度部分列の和が&lt;code&gt;target&lt;/code&gt;以上になったらそれ以上その部分列を伸ばして探しても答えに関係ない．部分列の末端の位置が早々に確定できるので，部分列の先頭を回すだけで求まる．$O(n)$．これは世の中では尺取法と呼ばれているそうだ．英語では sliding window と呼ばれているのか？&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;minSubArrayLen&lt;/span&gt;(self, target: int, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
-        accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
         ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; right, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
-            accum &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; num
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+            accum &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; nums[right]
             &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; accum:
                 ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(ans, right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
                 accum &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; nums[left]
