@@ -3708,9 +3708,10 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(connected_component(G))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;48-top-k-frequent-elements&#34;&gt;48: Top K Frequent Elements&lt;/h2&gt;
-&lt;p&gt;これは素直に書くだけ．&lt;/p&gt;
+&lt;p&gt;大きい順に$K$個，小さい順に$K$個は色々やり方がある．拙著は&lt;a href=&#34;https://zakimal.github.io/ja/post/find-k-th-smallest-elements/&#34;&gt;こちら&lt;/a&gt;&lt;/p&gt;
 &lt;details&gt;
 &lt;summary&gt;答え&lt;/summary&gt;
+&lt;p&gt;素直に書いても通る．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;topKFrequent&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
         table &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
@@ -3722,6 +3723,11 @@ G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[] &lt;span style=&#
         ordered &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(table&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items())
         ordered&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x: x[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], reverse&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;True)
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [x[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; ordered[:k]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;heapq.nlargest&lt;/code&gt;を使う．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;topKFrequent&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [(freq, num) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num, freq &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; Counter(nums)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items()]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [num &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nlargest(k, cnt)]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;49-intersection-of-two-arrays&#34;&gt;49: Intersection of Two Arrays&lt;/h2&gt;
 &lt;p&gt;python が偉い．&lt;/p&gt;

@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    22 分で読める
+    23 分で読める
   </span>
   
 
@@ -2058,9 +2058,10 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
 <span style="color:#66d9ef">print</span>(connected_component(G))
 </code></pre></div></details>
 <h2 id="48-top-k-frequent-elements">48: Top K Frequent Elements</h2>
-<p>これは素直に書くだけ．</p>
+<p>大きい順に$K$個，小さい順に$K$個は色々やり方がある．拙著は<a href="https://zakimal.github.io/ja/post/find-k-th-smallest-elements/">こちら</a></p>
 <details>
 <summary>答え</summary>
+<p>素直に書いても通る．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">topKFrequent</span>(self, nums: List[int], k: int) <span style="color:#f92672">-&gt;</span> List[int]:
         table <span style="color:#f92672">=</span> dict()
@@ -2072,6 +2073,11 @@ G <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span
         ordered <span style="color:#f92672">=</span> list(table<span style="color:#f92672">.</span>items())
         ordered<span style="color:#f92672">.</span>sort(key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: x[<span style="color:#ae81ff">1</span>], reverse<span style="color:#f92672">=</span>True)
         <span style="color:#66d9ef">return</span> [x[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> ordered[:k]]
+</code></pre></div><p><code>heapq.nlargest</code>を使う．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">topKFrequent</span>(self, nums: List[int], k: int) <span style="color:#f92672">-&gt;</span> List[int]:
+        cnt <span style="color:#f92672">=</span> [(freq, num) <span style="color:#66d9ef">for</span> num, freq <span style="color:#f92672">in</span> Counter(nums)<span style="color:#f92672">.</span>items()]
+        <span style="color:#66d9ef">return</span> [num <span style="color:#66d9ef">for</span> _, num <span style="color:#f92672">in</span> heapq<span style="color:#f92672">.</span>nlargest(k, cnt)]
 </code></pre></div></details>
 <h2 id="49-intersection-of-two-arrays">49: Intersection of Two Arrays</h2>
 <p>python が偉い．</p>
