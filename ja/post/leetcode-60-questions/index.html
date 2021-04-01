@@ -1971,6 +1971,26 @@ $$</p>
         <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums:
             dp[bisect_left(dp, num)] <span style="color:#f92672">=</span> num
         <span style="color:#66d9ef">return</span> bisect_left(dp, float(<span style="color:#e6db74">&#34;inf&#34;</span>))
+</code></pre></div><p>二分探索を自分で実装したらこう．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lengthOfLIS</span>(self, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#75715e"># dp[i]: 長さi+1の増加部分列の終端要素の最小値</span>
+        dp <span style="color:#f92672">=</span> [float(<span style="color:#e6db74">&#34;inf&#34;</span>)] <span style="color:#f92672">*</span> len(nums)
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">binary_search</span>(nums, key):
+            ok <span style="color:#f92672">=</span> len(nums)
+            ng <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_ok</span>(mid):
+                <span style="color:#66d9ef">return</span> key <span style="color:#f92672">&lt;=</span> nums[mid]
+            <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> abs(ng <span style="color:#f92672">-</span> ok):
+                mid <span style="color:#f92672">=</span> (ng <span style="color:#f92672">+</span> ok) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+                <span style="color:#66d9ef">if</span> is_ok(mid):
+                    ok <span style="color:#f92672">=</span> mid
+                <span style="color:#66d9ef">else</span>:
+                    ng <span style="color:#f92672">=</span> mid
+            <span style="color:#66d9ef">return</span> ok
+        <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums:
+            dp[binary_search(dp, num)] <span style="color:#f92672">=</span> num
+        <span style="color:#66d9ef">return</span> binary_search(dp, float(<span style="color:#e6db74">&#34;inf&#34;</span>))
 </code></pre></div></details>
 <h2 id="46-coin-change">46: Coin Change</h2>
 <details>

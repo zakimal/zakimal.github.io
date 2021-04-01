@@ -3621,6 +3621,26 @@ $$&lt;/p&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
             dp[bisect_left(dp, num)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; bisect_left(dp, float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;二分探索を自分で実装したらこう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lengthOfLIS&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i]: 長さi+1の増加部分列の終端要素の最小値&lt;/span&gt;
+        dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(nums, key):
+            ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+            ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; key &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums[mid]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ng &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ok):
+                mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ng &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ok) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                    ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            dp[binary_search(dp, num)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; binary_search(dp, float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;46-coin-change&#34;&gt;46: Coin Change&lt;/h2&gt;
 &lt;details&gt;
