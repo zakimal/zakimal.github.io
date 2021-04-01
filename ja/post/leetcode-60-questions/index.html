@@ -858,19 +858,17 @@ row <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> | 
 <summary>答え</summary>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">combinationSum</span>(self, candidates: List[int], target: int) <span style="color:#f92672">-&gt;</span> List[List[int]]:
-        ans <span style="color:#f92672">=</span> []
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_recurse</span>(nums, target, sofar):
-            <span style="color:#75715e"># base case</span>
-            <span style="color:#66d9ef">if</span> target <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+        ret <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rec</span>(nums, remain, sofar):
+            <span style="color:#66d9ef">if</span> remain <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
                 <span style="color:#66d9ef">return</span>
-            <span style="color:#66d9ef">if</span> target <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-                ans<span style="color:#f92672">.</span>append(sofar)
+            <span style="color:#66d9ef">if</span> remain <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                ret<span style="color:#f92672">.</span>append(sofar)
                 <span style="color:#66d9ef">return</span>
-
             <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(nums)):
-                _recurse(nums[i:], target <span style="color:#f92672">-</span> nums[i], sofar <span style="color:#f92672">+</span> [nums[i]])
-        _recurse(candidates, target, [])
-        <span style="color:#66d9ef">return</span> ans
+                rec(nums[i:], remain <span style="color:#f92672">-</span> nums[i], sofar <span style="color:#f92672">+</span> [nums[i]])
+        rec(candidates, target, [])
+        <span style="color:#66d9ef">return</span> ret
 </code></pre></div></details>
 <h2 id="12-permutations">12: Permutations</h2>
 <p>集合$A$から一つ選んで，残りから一つ選んで&hellip;</p>

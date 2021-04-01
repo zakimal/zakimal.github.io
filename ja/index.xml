@@ -2508,19 +2508,17 @@ row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34
 &lt;summary&gt;答え&lt;/summary&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;combinationSum&lt;/span&gt;(self, candidates: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[List[int]]:
-        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_recurse&lt;/span&gt;(nums, target, sofar):
-            &lt;span style=&#34;color:#75715e&#34;&gt;# base case&lt;/span&gt;
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rec&lt;/span&gt;(nums, remain, sofar):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
-                ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sofar)
                 &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
-
             &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
-                _recurse(nums[i:], target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; nums[i], sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [nums[i]])
-        _recurse(candidates, target, [])
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+                rec(nums[i:], remain &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; nums[i], sofar &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; [nums[i]])
+        rec(candidates, target, [])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;12-permutations&#34;&gt;12: Permutations&lt;/h2&gt;
 &lt;p&gt;集合$A$から一つ選んで，残りから一つ選んで&amp;hellip;&lt;/p&gt;
