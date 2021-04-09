@@ -519,6 +519,644 @@ target &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&
     </item>
     
     <item>
+      <title>AOJ ITP1</title>
+      <link>/ja/post/aoj-itp1/</link>
+      <pubDate>Mon, 29 Mar 2021 15:34:00 +0900</pubDate>
+      <guid>/ja/post/aoj-itp1/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://.u-aizu.ac.jp/online/finder.jsp?course=ITP1&#34;&gt;AOJ-ITP1&lt;/a&gt;を Python で解く．&lt;/p&gt;
+&lt;h2 id=&#34;itp1_1_a&#34;&gt;ITP1_1_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_1_b&#34;&gt;ITP1_1_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(x &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_1_c&#34;&gt;ITP1_1_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;h, w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(h &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; w, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (h &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; w))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_1_d&#34;&gt;ITP1_1_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;S &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{}:{}:{}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(S &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3600&lt;/span&gt;, (S &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3600&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;, S &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_2_a&#34;&gt;ITP1_2_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a, b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a &amp;lt; b&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; b:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a == b&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a &amp;gt; b&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_2_b&#34;&gt;ITP1_2_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a, b, c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; c:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yes&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_2_c&#34;&gt;ITP1_2_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lst)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_2_d&#34;&gt;ITP1_2_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;W, H, x, y, r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; H &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; r:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yes&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_3_a&#34;&gt;ITP1_3_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello World&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_3_b&#34;&gt;ITP1_3_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Case {}: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(i, x))
+    i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_3_c&#34;&gt;ITP1_3_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    x, y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; x:
+        x, y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y, x
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(x, y)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_3_d&#34;&gt;ITP1_3_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a, b, c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(a, b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(cnt)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_4_a&#34;&gt;ITP1_4_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a, b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(a &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; b, a &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; b, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{:.6f}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(a &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; b))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_4_b&#34;&gt;ITP1_4_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; math &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pi
+r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{:.6f} {:.6f}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; pi &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; r, pi &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_4_c&#34;&gt;ITP1_4_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()
+    lhs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(s[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+    op &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    rhs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(s[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;?&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(lhs &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; rhs)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(lhs &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; rhs)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(lhs &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; rhs)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(lhs &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; rhs)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_4_d&#34;&gt;ITP1_4_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(min(lst), max(lst), sum(lst))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_5_a&#34;&gt;ITP1_5_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    h, w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(h):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; w)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_5_b&#34;&gt;ITP1_5_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    h, w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; w)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(h &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (w &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; w)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_5_c&#34;&gt;ITP1_5_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    H, W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; H &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(W):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (h &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; w) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;#&amp;#34;&lt;/span&gt;, end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;, end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_5_d&#34;&gt;ITP1_5_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; str(i):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(i), end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_6_a&#34;&gt;ITP1_6_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;_ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+lst&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reverse()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lst)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_6_b&#34;&gt;ITP1_6_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+suits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;H&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;]
+cards &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    s, n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;:
+        cards&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(int(n))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;H&amp;#34;&lt;/span&gt;:
+        cards&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(&lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; int(n))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;:
+        cards&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(&lt;span style=&#34;color:#ae81ff&#34;&gt;26&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; int(n))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        cards&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(&lt;span style=&#34;color:#ae81ff&#34;&gt;39&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; int(n))
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; cards:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(suits[(i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt;], (i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;13&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;ele in lst&lt;/code&gt;は&lt;code&gt;n = len(lst)&lt;/code&gt;として$O(n)$らしい．&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2 id=&#34;itp1_6_c&#34;&gt;ITP1_6_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+room &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    b, f, r, v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    room[b &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][f &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][r &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; v
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(room[i][j][k]), end&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;####################&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_6_d&#34;&gt;ITP1_6_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N, M &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+B &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [int(input()) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(M)]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(M):
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; A[i][j] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; B[j]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(ans)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_7_a&#34;&gt;ITP1_7_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    m, f, r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    score &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; f
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; f &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;F&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; score:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;65&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; score:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; score:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; score:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; r:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;D&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;F&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_7_b&#34;&gt;ITP1_7_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    N, X &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; X &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; X &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; N:
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(cnt)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_7_c&#34;&gt;ITP1_7_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;H, W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+sheet &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H):
+    sheet[h]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(sum(sheet[h]))
+sheet&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(W &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)])
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(W &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H):
+        sheet[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][w] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; sheet[h][w]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; sheet:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;r)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_7_d&#34;&gt;ITP1_7_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N, M, L &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+B &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(M)]
+
+C &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(L)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(L):
+        c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(M):
+            c &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; A[i][k] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; B[k][j]
+        C[i][j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; C:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;r)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_8_a&#34;&gt;ITP1_8_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;string &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(string&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;swapcase())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_8_b&#34;&gt;ITP1_8_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; x:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+        x &lt;span style=&#34;color:#f92672&#34;&gt;//=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(ans)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_8_c&#34;&gt;ITP1_8_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
+string &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stdin&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
+cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;26&lt;/span&gt;
+alphabets &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [chr(ord(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; i) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;26&lt;/span&gt;)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; string:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; alphabets:
+        cnt[alphabets&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(x)] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;26&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{} : {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(alphabets[i], cnt[i]))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_8_d&#34;&gt;ITP1_8_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find(p) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yes&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_9_a&#34;&gt;ITP1_9_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sys
+word &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+text &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sys&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;stdin&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(text&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;count(word))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_9_b&#34;&gt;ITP1_9_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    cards &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; cards &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(m):
+        interval &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+        head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cards[:interval]
+        tail &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cards[interval:]
+        cards &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tail &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; head
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(cards)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_9_c&#34;&gt;ITP1_9_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+taro &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+hanako &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    card_taro, card_hanako &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; card_taro &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; card_hanako:
+        taro &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        hanako &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; card_taro &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; card_hanako:
+        hanako &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        taro &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(taro, hanako)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_9_d&#34;&gt;ITP1_9_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;text &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    command &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; command[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;replace&amp;#34;&lt;/span&gt;:
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; command[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        text &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text[:a] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; text[b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; command[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;reverse&amp;#34;&lt;/span&gt;:
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+        text &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; text[:a] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(reversed(text[a:b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; text[b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+        b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(command[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(text[a:b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_10_a&#34;&gt;ITP1_10_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;x1, y1, x2, y2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(float, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(((x1 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x2) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; (y1 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y2) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_10_b&#34;&gt;ITP1_10_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; math
+a, b, C&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;map(float, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+theta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;radians(C)
+h &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sin(theta)
+S &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (a &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; h) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+c &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sqrt(a &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; math&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cos(theta))
+L &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; c
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(S, L, h, sep&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_10_c&#34;&gt;ITP1_10_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+    N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+    score &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+    mean &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum(score) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; N
+    variant &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+        variant &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (score[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; mean) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;((variant &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; N) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_10_d&#34;&gt;ITP1_10_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dist&lt;/span&gt;(xs, ys, p):
+    ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (x, y) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(xs, ys):
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; p
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; p)
+
+N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+xs &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+ys &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(dist(xs, ys, p))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(max(abs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (x, y) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; zip(xs, ys)))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_11_a&#34;&gt;ITP1_11_A:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Dice&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s4 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s5 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate&lt;/span&gt;(self, dir):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;N&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s2, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s5, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s2, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s5
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s2, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s5, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s5, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s2
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;E&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s3, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s4, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s4, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s3
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# dir == &amp;#34;W&amp;#34;:&lt;/span&gt;
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s3, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s4, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s3, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s6, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s4
+
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+ops &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input()
+d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Dice(nums)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; op &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; ops:
+    d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(op)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;s1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_11_b&#34;&gt;ITP1_11_B:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Dice&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate&lt;/span&gt;(self, dir):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;N&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;E&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# dir == &amp;#34;W&amp;#34;:&lt;/span&gt;
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(self, top, front):
+        saved &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NNNNWNNNWNNNENNNENNNWNNN&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(dir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; top &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; front:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; saved
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Dice(nums)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    top, front &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(d&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query(top, front))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_11_c&#34;&gt;ITP1_11_C:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Dice&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate&lt;/span&gt;(self, dir):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;N&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;E&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# dir == &amp;#34;W&amp;#34;:&lt;/span&gt;
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(self, top, front):
+        saved &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NNNNWNNNWNNNENNNENNNWNNN&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(dir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; top &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; front:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; saved
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_equal&lt;/span&gt;(self, other):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NNNNWNNNWNNNENNNENNNWNNN&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(dir)
+            flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[k] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[k]:
+                    flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; False
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; flag:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+
+
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+d1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Dice(nums)
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+d2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Dice(nums)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; d1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;is_equal(d2):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yes&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;itp1_11_d&#34;&gt;ITP1_11_D:&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;答え&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Dice&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rotate&lt;/span&gt;(self, dir):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;N&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;S&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;E&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# dir == &amp;#34;W&amp;#34;:&lt;/span&gt;
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(self, top, front):
+        saved &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NNNNWNNNWNNNENNNENNNWNNN&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(dir)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; top &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; front:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; saved
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_equal&lt;/span&gt;(self, other):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NNNNWNNNWNNNENNNENNNWNNN&amp;#34;&lt;/span&gt;:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rotate(dir)
+            flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[k] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums[k]:
+                    flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; False
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; flag:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+
+N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+dices &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+    nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+    dices&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(Dice(nums))
+
+flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dices[i]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;is_equal(dices[j]):
+            flag &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; False
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; flag:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Yes&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Diameter of a Tree</title>
       <link>/ja/post/diameter-of-a-tree/</link>
       <pubDate>Mon, 29 Mar 2021 15:10:30 +0900</pubDate>
