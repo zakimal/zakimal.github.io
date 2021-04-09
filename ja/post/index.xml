@@ -2966,9 +2966,6 @@ $$&lt;/p&gt;
         carry &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
         head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
 
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(stack1)
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(stack2)
-
         &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack1) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; len(stack2) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; carry &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
             val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; carry
             val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; stack1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop() &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; stack1 &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
