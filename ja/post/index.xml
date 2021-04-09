@@ -605,8 +605,24 @@ v, diameter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BFS(T, u)
               |x|      |x|      |x|   |x|   |x|
         ------------------------------------------------
 input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
-&lt;p&gt;左右から，「その位置での直近の最大値」を計算し，各位置で小さい方を取れば水面の高さが取れる．&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;時間計算量on2空間計算量o1な答え&#34;&gt;時間計算量$O(n^2)$・空間計算量$O(1)$な答え&lt;/h2&gt;
+&lt;p&gt;ある位置&lt;code&gt;i&lt;/code&gt;で溜まる水の高さは，その位置から左右両側を見て，その位置より高い地点があるならそれらの低い方の高さになる．これを各位置について計算する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;volume_of_hist&lt;/span&gt;(hist):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
+        max_by_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(hist[:i]) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        max_by_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(hist[:i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]) &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        volume &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; max(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, min(max_by_left, max_by_right) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; hist[i])
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; volume
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(volume_of_hist(hist)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 26&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;時間計算量on空間計算量onな答え&#34;&gt;時間計算量$O(n)$・空間計算量$O(n)$な答え&lt;/h2&gt;
+&lt;p&gt;ある位置&lt;code&gt;i&lt;/code&gt;から見て左右の高さの最大値は，位置&lt;code&gt;i - 1&lt;/code&gt;でのそれと位置&lt;code&gt;i&lt;/code&gt;の高さのうちの高い方なので，左右から「その位置での直近の最大値」を計算し，各位置で小さい方を取れば水面の高さが取れる．&lt;code&gt;max_by_left&lt;/code&gt;/&lt;code&gt;max_by_right&lt;/code&gt;を真面目に求めるのではなくて直近との比較で時間効率良く求めるというのがこのやり方．&lt;/p&gt;
 
 
 
@@ -639,23 +655,18 @@ input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;volume_of_hist&lt;/span&gt;(hist):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
     max_by_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
-    m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; hist[i]:
-            max_by_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
-            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-            max_by_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m
+    max_by_left[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(hist)):
+        max_by_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_by_left[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], hist[i])
 
     max_by_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
-    m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; hist[i]:
-            max_by_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
-            m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[i]
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
-            max_by_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; m
+    max_by_right[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        max_by_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_by_right[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], hist[i])
 
     height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; len(hist)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(hist)):
@@ -680,7 +691,92 @@ input &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 1, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- max_by_right
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 4, 4, 4, 6, 5, 5, 5, 5, 5, 1, 1, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;max_by_left&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, max_by_right&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;])&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0, 0, 0, 4, 4, 0, 5, 5, 2, 5, 0, 1, 0, 0, 0, 0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &amp;lt;- volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height - input
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;時間計算量on空間計算量o1な答え&#34;&gt;時間計算量$O(n)$・空間計算量$O(1)$な答え&lt;/h2&gt;
+&lt;p&gt;左右から同時に高さを求めていくことで空間計算量を削減する．左右からポインタを交差するまで走らせ，走らせながら高さを確定させていく．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hist &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;volume_of_hist&lt;/span&gt;(hist):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(hist) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    max_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; hist[left] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; hist[right]:
+            curr_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[left]
+            left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            curr_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hist[right]
+            right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        volume &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; max(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, max_height &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; curr_height)
+        max_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_height, curr_height)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; volume
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(volume_of_hist(hist)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 26&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;類題&#34;&gt;類題&lt;/h2&gt;
+&lt;p&gt;3 次元のヒストグラムが与えられたときの溜まる水の量を計算せよ．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt;1, 4, 3, 1, 3, 2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;,
+ &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3, 2, 1, 3, 2, 4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;,
+ &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2, 3, 3, 2, 3, 1&lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;類題答え&#34;&gt;類題答え&lt;/h2&gt;
+&lt;p&gt;外堀から埋めていく．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hist_3d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
+    [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;],
+    [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;],
+    [&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+]
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; heapq
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;volume_of_hist_3d&lt;/span&gt;(hist_3d):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(hist_3d) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; len(hist_3d[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    H &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(hist_3d)
+    W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(hist_3d[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; H &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 外堀が作れず全部流出してしまう&lt;/span&gt;
+
+    has_visited &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+    queue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H):
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((hist_3d[h][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], h, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((hist_3d[h][W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], h, W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add((h, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;))
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add((h, W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(W):
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((hist_3d[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][w], &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, w))
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((hist_3d[H &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][w], H &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, w))
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add((&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, w))
+        has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add((H &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, w))
+
+    heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heapify(queue)
+    max_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    volume &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(queue) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        curr_height, h, w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappop(queue)
+        volume &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; max(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, max_height &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; curr_height)
+        max_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_height, curr_height)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (dh, dw) &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; [(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), (&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]:
+            nh &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dh
+            nw &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dw
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nh &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; H &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nw &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; (nh, nw) &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; has_visited:
+                heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappush(queue, (hist_3d[nh][nw], nh, nw))
+                has_visited&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add((nh, nw))
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; volume
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(volume_of_hist_3d(hist_3d)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;refs&#34;&gt;refs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/trapping-rain-water/&#34;&gt;https://leetcode.com/problems/trapping-rain-water/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/trapping-rain-water-ii/&#34;&gt;https://leetcode.com/problems/trapping-rain-water-ii/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
