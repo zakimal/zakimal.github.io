@@ -5,12 +5,113 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 09 Apr 2021 23:03:40 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 12 Apr 2021 19:29:49 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>$N$ Queens Problem</title>
+      <link>/ja/post/n-queens-problem/</link>
+      <pubDate>Mon, 12 Apr 2021 19:29:49 +0900</pubDate>
+      <guid>/ja/post/n-queens-problem/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;$N \times N$の盤面に$N$個のクイーンを互いに 1 手では襲撃できないように配置せよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;DFS で全探索．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+
+queens &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+board &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update_board&lt;/span&gt;(board, row, col, x):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _col &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+        board[row][_col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _row &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+        board[_row][col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# (+1, +1)&lt;/span&gt;
+    _row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; row
+    _col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; _row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; _col &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; N:
+        _row &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        _col &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        board[_row][_col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# (+1, -1)&lt;/span&gt;
+    _row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; row
+    _col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; _row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; _col &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        _row &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        _col &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        board[_row][_col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# (-1, +1)&lt;/span&gt;
+    _row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; row
+    _col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; _row &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; _col &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; N:
+        _row &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        _col &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        board[_row][_col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# (-1, -1)&lt;/span&gt;
+    _row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; row
+    _col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; _row &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; _col &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+        _row &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        _col &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        board[_row][_col] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; x
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;set_queens&lt;/span&gt;(queens, board, row):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; N:
+        &lt;span style=&#34;color:#75715e&#34;&gt;# print board with Qs&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; queens:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Q&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; board[row][col] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            queens[row] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; col
+            update_board(board, row, col, &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            set_queens(queens, board, row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            update_board(board, row, col, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+set_queens(queens, board, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;$ python3 main.py
+Q.......
+....Q...
+.......Q
+.....Q..
+..Q.....
+......Q.
+.Q......
+...Q....
+
+Q.......
+.....Q..
+.......Q
+..Q.....
+......Q.
+...Q....
+.Q......
+....Q...
+
+Q.......
+......Q.
+...Q....
+.....Q..
+.......Q
+.Q......
+....Q...
+..Q.....
+
+...（続く）...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>`Sqrt(x)`</title>
