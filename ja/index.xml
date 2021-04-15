@@ -72,6 +72,64 @@ mat[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][&lt;span style=&#3
     </item>
     
     <item>
+      <title>Previious Permutation and Next Permutation</title>
+      <link>/ja/post/prev-permutation-and-next-permutation/</link>
+      <pubDate>Thu, 15 Apr 2021 20:53:29 +0900</pubDate>
+      <guid>/ja/post/prev-permutation-and-next-permutation/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数を要素として持つリストが与えられたとき，辞書順でそのリストの前後の順列を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;prev_permutation&lt;/span&gt;(arr):
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; arr[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; arr[i]:
+        i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# arrは昇順に整列されている&lt;/span&gt;
+        arr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reverse()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+    i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arr[i]
+    j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; arr[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; arr[i]:
+      j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# arr[i+1:]は昇順に整列されているので二分探索も可&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# j = bisect_left(arr[i+1:], arr[i]) + i&lt;/span&gt;
+    arr[i], arr[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arr[j], arr[i]
+    arr[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed(arr[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:])
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;next_permutation&lt;/span&gt;(arr):
+    i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; arr[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; arr[i]:
+        i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# arrは降順に整列されている&lt;/span&gt;
+        arr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+    i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arr[i]
+    j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; arr[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot:
+        j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    arr[i], arr[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arr[j], arr[i]
+    arr[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; reversed(arr[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:])
+
+arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+prev_permutation(arr)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(arr) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [3, 2, 1]&lt;/span&gt;
+
+arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+prev_permutation(arr)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(arr) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [1, 2, 3]&lt;/span&gt;
+
+arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;]
+next_permutation(arr)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(arr) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [1, 3, 2]&lt;/span&gt;
+
+arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+next_permutation(arr)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(arr) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; [1, 2, 3]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>$N$ Queens Problem</title>
       <link>/ja/post/n-queens-problem/</link>
       <pubDate>Mon, 12 Apr 2021 19:29:49 +0900</pubDate>
