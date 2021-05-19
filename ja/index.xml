@@ -5,12 +5,582 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 16 Apr 2021 00:12:12 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 18 May 2021 22:13:18 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Centralities on Graph</title>
+      <link>/ja/post/centralities-on-graph/</link>
+      <pubDate>Tue, 18 May 2021 22:13:18 +0900</pubDate>
+      <guid>/ja/post/centralities-on-graph/</guid>
+      <description>&lt;h2 id=&#34;中心性とは&#34;&gt;中心性とは&lt;/h2&gt;
+&lt;p&gt;グラフ理論における頂点の中心性とは，その頂点のグラフのトポロジ観点での「重要度」．トポロジ観点とは，そのグラフの頂点や辺の意味とは無関係で，ただ純粋にグラフの形によってのみ依存するという意味．ソーシャルネットワーク上の影響力のある人物とか疫病のスーパースプレッダーを見つけたりするなどの応用ができる．これらの応用では「グラフ上のトポロジ的に重要な頂点は，意味においても特別である」という前提を置いていている．グラフの「中心」の定義は様々あり，それらに対応して「中心らしさ」の定義も様々ある．代表的な中心性指標を取り上げて記載する．&lt;/p&gt;
+&lt;p&gt;以下，グラフの図示には &lt;code&gt;networkx&lt;/code&gt; / &lt;code&gt;matplotlib&lt;/code&gt; などを使う．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# import libraries&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; networkx &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; nx
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; plt
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; matplotlib.colors &lt;span style=&#34;color:#f92672&#34;&gt;as&lt;/span&gt; mcolors
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# drawing function&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;draw&lt;/span&gt;(G, pos, measures, measure_name):
+    normalized_measures &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
+    s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum(measures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; key, value &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; measures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items():
+        normalized_measures[key] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; value &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; s
+    nodes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw_networkx_nodes(G, pos,
+                                   cmap&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cm&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;plasma,
+                                   node_size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;list(value &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4000&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; value &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; normalized_measures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values()),
+                                   node_color&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;list(normalized_measures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values()),
+                                   nodelist&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;normalized_measures&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;keys())
+    nodes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_norm(mcolors&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;SymLogNorm(linthresh&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.01&lt;/span&gt;, linscale&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, base&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;))
+    labels &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw_networkx_labels(G, pos)
+    edges &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;draw_networkx_edges(G, pos)
+
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;title(measure_name)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;colorbar(nodes)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;axis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;off&amp;#34;&lt;/span&gt;)
+    plt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;show()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# example graph&lt;/span&gt;
+G &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;karate_club_graph()
+pos &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;spring_layout(G, seed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;)
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# example directed graph&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# - this graph is same as one in https://en.wikipedia.org/wiki/PageRank&lt;/span&gt;
+DiG &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DiGraph()
+DiG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add_edges_from([(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;),
+                    (&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;),
+                    (&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;), (&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)])
+dpos &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.9&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.9&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.15&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.55&lt;/span&gt;],
+        &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;,  &lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;,  &lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.22&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.3&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.30&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.27&lt;/span&gt;],
+        &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.38&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.24&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.7&lt;/span&gt;,  &lt;span style=&#34;color:#ae81ff&#34;&gt;0.3&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;0.75&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.35&lt;/span&gt;]}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;degree-centrality次数中心性&#34;&gt;Degree Centrality：次数中心性&lt;/h2&gt;
+&lt;p&gt;頂点に生えている辺の本数が多ければ多いほどその頂点は重要であるという中心性．有向グラフに対しては入次数中心性と出次数中心性が計算できる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;degree_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Degree Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./degree-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;eigenvector-centrality固有ベクトル中心性&#34;&gt;Eigenvector Centrality：固有ベクトル中心性&lt;/h2&gt;
+&lt;p&gt;「重要な頂点と隣接している頂点ほど重要」であるとする中心性．頂点$i$の固有ベクトル中心性$x_i$は&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \sum_{j}A_{ij}x_j
+$$&lt;/p&gt;
+&lt;p&gt;ただし$A$はグラフ$G$の隣接行列表現．これを全頂点についてまとめて書くと&lt;/p&gt;
+&lt;p&gt;$$
+Ax = \lambda x
+$$&lt;/p&gt;
+&lt;p&gt;の解$x$と書ける．ここで$\lambda$が$A$の固有値，$x$が固有ベクトル．固有ベクトル中心性は絶対値が最大な固有値に対応する第一固有ベクトルを中心性として扱う．固有ベクトルの$i$行目成分が頂点$i$の固有ベクトル中心性．&lt;/p&gt;
+&lt;p&gt;固有ベクトル中心性は次数中心性の拡張とも言える．次数中心性では隣接頂点をすべて平等に扱っているが，固有ベクトル中心性では，より重要な隣接頂点の寄与をより大きく採用する．&lt;/p&gt;
+&lt;p&gt;有向グラフに対する固有ベクトル中心性では，入次数が0な頂点は無視されることになるという問題がある．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;eigenvector_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Eigenvector Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./eigenvector-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.leonidzhukov.net/hse/2014/socialnetworks/papers/Bonacich-Centrality.pdf&#34;&gt;Phillip Bonacich. “Power and Centrality: A Family of Measures.” American Journal of Sociology 92(5):1170–1182, 1986&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.co.jp/dp/0199206651&#34;&gt;Mark E. J. Newman. Networks: An Introduction. Oxford University Press, USA, 2010, pp. 169&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;katz-centralityカッツ中心性&#34;&gt;Katz Centrality：カッツ中心性&lt;/h2&gt;
+&lt;p&gt;入次数0の頂点の扱いを工夫した固有ベクトル中心性．初期値として全ての頂点の中心性として小さい値$\beta$を与える．&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \alpha \sum_{j}A_{ij}x_{j} + \beta
+$$&lt;/p&gt;
+&lt;p&gt;これを全頂点についてまとめて記述すると&lt;/p&gt;
+&lt;p&gt;$$
+x = \alpha Ax + \beta 1
+$$&lt;/p&gt;
+&lt;p&gt;の解$x$が全頂点の中心性になっている．パラメタ$\alpha$で隣接頂点の重要度をどの程度自分の重要度に考慮するかを調整する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;katz_centrality(G, alpha&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;, beta&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.0&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Katz Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./katz-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(DiG, dpos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;katz_centrality(DiG, alpha&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;, beta&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.0&lt;/span&gt;), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Katz Centrality (Directed Graph)&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./katz-centrality-directed.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://phya.snu.ac.kr/~dkim/PRL87278701.pdf&#34;&gt;Leo Katz: A New Status Index Derived from Sociometric Index. Psychometrika 18(1):39–43, 1953&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pagerank&#34;&gt;PageRank&lt;/h2&gt;
+&lt;p&gt;Katz中心性を拡張したもの．&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \alpha \sum_{j}A_{ij}\frac{x_j}{k_{j}^{out}} + \beta
+$$&lt;/p&gt;
+&lt;p&gt;全頂点についてまとめてかくと&lt;/p&gt;
+&lt;p&gt;$$
+x = \alpha AD^{-1}x + \beta 1
+$$&lt;/p&gt;
+&lt;p&gt;ただし，$D$は対角行列で$D_{ii} = max(k_{i}^{out}, 1)$&lt;/p&gt;
+&lt;p&gt;低出次数の頂点はより大きく隣接する頂点の重要度に寄与する．&lt;/p&gt;
+&lt;p&gt;グラフ上をRandom Walkするときの定常状態における各頂点での滞在確率に等しくなる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pagerank(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PageRank&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./pagerank.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(DiG, dpos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pagerank(DiG), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PageRank (Directed Graph)&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./pagerank-directed.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://dbpubs.stanford.edu:8090/pub/showDoc.Fulltext?lang=en&amp;amp;doc=1999-66&amp;amp;format=pdf&#34;&gt;Page, Lawrence; Brin, Sergey; Motwani, Rajeev and Winograd, Terry, The PageRank citation ranking: Bringing order to the Web. 1999&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hits&#34;&gt;HITS&lt;/h2&gt;
+&lt;p&gt;「重要度にも二種類あるよね」という発想から生まれた中心性．グラフの「中心」にはいないけど重要な頂点だってあるじゃないか，ならばそいつらも捉えたいというのがHITS．例えば，サーベイ論文は「重要な論文」へのリンクを大量に含んでいるという意味で重要だけれど，サーベイ論文自体に新規性があるわけではないので，そこから新しい派生研究が出てくる訳ではないという意味で重要ではない．&lt;/p&gt;
+&lt;p&gt;HITSでは重要な頂点の分類を与える．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorities&lt;/code&gt;：&lt;code&gt;Hubs&lt;/code&gt;からたくさん引用される頂点&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Hubs&lt;/code&gt;：&lt;code&gt;Authorities&lt;/code&gt;をたくさん引用する頂点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Authorities&lt;/code&gt;がエポックメイキングな論文で，&lt;code&gt;Hubs&lt;/code&gt;がサーベイ論文という感じ．&lt;/p&gt;
+&lt;p&gt;再帰的な定義になっている．頂点$i$の&lt;code&gt;Authority Centrality&lt;/code&gt;を$x_i$，&lt;code&gt;Hub Centrality&lt;/code&gt;を$y_i$とすると&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \alpha \sum_{j}A_{ij}y_j
+$$&lt;/p&gt;
+&lt;p&gt;$$
+y_i = \beta \sum_{j}A_{ji}x_j
+$$&lt;/p&gt;
+&lt;p&gt;全頂点についてまとめて書くと&lt;/p&gt;
+&lt;p&gt;$$
+x = \alpha A y
+$$&lt;/p&gt;
+&lt;p&gt;$$
+y = \beta A^{T} x
+$$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;hub, authority &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hits(DiG)
+draw(DiG, dpos, hub, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HITS Hubs (Directed Graph)&amp;#39;&lt;/span&gt;)
+draw(DiG, dpos, authority, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HITS Authorities (Directed Graph)&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./hub.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./authority.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cs.cornell.edu/home/kleinber/auth.pdf&#34;&gt;Jon Kleinberg, Authoritative sources in a hyperlinked environment Journal of the ACM 46 (5): 604-32, 1999. doi:10.1145/324133.324140&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://citeseer.ist.psu.edu/713792.html&#34;&gt;A. Langville and C. Meyer, “A survey of eigenvector methods of web information retrieval.”&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;closeness-centrality近接中心性&#34;&gt;Closeness Centrality：近接中心性&lt;/h2&gt;
+&lt;p&gt;頂点$i$から他の全頂点への最短経路長の平均の逆数で中心性としたもの．中心な頂点ほど周りの頂点に近い．「なんとなくみんなにリーチしやすい人」はその集団の中心にいそう．&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \frac{1}{l_i} = \frac{n}{\sum_{j}d_{ij}}
+$$&lt;/p&gt;
+&lt;p&gt;ただし，$l_i = \frac{\sum_{j}d_{ij}}{n}$で，$d_{ij}$は頂点$i$と頂点$j$の最短経路長．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;closeness_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Closeness Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./closeness-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://leonidzhukov.ru/hse/2013/socialnetworks/papers/freeman79-centrality.pdf&#34;&gt;Linton C. Freeman: Centrality in networks: I. Conceptual clarification. Social Networks 1:215-239, 1979.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;current-flow-closeness-aka-information-centrality情報中心性&#34;&gt;Current Flow Closeness (a.k.a Information Centrality)：情報中心性&lt;/h2&gt;
+&lt;p&gt;近接中心性の派生．グラフ上を伝って伝播していく情報に注目した中心性．頂点$i$と頂点$j$を繋ぐ経路上を流れる情報が，経路長の逆数に比例して分散するとしたときの各頂点で得られる情報量の調和平均．伝言ゲームで「より正確なことを聞ける人」は中心にいそう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current_flow_closeness_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Current Flow Closeness Centrality a.k.a Information Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./information-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://algo.uni-konstanz.de/publications/bf-cmbcf-05.pdf&#34;&gt;Ulrik Brandes and Daniel Fleischer, Centrality Measures Based on Current Flow. Proc. 22nd Symp. Theoretical Aspects of Computer Science (STACS ‘05). LNCS 3404, pp. 533-544. Springer-Verlag, 2005.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://doi.org/10.1016/0378-8733(89)90016-6&#34;&gt;Karen Stephenson and Marvin Zelen: Rethinking centrality: Methods and examples. Social Networks 11(1):1-37, 1989.&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;情報中心性として提案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;betweenness-centrality媒介中心性&#34;&gt;Betweenness Centrality：媒介中心性&lt;/h2&gt;
+&lt;p&gt;任意の頂点対$(s, t)$の最短経路のうち，頂点$i$を通過する最短経路はどのくらいあるか，を中心性として採用したもの．ここからあそこまで行くのにあの頂点をとらないといけないというとき，その頂点はネットワーク上での伝達を考えたときの要衝であると言えそう．ソーシャルネットワークであれば，異なる集団を繋ぐキーパーソンだと媒介中心性は大きい．&lt;/p&gt;
+&lt;p&gt;$$
+x_i = \sum_{s, t \in V} \frac{\sigma (s, t | i)}{\sigma (s, t)}
+$$&lt;/p&gt;
+&lt;p&gt;ただし，$\sigma(s, t)$は頂点$s$と$t$の最短経路数，$\sigma(s, t | i)$はそれらのうち頂点$i$を経由する経路数．&lt;/p&gt;
+&lt;p&gt;大規模なグラフに対してBrandesが提案するアルゴリズムで厳密な媒介中心性は$O(nm)$で計算できるが，頂点数が100万を超えてくるグラフには難しい．近年では近似値を高速に求めるというところが盛んに研究されている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;betweenness_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Betweenness Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./betweenncess-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.inf.uni-konstanz.de/algo/publications/b-fabc-01.pdf&#34;&gt;Ulrik Brandes: A Faster Algorithm for Betweenness Centrality. Journal of Mathematical Sociology 25(2):163-177, 2001.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.inf.uni-konstanz.de/algo/publications/b-vspbc-08.pdf&#34;&gt;Ulrik Brandes: On Variants of Shortest-Path Betweenness Centrality and their Generic Computation. Social Networks 30(2):136-145, 2008.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://moreno.ss.uci.edu/23.pdf&#34;&gt;Linton C. Freeman: A set of measures of centrality based on betweenness. Sociometry 40: 35–41, 1977&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;current-flow-betweenness-aka-random-walk-betweenness-centrality&#34;&gt;Current Flow Betweenness (a.k.a Random Walk Betweenness Centrality)&lt;/h2&gt;
+&lt;p&gt;媒介中心性では，情報が最短経路上を伝播することを仮定しているが，それを緩めて，頂点間最短経路のみならず，すべての経路上を伝播するとして，その中でも経路長が短いものの寄与をより重視する中心性として提案された．媒介中心性の拡張．歴史的にはCurrent Flow Betweennessが直感に反する場合があることをNewmanが示して，代替案としてRandom Walk Betweenness Centralityを提案した．&lt;/p&gt;
+&lt;p&gt;頂点$i$のRandom Walk Betweennessは，頂点$p$から出発して頂点$q$で終了するRandom Walkがその途中で頂点$i$を通過する回数を全ての頂点対$(p, q)$で平均したものとして定義される．情報がRandom Walkするとき，何回も訪問する頂点はきっと重要．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current_flow_betweenness_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Current Flow Betweenness Centrality a.k.a Random Walk Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./random-walk-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://algo.uni-konstanz.de/publications/bf-cmbcf-05.pdf&#34;&gt;Centrality Measures Based on Current Flow. Ulrik Brandes and Daniel Fleischer, Proc. 22nd Symp. Theoretical Aspects of Computer Science (STACS ‘05). LNCS 3404, pp. 533-544. Springer-Verlag, 2005.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/cond-mat/0309045.pdf&#34;&gt;A measure of betweenness centrality based on random walks, M. E. J. Newman, Social Networks 27, 39-54 (2005).&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;communicability-betweenness&#34;&gt;Communicability Betweenness&lt;/h2&gt;
+&lt;p&gt;Betweenness CentralityとRandom Walk Betweenness Centralityの中間にあるような中心性．頂点$i$のCommunicability Betweennessは，頂点$p$から出発して頂点$q$で終了するRandom Walkがその途中で頂点$i$を通過する回数を全ての頂点対$(p, q)$とその経路長で加重平均したもの．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;communicability_betweenness_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Communicability Betweenness Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./communicability-centrality.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/0905.4102&#34;&gt;Ernesto Estrada, Desmond J. Higham, Naomichi Hatano, “Communicability Betweenness in Complex Networks” Physica A 388 (2009) 764-774.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;power-centralityボナチッチ中心性パワー中心性&#34;&gt;Power Centrality：ボナチッチ中心性・パワー中心性&lt;/h2&gt;
+&lt;p&gt;重要な頂点と繋がっている頂点は重要では &lt;strong&gt;ない&lt;/strong&gt; とする中心性．&lt;a href=&#34;https://tjo.hatenablog.com/entry/2015/12/09/190000&#34;&gt;このブログ&lt;/a&gt;によると『&lt;a href=&#34;https://www.amazon.co.jp/dp/4320019288&#34;&gt;ネットワーク分析&lt;/a&gt;』という本に&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例えば、商取引のネットワークを考えてみよう。頂点は企業や個人など取引の主体であり、辺（ここではとりあえず無向辺とする）は取引関係を表す。ここで次数の高い頂点は、数多くの取引先を持つ主体である。取引先を他より多くもつ主体は、取引において有利な立場に立ち得る。なぜなら、自分は他にも取引相手の選択肢があるということを、交渉において相手への圧力として使えるからである（「安くしてくれないなら他から買う」など）。つまり、関係ある相手の力が強いほど、自分の力は弱くなるということである。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;と例えられているとのこと．&lt;/p&gt;
+&lt;p&gt;本質的には固有ベクトル中心性と同じ計算で求まる．&lt;/p&gt;
+&lt;h2 id=&#34;group-betweenness-centrality&#34;&gt;Group Betweenness Centrality&lt;/h2&gt;
+&lt;p&gt;媒介中心性を頂点集合に対して計算するように拡張したもの．頂点集合$C$のグループ中心性$BC_{C}$は&lt;/p&gt;
+&lt;p&gt;$$
+BC_{C} = \sum_{s, t \in V - C; s &amp;lt; t} \frac{\sigma (s, t | C)}{\sigma (s, t)}
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.analytictech.com/borgatti/group_centrality.htm&#34;&gt;M G Everett and S P Borgatti: The Centrality of Groups and Classes. Journal of Mathematical Sociology. 23(3): 181-201. 1999.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.72.9610&amp;amp;rep=rep1&amp;amp;type=pdf&#34;&gt;Ulrik Brandes: On Variants of Shortest-Path Betweenness Centrality and their Generic Computation. Social Networks 30(2):136-145, 2008.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sites.cs.ucsb.edu/~arlei/pubs/sdm18.pdf&#34;&gt;Sourav Medya et. al.: Group Centrality Maximization via Network Design. SIAM International Conference on Data Mining, SDM 2018, 126–134.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;subgraph-centrality&#34;&gt;Subgraph Centrality&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;networkx&lt;/code&gt;には&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Subgraph centrality of a node n is the sum of weighted closed walks of all lengths starting and ending at node n. The weights decrease with path length. Each closed walk is associated with a connected subgraph.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;と定義されているがよくわからん．水面に水滴を垂らしたら同心円状に波及していくイメージ？&lt;/p&gt;
+&lt;p&gt;頂点$u$のsubgraph centrality$SC_u$は&lt;/p&gt;
+&lt;p&gt;$$
+SC_u = \sum_{j = 1}^n (v_{j}^u)^2 e^{\lambda_{j}}
+$$&lt;/p&gt;
+&lt;p&gt;ただし$v_j$はグラフ$G$の固有ベクトル，$\lambda_j$はそれに対応する固有値．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;subgraph_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Subgraph Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./subgraph.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/cond-mat/0504730&#34;&gt;Ernesto Estrada, Juan A. Rodriguez-Velazquez, “Subgraph centrality in complex networks”, Physical Review E 71, 056103 (2005).&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;harmonic-centrality調和中心性&#34;&gt;Harmonic Centrality：調和中心性&lt;/h2&gt;
+&lt;p&gt;頂点$u$の調和中心性$x_u$はその他の頂点への最短経路長の逆数の和で定義される．&lt;/p&gt;
+&lt;p&gt;$$
+x_u = \sum_{v \neq u} \frac{1}{d(v, u)}
+$$&lt;/p&gt;
+&lt;p&gt;ただし$d(v, u)$は頂点$v$と頂点$u$の最短経路長．&lt;/p&gt;
+&lt;p&gt;距離に注目した中心性指標．PageRankとHarmonic Centralityは似たような結果になる一方で，Harmonic Centralityの方が計算時間が短くて済む．PageRankとHarmonic Centralityは上位の頂点が一致するが下位の頂点ではずれる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;harmonic_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Harmonic Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./harmonic.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1308.2140&#34;&gt;Boldi, Paolo, and Sebastiano Vigna. “Axioms for centrality.” Internet Mathematics 10.3-4 (2014): 222-262.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;second-order-centrality&#34;&gt;Second Order Centrality&lt;/h2&gt;
+&lt;p&gt;グラフ$G$上で頂点$u$からRandom Walkを実行したときに，始点頂点$u$を再び通過するまでの歩長の標準偏差（平均からのブレ）をSecond Order Centralityという．&lt;/p&gt;
+&lt;p&gt;Second Order Centralityが小さいほど，重要な頂点であるといえる．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;networkx&lt;/code&gt;での実装ではRandom Walkを実際に実行するのではなく，代数的に解く実装になっている．計算量は$O(n^3)$と大きく，規模の大きいグラフに対しては近似が必要になりそう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;draw(G, pos, nx&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;second_order_centrality(G), &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Second Order Centrality&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./second-order.png&#34; alt=&#34;&#34; &gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://homepages.laas.fr/gtredan/pdf/SOC_COMCOM2010.pdf&#34;&gt;Anne-Marie Kermarrec, Erwan Le Merrer, Bruno Sericola, Gilles Trédan “Second order centrality: Distributed assessment of nodes criticity in complex networks”, Elsevier Computer Communications 34(5):619-628, 2011.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;その他&#34;&gt;その他&lt;/h2&gt;
+&lt;p&gt;中心性という概念の歴史の話がこちらにまとまっていました．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tech.preferred.jp/ja/blog/%E4%B8%AD%E5%BF%83%E6%80%A7%EF%BC%9A%E5%A7%8B%E3%81%BE%E3%82%8A%E3%81%8B%E3%82%89%E6%9C%80%E8%BF%91%E3%81%BE%E3%81%A7/&#34;&gt;中心性：始まりから最近まで（Preferred Networks R&amp;amp;D Blog）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Tips on initialization of List</title>
@@ -7796,7 +8366,7 @@ $$&lt;/p&gt;
 &lt;p&gt;問題を「グラフ」としてモデル化・定式化することで高速な探索アルゴリズムを考えることができることが多い．例えば，首都圏の電車の乗換案内アプリケーションはほとんどそのままグラフ上の最短経路探索問題として定式化できるし，他にもオセロや将棋などのボードゲームも，ユーザの操作によって盤上の状態を頂点とするグラフ上を移動しているとすればグラフ上の探索問題とみなせる．&lt;/p&gt;
 &lt;h2 id=&#34;グラフ&#34;&gt;グラフ&lt;/h2&gt;
 &lt;p&gt;グラフとは，&lt;strong&gt;対象物を構成する事物の集合とその集合を構成する対象物間の関係にのみ注目したデータ構造&lt;/strong&gt;のことで，卑近な例で言えば，人間関係はグラフとして表現することができる．&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;グラフ$G$&lt;/strong&gt;はそれを構成する頂点の有限集合$V = \{v_1, v_2, &amp;hellip;, v_n\}$と頂点間に生える辺の有限集合$E = \{e_1, e_2, &amp;hellip;, e_m\}$の組として定義される．&lt;/p&gt;
+&lt;p&gt;**グラフ$G$**はそれを構成する頂点の有限集合$V = \{v_1, v_2, &amp;hellip;, v_n\}$と頂点間に生える辺の有限集合$E = \{e_1, e_2, &amp;hellip;, e_m\}$の組として定義される．&lt;/p&gt;
 &lt;p&gt;$$
 G = (V, E)
 $$&lt;/p&gt;
@@ -7860,7 +8430,7 @@ $$&lt;/p&gt;
 
 &lt;/figure&gt;
 
-&lt;p&gt;グラフ$G$上の 2 頂点$u$，$v$について，$u$を出発して隣接する頂点をたどることで$v$に到達できるとき，その経路を&lt;strong&gt;$u$-$v$路&lt;/strong&gt;という．またこのとき$u$をその路の&lt;strong&gt;始点&lt;/strong&gt;，$v$を&lt;strong&gt;終点&lt;/strong&gt;という．さらに，路のうち，同じ頂点を 2 度以上通らないものを&lt;strong&gt;パス&lt;/strong&gt;という．また，路のうち，始点と終点が等しいものを&lt;strong&gt;閉路&lt;/strong&gt;（または&lt;strong&gt;サイクル&lt;/strong&gt;）と呼ぶ．&lt;/p&gt;
+&lt;p&gt;グラフ$G$上の 2 頂点$u$，$v$について，$u$を出発して隣接する頂点をたどることで$v$に到達できるとき，その経路を**$u$-$v$路**という．またこのとき$u$をその路の**始点**，$v$を**終点**という．さらに，路のうち，同じ頂点を 2 度以上通らないものを**パス**という．また，路のうち，始点と終点が等しいものを**閉路**（または**サイクル**）と呼ぶ．&lt;/p&gt;
 
 
 
@@ -13619,7 +14189,7 @@ flag: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 &lt;p&gt;GitHub Pagesは，GitHubが提供している静的サイトのホスティングサービスです．GitHubのアカウントさえあれば，誰でも静的なサイトを公開することができます．何より無料なので，これを使わない手はありません．サイトのソースコードをGitHubで管理しつつ公開もできちゃうなんて，GitHubは太っ腹ですね．&lt;/p&gt;
 &lt;p&gt;GitHub Pagesの他にもホスティングサービスはありますが，ソースコード管理と一緒にホスティングできるところが便利だと思ったので採用しました．&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;気が向いたら，もうちょっと追記します 🙇&lt;/p&gt;
+&lt;p&gt;気が向いたら，もうちょっと追記します 🙇‍♂️&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
     </item>
