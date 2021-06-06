@@ -120,7 +120,7 @@
   <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-05-18T22:13:18&#43;09:00">
+    <meta property="og:updated_time" content="2021-06-06T15:58:55&#43;09:00">
   
 
   
@@ -746,6 +746,81 @@
     
       
     
+    Sun, Jun 6, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+  
+  
+  
+
+  <h3 class="article-title mb-1 mt-3">
+    <a href="/ja/post/missing-number/">Missing Number</a>
+  </h3>
+
+  
+  <div class="article-style">
+    <p>Missing Number https://leetcode.com/problems/missing-number/ 解法1 ソートして頭から順番に要素を見ていく．配列の整列で$O(n \log n)$かかる． class Solution: def missingNumber(self, nums: List[int]) -&gt; int: nums.sort() if nums[-1] != len(nums): return len(nums) if nums[0] != 0: return 0 for i in range(1, len(nums)): expected</p>
+  </div>
+  
+
+  
+
+</div>
+
+      
+    
+      
+        
+
+
+
+
+
+
+
+
+
+  
+
+
+<div class="card-simple">
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
     Tue, May 18, 2021
   </span>
   
@@ -1006,81 +1081,6 @@
   
   <div class="article-style">
     <p>問題 $N \times N$の盤面に$N$個のクイーンを互いに 1 手では襲撃できないように配置せよ． 答え DFS で全探索． N = int(input()) queens = [0 for _ in range(N)] board = [[0 for _ in range(N)] for _ in range(N)]</p>
-  </div>
-  
-
-  
-
-</div>
-
-      
-    
-      
-        
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Fri, Apr 9, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/sqrtx/">Sqrt(x)</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 非負整数が与えられる．その平方の整数部分を計算せよ． 答え 二分探索で書く． class Solution: def mySqrt(self, x: int) -&gt; int: ok = 1 &lt;&lt; 16 ng = 0 def is_ok(mid): return x &lt; mid * mid while 1 &lt; abs(ok - ng): mid =</p>
   </div>
   
 
