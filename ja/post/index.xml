@@ -5,12 +5,62 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 06 Jun 2021 15:58:55 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 06 Jun 2021 16:25:24 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Find the Duplicate Number</title>
+      <link>/ja/post/find-the-duplicate-number/</link>
+      <pubDate>Sun, 06 Jun 2021 16:25:24 +0900</pubDate>
+      <guid>/ja/post/find-the-duplicate-number/</guid>
+      <description>&lt;h2 id=&#34;find-the-duplicate-number&#34;&gt;Find the Duplicate Number&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/&#34;&gt;https://leetcode.com/problems/find-the-duplicate-number/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;解法1&#34;&gt;解法1&lt;/h3&gt;
+&lt;p&gt;配列をソートして前から順番に要素を見ていく．同じ要素が隣り合っていたらそれを返す．ソートに$O(n \log n)$かかる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findDuplicate&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(nums)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[i]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nums[i]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;解法2&#34;&gt;解法2&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;set&lt;/code&gt;を使って見たことある要素をメモしておく．時間計算量$O(n)$，空間計算量$O(n)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findDuplicate&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        seen &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; seen:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; num
+            seen&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(num)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;解法3&#34;&gt;解法3&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;nums&lt;/code&gt;の要素を&lt;code&gt;nums&lt;/code&gt;上のインデックスだと考えると，配列で連結リストを作ったことになる．このとき，ダブった要素の位置で連結リストがループを作ることになるのでそれを検出する．&lt;/p&gt;
+&lt;p&gt;足の速いうさぎ🐰と足の遅い亀🐢を走らせるという有名テクニックがある．&lt;/p&gt;
+&lt;p&gt;配列の要素を一度は見ることになるので時間計算量$O(n)$．一方でポインタを追いかけるだけなので空間計算量は&lt;code&gt;nums&lt;/code&gt;のサイズに依存せず$O(1)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findDuplicate&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; True:
+            faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[nums[faster]]
+            slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[slower]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; slower:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; slower &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; faster:
+            faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[faster]
+            slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[slower]
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; slower
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Missing Number</title>
