@@ -5,12 +5,49 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 06 Jun 2021 16:25:24 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 06 Jun 2021 16:52:29 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Number Swapper</title>
+      <link>/ja/post/number-swapper/</link>
+      <pubDate>Sun, 06 Jun 2021 16:52:29 +0900</pubDate>
+      <guid>/ja/post/number-swapper/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;一時変数を使用しないで数字の交換を実装せよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;差をうまく使うやり方&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a: {}, b: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(a, b))
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; b
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; a
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a: {}, b: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(a, b))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;xor&lt;/code&gt;をうまく使うやり方
+&lt;ul&gt;
+&lt;li&gt;同じ数字同士の&lt;code&gt;xor&lt;/code&gt;はキャンセルされることを利用する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a: {}, b: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(a, b))
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; b
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a: {}, b: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(a, b))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Find the Duplicate Number</title>
