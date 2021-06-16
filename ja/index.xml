@@ -5,12 +5,137 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 06 Jun 2021 16:52:29 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 16 Jun 2021 20:06:39 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Latency vs Throughput vs Bandwidth</title>
+      <link>/ja/post/latency-vs-throughput-vs-bandwidth/</link>
+      <pubDate>Wed, 16 Jun 2021 20:06:39 +0900</pubDate>
+      <guid>/ja/post/latency-vs-throughput-vs-bandwidth/</guid>
+      <description>&lt;p&gt;&lt;code&gt;Latency&lt;/code&gt;と&lt;code&gt;Throughtput&lt;/code&gt;と&lt;code&gt;Bandwidth&lt;/code&gt;の違いがよく分からなかったので調べてみました．&lt;/p&gt;
+&lt;h2 id=&#34;latency&#34;&gt;Latency&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Latency measures delay. Delay is simply the time taken for a data packet to reach its destination after being sent.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;あるパケットAを地点Sから地点Tへ送ったときに何秒かかるか&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;round-tripで測ることが多い&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;「地点S -&amp;gt; 地点T -&amp;gt; 地点S」にかかる時間&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Latency&lt;/code&gt;が大きいとネットワークのパフォーマンスは悪い&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Latency&lt;/code&gt;大 -&amp;gt; 一つのパケットの伝送に要する時間が大きい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;throughput&#34;&gt;Throughput&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;the amount of data able to be transmitted and received during a specific time period.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一定の時間幅で送受信できるデータの量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;throughput provides a practical measurement of the actual delivery of packets.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理論値ではなくて実測値&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;よく使われる単位は&lt;code&gt;bits per second&lt;/code&gt; = &lt;code&gt;bps&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;もしくは&lt;code&gt;packets per second&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;throughtput&lt;/code&gt;が落ちてるとネットワーク内でパケロスが発生しているかもしれない&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;bandwidth&#34;&gt;Bandwidth&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;the amount of data that can be transmitted and received during a specific period of time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一定の時間幅で送受信できるデータの量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;よく使われる単位は&lt;code&gt;bits per second&lt;/code&gt; = &lt;code&gt;bps&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gigabit per second&lt;/code&gt; = &lt;code&gt;Gbps&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;megabit per second&lt;/code&gt; = &lt;code&gt;Mbps&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;high bandwidth doesn’t necessarily guarantee optimal network performance.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bandwidth&lt;/code&gt;が大きいことが即座に&lt;code&gt;throughtput&lt;/code&gt;が大きいことを意味するとは限らない．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bandwidth measures capacity, not speed.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;車で言うなら，「この車は時速500km出せます」は&lt;code&gt;bandwidth&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ISPが帯域でネットワークの性能を推してくることがこの誤解を広めてしまっているという指摘．&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bandwidth&lt;/code&gt;が大きいネットワークを使えると，任意のタイミングで大きいデータを転送しようとすることができる，ということであって，その転送が瞬時に終わるということではない．&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;throughput-vs-latency&#34;&gt;Throughput vs Latency&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Throughtput&lt;/code&gt;と&lt;code&gt;Latency&lt;/code&gt;はコインの表裏みたいなもの&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Latency&lt;/code&gt;が大きければ&lt;code&gt;Throughput&lt;/code&gt;は小さい&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Throughput&lt;/code&gt;が小さければ&lt;code&gt;Latency&lt;/code&gt;が大きいだろう&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;latency-vs-bandwidth&#34;&gt;Latency vs Bandwidth&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Latency&lt;/code&gt;も&lt;code&gt;Bandwidth&lt;/code&gt;もネットワークの性能を測る指標&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Latency&lt;/code&gt;は土管の長さ
+&lt;ul&gt;
+&lt;li&gt;土管が長ければデータが土管に入って抜けるまでに必要な時間が長くなる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bandwidth&lt;/code&gt;は土管の直径
+&lt;ul&gt;
+&lt;li&gt;土管の直径が大きくなれば一度により多くのデータを送れる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;しばしば「&lt;code&gt;Bandwidth&lt;/code&gt;が〇〇だから&lt;code&gt;Latency&lt;/code&gt;が△△」
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Bandwidth&lt;/code&gt;が大きいから&lt;code&gt;Latency&lt;/code&gt;が小さい&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bandwidth&lt;/code&gt;が小さいから&lt;code&gt;Latency&lt;/code&gt;が大きい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;bandwidth-vs-throughput&#34;&gt;Bandwidth vs Throughput&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Bandwidth&lt;/code&gt;は土管の直径&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Throughtput&lt;/code&gt;はその土管に流れている水の量&lt;/li&gt;
+&lt;li&gt;bandwidth represents the theoretical measurement of the highest amount of data packets able to be transferred, and throughput represents the actual amount of packets successfully delivered.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bandwidth&lt;/code&gt;は理論値，&lt;code&gt;Throughtput&lt;/code&gt;は実測値．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;refs&#34;&gt;refs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.dnsstuff.com/latency-throughput-bandwidth&#34;&gt;https://www.dnsstuff.com/latency-throughput-bandwidth&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Number Swapper</title>
