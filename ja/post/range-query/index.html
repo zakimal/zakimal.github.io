@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="尾崎 耀一 (@zak)">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="「与えられた配列に対して，ある範囲についての大量のクエリを処理しろ」というときには以下のテクニックが有効．基本的には「大量のクエリ」を処理す">
+
+  
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/range-query/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/ja/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/ja/post/range-query/">
+
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@zak74702675">
+  <meta property="twitter:creator" content="@zak74702675">
+  
+  <meta property="og:site_name" content="zak">
+  <meta property="og:url" content="/ja/post/range-query/">
+  <meta property="og:title" content="Range Query | zak">
+  <meta property="og:description" content="「与えられた配列に対して，ある範囲についての大量のクエリを処理しろ」というときには以下のテクニックが有効．基本的には「大量のクエリ」を処理す"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
+  
+    
+      <meta property="article:published_time" content="2021-06-29T18:34:17&#43;09:00">
+    
+    <meta property="article:modified_time" content="2021-06-29T18:34:17&#43;09:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/range-query/"
+  },
+  "headline": "Range Query",
+  
+  "datePublished": "2021-06-29T18:34:17+09:00",
+  "dateModified": "2021-06-29T18:34:17+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "「与えられた配列に対して，ある範囲についての大量のクエリを処理しろ」というときには以下のテクニックが有効．基本的には「大量のクエリ」を処理す"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Range Query | zak</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="検索..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/ja"><img src="/img/zak.gif" alt="zak"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#about"><span>ホーム</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#posts"><span>ブログ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/post/book-shelf"><span>本棚</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/#contact"><span>お問い合わせ</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/ja/files/cv.pdf"><span>履歴書</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Range Query</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Tue, Jun 29, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 分で読める
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>「与えられた配列に対して，<strong>ある範囲</strong>についての<strong>大量のクエリを</strong>処理しろ」というときには以下のテクニックが有効．基本的には「大量のクエリ」を処理するために，$O(N)$ぐらいの前処理をしてクエリ自体には$O(1)$で答えられるようにするというのが基本戦略．</p>
+<ul>
+<li>累積和</li>
+<li>Binary Index Tree</li>
+<li>Segment Tree</li>
+</ul>
+<h2 id="累積和">累積和</h2>
+<p>「累積和の差」が「範囲の和」になるということを利用．累積和の作り方は添字が煩雑になりやすいので，次のように作ると決めてしまうと楽．</p>
+<p>長さ<code>N</code>の整数配列<code>arr</code>の累積和<code>accum</code>は</p>
+<ul>
+<li><code>accum[0]</code> = <code>0</code></li>
+<li><code>accum[i+1]</code> = <code>accum[i]</code> + <code>arr[i]</code></li>
+</ul>
+<p>このとき，範囲<code>[left, right)</code>について</p>
+<ul>
+<li><code>arr[left:right]</code> = <code>accum[right]</code> - <code>accum[left]</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="accumulative-sum.png" alt="" >
+
+
+  
+  
+  <figcaption>
+    累積和
+  </figcaption>
+
+
+</figure>
+
+<p>ここで意識すべきは，</p>
+<ul>
+<li><code>accum[0]</code> = <code>0</code></li>
+<li>範囲は右開区間
+<ul>
+<li>問題上で範囲が与えられるときは左右閉区間で与えられることが多いので，その時は<code>accum</code>にアクセスするタイミングで1足すなりして対応する</li>
+</ul>
+</li>
+</ul>
+<h3 id="例題1">例題1</h3>
+<blockquote>
+<p>長さ$N$の整数列$A$があります．$A$の空でない連続する部分列であって，その総和が$0$になるものの個数を求めてください．ただし，ここで数えるのは部分列の取り出し方であることに注意してください．つまり，ある$2$つの部分列が列として同じでも，取り出した位置が異なるならば，それらは別々に数えるものとします．</p>
+<p>from <code>https://atcoder.jp/contests/agc023/tasks/agc023_a</code></p>
+</blockquote>
+<p>累積和をとって，集計する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> collections <span style="color:#f92672">import</span> Counter
+N <span style="color:#f92672">=</span> int(input())
+A <span style="color:#f92672">=</span> list(map(int, input()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34; &#34;</span>)))
+accum <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(A) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(A)):
+    accum[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> accum[i] <span style="color:#f92672">+</span> A[i]
+
+freq <span style="color:#f92672">=</span> Counter(accum)
+ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> freq<span style="color:#f92672">.</span>values():
+    ans <span style="color:#f92672">+=</span> v <span style="color:#f92672">*</span> (v <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+
+<span style="color:#66d9ef">print</span>(ans)
+</code></pre></div><h3 id="例題2">例題2</h3>
+<blockquote>
+<p>Given an integer array <code>nums</code>, handle multiple queries of the following type:</p>
+<p>Calculate the sum of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> inclusive where <code>left</code> &lt;= <code>right</code>.
+Implement the <code>NumArray</code> class:</p>
+<ul>
+<li><code>NumArray(int[] nums)</code> Initializes the object with the integer array <code>nums</code>.</li>
+<li><code>int sumRange(int left, int right)</code> Returns the sum of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> inclusive (i.e. <code>nums[left] + nums[left + 1] + ... + nums[right]</code>).</li>
+</ul>
+<p>from <code>https://leetcode.com/problems/range-sum-query-immutable/</code></p>
+</blockquote>
+<p>まさしく累積和を使ってほしいという意図が見える問題．問題文中では範囲が閉区間で行われているので，それに合わせて<code>sumRange</code>内で<code>right</code>の扱いに注意する．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NumArray</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self, nums: List[int]):
+        self<span style="color:#f92672">.</span>nums <span style="color:#f92672">=</span> nums
+        accums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(nums)):
+            accums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> accums[i] <span style="color:#f92672">+</span> nums[i]
+        self<span style="color:#f92672">.</span>accums <span style="color:#f92672">=</span> accums
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sumRange</span>(self, left: int, right: int) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>accums[right <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>accums[left]
+
+
+<span style="color:#75715e"># Your NumArray object will be instantiated and called as such:</span>
+<span style="color:#75715e"># obj = NumArray(nums)</span>
+<span style="color:#75715e"># param_1 = obj.sumRange(left,right)</span>
+</code></pre></div><h2 id="二次元累積和">二次元累積和</h2>
+<p>ついでなので二次元配列の累積和についても記載しておく．</p>
+<p>二次元配列<code>A</code>が与えられたときに，<code>[x1, x2) x [y1, y2)</code>である長方形の範囲内の要素の総和を求めるクエリを考える．</p>
+<p>累積和<code>accum</code>は</p>
+<ul>
+<li><code>accum[0][0]</code> = <code>0</code></li>
+<li><code>accum[i][j]</code> = <code>[0, i)</code> x <code>[0, j)</code>の長方形範囲の総和
+<ul>
+<li><code>accum[i+1][j+1] = accum[i+1][j] + accum[i][j+1] - accum[i][j] + A[i][j]</code></li>
+</ul>
+</li>
+</ul>
+<p>こうすることで，<code>[x1, x2) x [y1, y2)</code>である長方形の範囲内の要素の総和は，<code>accum[x2][y2] - accum[x1][y2] - accum[x2][y1] + accum[x1][y1]</code>で求められる．</p>
+<h3 id="例題">例題</h3>
+<blockquote>
+<p>Given a 2D matrix <code>matrix</code>, handle multiple queries of the following type:</p>
+<p>Calculate the sum of the elements of <code>matrix</code> inside the rectangle defined by its upper left corner <code>(row1, col1)</code> and lower right corner <code>(row2, col2)</code>.
+Implement the <code>NumMatrix</code> class:</p>
+<p><code>NumMatrix(int[][] matrix)</code> Initializes the object with the integer matrix <code>matrix</code>.
+<code>int sumRegion(int row1, int col1, int row2, int col2)</code> Returns the sum of the elements of <code>matrix</code> inside the rectangle defined by its upper left corner <code>(row1, col1)</code> and lower right corner <code>(row2, col2)</code>.</p>
+<p>from <code>https://leetcode.com/problems/range-sum-query-2d-immutable/</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NumMatrix</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self, matrix: List[List[int]]):
+        self<span style="color:#f92672">.</span>matrix <span style="color:#f92672">=</span> matrix
+        H <span style="color:#f92672">=</span> len(matrix)
+        W <span style="color:#f92672">=</span> len(matrix[<span style="color:#ae81ff">0</span>])
+        accum <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(W <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(H <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+        <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, H):
+            <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, W):
+                accum[h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][w <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> accum[h][w <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> accum[h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][w] <span style="color:#f92672">-</span> accum[h][w] <span style="color:#f92672">+</span> matrix[h][w]
+        self<span style="color:#f92672">.</span>accum <span style="color:#f92672">=</span> accum
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sumRegion</span>(self, row1: int, col1: int, row2: int, col2: int) <span style="color:#f92672">-&gt;</span> int:
+        row2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        col2 <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>accum[row2][col2] <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>accum[row2][col1] <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>accum[row1][col2] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>accum[row1][col1]
+
+
+<span style="color:#75715e"># Your NumMatrix object will be instantiated and called as such:</span>
+<span style="color:#75715e"># obj = NumMatrix(matrix)</span>
+<span style="color:#75715e"># param_1 = obj.sumRegion(row1,col1,row2,col2)</span>
+</code></pre></div><h2 id="segment-tree">Segment Tree</h2>
+<p>配列を「区間」を単位に完全二分木で管理する．</p>
+<p><code>1</code>-indexな配列上に完全二分木を実装する．頂点<code>i</code>の子供は頂点<code>2*i</code>，頂点<code>2*i + 1</code>．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="segment-tree0.png" alt="" >
+
+
+  
+  
+  <figcaption>
+    セグメント木は配列で実装する
+  </figcaption>
+
+
+</figure>
+
+<p><code>update</code>クエリでは上にさかのぼっていきながら木を更新する．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="segment-tree1.png" alt="" >
+
+
+  
+  
+  <figcaption>
+    <code>update</code>クエリ系
+  </figcaption>
+
+
+</figure>
+
+<p><code>range</code>クエリでは下から該当する範囲を拾っていくイメージ．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="segment-tree2.png" alt="" >
+
+
+  
+  
+  <figcaption>
+    <code>range</code>クエリ系
+  </figcaption>
+
+
+</figure>
+
+<p>なお，クエリ時のインデックスは<code>0</code>-indexであることに注意．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SegmentTree</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, init_list, func, ele):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        init_list: 管理対象の整数配列
+</span><span style="color:#e6db74">        func:      区間に対して実行する処理（min/max/sum/productなど）
+</span><span style="color:#e6db74">        ele:       単位元
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        n <span style="color:#f92672">=</span> len(init_list)
+        self<span style="color:#f92672">.</span>func <span style="color:#f92672">=</span> func
+        self<span style="color:#f92672">.</span>ele <span style="color:#f92672">=</span> ele
+        self<span style="color:#f92672">.</span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>bit_length()
+        self<span style="color:#f92672">.</span>tree <span style="color:#f92672">=</span> [ele <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>num)]
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+            self<span style="color:#f92672">.</span>tree[i <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>num] <span style="color:#f92672">=</span> init_list[i] <span style="color:#75715e"># set leaf</span>
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            self<span style="color:#f92672">.</span>tree[i] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func(self<span style="color:#f92672">.</span>tree[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> i], self<span style="color:#f92672">.</span>tree[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, pos, val):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        init_listのpos番目の要素をvalに更新
+</span><span style="color:#e6db74">        note: posは0-origin
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        pos <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+        self<span style="color:#f92672">.</span>tree[pos] <span style="color:#f92672">=</span> val
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> pos:
+            self<span style="color:#f92672">.</span>tree[pos <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func(self<span style="color:#f92672">.</span>tree[pos], self<span style="color:#f92672">.</span>tree[pos <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>])
+            pos <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">query</span>(self, left, right):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        init_listの[left, right)に対してfuncした結果を返す
+</span><span style="color:#e6db74">        note: left, rightは0-origin
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>ele
+
+        left <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+        right <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+
+        <span style="color:#66d9ef">while</span> left <span style="color:#f92672">&lt;</span> right:
+            <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>:
+                ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func(ret, self<span style="color:#f92672">.</span>tree[left])
+                left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">if</span> right <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>:
+                ret <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>func(ret, self<span style="color:#f92672">.</span>tree[right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])
+            left <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+            right <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+
+        <span style="color:#66d9ef">return</span> ret
+
+lst <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>]
+seg <span style="color:#f92672">=</span> SegmentTree(init_list<span style="color:#f92672">=</span>lst, func<span style="color:#f92672">=</span>min, ele<span style="color:#f92672">=</span>float(<span style="color:#e6db74">&#34;+inf&#34;</span>))
+<span style="color:#66d9ef">print</span>(seg<span style="color:#f92672">.</span>query(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>)) <span style="color:#75715e"># =&gt; 1</span>
+seg<span style="color:#f92672">.</span>update(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>) <span style="color:#75715e"># lst[2] = 0</span>
+<span style="color:#66d9ef">print</span>(seg<span style="color:#f92672">.</span>query(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>)) <span style="color:#75715e"># =&gt; 0</span>
+</code></pre></div><h3 id="例題-1">例題</h3>
+<blockquote>
+<p>Given an integer array <code>nums</code>, handle multiple queries of the following types:</p>
+<ol>
+<li>Update the value of an element in <code>nums</code>.</li>
+<li>Calculate the sum of the elements of <code>nums</code> between indices <code>left</code> and <code>right</code> inclusive where <code>left</code> &lt;= <code>right</code>.
+Implement the <code>NumArray</code> class:</li>
+</ol>
+<ul>
+<li><code>NumArray(int[] nums)</code> Initializes the object with the integer array <code>nums</code>.</li>
+<li><code>void update(int index, int val)</code> Updates the value of <code>nums[index]</code> to be <code>val</code>.
+<code>int sumRange(int left, int right)</code> Returns the sum of the elements of <code>nums</code> between indices left and right inclusive (i.e.<code> nums[left] + nums[left + 1] + ... + nums[right]</code>).</li>
+</ul>
+<p>from <code>https://leetcode.com/problems/range-sum-query-mutable/</code></p>
+</blockquote>
+<p>要するに<code>func=sum</code>なセグメント木を実装しろという問題．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NumArray</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self, nums: List[int]):
+        n <span style="color:#f92672">=</span> len(nums)
+        self<span style="color:#f92672">.</span>num <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>bit_length()
+        self<span style="color:#f92672">.</span>tree <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>num)]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n):
+            self<span style="color:#f92672">.</span>tree[i <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>num] <span style="color:#f92672">=</span> nums[i]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            self<span style="color:#f92672">.</span>tree[i] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> i] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>tree[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update</span>(self, index: int, val: int) <span style="color:#f92672">-&gt;</span> None:
+        index <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+        self<span style="color:#f92672">.</span>tree[index] <span style="color:#f92672">=</span> val
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> index:
+            self<span style="color:#f92672">.</span>tree[index <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tree[index] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>tree[index <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>]
+            index <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sumRange</span>(self, left: int, right: int) <span style="color:#f92672">-&gt;</span> int:
+        right <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+        ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        left <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+        right <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>num
+        <span style="color:#66d9ef">while</span> left <span style="color:#f92672">&lt;</span> right:
+            <span style="color:#66d9ef">if</span> left <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>:
+                ret <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>tree[left]
+                left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">if</span> right <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>:
+                ret <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>tree[right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+            left <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+            right <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> ret
+
+
+<span style="color:#75715e"># Your NumArray object will be instantiated and called as such:</span>
+<span style="color:#75715e"># obj = NumArray(nums)</span>
+<span style="color:#75715e"># obj.update(index,val)</span>
+<span style="color:#75715e"># param_2 = obj.sumRange(left,right)</span>
+</code></pre></div><h2 id="binary-index-treebit">Binary Index Tree（BIT）</h2>
+<p>セグメント木から機能を削ぎ落とした感じ．</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure>
+
+<img src="./binary-index-tree.png" alt="" >
+
+
+  
+  
+  <figcaption>
+    Binary Index Tree
+  </figcaption>
+
+
+</figure>
+
+<ul>
+<li>BITは<code>1</code>-indexな配列上に作る</li>
+<li><code>update</code>クエリ
+<ul>
+<li>次に更新すべきBIT上の位置は，現在見ている位置にその位置が相当する区間の長さを<strong>足す</strong>と出てくる</li>
+<li>BIT上の位置<code>pos</code>について，<code>pos</code>の担当する範囲の長さは<code>pos &amp; -pos</code>
+<ul>
+<li><code>pos</code>のビット列の<code>1</code>が立ってる一番小さい桁を取ってる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>range</code>クエリ
+<ul>
+<li>BITに対する<code>range</code>クエリは「<code>[0, idx)</code>の範囲の和」というクエリ
+<ul>
+<li>これを2つ組み合わせれば任意の範囲の和が取れる</li>
+<li><code>[idx0, idx1)</code> = <code>[0, idx1)</code> - <code>[0, idx0)</code></li>
+</ul>
+</li>
+<li>次に足すべきBIT上の位置は，現在見ている位置にその位置が相当する区間の長さを<strong>引く</strong>と出てくる</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BIT</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, n):
+        self<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> n
+        self<span style="color:#f92672">.</span>tree <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)] <span style="color:#75715e"># 0で初期化</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(self, pos, val):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        位置posの要素にvalを加える
+</span><span style="color:#e6db74">        note: posは0-origin
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">while</span> pos <span style="color:#f92672">&lt;=</span> self<span style="color:#f92672">.</span>size:
+            self<span style="color:#f92672">.</span>tree[pos] <span style="color:#f92672">+=</span> val
+            pos <span style="color:#f92672">+=</span> (pos <span style="color:#f92672">&amp;</span> <span style="color:#f92672">-</span>pos)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">range</span>(self, pos):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        範囲[0, pos)の和を返す
+</span><span style="color:#e6db74">        note: posは0-origin
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;</span> pos:
+            ret <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>tree[pos]
+            pos <span style="color:#f92672">-=</span> (pos <span style="color:#f92672">&amp;</span> <span style="color:#f92672">-</span>pos)
+</code></pre></div><h2 id="refs">Refs</h2>
+<ul>
+<li><a href="https://qiita.com/drken/items/56a6b68edef8fc605821">https://qiita.com/drken/items/56a6b68edef8fc605821</a>
+<ul>
+<li>累積和</li>
+</ul>
+</li>
+<li><a href="https://atcoder.jp/contests/agc023/tasks/agc023_a">https://atcoder.jp/contests/agc023/tasks/agc023_a</a></li>
+<li><a href="https://leetcode.com/problems/range-sum-query-immutable/">https://leetcode.com/problems/range-sum-query-immutable/</a></li>
+<li><a href="https://leetcode.com/problems/range-sum-query-mutable/">https://leetcode.com/problems/range-sum-query-mutable/</a></li>
+<li><a href="https://leetcode.com/problems/range-sum-query-2d-immutable/">https://leetcode.com/problems/range-sum-query-2d-immutable/</a></li>
+<li>🔒 <a href="https://leetcode.com/problems/range-sum-query-2d-mutable/">https://leetcode.com/problems/range-sum-query-2d-mutable/</a></li>
+<li><a href="https://www.slideshare.net/iwiwi/ss-3578491">https://www.slideshare.net/iwiwi/ss-3578491</a>
+<ul>
+<li>セグメント木</li>
+</ul>
+</li>
+<li><a href="https://qiita.com/takayg1/items/c811bd07c21923d7ec69">https://qiita.com/takayg1/items/c811bd07c21923d7ec69</a>
+<ul>
+<li>セグメント木のPython実装</li>
+</ul>
+</li>
+<li><a href="http://hos.ac/slides/20140319_bit.pdf">http://hos.ac/slides/20140319_bit.pdf</a>
+<ul>
+<li>BIT</li>
+</ul>
+</li>
+<li><a href="https://ikatakos.com/pot/programming_algorithm/data_structure/binary_indexed_tree">https://ikatakos.com/pot/programming_algorithm/data_structure/binary_indexed_tree</a>
+<ul>
+<li>BIT</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/range-query/&amp;text=Range%20Query" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/range-query/&amp;t=Range%20Query" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Range%20Query&amp;body=/ja/post/range-query/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/range-query/&amp;title=Range%20Query" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Range%20Query%20/ja/post/range-query/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/range-query/&amp;title=Range%20Query" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hub69dcb66e1cbfdb18e29d9299880eec2_11573_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士2年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.3.1/mermaid.min.js" integrity="sha256-vOIuDSYDirTfyr+S2MjFnhOz6Rgiz4ODFAHATG0rFxw=" crossorigin="anonymous" title="mermaid"></script>
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/1c.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/abnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/accesslog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/actionscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ada.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/angelscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/apache.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arcade.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/arduino.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/armasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/asciidoc.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/aspectj.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autohotkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/autoit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/avrasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/awk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/axapta.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/basic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/brainfuck.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/capnproto.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ceylon.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clean.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/clojure.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cmake.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coffeescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/coq.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crmsh.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/crystal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/csp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/d.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dart.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/delphi.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/diff.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/django.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dns.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dos.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dsconfig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dts.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/dust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ebnf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elixir.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/elm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/erb.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/excel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/flix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fortran.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/fsharp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gams.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gauss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gcode.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gherkin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/glsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/go.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/golo.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/gradle.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/groovy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/handlebars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haskell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/haxe.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hsp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/htmlbars.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/http.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/hy.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/inform7.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ini.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/irpf90.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/isbl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/java.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/javascript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/jboss-cli.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia-repl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/kotlin.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lasso.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ldif.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/leaf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/less.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lisp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livecodeserver.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/livescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/llvm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/lua.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mathematica.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/matlab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/maxima.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mel.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mercury.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mipsasm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mizar.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/mojolicious.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/monkey.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/moonscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/n1ql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nginx.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nimrod.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nix.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/nsis.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/objectivec.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ocaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/openscad.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/oxygene.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/parser3.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/perl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pgsql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/php.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/pony.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/powershell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/processing.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/profile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/prolog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/properties.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/protobuf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/puppet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/purebasic.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/q.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/qml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/reasonml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rib.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/roboconf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/routeros.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rsl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/ruby.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/rust.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sas.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scheme.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scilab.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/scss.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smali.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/smalltalk.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sqf.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/sql.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stan.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/step21.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/stylus.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/subunit.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/swift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/taggerscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tcl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/thrift.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/tp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/twig.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/typescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vala.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbnet.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript-html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vbscript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/verilog.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vhdl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/vim.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/x86asm.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xl.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/xquery.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/zephir.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/ja/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"結果が見つかりませんでした","placeholder":"検索...","results":"results found"};
+      const content_type = {
+        'post': "投稿",
+        'project': "プロジェクト",
+        'publication' : "発表文献",
+        'talk' : "登壇"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d6bd04fdad2ad213aa8111c5a3b72fc5.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © zak 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">引用</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> コピー
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> ダウンロード
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

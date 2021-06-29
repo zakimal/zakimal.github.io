@@ -5,12 +5,470 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 29 Jun 2021 16:51:54 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 29 Jun 2021 18:34:17 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Range Query</title>
+      <link>/ja/post/range-query/</link>
+      <pubDate>Tue, 29 Jun 2021 18:34:17 +0900</pubDate>
+      <guid>/ja/post/range-query/</guid>
+      <description>&lt;p&gt;「与えられた配列に対して，&lt;strong&gt;ある範囲&lt;/strong&gt;についての&lt;strong&gt;大量のクエリを&lt;/strong&gt;処理しろ」というときには以下のテクニックが有効．基本的には「大量のクエリ」を処理するために，$O(N)$ぐらいの前処理をしてクエリ自体には$O(1)$で答えられるようにするというのが基本戦略．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;累積和&lt;/li&gt;
+&lt;li&gt;Binary Index Tree&lt;/li&gt;
+&lt;li&gt;Segment Tree&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;累積和&#34;&gt;累積和&lt;/h2&gt;
+&lt;p&gt;「累積和の差」が「範囲の和」になるということを利用．累積和の作り方は添字が煩雑になりやすいので，次のように作ると決めてしまうと楽．&lt;/p&gt;
+&lt;p&gt;長さ&lt;code&gt;N&lt;/code&gt;の整数配列&lt;code&gt;arr&lt;/code&gt;の累積和&lt;code&gt;accum&lt;/code&gt;は&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accum[0]&lt;/code&gt; = &lt;code&gt;0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;accum[i+1]&lt;/code&gt; = &lt;code&gt;accum[i]&lt;/code&gt; + &lt;code&gt;arr[i]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;このとき，範囲&lt;code&gt;[left, right)&lt;/code&gt;について&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;arr[left:right]&lt;/code&gt; = &lt;code&gt;accum[right]&lt;/code&gt; - &lt;code&gt;accum[left]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;accumulative-sum.png&#34; alt=&#34;&#34; &gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    累積和
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;ここで意識すべきは，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accum[0]&lt;/code&gt; = &lt;code&gt;0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;範囲は右開区間
+&lt;ul&gt;
+&lt;li&gt;問題上で範囲が与えられるときは左右閉区間で与えられることが多いので，その時は&lt;code&gt;accum&lt;/code&gt;にアクセスするタイミングで1足すなりして対応する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;例題1&#34;&gt;例題1&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;長さ$N$の整数列$A$があります．$A$の空でない連続する部分列であって，その総和が$0$になるものの個数を求めてください．ただし，ここで数えるのは部分列の取り出し方であることに注意してください．つまり，ある$2$つの部分列が列として同じでも，取り出した位置が異なるならば，それらは別々に数えるものとします．&lt;/p&gt;
+&lt;p&gt;from &lt;code&gt;https://atcoder.jp/contests/agc023/tasks/agc023_a&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;累積和をとって，集計する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; collections &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Counter
+N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(input())
+A &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;)))
+accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(A) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(A)):
+    accum[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accum[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; A[i]
+
+freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter(accum)
+ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; freq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values():
+    ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (v &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(ans)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;例題2&#34;&gt;例題2&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given an integer array &lt;code&gt;nums&lt;/code&gt;, handle multiple queries of the following type:&lt;/p&gt;
+&lt;p&gt;Calculate the sum of the elements of &lt;code&gt;nums&lt;/code&gt; between indices &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; inclusive where &lt;code&gt;left&lt;/code&gt; &amp;lt;= &lt;code&gt;right&lt;/code&gt;.
+Implement the &lt;code&gt;NumArray&lt;/code&gt; class:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;NumArray(int[] nums)&lt;/code&gt; Initializes the object with the integer array &lt;code&gt;nums&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int sumRange(int left, int right)&lt;/code&gt; Returns the sum of the elements of &lt;code&gt;nums&lt;/code&gt; between indices &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; inclusive (i.e. &lt;code&gt;nums[left] + nums[left + 1] + ... + nums[right]&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;from &lt;code&gt;https://leetcode.com/problems/range-sum-query-immutable/&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;まさしく累積和を使ってほしいという意図が見える問題．問題文中では範囲が閉区間で行われているので，それに合わせて&lt;code&gt;sumRange&lt;/code&gt;内で&lt;code&gt;right&lt;/code&gt;の扱いに注意する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NumArray&lt;/span&gt;:
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums: List[int]):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums
+        accums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(nums)):
+            accums[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accums[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[i]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accums
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sumRange&lt;/span&gt;(self, left: int, right: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accums[right &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accums[left]
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Your NumArray object will be instantiated and called as such:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# obj = NumArray(nums)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# param_1 = obj.sumRange(left,right)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;二次元累積和&#34;&gt;二次元累積和&lt;/h2&gt;
+&lt;p&gt;ついでなので二次元配列の累積和についても記載しておく．&lt;/p&gt;
+&lt;p&gt;二次元配列&lt;code&gt;A&lt;/code&gt;が与えられたときに，&lt;code&gt;[x1, x2) x [y1, y2)&lt;/code&gt;である長方形の範囲内の要素の総和を求めるクエリを考える．&lt;/p&gt;
+&lt;p&gt;累積和&lt;code&gt;accum&lt;/code&gt;は&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accum[0][0]&lt;/code&gt; = &lt;code&gt;0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;accum[i][j]&lt;/code&gt; = &lt;code&gt;[0, i)&lt;/code&gt; x &lt;code&gt;[0, j)&lt;/code&gt;の長方形範囲の総和
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;accum[i+1][j+1] = accum[i+1][j] + accum[i][j+1] - accum[i][j] + A[i][j]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;こうすることで，&lt;code&gt;[x1, x2) x [y1, y2)&lt;/code&gt;である長方形の範囲内の要素の総和は，&lt;code&gt;accum[x2][y2] - accum[x1][y2] - accum[x2][y1] + accum[x1][y1]&lt;/code&gt;で求められる．&lt;/p&gt;
+&lt;h3 id=&#34;例題&#34;&gt;例題&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given a 2D matrix &lt;code&gt;matrix&lt;/code&gt;, handle multiple queries of the following type:&lt;/p&gt;
+&lt;p&gt;Calculate the sum of the elements of &lt;code&gt;matrix&lt;/code&gt; inside the rectangle defined by its upper left corner &lt;code&gt;(row1, col1)&lt;/code&gt; and lower right corner &lt;code&gt;(row2, col2)&lt;/code&gt;.
+Implement the &lt;code&gt;NumMatrix&lt;/code&gt; class:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NumMatrix(int[][] matrix)&lt;/code&gt; Initializes the object with the integer matrix &lt;code&gt;matrix&lt;/code&gt;.
+&lt;code&gt;int sumRegion(int row1, int col1, int row2, int col2)&lt;/code&gt; Returns the sum of the elements of &lt;code&gt;matrix&lt;/code&gt; inside the rectangle defined by its upper left corner &lt;code&gt;(row1, col1)&lt;/code&gt; and lower right corner &lt;code&gt;(row2, col2)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;from &lt;code&gt;https://leetcode.com/problems/range-sum-query-2d-immutable/&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NumMatrix&lt;/span&gt;:
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, matrix: List[List[int]]):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;matrix &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix
+        H &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+        accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(W &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, H):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, W):
+                accum[h &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][w &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accum[h][w &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; accum[h &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][w] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; accum[h][w] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; matrix[h][w]
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; accum
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sumRegion&lt;/span&gt;(self, row1: int, col1: int, row2: int, col2: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        row2 &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        col2 &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accum[row2][col2] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accum[row2][col1] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accum[row1][col2] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accum[row1][col1]
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Your NumMatrix object will be instantiated and called as such:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# obj = NumMatrix(matrix)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# param_1 = obj.sumRegion(row1,col1,row2,col2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;segment-tree&#34;&gt;Segment Tree&lt;/h2&gt;
+&lt;p&gt;配列を「区間」を単位に完全二分木で管理する．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;1&lt;/code&gt;-indexな配列上に完全二分木を実装する．頂点&lt;code&gt;i&lt;/code&gt;の子供は頂点&lt;code&gt;2*i&lt;/code&gt;，頂点&lt;code&gt;2*i + 1&lt;/code&gt;．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;segment-tree0.png&#34; alt=&#34;&#34; &gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    セグメント木は配列で実装する
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code&gt;update&lt;/code&gt;クエリでは上にさかのぼっていきながら木を更新する．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;segment-tree1.png&#34; alt=&#34;&#34; &gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    &lt;code&gt;update&lt;/code&gt;クエリ系
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code&gt;range&lt;/code&gt;クエリでは下から該当する範囲を拾っていくイメージ．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;segment-tree2.png&#34; alt=&#34;&#34; &gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    &lt;code&gt;range&lt;/code&gt;クエリ系
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;なお，クエリ時のインデックスは&lt;code&gt;0&lt;/code&gt;-indexであることに注意．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SegmentTree&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, init_list, func, ele):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        init_list: 管理対象の整数配列
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        func:      区間に対して実行する処理（min/max/sum/productなど）
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        ele:       単位元
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(init_list)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;func &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; func
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ele &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ele
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bit_length()
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [ele &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num)]
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; init_list[i] &lt;span style=&#34;color:#75715e&#34;&gt;# set leaf&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;func(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(self, pos, val):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        init_listのpos番目の要素をvalに更新
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        note: posは0-origin
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        pos &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; pos:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;func(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos], self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+            pos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(self, left, right):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        init_listの[left, right)に対してfuncした結果を返す
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        note: left, rightは0-origin
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ele
+
+        left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+        right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;func(ret, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[left])
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;func(ret, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+            left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+lst &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+seg &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; SegmentTree(init_list&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;lst, func&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;min, ele&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+inf&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(seg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 1&lt;/span&gt;
+seg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# lst[2] = 0&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(seg&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;)) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;例題-1&#34;&gt;例題&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Given an integer array &lt;code&gt;nums&lt;/code&gt;, handle multiple queries of the following types:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Update the value of an element in &lt;code&gt;nums&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Calculate the sum of the elements of &lt;code&gt;nums&lt;/code&gt; between indices &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; inclusive where &lt;code&gt;left&lt;/code&gt; &amp;lt;= &lt;code&gt;right&lt;/code&gt;.
+Implement the &lt;code&gt;NumArray&lt;/code&gt; class:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;NumArray(int[] nums)&lt;/code&gt; Initializes the object with the integer array &lt;code&gt;nums&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void update(int index, int val)&lt;/code&gt; Updates the value of &lt;code&gt;nums[index]&lt;/code&gt; to be &lt;code&gt;val&lt;/code&gt;.
+&lt;code&gt;int sumRange(int left, int right)&lt;/code&gt; Returns the sum of the elements of &lt;code&gt;nums&lt;/code&gt; between indices left and right inclusive (i.e.&lt;code&gt; nums[left] + nums[left + 1] + ... + nums[right]&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;from &lt;code&gt;https://leetcode.com/problems/range-sum-query-mutable/&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;要するに&lt;code&gt;func=sum&lt;/code&gt;なセグメント木を実装しろという問題．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NumArray&lt;/span&gt;:
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, nums: List[int]):
+        n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bit_length()
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num)]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[i]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;update&lt;/span&gt;(self, index: int, val: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; None:
+        index &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[index] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; index:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[index] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[index &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sumRange&lt;/span&gt;(self, left: int, right: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+        right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[left]
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Your NumArray object will be instantiated and called as such:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# obj = NumArray(nums)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# obj.update(index,val)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# param_2 = obj.sumRange(left,right)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;binary-index-treebit&#34;&gt;Binary Index Tree（BIT）&lt;/h2&gt;
+&lt;p&gt;セグメント木から機能を削ぎ落とした感じ．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;./binary-index-tree.png&#34; alt=&#34;&#34; &gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Binary Index Tree
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;BITは&lt;code&gt;1&lt;/code&gt;-indexな配列上に作る&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update&lt;/code&gt;クエリ
+&lt;ul&gt;
+&lt;li&gt;次に更新すべきBIT上の位置は，現在見ている位置にその位置が相当する区間の長さを&lt;strong&gt;足す&lt;/strong&gt;と出てくる&lt;/li&gt;
+&lt;li&gt;BIT上の位置&lt;code&gt;pos&lt;/code&gt;について，&lt;code&gt;pos&lt;/code&gt;の担当する範囲の長さは&lt;code&gt;pos &amp;amp; -pos&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pos&lt;/code&gt;のビット列の&lt;code&gt;1&lt;/code&gt;が立ってる一番小さい桁を取ってる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;range&lt;/code&gt;クエリ
+&lt;ul&gt;
+&lt;li&gt;BITに対する&lt;code&gt;range&lt;/code&gt;クエリは「&lt;code&gt;[0, idx)&lt;/code&gt;の範囲の和」というクエリ
+&lt;ul&gt;
+&lt;li&gt;これを2つ組み合わせれば任意の範囲の和が取れる&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[idx0, idx1)&lt;/code&gt; = &lt;code&gt;[0, idx1)&lt;/code&gt; - &lt;code&gt;[0, idx0)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;次に足すべきBIT上の位置は，現在見ている位置にその位置が相当する区間の長さを&lt;strong&gt;引く&lt;/strong&gt;と出てくる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BIT&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, n):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; n
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)] &lt;span style=&#34;color:#75715e&#34;&gt;# 0で初期化&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(self, pos, val):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        位置posの要素にvalを加える
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        note: posは0-origin
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; pos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;size:
+            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; val
+            pos &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (pos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pos)
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;range&lt;/span&gt;(self, pos):
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        範囲[0, pos)の和を返す
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        note: posは0-origin
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; pos:
+            ret &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;tree[pos]
+            pos &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; (pos &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;pos)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;refs&#34;&gt;Refs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/drken/items/56a6b68edef8fc605821&#34;&gt;https://qiita.com/drken/items/56a6b68edef8fc605821&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;累積和&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://atcoder.jp/contests/agc023/tasks/agc023_a&#34;&gt;https://atcoder.jp/contests/agc023/tasks/agc023_a&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/range-sum-query-immutable/&#34;&gt;https://leetcode.com/problems/range-sum-query-immutable/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/range-sum-query-mutable/&#34;&gt;https://leetcode.com/problems/range-sum-query-mutable/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/range-sum-query-2d-immutable/&#34;&gt;https://leetcode.com/problems/range-sum-query-2d-immutable/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🔒 &lt;a href=&#34;https://leetcode.com/problems/range-sum-query-2d-mutable/&#34;&gt;https://leetcode.com/problems/range-sum-query-2d-mutable/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.slideshare.net/iwiwi/ss-3578491&#34;&gt;https://www.slideshare.net/iwiwi/ss-3578491&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;セグメント木&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/takayg1/items/c811bd07c21923d7ec69&#34;&gt;https://qiita.com/takayg1/items/c811bd07c21923d7ec69&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;セグメント木のPython実装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://hos.ac/slides/20140319_bit.pdf&#34;&gt;http://hos.ac/slides/20140319_bit.pdf&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;BIT&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ikatakos.com/pot/programming_algorithm/data_structure/binary_indexed_tree&#34;&gt;https://ikatakos.com/pot/programming_algorithm/data_structure/binary_indexed_tree&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;BIT&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Counting Bits</title>
