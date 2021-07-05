@@ -5,12 +5,59 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 05 Jul 2021 17:57:04 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 05 Jul 2021 18:47:49 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Squares of a Sorted Array</title>
+      <link>/ja/post/squares-of-a-sorted-array/</link>
+      <pubDate>Mon, 05 Jul 2021 18:47:49 +0900</pubDate>
+      <guid>/ja/post/squares-of-a-sorted-array/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;昇順にソートされた整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．各要素の二乗からなる昇順の整数配列を求めよ&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;$O(n \log n)$な答え
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;abs&lt;/code&gt;を基準に&lt;code&gt;nums&lt;/code&gt;をソートして二乗&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sortedSquares&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sorted(nums, key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x: abs(x))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; x: x&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, nums))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;$O(n)$な答え
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;left&lt;/code&gt;/&lt;code&gt;right&lt;/code&gt;ポインタと&lt;code&gt;deque&lt;/code&gt;を使う
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;deque&lt;/code&gt;：両端への要素の追加が$O(1)$なデータ構造&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;【格言】「昇順」を見たらbinary searchかtwo pointer&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sortedSquares&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; collections&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;deque()
+        l, r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; l &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; r:
+            left, right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; abs(nums[l]), abs(nums[r])
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; left:
+                ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;appendleft(left &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+                l &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;appendleft(right &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+                r &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(ans)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Subtree of Another Tree</title>
