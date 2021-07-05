@@ -5,12 +5,101 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 29 Jun 2021 18:34:17 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 05 Jul 2021 17:57:04 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Subtree of Another Tree</title>
+      <link>/ja/post/subtree-of-another-tree/</link>
+      <pubDate>Mon, 05 Jul 2021 17:57:04 +0900</pubDate>
+      <guid>/ja/post/subtree-of-another-tree/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;二分木&lt;code&gt;root&lt;/code&gt;，&lt;code&gt;subRoot&lt;/code&gt;が与えられる．&lt;code&gt;subRoot&lt;/code&gt;が&lt;code&gt;root&lt;/code&gt;の部分木であるかを判定せよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;再帰的に解く
+&lt;ul&gt;
+&lt;li&gt;根から再帰的に値が一致しているかを確認&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isSubtree(root, subRoot)&lt;/code&gt;: &lt;code&gt;root&lt;/code&gt;を根として&lt;code&gt;subRoot&lt;/code&gt;と重ねる&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;check(s, t)&lt;/code&gt;: &lt;code&gt;s&lt;/code&gt;を根とする木と&lt;code&gt;t&lt;/code&gt;を根とする木が重なるかを確認する&lt;/li&gt;
+&lt;li&gt;計算量
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;root&lt;/code&gt;の頂点数を$s$，&lt;code&gt;subRoot&lt;/code&gt;の頂点数を$t$とすると，$O(s \times t)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isSubtree&lt;/span&gt;(self, root: TreeNode, subRoot: TreeNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;check&lt;/span&gt;(s, t):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; t &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; t&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; check(s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, t&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; check(s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, t&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; s &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; t
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; check(root, subRoot) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isSubtree(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, subRoot) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isSubtree(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, subRoot)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E6%9C%A8&#34;&gt;merkle tree&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;木構造をハッシュ関数でまとめる&lt;/li&gt;
+&lt;li&gt;ハッシュ関数が衝突しない限り正解&lt;/li&gt;
+&lt;li&gt;計算量
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;root&lt;/code&gt;の頂点数を$s$，&lt;code&gt;subRoot&lt;/code&gt;の頂点数を$t$とすると，$O(s + t)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isSubtree&lt;/span&gt;(self, root: TreeNode, subRoot: TreeNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; hashlib &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sha256
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_hash&lt;/span&gt;(x):
+            S &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sha256()
+            S&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;update(str&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;encode(x))
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; S&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;hexdigest()
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merkle&lt;/span&gt;(node):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+            left_merkle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merkle(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            right_merkle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merkle(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+            node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;merkle &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; _hash(left_merkle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; str(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right_merkle)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;merkle
+
+        merkle(root)
+        merkle(subRoot)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dfs&lt;/span&gt;(node):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;merkle &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; subRoot&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;merkle &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; dfs(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; dfs(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dfs(root)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/subtree-of-another-tree/&#34;&gt;https://leetcode.com/problems/subtree-of-another-tree/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Range Query</title>
