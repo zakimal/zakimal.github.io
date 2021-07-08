@@ -5,12 +5,37 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 05 Jul 2021 18:47:49 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Thu, 08 Jul 2021 15:11:58 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Product of Array Expect Self</title>
+      <link>/ja/post/product-of-array-expect-self/</link>
+      <pubDate>Thu, 08 Jul 2021 15:11:58 +0900</pubDate>
+      <guid>/ja/post/product-of-array-expect-self/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;がが与えられる．そこで，$i$番目の要素が&lt;code&gt;nums&lt;/code&gt;の$i$番目以外の要素の積からなる配列&lt;code&gt;answer&lt;/code&gt;を返す関数を書け．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;answer[i]&lt;/code&gt;を定義どおりに計算すると全体で$O(n^2)$．これを回避したい．&lt;code&gt;answer[i]&lt;/code&gt;と&lt;code&gt;answer[i+1]&lt;/code&gt;のそれぞれの因数は共通している部分が多いので，無駄な計算をしていそう．そこで累積積（累積和からの造語）を考えてみるとうまくいきそう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;productExceptSelf&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+        output &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+            output&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(p)
+            p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; nums[i]
+        p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            output[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; output[i] &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; p
+            p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; p &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; nums[i]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; output
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Squares of a Sorted Array</title>
