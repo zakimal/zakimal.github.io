@@ -5,12 +5,77 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Thu, 08 Jul 2021 15:11:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 26 Jul 2021 15:21:02 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Path Parameter, Query Parameter, Request Body</title>
+      <link>/ja/post/path-parameter-query-parameter-request-body/</link>
+      <pubDate>Mon, 26 Jul 2021 15:21:02 +0900</pubDate>
+      <guid>/ja/post/path-parameter-query-parameter-request-body/</guid>
+      <description>&lt;p&gt;Path Parameter，Query Parameter，Request Bodyの使い分け．&lt;/p&gt;
+&lt;h2 id=&#34;path-parameter&#34;&gt;Path Parameter&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;あるリソースを識別するのに必要な情報&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例：&lt;code&gt;GET posts/1&lt;/code&gt;：1本目のブログ投稿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例：&lt;code&gt;GET users/1&lt;/code&gt;：1人目のユーザ&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;query-parameter&#34;&gt;Query Parameter&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;あるリソースに対する操作を通じてデータを取得するのに必要な情報&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;「リソースに対する操作」とは例えばソートするとか検索するとか範囲を絞るとか&lt;/li&gt;
+&lt;li&gt;検索・フィルタの条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例：&lt;code&gt;GET groups/2?sort=true&amp;amp;limit=20&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;グループをソートして上位20件を取得&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;例：&lt;code&gt;https://www.google.com/search?q=google&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;検索クエリ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;request-body&#34;&gt;Request Body&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;あるリソースに対する追加・更新に必要な情報
+&lt;ul&gt;
+&lt;li&gt;追加・更新する内容自体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;フローチャート&#34;&gt;フローチャート&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;if パラメタが「一意にリソースを特定する識別子」:
+    PathParameter
+elif パラメタが「リソースのソート・フィルタリング・検索などの条件」:
+    QueryParameter
+elif パラメタが「リソースに対する追加・更新の情報」:
+    RequestBody
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;認証情報とかメタデータだとどうするみたいな話もあるが今はとりあえず割愛．&lt;/p&gt;
+&lt;h2 id=&#34;refs&#34;&gt;Refs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tools.ietf.org/html/rfc7231&#34;&gt;https://tools.ietf.org/html/rfc7231&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/sakuraya/items/6f1030279a747bcce648&#34;&gt;https://qiita.com/sakuraya/items/6f1030279a747bcce648&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://qiita.com/Shokorep/items/b7697a146cbb1c3e9f0b&#34;&gt;https://qiita.com/Shokorep/items/b7697a146cbb1c3e9f0b&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Product of Array Expect Self</title>
