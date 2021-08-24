@@ -5,12 +5,95 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 09 Aug 2021 17:30:50 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 24 Aug 2021 12:36:57 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>$K$th Smallest Element in a Sorted Matrix</title>
+      <link>/ja/post/k-th-smallest-element-in-a-sorted-matrix/</link>
+      <pubDate>Tue, 24 Aug 2021 12:36:57 +0900</pubDate>
+      <guid>/ja/post/k-th-smallest-element-in-a-sorted-matrix/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;$N \times N$の二次元配列&lt;code&gt;matrix&lt;/code&gt;が与えられる．&lt;code&gt;matrix&lt;/code&gt;の各行・各列は昇順に整列されている．&lt;code&gt;matrix&lt;/code&gt;内の$k$番目に小さい値を取得せよ．&lt;/p&gt;
+&lt;h2 id=&#34;min-heapを使う&#34;&gt;min heapを使う&lt;/h2&gt;
+&lt;p&gt;「$k$番目に小さい値」系だとheapが使えることが多い印象．ソートされている行列を舐めながら候補となる値を次々にheapに突っ込んで，先頭から$k$個取っていけばいい．heapに突っ込むのと先頭を取るのを同時にやるのでやや混乱するかも知れない．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;kthSmallest&lt;/span&gt;(self, matrix: List[List[int]], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; heapq
+        n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        heap &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; col &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+            heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappush(heap, (matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][col], &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, col))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            (_, row, col) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappop(heap)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; row &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappush(heap, (matrix[row&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][col], row&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, col))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; heap[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;二分探索&#34;&gt;二分探索&lt;/h2&gt;
+&lt;p&gt;「昇順」から二分探索が使えそう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;kthSmallest&lt;/span&gt;(self, matrix: List[List[int]], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; high:
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (low &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; high) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(matrix)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; matrix[i][j]:
+                    j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; cnt &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+                low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; low
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;「$k$番目に小さい値$x$を求めよ」を「初めて$x$以下の数字が$k$個以上あるような$x$を求めよ」と言い換えてめぐる式二分探索に落とし込む．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;kthSmallest&lt;/span&gt;(self, matrix: List[List[int]], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 無駄の多い is_ok()&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# def is_ok(mid):&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     cnt = 0&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     for i in range(len(matrix)):&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#         for j in range(len(matrix[0])):&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#             if matrix[i][j] &amp;lt;= mid:&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#                 cnt += 1&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#             else:&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#                 break&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     return k &amp;lt;= cnt&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 改良版&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+            cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(matrix)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; matrix[i][j]:
+                    j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; cnt
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ok &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ng):
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ok &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ng) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+                ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&#34;&gt;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>1次元の座標圧縮</title>
