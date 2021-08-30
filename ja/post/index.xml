@@ -5,12 +5,156 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 24 Aug 2021 12:36:57 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 30 Aug 2021 15:23:33 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Search a 2D Matrix</title>
+      <link>/ja/post/search-a-2d-matrix/</link>
+      <pubDate>Mon, 30 Aug 2021 15:23:33 +0900</pubDate>
+      <guid>/ja/post/search-a-2d-matrix/</guid>
+      <description>&lt;h2 id=&#34;search-a-2d-array&#34;&gt;Search a 2D Array&lt;/h2&gt;
+&lt;p&gt;昇順に整列された配列&lt;code&gt;nums&lt;/code&gt;から与えられた&lt;code&gt;target&lt;/code&gt;を効率よく探すには二分探索が有効．&lt;code&gt;nums&lt;/code&gt;の長さを$N$として，$O(log N)$で見つけられる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(nums, target):
+    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right:
+        mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[mid] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; nums[mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;bisect&lt;/code&gt;というライブラリもある．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; bisect
+
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;]
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# target以上になる最小のインデックスを返す&lt;/span&gt;
+bisect&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bisect_left(nums, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 2&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# targetより大きくなる最小のインデックスを返す&lt;/span&gt;
+bisect&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;bisect(nums, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# =&amp;gt; 5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;めぐる式二分探索というバグらせない実装もある．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# target以上になる最小のインデックスを返す&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;binary_search&lt;/span&gt;(nums, target):
+    ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_ok&lt;/span&gt;(mid):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums[mid]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; abs(ng &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ok):
+        mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ng &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; ok) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; is_ok(mid):
+            ok &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            ng &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ok
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;search-a-2d-matrix-1&#34;&gt;Search a 2D Matrix 1&lt;/h2&gt;
+&lt;p&gt;ref: &lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix/&#34;&gt;https://leetcode.com/problems/search-a-2d-matrix/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;一列の整数配列と見なして二分探索できる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;searchMatrix&lt;/span&gt;(self, matrix: List[List[int]], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        h &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+
+        low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; w &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; high:
+            mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (low &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; high) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; matrix[mid &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; w][mid &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; w] &lt;span style=&#34;color:#75715e&#34;&gt;# ここが大事&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;search-a-2d-matrix-2&#34;&gt;Search a 2D Matrix 2&lt;/h2&gt;
+&lt;p&gt;ref: &lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix-ii/&#34;&gt;https://leetcode.com/problems/search-a-2d-matrix-ii/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;解法1各列or-各列に対して二分探索&#34;&gt;解法1：各列（or 各列）に対して二分探索&lt;/h3&gt;
+&lt;p&gt;各列（or 各列）に対して二分探索していく．どちらの方向に二分探索するかは与えられた二次元配列の縦横の大きさを比べて決めればいい．時間計算量は$O(\min(h \log w, w \log h))$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;searchMatrix&lt;/span&gt;(self, matrix: List[List[int]], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        H &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(H):
+            low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; high:
+                mid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (low &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; high) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; matrix[h][mid] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; matrix[h][mid] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                    low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    high &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;解法2右上から左下に向かって探索範囲を絞る&#34;&gt;解法2：右上から左下に向かって探索範囲を絞る&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;matrix[i][j]&lt;/code&gt;の要素が&lt;code&gt;target&lt;/code&gt;より小さいなら，&lt;code&gt;target&lt;/code&gt;は&lt;code&gt;i+1&lt;/code&gt;行目以下にあるはず．
+&lt;code&gt;matrix[i][j]&lt;/code&gt;の要素が&lt;code&gt;target&lt;/code&gt;より大きいなら，&lt;code&gt;target&lt;/code&gt;は&lt;code&gt;j-1&lt;/code&gt;列目以左にあるはず．
+時間計算量は，最悪の場合右上から左下まで下or左で到達するまでループが回るので$O(h + w)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;searchMatrix&lt;/span&gt;(self, matrix: List[List[int]], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        H &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 右上&lt;/span&gt;
+        h &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        w &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; H &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; w:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; matrix[h][w] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; matrix[h][w] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                h &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                w &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;解法3二分探索っぽく探索領域を狭めていく&#34;&gt;解法3：二分探索っぽく探索領域を狭めていく&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;matrix[i][j]&lt;/code&gt;の要素が&lt;code&gt;target&lt;/code&gt;より小さいなら，領域&lt;code&gt;(0, 0), (i, j)&lt;/code&gt;（&lt;code&gt;(i, j)&lt;/code&gt;を右下端とする左上方向の長方形領域）は全部&lt;code&gt;target&lt;/code&gt;より小さいので探索範囲から除外できる．
+&lt;code&gt;matrix[i][j]&lt;/code&gt;の要素が&lt;code&gt;target&lt;/code&gt;より大きいなら，領域&lt;code&gt;(i, j), (h, w)&lt;/code&gt;（&lt;code&gt;(i, j)&lt;/code&gt;を左上端とする右下方向の長方形領域）は全部&lt;code&gt;target&lt;/code&gt;より大きいので探索範囲から除外できる．&lt;/p&gt;
+&lt;p&gt;時間計算量の考察はやや複雑．漸化式で計算量を表現できてそれを解くことで得られる．結果だけ書くと$O(h \log (w/h))$（ただし$h \lt w$）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;searchMatrix&lt;/span&gt;(self, matrix: List[List[int]], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        H &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix)
+        W &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(matrix[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;])
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;search_submatrix&lt;/span&gt;(top_row, left_col, bottom_row, right_col):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; top_row &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; bottom_row &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; left_col &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; right_col:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+
+            mid_row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (top_row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; bottom_row) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left_col
+            right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right_col
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right:
+                mid_col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; matrix[mid_row][mid_col] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; matrix[mid_row][mid_col] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                    left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid_col &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; mid_col &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+            upper_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; search_submatrix(
+                top_row, left, mid_row &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, right_col)
+            lower_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; search_submatrix(
+                mid_row &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, left_col, bottom_row, right)
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; upper_right &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; lower_left
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; search_submatrix(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, H &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, W &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>$K$th Smallest Element in a Sorted Matrix</title>
