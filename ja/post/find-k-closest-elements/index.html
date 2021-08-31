@@ -28,12 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="問題 昇順にソートされた整数配列arrと整数k，xが与えられる．arr内のxに「近い」k個の整数を照準に格納した配列を返す関数を書け． ここで「">
 
   
-  <link rel="alternate" hreflang="en" href="/en/post/">
-  
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/find-k-closest-elements/">
 
   
 
@@ -93,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/ja/post/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/ja/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/">
+  <link rel="canonical" href="/ja/post/find-k-closest-elements/">
 
   
   
@@ -115,18 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/">
-  <meta property="og:title" content="Posts | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/find-k-closest-elements/">
+  <meta property="og:title" content="Find $K$ Closest Elements | zak">
+  <meta property="og:description" content="問題 昇順にソートされた整数配列arrと整数k，xが与えられる．arr内のxに「近い」k個の整数を照準に格納した配列を返す関数を書け． ここで「"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-08-31T20:20:51&#43;09:00">
+    
+      <meta property="article:published_time" content="2021-08-31T20:20:51&#43;09:00">
+    
+    <meta property="article:modified_time" content="2021-08-31T20:20:51&#43;09:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/find-k-closest-elements/"
+  },
+  "headline": "Find $K$ Closest Elements",
+  
+  "datePublished": "2021-08-31T20:20:51+09:00",
+  "dateModified": "2021-08-31T20:20:51+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "問題 昇順にソートされた整数配列arrと整数k，xが与えられる．arr内のxに「近い」k個の整数を照準に格納した配列を返す関数を書け． ここで「"
+}
+</script>
+
+  
 
   
 
@@ -134,10 +177,13 @@
   
 
 
+  
 
 
 
-  <title>Posts | zak</title>
+
+
+  <title>Find $K$ Closest Elements | zak</title>
 
 </head>
 
@@ -341,21 +387,6 @@
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i><span>日本語</span>
-          </a>
-          <ul class="dropdown-menu">
-            
-            <li class="dropdown-item my-0 py-0 mx-0 px-0">
-              <a href="/en/post/">
-                <span>English</span>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
-        
 
         
 
@@ -366,78 +397,33 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1>Find $K$ Closest Elements</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Posts</h1>
-
-  
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-
-  
-
-  
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/count-and-say/" >Count and Say</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 1 - 1個の1 -&gt; 11 - 2個の1 -&gt; 21 - 1個の2と1個の1 -&gt; 1211 -&gt; ... 上のように続く数列の第$n$項を求めよ． 答え def count_and_say(n): if n == 1: return …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
 
 
 <div class="article-metadata">
@@ -451,777 +437,7 @@
     
       
     
-    Wed, Mar 31, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/letter-case-permutation/" >Letter Case Permutation</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 アルファベットと数字で構成される文字列が与えられる．任意のアルファベットについて大文字小文字に変換できる．この変換によって得られるすべて
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Wed, Mar 31, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/n-sum-problems/" >$2$-Sum, $3$-Sum, ..., $N$-Sum Problems</a>
-    </h3>
-
-    
-    <div class="article-style">
-      整数を要素として格納する配列が与えられ，そこから$N$個要素を取り上げてその和が$X$になるような要素のとり方はいくつあるか，要素のとり方そ
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Tue, Mar 30, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    6 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/aoj-itp1/" >AOJ ITP1 in Python</a>
-    </h3>
-
-    
-    <div class="article-style">
-      AOJ-ITP1を Python で解く． ITP1_1_A: 答え print(&#34;Hello World&#34;) ITP1_1_B: 答え x = int(input()) print(x ** 3) ITP1_1_C: 答え h, w = …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Mar 29, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/diameter-of-a-tree/" >Diameter of a Tree</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 木の直径を求めよ． 答え 任意の頂点$x$から BFS をして$x$から最遠の頂点$u$を計算し，再び$u$から BFS して$u$から最遠の頂点$v$を計
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Mon, Mar 29, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/volume-of-histogram/" >Volume of Histogram</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 あるヒストグラムを考えよう．そのヒストグラムを容器に見立てて上から水を流し込む．このとき，ヒストグラム内に貯まる水の量はいくつか． 入力と
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sun, Mar 28, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-    
-    <a href="/ja/post/volume-of-histogram/" >
-      <img src="/ja/post/volume-of-histogram/featured_hu0835380e58f312549247f31197e109d2_19033_150x0_resize_lanczos_2.png" alt="">
-    </a>
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/find-k-th-smallest-elements/" >Find $K$th Smallest Elements</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 同一要素を含まない，長さ$n$の配列lstが与えられる．小さい順に$k$個の要素を取り出せ． 答え $O(n \log n)$：昇順にソートして先頭$k$個
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sun, Mar 28, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    3 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/find-majority-element-from-a-list/" >Find Majority Element From a List</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 配列$A$が与えられる．$A$の過半数を占める要素があればそれを見つけなさい．なければ-1を返しなさい． 答え ナイーブなやり方：各要素の頻
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sun, Mar 28, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/pick-up-m-elements-from-list/" >Pick Up M Elements From List</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 長さ$N$の配列からランダムに$M$個要素を取り出した配列を求めよ． 答え 標準ライブラリを使う． import random def pick_m_random_elements(lst, m): random.shuffle(lst) return …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sun, Mar 28, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/shuffle-a-deck-of-cards/" >Shuffle a Deck of Cards</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 $N$枚のカードをシャッフルせよ．シャッフルの結果に偏りがあってはならない． 答え 標準ライブラリを使うとさすがにチートか． N = int(input()) cards = [i for i
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sat, Mar 27, 2021
+    Tue, Aug 31, 2021
   </span>
   
 
@@ -1243,36 +459,382 @@
 
 </div>
 
-      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="問題">問題</h2>
+<p><strong>昇順に</strong>ソートされた整数配列<code>arr</code>と整数<code>k</code>，<code>x</code>が与えられる．<code>arr</code>内の<code>x</code>に「近い」<code>k</code>個の整数を照準に格納した配列を返す関数を書け．</p>
+<p>ここで「整数<code>a</code>が整数<code>b</code>より整数<code>x</code>に近い」とは，「<code>|a - x| &lt; |b - x|</code>」もしくは「<code>|a - x| == |b - x|</code>かつ<code>a &lt; b</code>」となることを意味する．</p>
+<h2 id="解法1">解法1</h2>
+<ul>
+<li>言われたとおりにソートして冒頭<code>k</code>個を返す．</li>
+<li>時間計算量：$O(n \log n + k \log k)$
+<ul>
+<li>$n$：<code>arr</code>の長さ，$k$：与えられた整数<code>k</code>（以下も同様）</li>
+</ul>
+</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findClosestElements</span>(self, arr: List[int], k: int, x: int) <span style="color:#f92672">-&gt;</span> List[int]:
+        arr <span style="color:#f92672">=</span> sorted(arr, key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> a: abs(a <span style="color:#f92672">-</span> x))
+        arr <span style="color:#f92672">=</span> arr[:k]
+        arr <span style="color:#f92672">=</span> sorted(arr)
+        <span style="color:#66d9ef">return</span> arr
+</code></pre></div><h2 id="解法2">解法2</h2>
+<ul>
+<li>配列がソートされているので，求める答えは<code>arr</code>の長さ<code>k</code>の部分配列になる</li>
+<li>いわゆる2 pointersというテクニック（？）
+<ul>
+<li><code>left</code>，<code>right</code>をそれぞれ左端，右端から詰めていく</li>
+</ul>
+</li>
+<li>時間計算量：$O(n - k)$
+<ul>
+<li>ポインタの移動回数分</li>
+</ul>
+</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findClosestElements</span>(self, arr: List[int], k: int, x: int) <span style="color:#f92672">-&gt;</span> List[int]:
+        left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        right <span style="color:#f92672">=</span> len(arr) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> k <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">-</span> left:
+            <span style="color:#66d9ef">if</span> x <span style="color:#f92672">-</span> arr[left] <span style="color:#f92672">&lt;=</span> arr[right] <span style="color:#f92672">-</span> x:
+                right <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># rightのほうがxから遠い</span>
+            <span style="color:#66d9ef">else</span>:
+                left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> arr[left:right<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+</code></pre></div><h2 id="解法3">解法3</h2>
+<ul>
+<li>答えとなる部分配列の右端の整数は<code>x</code>以上の値なはずなので，<code>right</code>の位置をそこから始めても構わない！
+<ul>
+<li><code>right</code>の初期値を「<code>arr</code>内で初めて<code>x</code>以上になる最小の位置」から初めて良い</li>
+</ul>
+</li>
+<li>領域を広げていく方向で答えを求める</li>
+<li>時間計算量：$O(log n + k)$</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findClosestElements</span>(self, arr: List[int], k: int, x: int) <span style="color:#f92672">-&gt;</span> List[int]:
+        right <span style="color:#f92672">=</span> bisect_left(arr, x) <span style="color:#75715e"># rightの初期位置</span>
+        left <span style="color:#f92672">=</span> right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;</span> k:
+            <span style="color:#66d9ef">if</span> len(arr) <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">or</span> (<span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> left <span style="color:#f92672">and</span> x <span style="color:#f92672">-</span> arr[left] <span style="color:#f92672">&lt;=</span> arr[right] <span style="color:#f92672">-</span> x):
+                left <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># leftの方がxに近いので左に伸ばす</span>
+            <span style="color:#66d9ef">else</span>:
+                right <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            k <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> arr[left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>:right]
+</code></pre></div><h2 id="解法4">解法4</h2>
+<ul>
+<li>解法3を改良する</li>
+<li><code>right</code>の初期値は<code>arr[0:len(arr) - k]</code>のどこか
+<ul>
+<li><code>right</code>の初期値を決定するときの無駄な計算が減る</li>
+</ul>
+</li>
+<li>時間計算量：$O(log (n - k) + k)$</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">findClosestElements</span>(self, arr: List[int], k: int, x: int) <span style="color:#f92672">-&gt;</span> List[int]:
+        right <span style="color:#f92672">=</span> bisect_left(arr[<span style="color:#ae81ff">0</span>:len(arr) <span style="color:#f92672">-</span> k], x)
+        left <span style="color:#f92672">=</span> right <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;</span> k:
+            <span style="color:#66d9ef">if</span> len(arr) <span style="color:#f92672">&lt;=</span> right <span style="color:#f92672">or</span> (<span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> left <span style="color:#f92672">and</span> x <span style="color:#f92672">-</span> arr[left] <span style="color:#f92672">&lt;=</span> arr[right] <span style="color:#f92672">-</span> x):
+                left <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">else</span>:
+                right <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            k <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> arr[left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>:right]
+</code></pre></div><h2 id="ref">ref</h2>
+<p><a href="https://leetcode.com/problems/find-k-closest-elements/">https://leetcode.com/problems/find-k-closest-elements/</a></p>
+
     </div>
 
     
 
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
 
-    
-  
 
-  
-<nav>
-  <ul class="pagination justify-content-center">
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
     
-    <li class="page-item"><a class="page-link" href="/ja/post/page/2/">&laquo;</a></li>
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/find-k-closest-elements/&amp;text=Find%20$K$%20Closest%20Elements" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
     
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/find-k-closest-elements/&amp;t=Find%20$K$%20Closest%20Elements" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
     
-    <li class="page-item"><a class="page-link" href="/ja/post/page/4/">&raquo;</a></li>
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Find%20$K$%20Closest%20Elements&amp;body=/ja/post/find-k-closest-elements/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/find-k-closest-elements/&amp;title=Find%20$K$%20Closest%20Elements" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Find%20$K$%20Closest%20Elements%20/ja/post/find-k-closest-elements/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/find-k-closest-elements/&amp;title=Find%20$K$%20Closest%20Elements" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
     
   </ul>
-</nav>
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hub69dcb66e1cbfdb18e29d9299880eec2_11573_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士2年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
 
       
 

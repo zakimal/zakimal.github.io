@@ -5,12 +5,110 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Mon, 30 Aug 2021 15:23:33 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Tue, 31 Aug 2021 20:20:51 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Find $K$ Closest Elements</title>
+      <link>/ja/post/find-k-closest-elements/</link>
+      <pubDate>Tue, 31 Aug 2021 20:20:51 +0900</pubDate>
+      <guid>/ja/post/find-k-closest-elements/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;昇順に&lt;/strong&gt;ソートされた整数配列&lt;code&gt;arr&lt;/code&gt;と整数&lt;code&gt;k&lt;/code&gt;，&lt;code&gt;x&lt;/code&gt;が与えられる．&lt;code&gt;arr&lt;/code&gt;内の&lt;code&gt;x&lt;/code&gt;に「近い」&lt;code&gt;k&lt;/code&gt;個の整数を照準に格納した配列を返す関数を書け．&lt;/p&gt;
+&lt;p&gt;ここで「整数&lt;code&gt;a&lt;/code&gt;が整数&lt;code&gt;b&lt;/code&gt;より整数&lt;code&gt;x&lt;/code&gt;に近い」とは，「&lt;code&gt;|a - x| &amp;lt; |b - x|&lt;/code&gt;」もしくは「&lt;code&gt;|a - x| == |b - x|&lt;/code&gt;かつ&lt;code&gt;a &amp;lt; b&lt;/code&gt;」となることを意味する．&lt;/p&gt;
+&lt;h2 id=&#34;解法1&#34;&gt;解法1&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;言われたとおりにソートして冒頭&lt;code&gt;k&lt;/code&gt;個を返す．&lt;/li&gt;
+&lt;li&gt;時間計算量：$O(n \log n + k \log k)$
+&lt;ul&gt;
+&lt;li&gt;$n$：&lt;code&gt;arr&lt;/code&gt;の長さ，$k$：与えられた整数&lt;code&gt;k&lt;/code&gt;（以下も同様）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;空間計算量：$O(1)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findClosestElements&lt;/span&gt;(self, arr: List[int], k: int, x: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sorted(arr, key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; a: abs(a &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x))
+        arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arr[:k]
+        arr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sorted(arr)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; arr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法2&#34;&gt;解法2&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;配列がソートされているので，求める答えは&lt;code&gt;arr&lt;/code&gt;の長さ&lt;code&gt;k&lt;/code&gt;の部分配列になる&lt;/li&gt;
+&lt;li&gt;いわゆる2 pointersというテクニック（？）
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;left&lt;/code&gt;，&lt;code&gt;right&lt;/code&gt;をそれぞれ左端，右端から詰めていく&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;時間計算量：$O(n - k)$
+&lt;ul&gt;
+&lt;li&gt;ポインタの移動回数分&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;空間計算量：$O(1)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findClosestElements&lt;/span&gt;(self, arr: List[int], k: int, x: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; arr[left] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; arr[right] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x:
+                right &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# rightのほうがxから遠い&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                left &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; arr[left:right&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法3&#34;&gt;解法3&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;答えとなる部分配列の右端の整数は&lt;code&gt;x&lt;/code&gt;以上の値なはずなので，&lt;code&gt;right&lt;/code&gt;の位置をそこから始めても構わない！
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;right&lt;/code&gt;の初期値を「&lt;code&gt;arr&lt;/code&gt;内で初めて&lt;code&gt;x&lt;/code&gt;以上になる最小の位置」から初めて良い&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;領域を広げていく方向で答えを求める&lt;/li&gt;
+&lt;li&gt;時間計算量：$O(log n + k)$&lt;/li&gt;
+&lt;li&gt;空間計算量：$O(1)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findClosestElements&lt;/span&gt;(self, arr: List[int], k: int, x: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; bisect_left(arr, x) &lt;span style=&#34;color:#75715e&#34;&gt;# rightの初期位置&lt;/span&gt;
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; arr[left] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; arr[right] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x):
+                left &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# leftの方がxに近いので左に伸ばす&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            k &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; arr[left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:right]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法4&#34;&gt;解法4&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;解法3を改良する&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;right&lt;/code&gt;の初期値は&lt;code&gt;arr[0:len(arr) - k]&lt;/code&gt;のどこか
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;right&lt;/code&gt;の初期値を決定するときの無駄な計算が減る&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;時間計算量：$O(log (n - k) + k)$&lt;/li&gt;
+&lt;li&gt;空間計算量：$O(1)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findClosestElements&lt;/span&gt;(self, arr: List[int], k: int, x: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; bisect_left(arr[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; k], x)
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; k:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(arr) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; arr[left] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; arr[right] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; x):
+                left &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                right &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            k &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; arr[left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:right]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-k-closest-elements/&#34;&gt;https://leetcode.com/problems/find-k-closest-elements/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Search a 2D Matrix</title>
