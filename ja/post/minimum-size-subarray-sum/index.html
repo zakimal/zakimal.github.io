@@ -28,12 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="問題 正整数配列numsと整数targetが与えられる．numsの連続する部分列のうち，その和がtarget以上となるような部分列の最小の長さ">
 
   
-  <link rel="alternate" hreflang="en" href="/en/post/">
-  
-  <link rel="alternate" hreflang="ja-JP" href="/ja/post/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/minimum-size-subarray-sum/">
 
   
 
@@ -93,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/ja/post/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/ja/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/post/">
+  <link rel="canonical" href="/ja/post/minimum-size-subarray-sum/">
 
   
   
@@ -115,18 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/post/">
-  <meta property="og:title" content="Posts | zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/minimum-size-subarray-sum/">
+  <meta property="og:title" content="Minimum Size Subarray Sum | zak">
+  <meta property="og:description" content="問題 正整数配列numsと整数targetが与えられる．numsの連続する部分列のうち，その和がtarget以上となるような部分列の最小の長さ"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2021-09-01T00:08:00&#43;09:00">
+    
+      <meta property="article:published_time" content="2021-09-01T00:08:00&#43;09:00">
+    
+    <meta property="article:modified_time" content="2021-09-01T00:08:00&#43;09:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/minimum-size-subarray-sum/"
+  },
+  "headline": "Minimum Size Subarray Sum",
+  
+  "datePublished": "2021-09-01T00:08:00+09:00",
+  "dateModified": "2021-09-01T00:08:00+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "問題 正整数配列numsと整数targetが与えられる．numsの連続する部分列のうち，その和がtarget以上となるような部分列の最小の長さ"
+}
+</script>
+
+  
 
   
 
@@ -134,10 +177,13 @@
   
 
 
+  
 
 
 
-  <title>Posts | zak</title>
+
+
+  <title>Minimum Size Subarray Sum | zak</title>
 
 </head>
 
@@ -341,21 +387,6 @@
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i><span>日本語</span>
-          </a>
-          <ul class="dropdown-menu">
-            
-            <li class="dropdown-item my-0 py-0 mx-0 px-0">
-              <a href="/en/post/">
-                <span>English</span>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
-        
 
         
 
@@ -366,78 +397,33 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1>Minimum Size Subarray Sum</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Posts</h1>
-
-  
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-
-  
-
-  
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/shuffle-a-deck-of-cards/" >Shuffle a Deck of Cards</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 $N$枚のカードをシャッフルせよ．シャッフルの結果に偏りがあってはならない． 答え 標準ライブラリを使うとさすがにチートか． N = int(input()) cards = [i for i
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
 
 
 <div class="article-metadata">
@@ -451,7 +437,7 @@
     
       
     
-    Sat, Mar 27, 2021
+    Wed, Sep 1, 2021
   </span>
   
 
@@ -473,801 +459,412 @@
 
 </div>
 
-      
-    </div>
-
     
 
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 </div>
 
-    
-  
-    
-      
 
 
+  <div class="article-container">
 
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/add-without-plus/" >Add Without Plus</a>
-    </h3>
-
-    
     <div class="article-style">
-      問題 +を使わずに足し算を実装せよ． 答え 計算機はビット演算で四則演算を実装している．足し算とは，各桁の数字の足し算と繰り上がりの処理からなる．
+      <h2 id="問題">問題</h2>
+<p>正整数配列<code>nums</code>と整数<code>target</code>が与えられる．<code>nums</code>の連続する部分列のうち，その和が<code>target</code>以上となるような部分列の最小の長さを求めよ．そのような部分列が存在しないならば<code>0</code>を返せ．</p>
+<h2 id="方針">方針</h2>
+<p>常に考えるべきは</p>
+<ol>
+<li>まずはbrute-force</li>
+<li>無駄な計算はないか？</li>
+</ol>
+<h2 id="解法1">解法1</h2>
+<ul>
+<li>brute-force</li>
+<li>考えられるすべての部分列を列挙して，それぞれについて和をとって<code>target</code>以上になるかを調べる</li>
+<li>時間計算量：$O(n^3)$
+<ul>
+<li>$O(n^2)$個の部分列それぞれに対して，$O(n)$で和を取る</li>
+</ul>
+</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minSubArrayLen</span>(self, target: int, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        ans <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>)
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(nums)):
+            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i, len(nums)):
+                s <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+                <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums[i:j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]:
+                    s <span style="color:#f92672">+=</span> num
+                <span style="color:#66d9ef">if</span> target <span style="color:#f92672">&lt;=</span> s:
+                    ans <span style="color:#f92672">=</span> min(ans, j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="解法2">解法2</h2>
+<ul>
+<li>解法1を改良する</li>
+<li>部分列の和を累積和を使って$O(1)$で求めれば全体は$O(n^2)$に落とせる
+<ul>
+<li>累積和：<code>accum[0] = 0</code>，<code>accum[i] = accum[i-1] + nums[i]</code></li>
+</ul>
+</li>
+<li>時間計算量：$O(n^2)$
+<ul>
+<li>$O(n^2)$個の部分列それぞれに対して，$O(1)$で和を取る</li>
+</ul>
+</li>
+<li>空間計算量：$O(n)$
+<ul>
+<li>累積和の配列</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minSubArrayLen</span>(self, target: int, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        ans <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>)
+        accum <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+            accum[i] <span style="color:#f92672">=</span> accum[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(nums)):
+            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i, len(nums)):
+                s <span style="color:#f92672">=</span> accum[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> accum[i]
+                <span style="color:#66d9ef">if</span> target <span style="color:#f92672">&lt;=</span> s:
+                    ans <span style="color:#f92672">=</span> min(ans, j <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="解法3">解法3</h2>
+<ul>
+<li>解法2を改良する</li>
+<li>累積和<code>accum</code>は単調に増加する配列</li>
+<li><code>target = accum[j+1] - accum[i]</code>だから<code>accum[j+1] = target + accum[i]</code></li>
+<li><code>i</code>を固定したときに<code>j+1</code>は<code>accum</code>に対する二分探索で$O(\log n)$で求められる</li>
+<li>時間計算量：$O(n \log n)$
+<ul>
+<li>$O(n)$で左端が回って，$O(\log n)$で部分和が<code>target</code>を超える境目が取れる</li>
+</ul>
+</li>
+<li>空間計算量：$O(n)$
+<ul>
+<li>累積和の配列</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minSubArrayLen</span>(self, target: int, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        ans <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>)
+        accum <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)]
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+            accum[i] <span style="color:#f92672">=</span> accum[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(nums) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+            j <span style="color:#f92672">=</span> bisect_left(accum, accum[i] <span style="color:#f92672">+</span> target)
+            <span style="color:#66d9ef">if</span> j <span style="color:#f92672">!=</span> len(accum):
+                ans <span style="color:#f92672">=</span> min(ans, j <span style="color:#f92672">-</span> i)
+        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="解法4">解法4</h2>
+<ul>
+<li>尺取法というテク
+<ul>
+<li>解法3の改良（<code>accum</code>を全部保持しない）とも捉えられる</li>
+</ul>
+</li>
+<li>左端を固定したときに，その部分列の和が<code>target</code>を超えた時点で右端はそれ以上伸ばしても意味ない</li>
+<li>時間計算量：$O(n)$
+<ul>
+<li>$O(n)$で左端が回っておしまい</li>
+</ul>
+</li>
+<li>空間計算量：$O(1)$</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">minSubArrayLen</span>(self, target: int, nums: List[int]) <span style="color:#f92672">-&gt;</span> int:
+        ans <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>)
+        left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        accum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> right <span style="color:#f92672">in</span> range(len(nums)):
+            accum <span style="color:#f92672">+=</span> nums[right]
+            <span style="color:#66d9ef">while</span> target <span style="color:#f92672">&lt;=</span> accum:
+                ans <span style="color:#f92672">=</span> min(ans, right <span style="color:#f92672">-</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+                accum <span style="color:#f92672">-=</span> nums[left]
+                left <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> ans <span style="color:#66d9ef">if</span> ans <span style="color:#f92672">!=</span> float(<span style="color:#e6db74">&#34;inf&#34;</span>) <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><h2 id="ref">ref</h2>
+<p><a href="https://leetcode.com/problems/minimum-size-subarray-sum/">https://leetcode.com/problems/minimum-size-subarray-sum/</a></p>
+
     </div>
+
     
 
-    <div class="stream-meta article-metadata">
 
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
       
-
+      
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/minimum-size-subarray-sum/&amp;text=Minimum%20Size%20Subarray%20Sum" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
     
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/simple-calculator/" >Simple Calculator</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 文字列として与えられる数式を計算するプログラムを書け． print(compute(&#34;2*3+5/6*3+15&#34;)) # =&gt; 23.5 答え from enum import Enum, auto class Op(Enum): ADD = …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/minimum-size-subarray-sum/&amp;t=Minimum%20Size%20Subarray%20Sum" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
     
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/smallest-difference-in-two-arrays/" >Smallest Difference in Two Arrays</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 配列a，bが与えられる．それぞれの配列から一つずつ要素を選んだとき，その差の絶対値が最小となるような要素のペアとその差を求めよ． 答え 全て
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Minimum%20Size%20Subarray%20Sum&amp;body=/ja/post/minimum-size-subarray-sum/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
     
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/how-many-zeros-in-suffix-of-factorial/" >How Many Zeros in Suffix of Factorial</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 $n$の階乗の末尾には$0$がいくつ並んでいるか．求めよ． 答え よくある中学受験問題．素因数分解したときに$2$より$5$のほうが数が多い
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/minimum-size-subarray-sum/&amp;title=Minimum%20Size%20Subarray%20Sum" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
     
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/swap-two-intergers-without-additional-mrmory/" >Swap Two Intergers Without Additional Mrmory</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 一時変数を使わずに整数aとbを交換せよ． 答え a = 10 b = 3 print(a, b) # =&gt; 10 3 a = a - b b = a + b # (1) a = b - a # (2) print(a, b) # =&gt; 3, 10 …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Minimum%20Size%20Subarray%20Sum%20/ja/post/minimum-size-subarray-sum/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
     
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/find-key-in-listy/" >Find Key in Listy</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 Listみたいなデータ構造Listyを考える．Listyは次のように定義される． class Listy: def __init__(self, lst): lst.sort() self.lst = lst def at(self, idx): if idx …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
       
         
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
       
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    2 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
       
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
       
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/merge-two-sorted-array-in-place/" >Merge Two Sorted Array in Place</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 共に昇順に整列された配列aと配列bが与えられる．aにはbの要素を全て格納するほどのバッファが存在する．このとき，追加のメモリを使用せずに
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/coin-change/" >Coin Change</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 手元に$1$円硬貨，$5$円硬貨，$10$円硬貨，$25$円硬貨が無限に存在する．$n$円支払うときの，硬貨の出し方の総数はいくらか． 答
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    2 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/ja/post/valid-parentheses/" >Valid Parentheses</a>
-    </h3>
-
-    
-    <div class="article-style">
-      問題 $n$個の()を，全ての開きカッコと閉じカッコの対応が正しいように並べたときの全通りを求めよ． 答え def valid_parentheses(n): ret = [] def rec(left, right, sofar): if left == 0 and …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Sat, Mar 27, 2021
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
-    
-  
-
-  
-<nav>
-  <ul class="pagination justify-content-center">
-    
-    <li class="page-item"><a class="page-link" href="/ja/post/page/3/">&laquo;</a></li>
-    
-    
-    <li class="page-item"><a class="page-link" href="/ja/post/page/5/">&raquo;</a></li>
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/minimum-size-subarray-sum/&amp;title=Minimum%20Size%20Subarray%20Sum" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
     
   </ul>
-</nav>
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hub69dcb66e1cbfdb18e29d9299880eec2_11573_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士2年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
 
       
 
