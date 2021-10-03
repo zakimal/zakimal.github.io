@@ -17,36 +17,7 @@
       <link>/ja/post/sort-colors/</link>
       <pubDate>Sun, 03 Oct 2021 14:54:54 +0900</pubDate>
       <guid>/ja/post/sort-colors/</guid>
-      <description>&lt;!-- 
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;algorithm.png&#34; data-caption=&#34;アルゴリズム概観&#34;&gt;
-&lt;img src=&#34;algorithm.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    アルゴリズム概観
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
- --&gt;
-&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;1&lt;/code&gt;，&lt;code&gt;2&lt;/code&gt;，&lt;code&gt;3&lt;/code&gt; のみを要素として含む整数配列 &lt;code&gt;nums&lt;/code&gt; が与えられる．&lt;code&gt;nums&lt;/code&gt; を昇順に整列させるアルゴリズムを書きなさい．&lt;/p&gt;
 &lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
 &lt;p&gt;各要素が入るべき位置の末端を追跡しながら整列させる．&lt;/p&gt;
