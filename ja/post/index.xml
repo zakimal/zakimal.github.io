@@ -5,12 +5,83 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 05 Sep 2021 20:12:51 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 03 Oct 2021 14:54:54 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Sort Colors</title>
+      <link>/ja/post/sort-colors/</link>
+      <pubDate>Sun, 03 Oct 2021 14:54:54 +0900</pubDate>
+      <guid>/ja/post/sort-colors/</guid>
+      <description>&lt;!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;algorithm.png&#34; data-caption=&#34;アルゴリズム概観&#34;&gt;
+&lt;img src=&#34;algorithm.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    アルゴリズム概観
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+ --&gt;
+&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1&lt;/code&gt;，&lt;code&gt;2&lt;/code&gt;，&lt;code&gt;3&lt;/code&gt; のみを要素として含む整数配列 &lt;code&gt;nums&lt;/code&gt; が与えられる．&lt;code&gt;nums&lt;/code&gt; を昇順に整列させるアルゴリズムを書きなさい．&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;各要素が入るべき位置の末端を追跡しながら整列させる．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;one&lt;/code&gt;：整列後の &lt;code&gt;nums&lt;/code&gt; に現れる連続する &lt;code&gt;1&lt;/code&gt; のうちの右端の位置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;two&lt;/code&gt;：整列後の &lt;code&gt;nums&lt;/code&gt; に現れる連続する &lt;code&gt;2&lt;/code&gt; のうちの右端の位置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;three&lt;/code&gt;：整列後の &lt;code&gt;nums&lt;/code&gt; に現れる連続する &lt;code&gt;3&lt;/code&gt; のうちの右端の位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sortColors&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; None:
+        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        Do not return anything, modify nums in-place instead.
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+        one &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        two &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        three &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; two &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; three:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[two] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                nums[one], nums[two] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[two], nums[one]
+                one &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                two &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; nums[two] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;:
+                two &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                nums[two], nums[three] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[three], nums[two]
+                three &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;計算量は&lt;code&gt;two&lt;/code&gt;が&lt;code&gt;nums&lt;/code&gt;を左端から右端まで動くループが回るので$O(n)$&lt;/p&gt;
+&lt;p&gt;一方で，&lt;code&gt;list.sort()&lt;/code&gt;すればいいという話もある．この場合は実際に実行されるアルゴリズムに依存するが$O(n \log n)$．&lt;/p&gt;
+&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/sort-colors/&#34;&gt;https://leetcode.com/problems/sort-colors/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Permutation in String</title>
