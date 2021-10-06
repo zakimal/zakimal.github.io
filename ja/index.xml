@@ -13,10 +13,10 @@
     </image>
     
     <item>
-      <title>Merge Sorted List</title>
-      <link>/ja/post/merge-sorted-list/</link>
+      <title>Merge $k$ Sorted List</title>
+      <link>/ja/post/merge-k-sorted-list/</link>
       <pubDate>Wed, 06 Oct 2021 14:16:22 +0900</pubDate>
-      <guid>/ja/post/merge-sorted-list/</guid>
+      <guid>/ja/post/merge-k-sorted-list/</guid>
       <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
 &lt;p&gt;$k$個の単連結リスト&lt;code&gt;lists&lt;/code&gt;が与えられる．連結リストは次のように定義される．各リストは昇順に整列されている．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ListNode&lt;/span&gt;:
