@@ -5,12 +5,223 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 03 Oct 2021 14:54:54 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Wed, 06 Oct 2021 14:16:22 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Merge Sorted List</title>
+      <link>/ja/post/merge-sorted-list/</link>
+      <pubDate>Wed, 06 Oct 2021 14:16:22 +0900</pubDate>
+      <guid>/ja/post/merge-sorted-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;$k$個の単連結リスト&lt;code&gt;lists&lt;/code&gt;が与えられる．連結リストは次のように定義される．各リストは昇順に整列されている．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;すべてのリストを統合した上で昇順に整列した連結リストを返せ．&lt;/p&gt;
+&lt;p&gt;例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1-&amp;gt;4-&amp;gt;5,
+  1-&amp;gt;3-&amp;gt;4,
+  2-&amp;gt;6
+]
+merging them into one sorted list:
+1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4-&amp;gt;5-&amp;gt;6
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法1&#34;&gt;解法1&lt;/h2&gt;
+&lt;p&gt;なんにも考えずに，全ノードを一旦舐めて値を回収してソートする．マージ結果の連結リストに含まれるノード数を$N$として，時間計算量はソートがボトルネックになって$O(N \log N)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[ListNode]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; ListNode:
+        vals &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lists:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                vals&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val)
+                node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        vals&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode()
+        ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; val &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; vals:
+            ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;val)
+            ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法2&#34;&gt;解法2&lt;/h2&gt;
+&lt;p&gt;各連結リストの先頭から一番小さいやつを選んで新しいリストを作っていく．$n$を各リストの平均長として時間計算量は$O(kn)$．各リストから最小の要素を見つけるのに特に工夫をしなければ$O(n)$かかる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[Optional[ListNode]]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode()
+        ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ret
+        current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lists:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(node)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(current) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            min_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;))
+            min_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, node &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(current):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; min_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val:
+                    min_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node
+                    min_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx
+            ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min_node
+            ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current[:min_idx] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; current[min_idx &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; min_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(min_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法3&#34;&gt;解法3&lt;/h2&gt;
+&lt;p&gt;解法2を改良する．「各リストから最小の要素を見つける」をPriority Queueを使って$O(1)$にできる．一方でPriority Queueへの要素の追加が$O(\log k)$かかるので，全体の時間計算量は$O(n \log k)$．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Wrapper&lt;/code&gt;クラスを作って&lt;code&gt;ListNode&lt;/code&gt;に演算子&lt;code&gt;&amp;lt;&lt;/code&gt;を使えるようにする実装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[Optional[ListNode]]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Wrapper&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, node):
+                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __lt__(self, other):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode()
+        ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ret
+
+        &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; queue &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; PriorityQueue
+        pq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PriorityQueue()
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; lists:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            pq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;put(Wrapper(node))
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; pq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;empty():
+            min_node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;node
+            ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min_node
+            ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; min_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                pq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;put(Wrapper(min_node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;どのリストから最小値のノードが取れたかを&lt;code&gt;lists&lt;/code&gt;上のインデックスとして保持しておく実装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[Optional[ListNode]]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode()
+        ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ret
+        current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, node &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(lists):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; node &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val, idx))
+        heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heapify(current)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(current) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            min_val, min_idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappop(current)
+            ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;min_val)
+            ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ptr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; lists[min_idx]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                heapq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;heappush(current, (lists[min_idx]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val, min_idx))
+                lists[min_idx] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lists[min_idx]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法4&#34;&gt;解法4&lt;/h2&gt;
+&lt;p&gt;「$k$個のリストのマージ」を「2個のリストのマージ，を$k-1$回」と考えて解くことも考えられる．一つ前の統合結果に次のリストを重ねて統合させていくイメージ．各リストの平均長を$n$として，全体の時間計算量は$O(nk^2)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[Optional[ListNode]]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merge_two_lists&lt;/span&gt;(list1, list2):
+            dummy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None)
+            current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dummy
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; list1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; list2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; list1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; list2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val:
+                    current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1
+                    list1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2
+                    list2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+                current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; list1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dummy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(lists)):
+            head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merge_two_lists(head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next, lists[i])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; head&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法5&#34;&gt;解法5&lt;/h2&gt;
+&lt;p&gt;解法4を改良する．解法4では，最初の方にマージされた頂点を何回も参照することになる．ここが無駄．そこで，分割統治法．2個ずつ，4個ずつ，8個ずつ&amp;hellip;マージしていけばいい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeKLists&lt;/span&gt;(self, lists: List[Optional[ListNode]]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merge_two_lists&lt;/span&gt;(list1, list2):
+            dummy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ListNode(val&lt;span style=&#34;color:#f92672&#34;&gt;=-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None)
+            current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dummy
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; list1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; list2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; list1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; list2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val:
+                    current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1
+                    list1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2
+                    list2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+                current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; list1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list1
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                current&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list2
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dummy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(lists)
+        interval &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; None
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; interval &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; N:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, N &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; interval, interval &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;):
+                lists[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; merge_two_lists(lists[i], lists[i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; interval])
+            interval &lt;span style=&#34;color:#f92672&#34;&gt;*=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; lists[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;Ref&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/merge-k-sorted-lists/&#34;&gt;https://leetcode.com/problems/merge-k-sorted-lists/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Sort Colors</title>
