@@ -615,6 +615,21 @@ nums1[2] (= 2) ... nums2における「2の次に大きい値」は存在しな�
         ret <span style="color:#f92672">=</span> int(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(digits))
 
         <span style="color:#66d9ef">return</span> ret <span style="color:#66d9ef">if</span> ret <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">31</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</code></pre></div><h2 id="問題4">問題4</h2>
+<p><code>i</code>日の気温が<code>temperatures[i]</code>に記載されているような整数配列<code>temperatures</code>が与えられる．各日付に対して，その日より暖かい日が何日後似合ったのかを計算せよ．</p>
+<h2 id="答え-3">答え</h2>
+<p>「次に大きい値」系の問題そのもの．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dailyTemperatures</span>(self, temperatures: List[int]) <span style="color:#f92672">-&gt;</span> List[int]:
+        ans <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(len(temperatures))]
+        stack <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(temperatures)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+            <span style="color:#66d9ef">while</span> len(stack) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> stack[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> temperatures[i]:
+                stack<span style="color:#f92672">.</span>pop()
+            <span style="color:#66d9ef">if</span> len(stack) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+                ans[i] <span style="color:#f92672">=</span> stack[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> i
+            stack<span style="color:#f92672">.</span>append((temperatures[i], i))
+        <span style="color:#66d9ef">return</span> ans
 </code></pre></div><h2 id="refs">refs</h2>
 <ul>
 <li><a href="https://leetcode.com/problems/next-greater-element-i/">https://leetcode.com/problems/next-greater-element-i/</a></li>
