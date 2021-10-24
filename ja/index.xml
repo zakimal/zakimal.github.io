@@ -5,12 +5,70 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sat, 09 Oct 2021 21:56:14 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 24 Oct 2021 15:51:26 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Maximum Difference Between Increasing Elements</title>
+      <link>/ja/post/maximum-difference-between-increasing-elements/</link>
+      <pubDate>Sun, 24 Oct 2021 15:51:26 +0900</pubDate>
+      <guid>/ja/post/maximum-difference-between-increasing-elements/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．ここで，次に挙げる条件を満たすような2要素の差の最大値（&lt;code&gt;nums[j] - nums[i]&lt;/code&gt;）を求めよ．存在しなければ&lt;code&gt;-1&lt;/code&gt;を返せ．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0 &amp;lt;= i &amp;lt; j &amp;lt; len(nums)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums[i] &amp;lt; nums[j]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;解法1&#34;&gt;解法1&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;(i, j)&lt;/code&gt;の組み合わせを前通り調べ上げると$O(n^2)$．&lt;/p&gt;
+&lt;h2 id=&#34;解法2&#34;&gt;解法2&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;nums&lt;/code&gt;を左から舐めながら，&lt;code&gt;min_sofar&lt;/code&gt;でその位置までの最小値を保存しておけば$O(n)$で求めたい答えが求まる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maximumDifference&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        min_sofar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;inf&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            min_sofar &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(min_sofar, num)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; min_sofar &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; num:
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(ans, num &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; min_sofar)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法3&#34;&gt;解法3&lt;/h2&gt;
+&lt;p&gt;Functionalに考える．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums:      [7, 1, 5, 4]
+min_sofar: [7, 1, 1, 1]
+diff:      [0, 0, 4, 3] # element-wise diff
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;diff&lt;/code&gt;の&lt;code&gt;max&lt;/code&gt;が答え．ただ，&lt;code&gt;nums = [9, 4, 3, 2]&lt;/code&gt;のような場合は返すべきは&lt;code&gt;-1&lt;/code&gt;なのでその処理のために&lt;code&gt;diff&lt;/code&gt;の&lt;code&gt;0&lt;/code&gt;を弾いてから&lt;code&gt;-1&lt;/code&gt;を追加した上で&lt;code&gt;max&lt;/code&gt;を取ると良い&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;maximumDifference&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; itertools
+        min_scan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; itertools&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;accumulate(
+            nums,
+            min,
+            initial&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+inf&amp;#34;&lt;/span&gt;)
+        )
+
+        min_scan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(min_scan)[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]
+
+        zipped &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; zip(nums, min_scan)
+
+        mapped &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; _: _[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; _[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], zipped)
+
+        filtered &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; filter(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; _: _ &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, mapped)
+
+        &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; functools
+        fold_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; func, acc, xs: functools&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reduce(func, xs, acc)
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fold_left(max, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, filtered)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ref&#34;&gt;ref&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/maximum-difference-between-increasing-elements/&#34;&gt;https://leetcode.com/problems/maximum-difference-between-increasing-elements/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Sliding Window Maximum</title>
