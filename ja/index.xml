@@ -5,12 +5,159 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 24 Oct 2021 15:51:26 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 24 Oct 2021 17:05:02 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Next Greater Element Series</title>
+      <link>/ja/post/next-greater-element-series/</link>
+      <pubDate>Sun, 24 Oct 2021 17:05:02 +0900</pubDate>
+      <guid>/ja/post/next-greater-element-series/</guid>
+      <description>&lt;h2 id=&#34;問題1&#34;&gt;問題1&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums1&lt;/code&gt;，&lt;code&gt;nums2&lt;/code&gt;が与えられる．&lt;code&gt;nums1&lt;/code&gt;は&lt;code&gt;nums2&lt;/code&gt;の部分配列である．&lt;code&gt;nums2&lt;/code&gt;には同じ整数が複数回登場することがないことが保証されている．ここで整数配列&lt;code&gt;nums&lt;/code&gt;の各要素&lt;code&gt;nums[i]&lt;/code&gt;に対して「次に大きい値」を次のように定める．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nums[i+1:]&lt;/code&gt;で最初に&lt;code&gt;nums[i]&lt;/code&gt;より大きい値&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;nums1&lt;/code&gt;に含まれる要素について，&lt;code&gt;nums2&lt;/code&gt;における各要素の「次に大きい値」を求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums1 = [4, 1, 2]
+nums2 = [1, 3, 4, 2]
+
+-&amp;gt; ans = [-1, 3, -1]
+nums1[0] (= 4) ... nums2における「4の次に大きい値」は存在しないので -1
+nums1[1] (= 1) ... nums2における「1の次に大きい値」は 3 (= nums2[1])
+nums1[2] (= 2) ... nums2における「2の次に大きい値」は存在しないので -1
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;h3 id=&#34;blute-force&#34;&gt;Blute-Force&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;nums1&lt;/code&gt;の各要素について，毎回「次に大きい値」を$O(n)$で計算する．全体としては時間計算量が$O(n^2)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElement&lt;/span&gt;(self, nums1: List[int], nums2: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums1: &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+            idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;index(num)
+            next_greater &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; candidate &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums2[idx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]: &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; candidate:
+                    next_greater &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; candidate
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(next_greater)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;stackを使う&#34;&gt;stackを使う&lt;/h3&gt;
+&lt;p&gt;「&lt;code&gt;nums2[i]&lt;/code&gt;の次に大きい値」候補は，確かに&lt;code&gt;nums2[i+1:]&lt;/code&gt;に含まれるがこれは無駄が多い．&lt;/p&gt;
+&lt;p&gt;「&lt;code&gt;nums2[i]&lt;/code&gt;の次に大きい値」の候補は「&lt;code&gt;nums2[i+1]&lt;/code&gt;の次に大きい値，&lt;code&gt;nums2[i+2]&lt;/code&gt;の次に大きい値&amp;hellip;」である．&lt;/p&gt;
+&lt;p&gt;これはつまり，&lt;code&gt;nums2[i]&lt;/code&gt;の次に大きい値を求める問題が&lt;code&gt;nums2[i+j]&lt;/code&gt;(&lt;code&gt;j = 1, 2, ...&lt;/code&gt;)という部分問題の貝を使って解けるということになる．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[..., 5, 2, 1, 6]
+      ^
+5の次に大きい値 = max(2の次に大きい値, 1の次に大きい値, 6の次に大きい値)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;これをstackで実装する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElement&lt;/span&gt;(self, nums1: List[int], nums2: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        next_greater &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict() &lt;span style=&#34;color:#75715e&#34;&gt;# nums2は重複要素が存在しないことが保証されている&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums2:
+            next_greater[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums2)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;): &lt;span style=&#34;color:#75715e&#34;&gt;# 後ろから部分問題を解いていく&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums2[i]: &lt;span style=&#34;color:#75715e&#34;&gt;# nums2[i]以下の答え候補は答えになりえない&lt;/span&gt;
+                stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                next_greater[nums2[i]] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(nums2[i])
+
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [next_greater[num] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums1]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;問題2&#34;&gt;問題2&lt;/h2&gt;
+&lt;p&gt;整数を要素とする循環配列&lt;code&gt;nums&lt;/code&gt;が与えられる．なお&lt;code&gt;nums[-1]&lt;/code&gt;の次の要素は&lt;code&gt;nums[0]&lt;/code&gt;であるとする．&lt;/p&gt;
+&lt;p&gt;ここで整数配列&lt;code&gt;nums&lt;/code&gt;の各要素&lt;code&gt;nums[i]&lt;/code&gt;に対して「次に大きい値」を次のように定める．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nums[i+1:]&lt;/code&gt;で最初に&lt;code&gt;nums[i]&lt;/code&gt;より大きい値&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;循環配列&lt;code&gt;nums&lt;/code&gt;の各要素について「次に大きい値」を求めよ．&lt;/p&gt;
+&lt;h2 id=&#34;答え-1&#34;&gt;答え&lt;/h2&gt;
+&lt;h3 id=&#34;blute-force-1&#34;&gt;Blute-Force&lt;/h3&gt;
+&lt;p&gt;循環配列は元の配列の2倍の長さにコピーしておけば普通の配列として扱える．あとは真面目に各要素について次に大きい値を$O(n)$で計算すればいい．全体としては$O(n^2)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElements&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums))]
+        doubled &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)): &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; len(nums)): &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; doubled[j]:
+                    ret[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; doubled[j]
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;nums&lt;/code&gt;の長さの剰余で実装してもいい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElements&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums))]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)): &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(nums)): &lt;span style=&#34;color:#75715e&#34;&gt;# O(n)&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; j) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; len(nums)]:
+                    ret[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; j) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; len(nums)]
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;stackを使う-1&#34;&gt;stackを使う&lt;/h3&gt;
+&lt;p&gt;問題1と同じ発想．ただし循環配列なので2回配列を舐める必要がある．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElements&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums))]
+        filled &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [False &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums))]
+        stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []  &lt;span style=&#34;color:#75715e&#34;&gt;# nums[i]の次に大きい値の候補（nums[i+?]の次に大きい値）をメモ&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):  &lt;span style=&#34;color:#75715e&#34;&gt;# 後ろからループ&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums[i]:
+                stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()  &lt;span style=&#34;color:#75715e&#34;&gt;# nums[i]以下なのでstack[-1]は答えにならない&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                ret[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+                filled[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+            stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(nums[i])  &lt;span style=&#34;color:#75715e&#34;&gt;# nums[i]はnums[i-1]以降の「次に大きい値」の候補&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# サイクルになっているので2周しておけば十分&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; filled[i]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; nums[i]:
+                    stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                    ret[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack[&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+                    filled[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; True
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;問題3&#34;&gt;問題3&lt;/h2&gt;
+&lt;p&gt;整数&lt;code&gt;x&lt;/code&gt;が与えられる．&lt;code&gt;x&lt;/code&gt;と各桁の数字の集合が同じで&lt;code&gt;x&lt;/code&gt;の次に大きい整数を求めよ．存在しなければ&lt;code&gt;-1&lt;/code&gt;を返せ．&lt;/p&gt;
+&lt;h2 id=&#34;答え-2&#34;&gt;答え&lt;/h2&gt;
+&lt;p&gt;小さい桁から見ていく．小さい桁に向かって降順になっている部分を調べて，降順が崩れる箇所を特定する．降順になっている桁のうち，降順が崩れる桁の数字の次に大きい数字を交換して昇順に並べる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nextGreaterElement&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        digits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(str(n))
+        i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(digits) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 降順になっている部分を探す&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; digits[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; digits[i]:
+            i &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# 全部降順 -&amp;gt; 次に大きい値は存在しない&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(digits) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; digits[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; digits[j&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+            j &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        digits[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], digits[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; digits[j], digits[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        digits[i:] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; digits[i:][::&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(digits))
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ret &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;refs&#34;&gt;refs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/next-greater-element-i/&#34;&gt;https://leetcode.com/problems/next-greater-element-i/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/next-greater-element-ii/&#34;&gt;https://leetcode.com/problems/next-greater-element-ii/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/next-greater-element-iii/&#34;&gt;https://leetcode.com/problems/next-greater-element-iii/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Maximum Difference Between Increasing Elements</title>
