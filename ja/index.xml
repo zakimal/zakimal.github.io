@@ -5,12 +5,117 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Sun, 24 Oct 2021 17:05:02 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 03 Dec 2021 12:25:43 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Strongly Connected Components in Directed Graph</title>
+      <link>/ja/post/strongly-connected-components-in-directed-graph/</link>
+      <pubDate>Fri, 03 Dec 2021 12:25:43 +0900</pubDate>
+      <guid>/ja/post/strongly-connected-components-in-directed-graph/</guid>
+      <description>&lt;h2 id=&#34;有向グラフにおける強連結成分分解&#34;&gt;有向グラフにおける強連結成分分解&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;強連結：任意の2頂点対$(u, v)$について，$u$から$v$に至るパスと$v$から$u$に至るパスの双方が存在する&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;強連結成分：互いに強連結である頂点からなる頂点集合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;強連結成分を計算するアルゴリズム&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2回のDFSを行う
+&lt;ul&gt;
+&lt;li&gt;【1】DFSを行って，頂点の帰りがけ順を求める&lt;/li&gt;
+&lt;li&gt;【2】帰りがけ順上位から，元のグラフの辺の向きを逆転させたグラフ上でDFS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;例題&#34;&gt;例題&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://atcoder.jp/contests/typical90/tasks/typical90_u&#34;&gt;https://atcoder.jp/contests/typical90/tasks/typical90_u&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;bits/stdc++.h&amp;gt;
+
+using namespace std;
+
+int N, M;
+
+bool has_visited[1 &amp;lt;&amp;lt; 18];
+vector&amp;lt;int&amp;gt; G[1 &amp;lt;&amp;lt; 18];
+vector&amp;lt;int&amp;gt; RG[1 &amp;lt;&amp;lt; 18];
+vector&amp;lt;int&amp;gt; post_order;
+long long cnt = 0;
+
+void DFS(int node)
+{
+    has_visited[node] = true;
+    for (int neighbor : G[node])
+    {
+        if (!has_visited[neighbor])
+            DFS(neighbor);
+    }
+    post_order.push_back(node);
+}
+
+void RDFS(int node)
+{
+    has_visited[node] = true;
+    cnt += 1;
+    for (int neighbor : RG[node])
+    {
+        if (!has_visited[neighbor])
+            RDFS(neighbor);
+    }
+}
+
+int main()
+{
+    cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; M;
+    for (int i = 1; i &amp;lt;= M; i++)
+    {
+        int A, B;
+        cin &amp;gt;&amp;gt; A &amp;gt;&amp;gt; B;
+        G[A].push_back(B);
+        RG[B].push_back(A);
+    }
+
+    for (int i = 1; i &amp;lt;= N; i++)
+        has_visited[i] = false;
+
+    for (int node = 1; node &amp;lt;= N; node++)
+    {
+        if (!has_visited[node])
+            DFS(node);
+    }
+
+    reverse(post_order.begin(), post_order.end());
+    long long ans = 0;
+
+    for (int i = 1; i &amp;lt;= N; i++)
+        has_visited[i] = false;
+
+    for (int node : post_order)
+    {
+        if (has_visited[node])
+            continue;
+        cnt = 0;
+        RDFS(node);
+        ans += cnt * (cnt - 1LL) / 2LL;
+    }
+
+    cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
+
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
     
     <item>
       <title>Next Greater Element Series</title>
