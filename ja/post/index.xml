@@ -5,12 +5,73 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 17:21:03 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 17:33:44 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Ones and Zeros</title>
+      <link>/ja/post/ones-and-zeros/</link>
+      <pubDate>Wed, 02 Feb 2022 17:33:44 +0900</pubDate>
+      <guid>/ja/post/ones-and-zeros/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;0&lt;/code&gt;と&lt;code&gt;1&lt;/code&gt;のみから構成される文字列を格納する配列&lt;code&gt;strs&lt;/code&gt;と整数&lt;code&gt;m&lt;/code&gt;，&lt;code&gt;n&lt;/code&gt;が与えられる．&lt;code&gt;strs&lt;/code&gt;からいくつかの文字列を取り出して，次の条件を満たすような文字列の集合&lt;code&gt;X&lt;/code&gt;を作りたい．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;X&lt;/code&gt;に含まれる文字列について，&lt;code&gt;0&lt;/code&gt;の個数と&lt;code&gt;1&lt;/code&gt;の個数がそれぞれ最大でも&lt;code&gt;m&lt;/code&gt;個，&lt;code&gt;n&lt;/code&gt;個である&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;X&lt;/code&gt;の最大のサイズはいくつか&lt;/p&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ナップザック問題&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;findMaxForm&lt;/span&gt;(self, strs: List[str], m: int, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i][j][k]: 1, 2, ..., i番目までの文字列を対象に0が最大でj個，1が最大でi個存在するような部分集合を取ったときの要素数の最大値&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 更新式の立て方：dp[i][j][k]を一つ前の状態から更新することで求めると考える．今回はi番目のstrを入れるか入れないかの2つの状態から遷移してくるので&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i][j][k] = max(入れる場合, 入れない場合)になる．入れない場合は前と同じになるので&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i][j][k] = max(入れる場合, dp[i-1][j][k])．入れる場合を考えると，i番目のstrに0がzeros個，1がones個含まれているので，&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# i番目のstrを採用してdp[i][j][k]に至るということはその前はdp[i-1][j-zeros][k-ones]であるはずなので&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# dp[i][j][k] = max(dp[i-1][j-zeros][k-ones], dp[i-1][j][k])．ここで，j-zerosとk-onesがインデックスの値として正当な値になるためには0以上である必要があるので&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# j-zeros &amp;gt;= 0 and k-ones &amp;gt;= 0を条件に分岐する必要がある．elseの方はそもそも0をzeros個，1をones個追加してdp[i][j][k]に到達することができない（その前状態が存在してない）ので&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# i番目のstrを含むことができずそのままになる．&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# -----------------------------&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# if 0 &amp;lt;= j - zeros and 0 &amp;lt;= k - ones:&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     dp[i][j][k] = max(dp[i - 1][j][k], dp[i - 1][j - zeros][k - ones] + 1)&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# else:&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;#     dp[i][j][k] = dp[i - 1][j][k]&lt;/span&gt;
+
+        l &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(strs)
+        dp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [[[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)] &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+              &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(l &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)]
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count01&lt;/span&gt;(s):
+            zeros, ones &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; s:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;:
+                    zeros &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; c &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;:
+                    ones &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (zeros, ones)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, l &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; strs[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+            zeros, ones &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; count01(s)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; zeros &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ones:
+                        dp[i][j][k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(
+                            dp[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][j][k], dp[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; zeros][k &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ones] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                        dp[i][j][k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dp[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][j][k]
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; dp[l][m][n]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/ones-and-zeroes/&#34;&gt;https://leetcode.com/problems/ones-and-zeroes/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Single Number</title>
