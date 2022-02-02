@@ -5,12 +5,100 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 16:49:38 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 17:21:03 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Single Number</title>
+      <link>/ja/post/single-number/</link>
+      <pubDate>Wed, 02 Feb 2022 17:21:03 +0900</pubDate>
+      <guid>/ja/post/single-number/</guid>
+      <description>&lt;h2 id=&#34;問題1&#34;&gt;問題1&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;は1つのある整数$x$を除いてすべての整数が2個ずつ格納されている．$x$を求めよ．&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/single-number/&#34;&gt;https://leetcode.com/problems/single-number/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;答え&#34;&gt;答え&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;xor&lt;/code&gt;演算を使う
+&lt;ul&gt;
+&lt;li&gt;同じ整数同士の&lt;code&gt;xor&lt;/code&gt;は&lt;code&gt;0&lt;/code&gt;になることを利用する&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;a ^ a == 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums&lt;/code&gt;を全部&lt;code&gt;xor&lt;/code&gt;すれば1つしかない要素が残る&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;singleNumber&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:]:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;^=&lt;/span&gt; num
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;問題2&#34;&gt;問題2&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;は2つのある整数$x$，$y$を除いてすべての整数が2個ずつ格納されている．$x$，$y$を求めよ．&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/single-number-iii/&#34;&gt;https://leetcode.com/problems/single-number-iii/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;答え1&#34;&gt;答え1&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;set&lt;/code&gt;を使う&lt;/li&gt;
+&lt;li&gt;時間計算量$O(n)$&lt;/li&gt;
+&lt;li&gt;空間計算量$O(n)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;singleNumber&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; s:
+                s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remove(num)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+            s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(num)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(s)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;答え2&#34;&gt;答え2&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;xor&lt;/code&gt;を使う&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1つ目の問題と同じように考えると，&lt;code&gt;nums&lt;/code&gt;の要素全部の&lt;code&gt;xor&lt;/code&gt;を取った結果&lt;code&gt;P&lt;/code&gt;は&lt;code&gt;x&lt;/code&gt;と&lt;code&gt;y&lt;/code&gt;の重ね合わせになっているので分解する必要がある&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;xor&lt;/code&gt;の特徴から，一方がわかれば良い&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;P&lt;/code&gt;を2進数表記したときに&lt;code&gt;1&lt;/code&gt;になっている桁に注目すると，そこに桁が立つということは，&lt;code&gt;x&lt;/code&gt;，&lt;code&gt;y&lt;/code&gt;のどっちかにもその位置の桁が立っていたはず（じゃないと&lt;code&gt;xor&lt;/code&gt;した結果に残らない）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;時間計算量$O(n)$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;空間計算量$O(1)$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;singleNumber&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        xor1, xor2, i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 全部のxorを取る&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            xor1 &lt;span style=&#34;color:#f92672&#34;&gt;^=&lt;/span&gt; num
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;# 1が立ってる最下位桁を取る（ホントはどこの桁でもいい）&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; d &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; xor1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; d:
+                i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; d
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; i:
+                xor2 &lt;span style=&#34;color:#f92672&#34;&gt;^=&lt;/span&gt; num
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [xor1 &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; xor2, xor2]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Contains Duplicate</title>
