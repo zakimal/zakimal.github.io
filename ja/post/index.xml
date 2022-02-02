@@ -5,12 +5,115 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2021</copyright><lastBuildDate>Fri, 03 Dec 2021 12:25:43 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 16:49:38 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Contains Duplicate</title>
+      <link>/ja/post/contains-duplicate-1-2-3/</link>
+      <pubDate>Wed, 02 Feb 2022 16:49:38 +0900</pubDate>
+      <guid>/ja/post/contains-duplicate-1-2-3/</guid>
+      <description>&lt;h2 id=&#34;contain-duplicate-1&#34;&gt;contain duplicate 1&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．2個以上同じ要素が&lt;code&gt;nums&lt;/code&gt;に含まれるかを判定せよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 2, 3, 1] -&amp;gt; True
+nums = [1, 2, 3, 4] -&amp;gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;答え&#34;&gt;答え&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ソートして前から見ていく．&lt;/li&gt;
+&lt;li&gt;時間計算量$O(n)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;containsDuplicate&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;contain-duplicate-2&#34;&gt;contain duplicate 2&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;，整数&lt;code&gt;k&lt;/code&gt;が与えられる．異なるインデックス&lt;code&gt;i&lt;/code&gt;，&lt;code&gt;j&lt;/code&gt;について，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nums[i] == nums[j]&lt;/code&gt;かつ&lt;code&gt;abs(i - j) &amp;lt;= k&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;を満たすような&lt;code&gt;(i, j)&lt;/code&gt;が存在するか判定せよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 2, 3, 1],       k = 3 -&amp;gt; True (i = 0, j = 3)
+nums = [1, 2, 3, 1, 2, 3], k = 2 -&amp;gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;on2な答え&#34;&gt;$O(n^2)$な答え&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(i, j)&lt;/code&gt;の組み合わせを全通り調べる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# TLE: O(n^2)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;containsNearbyDuplicate&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(nums)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; nums[j] &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; k:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;onな答え&#34;&gt;$O(n)$な答え&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;最後に&lt;code&gt;num&lt;/code&gt;となる位置&lt;code&gt;i&lt;/code&gt;を覚えておけば判定可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;containsNearbyDuplicate&lt;/span&gt;(self, nums: List[int], k: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        memo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict() &lt;span style=&#34;color:#75715e&#34;&gt;# {num: idx}&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; memo:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; memo[num] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; k:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+            memo[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;contain-duplicate-3&#34;&gt;contain duplicate 3&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;，整数&lt;code&gt;k&lt;/code&gt;，&lt;code&gt;t&lt;/code&gt;が与えられる．異なるインデックス&lt;code&gt;i&lt;/code&gt;，&lt;code&gt;j&lt;/code&gt;について，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;abs(nums[i] - nums[j]) &amp;lt;= t&lt;/code&gt;かつ&lt;code&gt;abs(i - j) &amp;lt;= k&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;を満たすような&lt;code&gt;(i, j)&lt;/code&gt;が存在するか判定せよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 2, 3, 1],       k = 3, t = 0 -&amp;gt; True (i = 0, j = 3)
+nums = [1, 5, 9, 1, 5, 9], k = 2, t = 3 -&amp;gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;on2な答え-1&#34;&gt;$O(n^2)$な答え&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(i, j)&lt;/code&gt;の組み合わせを全通り調べる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# TLE: O(n^2)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;containsNearbyAlmostDuplicate&lt;/span&gt;(self, nums: List[int], k: int, t: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(nums)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; nums[j]) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; t &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; abs(i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; j) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; k:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;onな答え-1&#34;&gt;$O(n)$な答え&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;やや難しい&lt;/li&gt;
+&lt;li&gt;バケットソートから発想&lt;/li&gt;
+&lt;li&gt;（雑に言うと）&lt;code&gt;nums&lt;/code&gt;の数字を&lt;code&gt;MIN_NUM (= -2^31)&lt;/code&gt;からの距離で取り直した上で，幅&lt;code&gt;t&lt;/code&gt;でバケツを用意すると，同じバケツに属する数字は差が&lt;code&gt;t&lt;/code&gt;以内&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;containsNearbyAlmostDuplicate&lt;/span&gt;(self, nums: List[int], k: int, t: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; k &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; t &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+
+        buckets &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()  &lt;span style=&#34;color:#75715e&#34;&gt;# {remapped num: original num}&lt;/span&gt;
+        MIN_NUM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+            remapped &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; MIN_NUM
+            bucket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; remapped &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; (t &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; bucket &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; buckets &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; (bucket &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; buckets &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; buckets[bucket &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; remapped &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; t) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; (bucket &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; buckets &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; remapped &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; buckets[bucket &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; t):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(buckets) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; k:  &lt;span style=&#34;color:#75715e&#34;&gt;# 位置が遠すぎる数字のbucketは不要なのでで消す&lt;/span&gt;
+                last_bucket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (nums[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; k] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; MIN_NUM) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; (t &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;del&lt;/span&gt; buckets[last_bucket]
+            buckets[bucket] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; remapped
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Strongly Connected Components in Directed Graph</title>
