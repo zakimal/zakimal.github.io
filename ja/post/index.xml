@@ -5,12 +5,352 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Wed, 02 Feb 2022 17:33:44 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 03 Feb 2022 20:01:18 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Count Vowel Substrings of a String</title>
+      <link>/ja/post/count-vowel-substrings-of-a-string/</link>
+      <pubDate>Thu, 03 Feb 2022 20:01:18 +0900</pubDate>
+      <guid>/ja/post/count-vowel-substrings-of-a-string/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;文字列&lt;code&gt;word&lt;/code&gt;が与えられる．母音（&lt;code&gt;a&lt;/code&gt;，&lt;code&gt;e&lt;/code&gt;，&lt;code&gt;i&lt;/code&gt;，&lt;code&gt;o&lt;/code&gt;，&lt;code&gt;u&lt;/code&gt;）飲みからなる連続した部分文字列の個数を数え上げよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;word = &amp;quot;aeiouu&amp;quot; -&amp;gt; ans = 2 (&amp;quot;aeiou&amp;quot;, &amp;quot;aeiouu&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;しゃくとり法．数え上げ対象の部分列は連続した部分列になるので，両端を管理しながら数える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;countVowelSubstrings&lt;/span&gt;(self, word: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;i&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;u&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;}
+
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        vowel_kind &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(word)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; word[right] &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; freq:
+                v &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; word[right]
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; freq[v] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                    vowel_kind &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                freq[v] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; vowel_kind &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;:
+                    h &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; word[head]
+                    freq[h] &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; freq[h] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                        vowel_kind &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    head &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (head &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;e&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;i&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;o&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;u&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;}
+                left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                head &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                vowel_kind &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;right&lt;/code&gt;を右に勧めながら，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;子音にぶつかったらリセット&lt;/li&gt;
+&lt;li&gt;母音にぶつかったら
+&lt;ul&gt;
+&lt;li&gt;観測した母音を頻度表に追加&lt;/li&gt;
+&lt;li&gt;5種の母音を観測済みなら数え上げ開始
+&lt;ul&gt;
+&lt;li&gt;「観測済み母音種が5」を満たさなくなるまで&lt;code&gt;head&lt;/code&gt;を右に動かす（動かせるだけ数え上げ対象の部分列が存在することに）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;head&lt;/code&gt;を動かせなくなったところで部分列の数を数えて記録&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/count-vowel-substrings-of-a-string/&#34;&gt;https://leetcode.com/problems/count-vowel-substrings-of-a-string/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Position of Large Groups</title>
+      <link>/ja/post/position-of-large-groups/</link>
+      <pubDate>Thu, 03 Feb 2022 19:56:52 +0900</pubDate>
+      <guid>/ja/post/position-of-large-groups/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;文字列&lt;code&gt;s&lt;/code&gt;が与えられる．同種の文字が連続する部分のうち，長さが3以上の箇所をすべて取り出せ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;s = &amp;quot;abbxxxxzyy&amp;quot; -&amp;gt; [[3, 6]] (&amp;quot;xxxx&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;しゃくとり法．伸ばせるところまで&lt;code&gt;right&lt;/code&gt;を伸ばして，条件を満たさなくなったら&lt;code&gt;left&lt;/code&gt;を&lt;code&gt;right+1&lt;/code&gt;まで一気に更新する．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;largeGroupPositions&lt;/span&gt;(self, s: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[List[int]]:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(s) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+        left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, len(s)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; len(s) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; s[left] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; s[right]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;:
+                    ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append([left, right&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+                left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/positions-of-large-groups/&#34;&gt;https://leetcode.com/problems/positions-of-large-groups/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Shortest Distance to a Character</title>
+      <link>/ja/post/shortest-distance-to-a-character/</link>
+      <pubDate>Thu, 03 Feb 2022 18:30:24 +0900</pubDate>
+      <guid>/ja/post/shortest-distance-to-a-character/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;文字列&lt;code&gt;s&lt;/code&gt;と文字&lt;code&gt;c&lt;/code&gt;が与えられる．次のような整数配列&lt;code&gt;answer&lt;/code&gt;を返せ&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;len(answer) == len(s)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;answer[i]&lt;/code&gt;は位置&lt;code&gt;i&lt;/code&gt;から最も近い&lt;code&gt;c&lt;/code&gt;までの距離（インデックスの差の絶対値）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;s = &amp;quot;loveleetcode&amp;quot;, c = &amp;quot;e&amp;quot;
+-&amp;gt; [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;各&lt;code&gt;i&lt;/code&gt;について，左右を見て近い&lt;code&gt;c&lt;/code&gt;を探せば良いのだが，これをそのまま書くのではなく，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;各&lt;code&gt;i&lt;/code&gt;の左側をまず見る&lt;/li&gt;
+&lt;li&gt;次に各&lt;code&gt;i&lt;/code&gt;の右側を見る&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;と書くとよい．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   &amp;quot;l    o   v    e l e e t c o d e&amp;quot; (c = &amp;quot;e&amp;quot;)
+-&amp;gt;) inf inf inf   0 1 0 0 1 2 3 4 0
+     3   2   1    0 1 0 0 4 3 2 1 0 (&amp;lt;-
+------------------------------------------------
+-&amp;gt; [ 3   2   1    0 1 0 0 1 2 2 1 0] (min)
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;shortestToChar&lt;/span&gt;(self, s: str, c: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(s)
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+
+        prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-inf&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; c:
+                prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i
+            ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; prev)
+
+        prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+inf&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; s[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; c:
+                prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i
+            ans[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(ans[i], prev &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; i)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/shortest-distance-to-a-character/&#34;&gt;https://leetcode.com/problems/shortest-distance-to-a-character/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Uncommon Words From Two Sentences</title>
+      <link>/ja/post/uncommon-words-from-two-sentences/</link>
+      <pubDate>Thu, 03 Feb 2022 18:15:49 +0900</pubDate>
+      <guid>/ja/post/uncommon-words-from-two-sentences/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;2文&lt;code&gt;s1&lt;/code&gt;，&lt;code&gt;s2&lt;/code&gt;が与えられる．片方の文に一度だけ登場する単語のリストを返す関数を実装せよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;s1 = &amp;quot;this apple is sweet&amp;quot;
+s2 = &amp;quot;this apple is sour&amp;quot;
+-&amp;gt; [&amp;quot;sweet&amp;quot;,&amp;quot;sour&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;片方に一度だけ登場する単語は全体でも一度だけしか登場しない．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;uncommonFromSentences&lt;/span&gt;(self, s1: str, s2: str) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[str]:
+        s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; s1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; s2
+        freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter(s&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; k, v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; freq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;items():
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(k)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/uncommon-words-from-two-sentences/&#34;&gt;https://leetcode.com/problems/uncommon-words-from-two-sentences/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Count Common Words With One Occurrence</title>
+      <link>/ja/post/count-common-words-with-one-occurrence/</link>
+      <pubDate>Thu, 03 Feb 2022 18:06:32 +0900</pubDate>
+      <guid>/ja/post/count-common-words-with-one-occurrence/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;文字列を格納する配列&lt;code&gt;words1&lt;/code&gt;，&lt;code&gt;words2&lt;/code&gt;が与えられる．どちらにも一度だけ登場する文字列の個数を求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;words1 = [&amp;quot;leetcode&amp;quot;,&amp;quot; is&amp;quot;, &amp;quot;amazing&amp;quot;, &amp;quot;as&amp;quot;, &amp;quot;is&amp;quot;]
+words2 = [&amp;quot;amazing&amp;quot;, &amp;quot;leetcode&amp;quot;, &amp;quot;is&amp;quot;]
+-&amp;gt; 2 (&amp;quot;leetcode&amp;quot;, &amp;quot;amazing&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;words1&lt;/code&gt;で一度しか登場しない文字列が確かに&lt;code&gt;words2&lt;/code&gt;でも一度しか登場しないかを確認すればいい．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;countWords&lt;/span&gt;(self, words1: List[str], words2: List[str]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        freq &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Counter(words1)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; word &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; words2:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; freq[word] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                freq[word] &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; sum(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; freq&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;values() &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; v &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/count-common-words-with-one-occurrence/&#34;&gt;https://leetcode.com/problems/count-common-words-with-one-occurrence/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pairs of Songs With Total Duration Divisible by 60</title>
+      <link>/ja/post/pairs-of-songs-with-total-duration-divisible-by-60/</link>
+      <pubDate>Thu, 03 Feb 2022 17:52:19 +0900</pubDate>
+      <guid>/ja/post/pairs-of-songs-with-total-duration-divisible-by-60/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;time&lt;/code&gt;が与えられる．&lt;code&gt;time[i]&lt;/code&gt;は&lt;code&gt;i&lt;/code&gt;番目の歌の長さを表している．異なる歌同士の組み合わせで，その長さの合計が60で割り切れるようなペアの数を求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;times = [30, 20, 150, 100, 40] -&amp;gt; ans = 3 (30 + 150, 20 + 100, 20 + 40)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;2Sum問題のひねったバージョン．相方がいるかをメモっておけば二重ループを回避して$O(n)$で済む．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;numPairsDivisibleBy60&lt;/span&gt;(self, time: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        memo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;)]
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; t &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; time:
+            ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; memo[(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; t &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;]
+            memo[t &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/&#34;&gt;https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Partition Array Into Disjoint Intervals</title>
+      <link>/ja/post/partition-array-into-disjoint-intervals/</link>
+      <pubDate>Thu, 03 Feb 2022 17:10:18 +0900</pubDate>
+      <guid>/ja/post/partition-array-into-disjoint-intervals/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;を以下の条件を満たすように左右に2分割することを考える．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;左部分列のどの要素も，右部分列の要素以下である&lt;/li&gt;
+&lt;li&gt;左右の部分列は空ではない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;このとき，左部分列の長さを求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [5, 0, 3, 8, 6] -&amp;gt; ans = 3, [5, 0, 3] + [8, 6]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;左部分列の最大値 &amp;lt;= 右部分列の最小値&lt;/code&gt;という条件を満たす&lt;code&gt;i&lt;/code&gt;を求める．&lt;/p&gt;
+&lt;p&gt;左方向の最大値と右方向の最小値を別々に計算して最後に&lt;code&gt;i&lt;/code&gt;を見つけるというふうに考えると次のようになる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(N), Space: O(N)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partitionDisjoint&lt;/span&gt;(self, A: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(A)
+        max_on_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [None &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+        max_on_left[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            max_on_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(max_on_left[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], A[i])
+        min_on_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [None &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+        min_on_right[N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            min_on_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(min_on_right[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], A[i])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; max_on_left[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; min_on_right[i]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;max_on_left&lt;/code&gt;は単調増加な配列で，必要なのは直近の最大値だけなので配列じゃなくても良い．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(N), Space: O(N)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partitionDisjoint&lt;/span&gt;(self, A: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(A)
+        min_on_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [None &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+        min_on_right[N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            min_on_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(min_on_right[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], A[i])
+        current_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            current_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(current_max, A[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; current_max&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; min_on_right[i]:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更に空間計算量を減らすことができる．境界を左から右へ移していくとき，左側のその時点での最大値より小さい値に遭遇したら，そこは必ず左側に入ることが確定し，同時に左側部分列の長さが暫定で決まる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(N), Space: O(1)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partitionDisjoint&lt;/span&gt;(self, A: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(A)
+        current_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        possible_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+        length &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; A[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; current_max:
+                length &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                current_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; possible_max
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                possible_max &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(possible_max, A[i])
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; length
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/partition-array-into-disjoint-intervals/&#34;&gt;https://leetcode.com/problems/partition-array-into-disjoint-intervals/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sum of Beauty in the Array</title>
+      <link>/ja/post/sum-of-beauty-in-the-array/</link>
+      <pubDate>Thu, 03 Feb 2022 16:54:48 +0900</pubDate>
+      <guid>/ja/post/sum-of-beauty-in-the-array/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．&lt;code&gt;nums[i]&lt;/code&gt;の「綺麗さ」を次のように定める．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0 &amp;lt;= j &amp;lt; i&lt;/code&gt;，&lt;code&gt;i &amp;lt; k &amp;lt;= nums.length - 1&lt;/code&gt;を満たすすべての&lt;code&gt;j&lt;/code&gt;，&lt;code&gt;k&lt;/code&gt;について，&lt;code&gt;nums[j] &amp;lt; nums[i] &amp;lt; nums[k]&lt;/code&gt;を満たすとき2点&lt;/li&gt;
+&lt;li&gt;上記を満たさないとき，&lt;code&gt;nums[i - 1] &amp;lt; nums[i] &amp;lt; nums[i + 1]&lt;/code&gt;を満たすと1点&lt;/li&gt;
+&lt;li&gt;さらに上記を満たさないとき，0点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;すべての&lt;code&gt;i&lt;/code&gt;について綺麗さの合計を求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 2, 3] -&amp;gt; ans = 2
+nums = [2, 4, 6, 4] -&amp;gt; ans = 1
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;1つ目の条件については，要するに「&lt;code&gt;max(nums[:i])&amp;lt; nums[i] &amp;lt; min(nums[i+1:])&lt;/code&gt;」．このまま書いてしまうと$O(n^2)$になってしまう．&lt;code&gt;i&lt;/code&gt;がちょっとずれただけで&lt;code&gt;i-1&lt;/code&gt;までの最大値最小値の結果が無駄にならないように実装する．&lt;/p&gt;
+&lt;p&gt;一定方向の最大最小を事前に計算してく系の問題は結構ある．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;max_on_left[i]&lt;/code&gt;：&lt;code&gt;nums[:i]&lt;/code&gt;の最大値&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;min_on_right[i]&lt;/code&gt;：&lt;code&gt;nums[i+1:]&lt;/code&gt;の最小値&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sumOfBeauties&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len(nums)
+
+        max_on_left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [None &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+        x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-inf&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, N, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            max_on_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x
+            x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(x, nums[i])
+
+        min_on_right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [None &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N)]
+        x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; float(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+inf&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            min_on_right[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x
+            x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; min(x, nums[i])
+
+        score &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, N&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; max_on_left[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; min_on_right[i]:
+                score &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; nums[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; nums[i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]:
+                score &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; score
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/sum-of-beauty-in-the-array/&#34;&gt;https://leetcode.com/problems/sum-of-beauty-in-the-array/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Ones and Zeros</title>
