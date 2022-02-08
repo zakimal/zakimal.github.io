@@ -5614,6 +5614,9 @@ random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;shuffle(cards)
 ------
   &lt;span style=&#34;color:#ae81ff&#34;&gt;1711&lt;/span&gt; &amp;lt;- 正しい答え
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;これを 2 進数でやればいい．「繰り上がりを無視した足し算」はそのまま&lt;code&gt;xor&lt;/code&gt;が対応する．「繰り上がりだけ並べる」というのは，&lt;code&gt;&amp;amp;&lt;/code&gt;を取って左 1 シフトと対応する．&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;x + y = (x XOR y) + 2 * (x AND y)&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(a, b):
     &lt;span style=&#34;color:#75715e&#34;&gt;# 32 bits integer max&lt;/span&gt;
     MAX &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x7FFFFFFF&lt;/span&gt;

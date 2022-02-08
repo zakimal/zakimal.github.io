@@ -494,6 +494,9 @@
 ------
   <span style="color:#ae81ff">1711</span> &lt;- 正しい答え
 </code></pre></div><p>これを 2 進数でやればいい．「繰り上がりを無視した足し算」はそのまま<code>xor</code>が対応する．「繰り上がりだけ並べる」というのは，<code>&amp;</code>を取って左 1 シフトと対応する．</p>
+<blockquote>
+<p>x + y = (x XOR y) + 2 * (x AND y)</p>
+</blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
     <span style="color:#75715e"># 32 bits integer max</span>
     MAX <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x7FFFFFFF</span>
