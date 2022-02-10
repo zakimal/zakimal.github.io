@@ -5,12 +5,52 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Feb 2022 17:06:32 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Feb 2022 17:09:58 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Happy Number</title>
+      <link>/ja/post/happy-number/</link>
+      <pubDate>Thu, 10 Feb 2022 17:09:58 +0900</pubDate>
+      <guid>/ja/post/happy-number/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;happy number&lt;/code&gt;を次のように定義する&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;各桁の二乗和を取る操作を繰り返したときに繰り返し同じ数字が登場することなく&lt;code&gt;1&lt;/code&gt;で終わる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;与えられた正の整数&lt;code&gt;n&lt;/code&gt;が&lt;code&gt;happy number&lt;/code&gt;であるかどうか判定せよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;n = 19
+1^2 + 9^2 = 82
+8^2 + 2^2 = 68
+6^2 + 8^2 = 100
+1^2 + 0^2 + 0^2 = 1 -&amp;gt; 19 is happy number!
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;「各桁の二乗和を取る操作」での入出力の関係は隣接リストのように表現できて，そのリストが循環を含むのかを判定すれば良い．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;1&lt;/code&gt;は各桁の二乗和を取っても&lt;code&gt;1&lt;/code&gt;に戻ることに注意．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isHappy&lt;/span&gt;(self, n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;calc_next&lt;/span&gt;(n):
+            total &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n:
+                n, d &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; divmod(n, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;)
+                total &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; d &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; d
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; total
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; n
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calc_next(n) &lt;span style=&#34;color:#75715e&#34;&gt;# ループの条件を下のようにするためにfasterを1つ進めておく&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; slower &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+            slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calc_next(slower)
+            faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; calc_next(calc_next(faster))　
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/happy-number/&#34;&gt;https://leetcode.com/problems/happy-number/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Linked List Cycle</title>
