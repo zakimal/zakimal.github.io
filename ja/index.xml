@@ -5,12 +5,54 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Feb 2022 17:09:58 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Feb 2022 17:23:09 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Find Target Indices After Sorting Array</title>
+      <link>/ja/post/find-target-indices-after-sorting-array/</link>
+      <pubDate>Thu, 10 Feb 2022 17:23:09 +0900</pubDate>
+      <guid>/ja/post/find-target-indices-after-sorting-array/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;配列&lt;code&gt;nums&lt;/code&gt;と整数&lt;code&gt;target&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;を昇順に整列したときに&lt;code&gt;nums[i] == target&lt;/code&gt;を満たすインデックス&lt;code&gt;i&lt;/code&gt;をすべて求めよ．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 2, 5, 2, 3], target = 2
+-&amp;gt; sorted nums = [1, 2, 2, 3, 5] -&amp;gt; ans = [1, 2]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法1&#34;&gt;解法1&lt;/h2&gt;
+&lt;p&gt;言われたとおりにソートしてから位置を探す．ソートに時間がかかって$O(n \log n)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;targetIndices&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(i)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;解法2&#34;&gt;解法2&lt;/h2&gt;
+&lt;p&gt;整列後の配列に置いて，&lt;code&gt;target&lt;/code&gt;と等しい要素の位置を決定するのに，&lt;code&gt;target&lt;/code&gt;より大きい要素が整列されている必要はない．「&lt;code&gt;target&lt;/code&gt;より小さい値が何個あるのか」と「&lt;code&gt;target&lt;/code&gt;と等しい値が何個あるのか」で答えは求まる．&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nums&lt;/code&gt;を端から一舐めすれば十分で$O(n)$&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;targetIndices&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        less &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; target:
+                less &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(cnt):
+            ans&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(less &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; i)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/find-target-indices-after-sorting-array/&#34;&gt;https://leetcode.com/problems/find-target-indices-after-sorting-array/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Happy Number</title>
