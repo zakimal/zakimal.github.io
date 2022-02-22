@@ -5,12 +5,58 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Tue, 22 Feb 2022 20:26:52 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Tue, 22 Feb 2022 20:37:10 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Middle of the Linked List</title>
+      <link>/ja/post/middle-of-the-linked-list/</link>
+      <pubDate>Tue, 22 Feb 2022 20:37:10 +0900</pubDate>
+      <guid>/ja/post/middle-of-the-linked-list/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;次のように定義される連結リストが与えられたときに，真ん中の値はなにか計算する関数を書け．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;例&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;head = [1] -&amp;gt; [2] -&amp;gt; [3] -&amp;gt; [4] -&amp;gt; [5],        ans = [3] -&amp;gt; [4] -&amp;gt; [5]
+head = [1] -&amp;gt; [2] -&amp;gt; [3] -&amp;gt; [4] -&amp;gt; [5] -&amp;gt; [6], ans = [4] -&amp;gt; [5] -&amp;gt; [6]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;🐰と🐢テクニック
+&lt;ul&gt;
+&lt;li&gt;二倍の速度で動く🐰を端まで走らせると🐢は真ん中ぐらいにまだいる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;while&lt;/code&gt;のループの条件は，ループ内部の実行時エラーが発生しない条件を考えれば良い．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;middleNode&lt;/span&gt;(self, head: Optional[ListNode]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; head &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; []
+        faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+        slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; faster &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            faster &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; faster&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+            slower &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; slower&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; slower
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/middle-of-the-linked-list/&#34;&gt;https://leetcode.com/problems/middle-of-the-linked-list/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Remove Linked List Elements</title>
@@ -20,10 +66,10 @@
       <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
 &lt;p&gt;次のように定義される連結リストに対して，指定された要素を削除する関数を書け．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for singly-linked list.&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# class ListNode:&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, next=None):&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#         self.next = next&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ListNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, next&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; next
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;関数の引数と返り値は次の通り．&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;removeElements&lt;/span&gt;(self, head: Optional[ListNode], val: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[ListNode]:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;pass&lt;/span&gt;

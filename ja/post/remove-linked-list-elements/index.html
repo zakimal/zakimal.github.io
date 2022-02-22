@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. # class ListNode: # def __init__(self, val=0, next=None): # self.val = val # self.next = next 関数の引数と返り値">
+  <meta name="description" content="問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. class ListNode: def __init__(self, val=0, next=None): self.val = val self.next = next 関数の引数と返り値は次の通">
 
   
   <link rel="alternate" hreflang="ja-JP" href="/ja/post/remove-linked-list-elements/">
@@ -113,7 +113,7 @@
   <meta property="og:site_name" content="zak">
   <meta property="og:url" content="/ja/post/remove-linked-list-elements/">
   <meta property="og:title" content="Remove Linked List Elements | zak">
-  <meta property="og:description" content="問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. # class ListNode: # def __init__(self, val=0, next=None): # self.val = val # self.next = next 関数の引数と返り値"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:description" content="問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. class ListNode: def __init__(self, val=0, next=None): self.val = val self.next = next 関数の引数と返り値は次の通"><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
     
@@ -165,7 +165,7 @@
       "url": "/img/zak.gif"
     }
   },
-  "description": "問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. # class ListNode: # def __init__(self, val=0, next=None): # self.val = val # self.next = next 関数の引数と返り値"
+  "description": "問題 次のように定義される連結リストに対して，指定された要素を削除する関数を書け． # Definition for singly-linked list. class ListNode: def __init__(self, val=0, next=None): self.val = val self.next = next 関数の引数と返り値は次の通"
 }
 </script>
 
@@ -485,10 +485,10 @@
       <h2 id="問題">問題</h2>
 <p>次のように定義される連結リストに対して，指定された要素を削除する関数を書け．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for singly-linked list.</span>
-<span style="color:#75715e"># class ListNode:</span>
-<span style="color:#75715e">#     def __init__(self, val=0, next=None):</span>
-<span style="color:#75715e">#         self.val = val</span>
-<span style="color:#75715e">#         self.next = next</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ListNode</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, val<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, next<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>val <span style="color:#f92672">=</span> val
+        self<span style="color:#f92672">.</span>next <span style="color:#f92672">=</span> next
 </code></pre></div><p>関数の引数と返り値は次の通り．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">removeElements</span>(self, head: Optional[ListNode], val: int) <span style="color:#f92672">-&gt;</span> Optional[ListNode]:
     <span style="color:#66d9ef">pass</span>
