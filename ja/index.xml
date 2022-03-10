@@ -5,12 +5,574 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Mar 2022 14:08:57 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 10 Mar 2022 21:19:51 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Morris Traversal</title>
+      <link>/ja/post/morris-traversal/</link>
+      <pubDate>Thu, 10 Mar 2022 21:19:51 +0900</pubDate>
+      <guid>/ja/post/morris-traversal/</guid>
+      <description>&lt;h2 id=&#34;二分木上の探索&#34;&gt;二分木上の探索&lt;/h2&gt;
+&lt;p&gt;次のように定義される二分木を考える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;class: TreeNode:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, left&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None, right&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ある二分木&lt;code&gt;root&lt;/code&gt;が与えられたときに，その木を構成する頂点の全探索は「深さ優先探索 Depth-First Search（DFS）」と「幅優先探索 Breadth-First Search（BFS）」に大別される．&lt;/p&gt;
+&lt;h3 id=&#34;深さ優先探索-depth-first-searchdfs&#34;&gt;深さ優先探索 Depth-First Search（DFS）&lt;/h3&gt;
+&lt;p&gt;二分木における深さ優先探索は「今いる頂点を調査して，その子供の頂点にも同じ調査を繰り返すように走査」する．&lt;/p&gt;
+&lt;p&gt;今いる頂点と左右の子供の頂点をどういう順番で走査するのかで名前が付いている．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;行きがけ順（pre-order traversal）
+&lt;ul&gt;
+&lt;li&gt;まず根ノードを見て，続けて左部分木を行きがけ順で走査，最後に右部分機を行きがけ順で走査&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;通りがけ順（in-order traversal）
+&lt;ul&gt;
+&lt;li&gt;まず左部分機を通りがけ順で走査，続けて根ノードを見て，最後に右部分機を行きがけ順で走査&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;帰りがけ順（post-order traversal）
+&lt;ul&gt;
+&lt;li&gt;まず左部分機を通りがけ順で走査，続けて右部分機を行きがけ順で走査，最後に根ノードを見て&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;再帰関数で簡単に実装することができる．stackを用いても実装可能．&lt;/p&gt;
+&lt;p&gt;行きがけ順を再帰関数で実装すると&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;preorder&lt;/span&gt;(root):
+    process(root)
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;行きがけ順をstackを用いて実装すると&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;preorder&lt;/span&gt;(root):
+    stack &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [root]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(stack) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop()
+        process(node)
+        stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+        stack&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;通りがけ順を再帰関数で実装すると&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inorder&lt;/span&gt;(root):
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+    process(root)
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;帰りがけ順を再帰関数で実装すると&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;inorder&lt;/span&gt;(root):
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+    preorder(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+    process(root)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;幅優先探索-breadth-first-searchbfs&#34;&gt;幅優先探索 Breadth-First Search（BFS）&lt;/h3&gt;
+&lt;p&gt;二分木における幅優先探索は「深さが同じ頂点群を，浅い順に走査」する．queueを用いると簡単に実装できる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bfs&lt;/span&gt;(root):
+    queue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [root]
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; len(queue) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+        node &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;pop(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+        process(node)
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;morris-traversal&#34;&gt;Morris Traversal&lt;/h2&gt;
+&lt;p&gt;再帰関数による（行きがけ順｜通りがけ順｜帰りがけ順）DFS，stackによる（行きがけ順）DFS，queueによるBFSは，木を構成する頂点の総数が$n$であるとして，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;時間計算量$O(n)$
+&lt;ul&gt;
+&lt;li&gt;$n$頂点全部を訪問するから&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;空間計算量$O(\log n)$
+&lt;ul&gt;
+&lt;li&gt;木の高さ（=$\log n$）分call stack/stack/queueが伸びるから&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Morris traversalアルゴリズムは時間計算量$O(n)$，空間計算量を$O(1)$で木を構成する頂点を通りがけ順で全探索するアルゴリズム．&lt;/p&gt;
+&lt;p&gt;「左部分木の左端の葉ノードに到達するまでに間に，左部分木の右端葉ノードから通りがけ順で直後の頂点へのポインタを（右の子供として）張りながら木を降りていって，降りきれなくなったタイミングでひたすら右の子供をたどっていくと，通りがけ順になってる」というもの．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-0.png&#34; data-caption=&#34;Morris Traversalの概要&#34;&gt;
+&lt;img src=&#34;morris-0.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Morris Traversalの概要
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;次に示す具体例で動作を追っていく．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-1.png&#34; &gt;
+&lt;img src=&#34;morris-1.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;まず頂点&lt;code&gt;0&lt;/code&gt;から走査を始める．&lt;code&gt;0&lt;/code&gt;には左部分木があるので，&lt;code&gt;0&lt;/code&gt;の左部分木の右端葉を計算すると今回は頂点&lt;code&gt;9&lt;/code&gt;．&lt;code&gt;9&lt;/code&gt;の右の子供として&lt;code&gt;0&lt;/code&gt;へのポインタを張っておく．このポインタを後でたどることで行きがけ順を達成する．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-2.png&#34; &gt;
+&lt;img src=&#34;morris-2.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code&gt;0&lt;/code&gt;の左部分木へ降りていき，降り立った頂点を根とした木の左部分木が存在するる限り同じように「左部分木の右端葉を計算して，それの右の子供として根へのポインタを張る」ことを繰り返す．&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-3.png&#34; &gt;
+&lt;img src=&#34;morris-3.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-4.png&#34; &gt;
+&lt;img src=&#34;morris-4.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-5.png&#34; &gt;
+&lt;img src=&#34;morris-5.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;左部分機が存在しない，つまり左端の葉まで降りたら，そこが行きがけ順の一番最初の頂点なので処理をする．今回は頂点&lt;code&gt;7&lt;/code&gt;がそれ．頂点&lt;code&gt;7&lt;/code&gt;を処理したら，さっき張った&lt;code&gt;7&lt;/code&gt;の&lt;strong&gt;右子ポインタ&lt;/strong&gt;を使って遷移する．このポインタは行きがけ順における左部分期の右端葉とその直後の頂点を結んでいるので正しく行きがけ順に遷移することになる．今回の例だと&lt;code&gt;3&lt;/code&gt;へ赤いポインタを使って遷移することになる．このとき，遷移しながら赤いポインタを剥がす，具体的には&lt;code&gt;7&lt;/code&gt;の右子ポインタに&lt;code&gt;None&lt;/code&gt;をセットする．このアルゴリズムでは「ポインタを張りながら遷移して不要になったらすぐ剥がす」という挙動になっている．全部張ってから剥がすのではないという点に注意．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-6.png&#34; &gt;
+&lt;img src=&#34;morris-6.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;右子ポインタで次へ行く次へ行く．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-7.png&#34; &gt;
+&lt;img src=&#34;morris-7.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;左子ポインタがあるなら，左部分木が存在するので，左部分期の右端葉頂点を見つけて行きがけ順になるためのポインタを張る作業（頂点&lt;code&gt;0&lt;/code&gt;/&lt;code&gt;1&lt;/code&gt;/&lt;code&gt;3&lt;/code&gt;でやってきたのと同じこと）をやる．&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-8.png&#34; &gt;
+&lt;img src=&#34;morris-8.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;左子ポインタがないということは左部分木が存在しないので，右子ポインタをたどる．&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-9.png&#34; &gt;
+&lt;img src=&#34;morris-9.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-10.png&#34; &gt;
+&lt;img src=&#34;morris-10.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-11.png&#34; &gt;
+&lt;img src=&#34;morris-11.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-12.png&#34; &gt;
+&lt;img src=&#34;morris-12.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-13.png&#34; &gt;
+&lt;img src=&#34;morris-13.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-14.png&#34; &gt;
+&lt;img src=&#34;morris-14.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-15.png&#34; &gt;
+&lt;img src=&#34;morris-15.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-16.png&#34; &gt;
+&lt;img src=&#34;morris-16.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;morris-17.png&#34; &gt;
+&lt;img src=&#34;morris-17.png&#34; alt=&#34;&#34; &gt;&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;これを実装すると次のようになる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;morris&lt;/span&gt;(root):
+    curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; curr &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            &lt;span style=&#34;color:#75715e&#34;&gt;# 左部分木が存在するので，左部分期の右端葉ノードを探しに行く&lt;/span&gt;
+            prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; curr:
+                prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr &lt;span style=&#34;color:#75715e&#34;&gt;# 右子ポインタで行きがけ順直後の頂点を登録（赤矢印）&lt;/span&gt;
+                curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#75715e&#34;&gt;# 左部分木へ降りていく&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# すでに赤矢印が張ってあるということは左部分木は見終わったということになる&lt;/span&gt;
+                prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None &lt;span style=&#34;color:#75715e&#34;&gt;# 赤矢印を剥がす&lt;/span&gt;
+                process(curr)
+                curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#75715e&#34;&gt;# 左部分木を見終わったので右部分木へ降りていく&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;# curr.left is None&lt;/span&gt;
+            process(curr)
+            curr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; curr&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#75715e&#34;&gt;# 左部分木が存在しないので右部分木へ降りていく&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;やや複雑．これを何も見ずに書けと要求されるとしんどい．&lt;/p&gt;
+&lt;h2 id=&#34;練習問題&#34;&gt;練習問題&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/sum-of-left-leaves/&#34;&gt;https://leetcode.com/problems/sum-of-left-leaves/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Morris traversal：空間計算量O(1)で全頂点をin-orderで探索する．イメージとしては左部分木の右端から根への一時的なポインタを作りながら木を下に降りていき，葉ノードに到達したらそこから右へ右へ進んでいくとin-orderになっている．右へ右へ進む途中で一時的に張ったポインタを消しながら進む．&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sumOfLeftLeaves&lt;/span&gt;(self, root: TreeNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        ans &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None:
+                prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; None &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; root:
+                    prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:  &lt;span style=&#34;color:#75715e&#34;&gt;# in-order順でrootの直前のノードがprevになっている&lt;/span&gt;
+                    prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root  &lt;span style=&#34;color:#75715e&#34;&gt;# 一時的なリンクを張る&lt;/span&gt;
+                    root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                    prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None  &lt;span style=&#34;color:#75715e&#34;&gt;# ここで一時的に張ったリンクを消してる&lt;/span&gt;
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; prev &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                        ans &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; prev&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+                    root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:  &lt;span style=&#34;color:#75715e&#34;&gt;# ここに入り込む時点でrootは左端の葉ノード&lt;/span&gt;
+                root &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Peak Index in a Mountain Array</title>
