@@ -516,7 +516,7 @@
 
         <span style="color:#66d9ef">return</span> abs(height(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">-</span> height(root<span style="color:#f92672">.</span>right)) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>isBalanced(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>isBalanced(root<span style="color:#f92672">.</span>right)
 </code></pre></div><p>ある部分木で<code>height(root)</code>が$O(n)$回呼ばれるが，それを全頂点で行うことになって，全体としては$O(n^2)$の計算量がかかる．</p>
-<p>平衡していない木を部分木として持つ木は平衡していないので，高さを計算している途中で全体が平衡しているかは決まる．これをうまく返していけば全体の計算量を$O(n)$にできる．</p>
+<p>平衡していない木を部分木として持つ木は平衡していないので，これをうまく返していけば全体の計算量を$O(n)$にできる．</p>
 <p>下の実装では，<code>height(root)</code>で<code>root</code>を根とする部分木の左右の部分木の高さを計算するが，高さの差が1より大きい場合は<code>-1</code>を返すことでそれを表現している．<code>height(root)</code>の結果として<code>-1</code>が返った瞬間に無駄な計算をせず平衡していないことを返せる．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Time: O(n)</span>
 <span style="color:#75715e"># Definition for a binary tree node.</span>
