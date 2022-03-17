@@ -5,12 +5,86 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Fri, 11 Mar 2022 17:38:17 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Thu, 17 Mar 2022 18:50:04 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Balanced Binary Tree</title>
+      <link>/ja/post/balanced-binary-tree/</link>
+      <pubDate>Thu, 17 Mar 2022 18:50:04 +0900</pubDate>
+      <guid>/ja/post/balanced-binary-tree/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;次のように定義される二分木を考える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TreeNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, left&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None, right&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ある二分木が与えられたときに，その二分木が平衡している（balanced）かを判定せよ．なお二分木が並行しているとは次を満たすことと定義する．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二分木に含まれるどの頂点を根としたときも，その左右の部分木の高さの差が1以下である&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;木の高さは再帰的に計算できるので，それをすべての頂点で確認することで定義通りに判定することができる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isBalanced&lt;/span&gt;(self, root: TreeNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;(root):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            left_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            right_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; max(left_height, right_height)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; abs(height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isBalanced(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left) &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;isBalanced(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ある部分木で&lt;code&gt;height(root)&lt;/code&gt;が$O(n)$回呼ばれるが，それを全頂点で行うことになって，全体としては$O(n^2)$の計算量がかかる．&lt;/p&gt;
+&lt;p&gt;平衡していない木を部分木として持つ木は平衡していないので，高さを計算している途中で全体が平衡しているかは決まる．これをうまく返していけば全体の計算量を$O(n)$にできる．&lt;/p&gt;
+&lt;p&gt;下の実装では，&lt;code&gt;height(root)&lt;/code&gt;で&lt;code&gt;root&lt;/code&gt;を根とする部分木の左右の部分木の高さを計算するが，高さの差が1より大きい場合は&lt;code&gt;-1&lt;/code&gt;を返すことでそれを表現している．&lt;code&gt;height(root)&lt;/code&gt;の結果として&lt;code&gt;-1&lt;/code&gt;が返った瞬間に無駄な計算をせず平衡していないことを返せる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(n)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isBalanced&lt;/span&gt;(self, root: TreeNode) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; bool:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; True
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;(root):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            left_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; left_height &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            right_height &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; height(root&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; right_height &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; abs(left_height &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; right_height) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; max(left_height, right_height)
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; height(root) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/balanced-binary-tree/&#34;&gt;https://leetcode.com/problems/balanced-binary-tree/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Diameter of Binary Tree</title>
