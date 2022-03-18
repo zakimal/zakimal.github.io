@@ -28,12 +28,10 @@
   
     
   
-  <meta name="description" content="zak&#39;s blog">
+  <meta name="description" content="問題 次のように定義される二分木が与えられたとき，その木の深さの最大値（根から葉までの距離の最大値）を求めよ． # Definition for a binary tree node. class TreeNode: def __init__(self, val=0, left=None, right=None): self.val =">
 
   
-  <link rel="alternate" hreflang="en" href="/en/">
-  
-  <link rel="alternate" hreflang="ja-JP" href="/ja/">
+  <link rel="alternate" hreflang="ja-JP" href="/ja/post/maximum-depth-of-binary-tree/">
 
   
 
@@ -93,14 +91,12 @@
 
 
   
-  <link rel="alternate" href="/ja/index.xml" type="application/rss+xml" title="zak">
-  
 
   <link rel="manifest" href="/ja/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/ja/">
+  <link rel="canonical" href="/ja/post/maximum-depth-of-binary-tree/">
 
   
   
@@ -115,29 +111,65 @@
   <meta property="twitter:creator" content="@zak74702675">
   
   <meta property="og:site_name" content="zak">
-  <meta property="og:url" content="/ja/">
-  <meta property="og:title" content="zak">
-  <meta property="og:description" content="zak&#39;s blog"><meta property="og:image" content="/img/icon-1080.png">
+  <meta property="og:url" content="/ja/post/maximum-depth-of-binary-tree/">
+  <meta property="og:title" content="Maximum Depth of Binary Tree | zak">
+  <meta property="og:description" content="問題 次のように定義される二分木が与えられたとき，その木の深さの最大値（根から葉までの距離の最大値）を求めよ． # Definition for a binary tree node. class TreeNode: def __init__(self, val=0, left=None, right=None): self.val ="><meta property="og:image" content="/img/icon-1080.png">
   <meta property="twitter:image" content="/img/icon-1080.png"><meta property="og:locale" content="ja-JP">
   
-    <meta property="og:updated_time" content="2022-03-18T16:04:42&#43;09:00">
+    
+      <meta property="article:published_time" content="2022-03-18T16:04:42&#43;09:00">
+    
+    <meta property="article:modified_time" content="2022-03-18T16:04:42&#43;09:00">
   
 
   
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/ja/post/maximum-depth-of-binary-tree/"
   },
-  "url": "/"
+  "headline": "Maximum Depth of Binary Tree",
+  
+  "datePublished": "2022-03-18T16:04:42+09:00",
+  "dateModified": "2022-03-18T16:04:42+09:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "尾崎 耀一 (@zak)"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "zak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/zak.gif"
+    }
+  },
+  "description": "問題 次のように定義される二分木が与えられたとき，その木の深さの最大値（根から葉までの距離の最大値）を求めよ． # Definition for a binary tree node. class TreeNode: def __init__(self, val=0, left=None, right=None): self.val ="
 }
 </script>
 
+  
 
   
 
@@ -151,11 +183,11 @@
 
 
 
-  <title>zak</title>
+  <title>Maximum Depth of Binary Tree | zak</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -355,21 +387,6 @@
         
 
         
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i><span>日本語</span>
-          </a>
-          <ul class="dropdown-menu">
-            
-            <li class="dropdown-item my-0 py-0 mx-0 px-0">
-              <a href="/en/" data-target="/en/">
-                <span>English</span>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
-        
 
         
 
@@ -380,310 +397,9 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-<span class="js-widget-page d-none"></span>
-
-
-
+  <article class="article">
 
   
-
-
-
-
-
-
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="about" class="home-section wg-about   "  >
-    <div class="container">
-      
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-<div class="row">
-  <div class="col-12 col-lg-4">
-    <div id="profile">
-
-      
-      
-      <img class="portrait" src="/ja/authors/admin/avatar_hub69dcb66e1cbfdb18e29d9299880eec2_11573_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
-      
-
-      <div class="portrait-title">
-        <h2>尾崎 耀一 (@zak)</h2>
-        <h3>大学院 修士2年 (修士課程)</h3>
-
-        
-        <h3>
-          <a href="https://www.inl.ics.keio.ac.jp/" target="_blank" rel="noopener">
-          <span>慶應義塾大学 理工学部研究科 情報工学専修 寺岡・金子研究室</span>
-          </a>
-        </h3>
-        
-      </div>
-
-      <ul class="network-icon" aria-hidden="true">
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="/ja/#contact" >
-            <i class="fas fa-envelope big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
-            <i class="fab fa-twitter big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://github.com/zakimal" target="_blank" rel="noopener">
-            <i class="fab fa-github big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
-            <i class="fab fa-amazon big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
-            <i class="fab fa-linkedin big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="/ja/files/cv-ja.pdf" >
-            <i class="ai ai-cv big-icon"></i>
-          </a>
-        </li>
-        
-      </ul>
-
-    </div>
-  </div>
-  <div class="col-12 col-lg-8">
-
-    
-    <h1>自己紹介</h1>
-
-    <p>はじめまして！zak です．</p>
-
-
-    <div class="row">
-
-      
-      <div class="col-md-5">
-        <h3>興味・関心</h3>
-        <ul class="ul-interests">
-          
-          <li>分散システム</li>
-          
-          <li>インターネット</li>
-          
-          <li>グラフ理論</li>
-          
-          <li>ブロックチェーン</li>
-          
-          <li>暗号技術</li>
-          
-        </ul>
-      </div>
-      
-
-      
-      <div class="col-md-7">
-        <h3>学歴</h3>
-        <ul class="ul-edu fa-ul">
-          
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">学士 (工学), 2020</p>
-              <p class="institution">慶應義塾大学 理工学部</p>
-            </div>
-          </li>
-          
-        </ul>
-      </div>
-      
-
-    </div>
-  </div>
-</div>
-
-    </div>
-  </section>
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="posts" class="home-section wg-pages   "  >
-    <div class="container">
-      
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -698,38 +414,13 @@
 
   
 
-
-
-
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Maximum Depth of Binary Tree</h1>
 
   
-
-
-<div class="row">
-  <div class="col-12 col-lg-4 section-heading">
-    <h1>最近の投稿</h1>
-    <p>研究の話・技術の話から<br>好きなもの・好きなことの話まで<br>ざっくばらんにお届けします！</p>
-  </div>
-  <div class="col-12 col-lg-8">
-
-    
-
-    
-      
-        
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
 
   
     
@@ -768,255 +459,153 @@
 
 </div>
 
-  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/maximum-depth-of-binary-tree/">Maximum Depth of Binary Tree</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 次のように定義される二分木が与えられたとき，その木の深さの最大値（根から葉までの距離の最大値）を求めよ． # Definition for a binary tree node. class TreeNode: def __init__(self, val=0, left=None, right=None): self.val =</p>
-  </div>
-  
-
-  
-
 </div>
 
-      
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="問題">問題</h2>
+<p>次のように定義される二分木が与えられたとき，その木の深さの最大値（根から葉までの距離の最大値）を求めよ．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TreeNode</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, val<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, left<span style="color:#f92672">=</span>None, right<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>val <span style="color:#f92672">=</span> val
+        self<span style="color:#f92672">.</span>left <span style="color:#f92672">=</span> left
+        self<span style="color:#f92672">.</span>right <span style="color:#f92672">=</span> right
+</code></pre></div><h2 id="解法">解法</h2>
+<p>求める深さの最大値は<code>1 + max(左部分木の深さの最大値, 右部分木の深さの最大値)</code>．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
+<span style="color:#75715e"># class TreeNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, left=None, right=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.left = left</span>
+<span style="color:#75715e">#         self.right = right</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maxDepth</span>(self, root: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> int:
+        <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+        left_depth <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>maxDepth(root<span style="color:#f92672">.</span>left)
+        right_depth <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>maxDepth(root<span style="color:#f92672">.</span>right)
+        <span style="color:#66d9ef">return</span> max(left_depth, right_depth) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/submissions/">https://leetcode.com/problems/maximum-depth-of-binary-tree/submissions/</a></li>
+</ul>
+
+    </div>
+
     
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
       
         
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/ja/post/maximum-depth-of-binary-tree/&amp;text=Maximum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
     
       
-    
-    Thu, Mar 17, 2022
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/lowest-common-ancestor-of-a-binary-tree/">Lowest Common Ancestor of a Binary Tree</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 二分木rootと木に含まれる2頂点p/qが与えられる．pとqの最小木共通先祖（Lowest Common Ancestor）を求めよ． 解法 rootが「</p>
-  </div>
-  
-
-  
-
-</div>
-
       
-    
       
         
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/ja/post/maximum-depth-of-binary-tree/&amp;t=Maximum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
     
       
-    
-    Thu, Mar 17, 2022
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/lowest-common-ancestor-of-a-binary-search-tree/">Lowest Common Ancestor of a Binary Search Tree</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 二分探索木rootとその木に含まれる2頂点p/qが与えられる．pとqの共通の先祖のうち，高さが最も低いもの（最小共通祖先：Lowest Common</p>
-  </div>
-  
-
-  
-
-</div>
-
       
-    
       
         
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="card-simple">
-
-  
-    
-
-
-<div class="article-metadata">
-
-  
-  
-
-  
-  <span class="article-date">
-    
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Maximum%20Depth%20of%20Binary%20Tree&amp;body=/ja/post/maximum-depth-of-binary-tree/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
     
       
-    
-    Thu, Mar 17, 2022
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    2 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/balanced-binary-tree/">Balanced Binary Tree</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 次のように定義される二分木を考える． # Definition for a binary tree node. class TreeNode: def __init__(self, val=0, left=None, right=None): self.val = val self.left = left self.right = right ある二分木が与えられたときに，その二分木が平衡している</p>
-  </div>
-  
-
-  
-
-</div>
-
       
-    
       
         
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/ja/post/maximum-depth-of-binary-tree/&amp;title=Maximum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Maximum%20Depth%20of%20Binary%20Tree%20/ja/post/maximum-depth-of-binary-tree/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/ja/post/maximum-depth-of-binary-tree/&amp;title=Maximum%20Depth%20of%20Binary%20Tree" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
 
 
 
@@ -1029,410 +618,160 @@
   
 
 
-<div class="card-simple">
 
+
+
+
+  
+  
   
     
-
-
-<div class="article-metadata">
-
   
   
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/ja/authors/admin/avatar_hub69dcb66e1cbfdb18e29d9299880eec2_11573_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
 
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">尾崎 耀一 (@zak)</a></h5>
+      <h6 class="card-subtitle">大学院 修士2年 (修士課程)</h6>
+      <p class="card-text">分散システムとかインターネット，ブロックチェーンに興味がある大学院生です．最近は分散グラフ処理系について研究しています．</p>
+      <ul class="network-icon" aria-hidden="true">
   
-  <span class="article-date">
+    
     
     
       
     
-    Fri, Mar 11, 2022
-  </span>
-  
-
-  
-
-  
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    1 分で読める
-  </span>
-  
-
-  
-  
-  
-
-  
-  
-
-</div>
-
-  
-
-  
-  
-  
-
-  <h3 class="article-title mb-1 mt-3">
-    <a href="/ja/post/diameter-of-binary-tree/">Diameter of Binary Tree</a>
-  </h3>
-
-  
-  <div class="article-style">
-    <p>問題 次のように定義される二分木を考える． class TreeNode: def __init__(self, val=0, left=None, right=None): self.val = val self.left = left self.right = right 二分木の直径を計算せよ． 解法 二分木を根を中心に左右に引っ張るイメージ</p>
-  </div>
-  
-
-  
-
-</div>
-
+    
+    
+    
+    
       
     
-
-    
-    <div class="see-all">
-      <a href="/ja/post/">
-        投稿一覧
-        <i class="fas fa-angle-right"></i>
+    <li>
+      <a href="/ja/#contact" >
+        <i class="fas fa-envelope"></i>
       </a>
-    </div>
+    </li>
+  
     
-
-  </div>
-</div>
-
-    </div>
-  </section>
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="tags" class="home-section wg-tag-cloud   "  >
-    <div class="container">
-      
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-<div class="row">
-  <div class="col-12 col-lg-4 section-heading">
-    <h1>タグ</h1>
     
-  </div>
-  <div class="col-12 col-lg-8">
     
-
+      
     
-
-      
-      
-      
-      
-      
-
-      <div class="tag-cloud">
-        
-          
-          
-          
-          <a href="/ja/tags/abc/" style="font-size:3.3rem">ABC</a>
-        
-          
-          
-          
-          <a href="/ja/tags/activitypub/" style="font-size:0.7rem">ActivityPub</a>
-        
-          
-          
-          
-          <a href="/ja/tags/api/" style="font-size:0.7rem">API</a>
-        
-          
-          
-          
-          <a href="/ja/tags/atcoder/" style="font-size:4.6000000000000005rem">AtCoder</a>
-        
-          
-          
-          
-          <a href="/ja/tags/bfs/" style="font-size:0.7rem">BFS</a>
-        
-          
-          
-          
-          <a href="/ja/tags/c&#43;&#43;/" style="font-size:3.718506523353571rem">C&#43;&#43;</a>
-        
-          
-          
-          
-          <a href="/ja/tags/channel/" style="font-size:2rem">Channel</a>
-        
-          
-          
-          
-          <a href="/ja/tags/competitive-programming/" style="font-size:3.3rem">Competitive Programming</a>
-        
-          
-          
-          
-          <a href="/ja/tags/cpp/" style="font-size:3.3rem">cpp</a>
-        
-          
-          
-          
-          <a href="/ja/tags/cryptography/" style="font-size:2rem">Cryptography</a>
-        
-          
-          
-          
-          <a href="/ja/tags/github/" style="font-size:2rem">GitHub</a>
-        
-          
-          
-          
-          <a href="/ja/tags/golang/" style="font-size:3.718506523353571rem">Golang</a>
-        
-          
-          
-          
-          <a href="/ja/tags/graph/" style="font-size:2rem">Graph</a>
-        
-          
-          
-          
-          <a href="/ja/tags/memo/" style="font-size:2.7604512509375025rem">Memo</a>
-        
-          
-          
-          
-          <a href="/ja/tags/puzzle/" style="font-size:2.7604512509375025rem">puzzle</a>
-        
-          
-          
-          
-          <a href="/ja/tags/terminology/" style="font-size:2.7604512509375025rem">Terminology</a>
-        
-          
-          
-          
-          <a href="/ja/tags/tips/" style="font-size:2rem">Tips</a>
-        
-          
-          
-          
-          <a href="/ja/tags/%E5%85%A8%E6%8E%A2%E7%B4%A2/" style="font-size:2rem">全探索</a>
-        
-          
-          
-          
-          <a href="/ja/tags/%E7%AB%B6%E3%83%95%E3%83%AD/" style="font-size:5.0185065233535715rem">競プロ</a>
-        
-          
-          
-          
-          <a href="/ja/tags/%E7%AB%B6%E6%8A%80%E3%83%95%E3%83%AD%E3%82%AF%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%AF/" style="font-size:5.0185065233535715rem">競技プログラミング</a>
-        
-      </div>
     
-
-  </div>
-</div>
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/zakimal" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.amazon.jp/hz/wishlist/ls/1ZX30ER9D9I4X?ref_=wl_share" target="_blank" rel="noopener">
+        <i class="fab fa-amazon"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/ja/files/cv-ja.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
 
     </div>
-  </section>
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="contact" class="home-section wg-contact   "  >
-    <div class="container">
-      
-
-
-
-
-
-<div class="row contact-widget">
-  <div class="col-12 col-lg-4 section-heading">
-    <h1>お問い合わせ</h1>
-    
   </div>
-  <div class="col-12 col-lg-8">
-    
 
-    
 
-    
-    
-      
-      
-    
 
-    <div class="mb-3">
-      <form name="contact" method="POST" action="https://formspree.io/zak@inl.ics.keio.ac.jp">
-        <div class="form-group form-inline">
-          <label class="sr-only" for="inputName">Name</label>
-          <input type="text" name="name" class="form-control w-100" id="inputName" placeholder="Name" required>
-        </div>
-        <div class="form-group form-inline">
-          <label class="sr-only" for="inputEmail">Email</label>
-          <input type="email" name="email" class="form-control w-100" id="inputEmail" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="inputMessage">Message</label>
-          <textarea name="message" class="form-control" id="inputMessage" rows="5" placeholder="Message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-outline-primary px-3 py-2">Send</button>
-      </form>
-    </div>
-    
 
-    <ul class="fa-ul">
+<section id="comments">
+  
+    <script src="https://utteranc.es/client.js"
+        repo="zakimal/zakimal.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  
+</section>
 
-      
 
-      
 
-      
-      
 
-      
 
-      
 
-      
+  
+  
 
-      
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <i class="fa-li fab fa-twitter fa-2x" aria-hidden="true"></i>
-        <a href="https://twitter.com/zak74702675" target="_blank" rel="noopener">DM Me</a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <i class="fa-li fab fa-facebook fa-2x" aria-hidden="true"></i>
-        <a href="https://www.facebook.com/zakyoichi" target="_blank" rel="noopener">DM Me</a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <i class="fa-li fab fa-linkedin fa-2x" aria-hidden="true"></i>
-        <a href="https://www.linkedin.com/in/yoichi-ozaki-706760181/" target="_blank" rel="noopener">DM Me</a>
-      </li>
-      
 
-    </ul>
-
-    
 
   </div>
-</div>
-
-    </div>
-  </section>
-
-
+</article>
 
       
 
