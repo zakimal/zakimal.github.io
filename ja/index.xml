@@ -5,12 +5,72 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Fri, 18 Mar 2022 16:12:02 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Fri, 18 Mar 2022 16:38:58 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Merge Two Binary Trees</title>
+      <link>/ja/post/merge-two-binary-trees/</link>
+      <pubDate>Fri, 18 Mar 2022 16:38:58 +0900</pubDate>
+      <guid>/ja/post/merge-two-binary-trees/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;次のように定義される二分木を考える．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TreeNode&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, val&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, left&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None, right&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; val
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left
+        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2つの二分木&lt;code&gt;root1&lt;/code&gt;/&lt;code&gt;root2&lt;/code&gt;が与えられる．これらを重ねた結果得られる二分木を計算せよ．&lt;/p&gt;
+&lt;p&gt;例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   1         2         3
+ 3   2  +  1   3  =  4   5
+5           4   7   5 4   7
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mergeTree(root1, root2)&lt;/code&gt;は&lt;code&gt;root1&lt;/code&gt;を根とする木と&lt;code&gt;root2&lt;/code&gt;を寝とする木を重ねる関数
+&lt;ul&gt;
+&lt;li&gt;まず根（&lt;code&gt;root1&lt;/code&gt;/&lt;code&gt;root2&lt;/code&gt;）を重ねる&lt;/li&gt;
+&lt;li&gt;左右の部分木については再帰的に考えられる．つまり
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mergeTree(root1.left, root2.left)&lt;/code&gt;は&lt;code&gt;root1.left&lt;/code&gt;を根とする木と&lt;code&gt;root2.left&lt;/code&gt;を寝とする木を重ねる関数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mergeTree(root1.right, root2.right)&lt;/code&gt;は&lt;code&gt;root1.right&lt;/code&gt;を根とする木と&lt;code&gt;root2.right&lt;/code&gt;を寝とする木を重ねる関数&lt;/li&gt;
+&lt;li&gt;これらの結果が重ね終わった木の根の左右の部分木になってほしいのでつける．
+&lt;ul&gt;
+&lt;li&gt;ああなんて再帰的なんだ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeTrees&lt;/span&gt;(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Optional[TreeNode]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root1 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; root2 &lt;span style=&#34;color:#75715e&#34;&gt;# 相方がいなければ足さずににそのまま&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; root2 &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; None:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; root1 &lt;span style=&#34;color:#75715e&#34;&gt;# 相方がいなければ足さずにそのまま&lt;/span&gt;
+        root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;val
+        root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mergeTrees(root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left, root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;left)
+        root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mergeTrees(root1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right, root2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;right)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; root1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/merge-two-binary-trees/&#34;&gt;https://leetcode.com/problems/merge-two-binary-trees/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Path Sum</title>
