@@ -446,7 +446,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 分で読める
+    2 分で読める
   </span>
   
 
@@ -490,7 +490,7 @@
 <ul>
 <li>根から再帰的に値が一致しているかを確認</li>
 <li><code>isSubtree(root, subRoot)</code>: <code>root</code>を根として<code>subRoot</code>と重ねる</li>
-<li><code>check(s, t)</code>: <code>s</code>を根とする木と<code>t</code>を根とする木が重なるかを確認する</li>
+<li><code>is_same(s, t)</code>: <code>s</code>を根とする木と<code>t</code>を根とする木が重なるかを確認する</li>
 <li>計算量
 <ul>
 <li><code>root</code>の頂点数を$s$，<code>subRoot</code>の頂点数を$t$とすると，$O(s \times t)$</li>
@@ -506,20 +506,111 @@
 <span style="color:#75715e">#         self.left = left</span>
 <span style="color:#75715e">#         self.right = right</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: TreeNode, subRoot: TreeNode) <span style="color:#f92672">-&gt;</span> bool:
-        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(s, t):
-            <span style="color:#66d9ef">if</span> s <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> t <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
-                <span style="color:#66d9ef">return</span> s<span style="color:#f92672">.</span>val <span style="color:#f92672">==</span> t<span style="color:#f92672">.</span>val <span style="color:#f92672">and</span> check(s<span style="color:#f92672">.</span>left, t<span style="color:#f92672">.</span>left) <span style="color:#f92672">and</span> check(s<span style="color:#f92672">.</span>right, t<span style="color:#f92672">.</span>right)
-            <span style="color:#66d9ef">return</span> s <span style="color:#f92672">is</span> t
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> bool:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_same</span>(root1, root2):
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> True
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> False
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+                <span style="color:#66d9ef">return</span> False
+            <span style="color:#66d9ef">return</span> root1<span style="color:#f92672">.</span>val <span style="color:#f92672">==</span> root2<span style="color:#f92672">.</span>val <span style="color:#f92672">and</span> is_same(root1<span style="color:#f92672">.</span>left, root2<span style="color:#f92672">.</span>left) <span style="color:#f92672">and</span> is_same(root1<span style="color:#f92672">.</span>right, root2<span style="color:#f92672">.</span>right)
 
-        <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> subRoot <span style="color:#f92672">is</span> None:
+            <span style="color:#66d9ef">return</span> True
+        <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> subRoot <span style="color:#f92672">is</span> None:
             <span style="color:#66d9ef">return</span> False
-        <span style="color:#66d9ef">return</span> check(root, subRoot) <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>isSubtree(root<span style="color:#f92672">.</span>left, subRoot) <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>isSubtree(root<span style="color:#f92672">.</span>right, subRoot)
+        <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> subRoot <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            <span style="color:#66d9ef">return</span> False
+        <span style="color:#66d9ef">return</span> is_same(root, subRoot) <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>isSubtree(root<span style="color:#f92672">.</span>left, subRoot) <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>isSubtree(root<span style="color:#f92672">.</span>right, subRoot)
+</code></pre></div><ul>
+<li>上のやりかただと，すべての頂点について重なるかを根の方から調べていく．どんどん木を降りていくと過去に重ねたのと同じものを再度計算することになるのでそれを回避するともうチョット効率が良さそう．</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
+<span style="color:#75715e"># class TreeNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, left=None, right=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.left = left</span>
+<span style="color:#75715e">#         self.right = right</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> bool:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_same</span>(root1, root2):
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> True
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> False
+            <span style="color:#66d9ef">if</span> root1 <span style="color:#f92672">is</span> None <span style="color:#f92672">and</span> root2 <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+                <span style="color:#66d9ef">return</span> False
+            <span style="color:#66d9ef">return</span> root1<span style="color:#f92672">.</span>val <span style="color:#f92672">==</span> root2<span style="color:#f92672">.</span>val <span style="color:#f92672">and</span> is_same(root1<span style="color:#f92672">.</span>left, root2<span style="color:#f92672">.</span>left) <span style="color:#f92672">and</span> is_same(root1<span style="color:#f92672">.</span>right, root2<span style="color:#f92672">.</span>right)
+        result <span style="color:#f92672">=</span> False
+
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dfs</span>(root):
+            nonlocal result
+            <span style="color:#66d9ef">if</span> result:
+                <span style="color:#66d9ef">return</span>
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span>
+            <span style="color:#66d9ef">if</span> root<span style="color:#f92672">.</span>val <span style="color:#f92672">==</span> subRoot<span style="color:#f92672">.</span>val:
+                result <span style="color:#f92672">=</span> is_same(root, subRoot)
+            dfs(root<span style="color:#f92672">.</span>left)
+            dfs(root<span style="color:#f92672">.</span>right)
+        dfs(root)
+        <span style="color:#66d9ef">return</span> result
+</code></pre></div><ul>
+<li>木構造を文字列にエンコードして部分文字列に含まれるかを調べるやり方
+<ul>
+<li><code>[12, None, None]</code>と<code>[2, None, None]</code>のようなときに区別できるようにエンコードを注意する．
+<ul>
+<li>要するに<code>12-...</code>と<code>2-...</code>が区別できればいいので，<code>-12-...</code>と<code>-2-...</code>みたいに前になにかつけてやればいい</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
+<span style="color:#75715e"># class TreeNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, left=None, right=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.left = left</span>
+<span style="color:#75715e">#         self.right = right</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> bool:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode</span>(root):
+            <span style="color:#66d9ef">if</span> root <span style="color:#f92672">is</span> None:
+                <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;#&#34;</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> str(root<span style="color:#f92672">.</span>val) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> encode(root<span style="color:#f92672">.</span>left) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> encode(root<span style="color:#f92672">.</span>right) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span>
+        <span style="color:#66d9ef">return</span> encode(subRoot) <span style="color:#f92672">in</span> encode(root)
+</code></pre></div><ul>
+<li>上のエンコードするやり方を繰り返しで書き下すと次のように書ける</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
+<span style="color:#75715e"># class TreeNode:</span>
+<span style="color:#75715e">#     def __init__(self, val=0, left=None, right=None):</span>
+<span style="color:#75715e">#         self.val = val</span>
+<span style="color:#75715e">#         self.left = left</span>
+<span style="color:#75715e">#         self.right = right</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> bool:
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode</span>(root):
+            suspended <span style="color:#f92672">=</span> [root]
+            traversal <span style="color:#f92672">=</span> []
+            <span style="color:#66d9ef">while</span> len(suspended) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+                node <span style="color:#f92672">=</span> suspended<span style="color:#f92672">.</span>pop()
+                <span style="color:#66d9ef">if</span> node <span style="color:#f92672">is</span> None:
+                    traversal<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;#&#34;</span>)
+                    <span style="color:#66d9ef">continue</span>
+                <span style="color:#66d9ef">else</span>:
+                    traversal<span style="color:#f92672">.</span>append(str(node<span style="color:#f92672">.</span>val))
+                    suspended<span style="color:#f92672">.</span>append(node<span style="color:#f92672">.</span>left)
+                    suspended<span style="color:#f92672">.</span>append(node<span style="color:#f92672">.</span>right)
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span><span style="color:#f92672">.</span>join(traversal) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span>
+        <span style="color:#66d9ef">return</span> encode(subRoot) <span style="color:#f92672">in</span> encode(root)
 </code></pre></div><ul>
 <li><a href="https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E6%9C%A8">merkle tree</a>
 <ul>
-<li>木構造をハッシュ関数でまとめる</li>
+<li>木構造をマークルハッシュでまとめる</li>
 <li>ハッシュ関数が衝突しない限り正解</li>
+<li>やりすぎ</li>
 <li>計算量
 <ul>
 <li><code>root</code>の頂点数を$s$，<code>subRoot</code>の頂点数を$t$とすると，$O(s + t)$</li>
@@ -535,7 +626,7 @@
 <span style="color:#75715e">#         self.left = left</span>
 <span style="color:#75715e">#         self.right = right</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: TreeNode, subRoot: TreeNode) <span style="color:#f92672">-&gt;</span> bool:
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isSubtree</span>(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) <span style="color:#f92672">-&gt;</span> bool:
         <span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
         <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_hash</span>(x):
             S <span style="color:#f92672">=</span> sha256()
