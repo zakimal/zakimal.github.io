@@ -493,8 +493,15 @@
 </code></pre></div><p>二分木<code>root</code>が与えられたとき，これを次のようなルールに基づいて文字列に変換する処理を書け．</p>
 <ul>
 <li><code>root.val</code> <code>(左部分木)</code> <code>(右部分木)</code></li>
-<li>ただし，空の木については空文字に変換するものとする</li>
-<li>ただし，左部分木が空の場合は<code>()</code>を許す</li>
+<li>ただし，与えられた二分木がその文字列と1対1に対応する限り空かっこ（<code>()</code>）を省略する
+<ul>
+<li>具体的には，右子しかいないときの左子相当の<code>()</code>は省略できない
+<ul>
+<li>こうしないと一方しか子供がいないときにその子が左右のどっちの子供かが判断できず同じ文字列から複数の二分木が構成できてしまう</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="解法">解法</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Definition for a binary tree node.</span>
