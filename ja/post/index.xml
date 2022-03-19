@@ -5,12 +5,52 @@
     <link>/ja/post/</link>
       <atom:link href="/ja/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Fri, 18 Mar 2022 22:38:46 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Sat, 19 Mar 2022 15:10:20 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>Posts</title>
       <link>/ja/post/</link>
     </image>
+    
+    <item>
+      <title>Two Sum</title>
+      <link>/ja/post/two-sum/</link>
+      <pubDate>Sat, 19 Mar 2022 15:10:20 +0900</pubDate>
+      <guid>/ja/post/two-sum/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;と整数&lt;code&gt;target&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;内の2つの要素の和が&lt;code&gt;target&lt;/code&gt;となるような要素の位置を返せ．&lt;/p&gt;
+&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;まずはバカ正直に全探索することを考えると，$O(n^2)$．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;twoSum&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(len(nums)):
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nums[i] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nums[j] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; target:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [i, j]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;nums[i] + nums[j] = target&lt;/code&gt;という条件式は&lt;code&gt;nums[i]&lt;/code&gt;を決めてしまえば&lt;code&gt;nums[j]&lt;/code&gt;は勝手に決まるので，自由度は1変数分しかないので，相方をメモしておく方法で$O(n)$になる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;twoSum&lt;/span&gt;(self, nums: List[int], target: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+        memo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; dict()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; idx, num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(nums):
+            remain &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; target &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; num
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; remain &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; memo:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; [idx, memo[remain]]
+            memo[num] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; idx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2-Sum問題は$N$-Sum問題の基本問題として使える．つまり，$N$-Sum問題を分解していくと2-Sumに還元できる．&lt;/p&gt;
+&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/two-sum/&#34;&gt;https://leetcode.com/problems/two-sum/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zakimal.github.io/ja/post/n-sum-problems/&#34;&gt;https://zakimal.github.io/ja/post/n-sum-problems/&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;$N$-Sum問題をまとめた記事：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Invert Binary Tree</title>
