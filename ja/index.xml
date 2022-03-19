@@ -5,12 +5,80 @@
     <link>/ja/</link>
       <atom:link href="/ja/index.xml" rel="self" type="application/rss+xml" />
     <description>zak</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Sat, 19 Mar 2022 15:10:20 +0900</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ja-JP</language><copyright>© zak 2022</copyright><lastBuildDate>Sat, 19 Mar 2022 17:27:47 +0900</lastBuildDate>
     <image>
       <url>/img/icon-1080.png</url>
       <title>zak</title>
       <link>/ja/</link>
     </image>
+    
+    <item>
+      <title>Majority Element</title>
+      <link>/ja/post/majority-element/</link>
+      <pubDate>Sat, 19 Mar 2022 17:27:47 +0900</pubDate>
+      <guid>/ja/post/majority-element/</guid>
+      <description>&lt;h2 id=&#34;問題&#34;&gt;問題&lt;/h2&gt;
+&lt;p&gt;整数配列&lt;code&gt;nums&lt;/code&gt;が与えられる．&lt;code&gt;nums&lt;/code&gt;内の過半数を占める要素を求めよ．&lt;/p&gt;
+&lt;p&gt;例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [2, 2, 1, 1, 1, 2, 2] -&amp;gt; 2
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+&lt;p&gt;単純な問題だがいろんな解法がある．&lt;/p&gt;
+&lt;p&gt;まずは総当りで解決することを考える．各要素ごとに何個あるかを計算してそれが過半数あるかを確認してやればいい．各要素ごとに$O(n)$で個数をカウントするので全体としては$O(n^2)$の時間計算量がかかる．空間計算量は$O(1)$．&lt;code&gt;nums&lt;/code&gt;の長さ次第では時間がかかってしまう．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(n^2)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Space: O(1)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;majorityElement&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ele &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; num)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; cnt:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; num
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;各要素がいくつあるかを辞書で持っておけば時間計算量$O(n)$で解決できる．ただ，空間計算量も$O(n)$になる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(n)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Space: O(n)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;majorityElement&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        cnts &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; collections&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Counter(nums)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; max(cnts&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;keys(), key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;cnts&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;少し趣を変えて考えてみると，「&lt;code&gt;nums&lt;/code&gt;を整列すると過半数の要素が&lt;code&gt;nums&lt;/code&gt;の真ん中に現れる」．なんだか不思議な気もするが，よくよく考えるとそれもそうだなという気持ちにならなくもない．&lt;code&gt;nums&lt;/code&gt;中のどの要素（最小の要素なのか真ん中ぐらいの要素なのか最大の要素なのか）が過半数の要素であるかをそれぞれのパターンで想像すると，真ん中には必ずその過半数の要素が来る．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# ex: len(nums) == 9&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#-----------[*]-----------&lt;/span&gt;
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 最小の要素が過半数&lt;/span&gt;
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 真ん中の要素が過半数&lt;/span&gt;
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 最大の要素が過半数&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;「過半数」なのだからその要素は「半分より多い」．ということは，その要素を（右端から｜真ん中らへんに｜左端から）並べれば，全体の真ん中の位置にはその要素が来る．&lt;/p&gt;
+&lt;p&gt;これを実装すると整列がボトルネックとなって時間計算量は$O(n \log n)$，空間計算量はソートアルゴリズム次第で$O(n)$とかになる．&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(n log n)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Space: O(1) or O(n) (depending on sorting algorithm)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;majorityElement&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        nums&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; nums[len(nums) &lt;span style=&#34;color:#f92672&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最後に，時間計算量$O(n)$，空間計算量$O(1)$で解決する方法がある！イメージとしては，「過半数ある要素」と「それ以外の要素」で「打ち消し合う」ようなことを考えると浮かんでくる．過半数ある要素はある1種の数字で，それ以外の要素は複数種の数字から成る．「過半数」とは半分より多く存在するということなので，&lt;code&gt;(過半数ある要素, それ以外の要素)&lt;/code&gt;のペアを作ると，過半数ある要素が1つ以上余る．逆に余ったやつが過半数あるやつなのでこれを書く．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nums = [1, 1, 2, 2, 2, 2, 2, 3, 3]
+過半数の要素たち      = [2, 2, 2, 2, 2]
+過半数ではない要素たち = [1, 1, 3, 3]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;具体的には，&lt;code&gt;nums&lt;/code&gt;を頭からなめていくとき，新たに遭遇する数字は「過半数ある要素」の候補であるので，真新しい数字が出てきたら，そいつが候補足りうるのかを判定していく．（説明になっているのか微妙だ）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Time: O(n)&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Space: O(1)&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Solution&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;majorityElement&lt;/span&gt;(self, nums: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+        candidate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; None
+        count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; nums:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                candidate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; num
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; candidate:
+                count &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+                count &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; candidate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;if num == candidate: ... else: ...&lt;/code&gt;がポイントなような気がする．これを書きたいのでその直前の&lt;code&gt;if count == 0: candidate = num&lt;/code&gt;がいるなぁ，みたいな気持ちで書く？&lt;/p&gt;
+&lt;h2 id=&#34;出典&#34;&gt;出典&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://leetcode.com/problems/majority-element/&#34;&gt;https://leetcode.com/problems/majority-element/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Two Sum</title>
